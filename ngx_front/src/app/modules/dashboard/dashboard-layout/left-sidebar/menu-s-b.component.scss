@@ -1,0 +1,29 @@
+:host{
+  width: 22em;
+  height: 100vh;
+  border-right: 1px ridge black ;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, .4);
+  background-color: white;
+  text-align: center;
+  font-family: "Roboto-Bold", sans-serif;
+}
+.avatar {
+  margin-top: 3em;
+  width: 7em;
+  height: 7em;
+  border-radius: 50%;
+  background-color: #f5f7fa;
+}
+.menu{
+  height: calc(100% - 15em);
+  display: flex;
+  flex-flow: wrap;
+  align-content: space-between;
+}
+
+.name {
+  margin-top: 1em;
+  font-weight: normal;
+}
+
+

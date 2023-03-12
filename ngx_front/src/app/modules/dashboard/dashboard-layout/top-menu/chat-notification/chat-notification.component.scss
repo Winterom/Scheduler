@@ -1,0 +1,10 @@
+:host{
+  margin-right: 1.5em;
+  cursor: pointer;
+}
+:host :hover{
+  opacity: 0.5;
+}
+:host svg{
+  color: #f5f7fa;
+}

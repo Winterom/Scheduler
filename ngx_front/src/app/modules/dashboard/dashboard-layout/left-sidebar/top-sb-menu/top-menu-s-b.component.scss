@@ -1,0 +1,36 @@
+:host{
+  display: block;
+  margin-top: 2em;
+  margin-left: 1em;
+  width: 100%;
+  text-align: left;
+}
+hr{
+  width: 15em;
+  margin-bottom: 1.5em;
+}
+.active{
+  background: #BDD9FE;
+}
+.item{
+  padding: 0 1em;
+  width: 15em;
+  height: 2.7em;
+  border-radius: 8px;
+  margin-bottom: 0.3em;
+  cursor: pointer;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.item:hover{
+  background: rgba(9, 35, 79, 0.14);
+}
+.item p{
+  margin-left: 1em;
+}
+
+.return p{
+  font-style: italic;
+}
+

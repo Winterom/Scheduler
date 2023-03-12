@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Scheduler.iml" filepath="$PROJECT_DIR$/Scheduler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ngx_front.iml" filepath="$PROJECT_DIR$/ngx_front.iml" />
     </modules>
   </component>
 </project>
