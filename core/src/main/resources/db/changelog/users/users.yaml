@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/users/create/create-users-table.sql
+  - include:
+      file: db/changelog/users/create/create-roles-table.sql
+  - include:
+      file: db/changelog/users/create/create-authorities-table.sql
+  - include:
+      file: db/changelog/users/create/create-users-roles-table.sql
+  - include:
+      file: db/changelog/users/create/add-fk-users-roles.sql
+  - include:
+      file: db/changelog/users/complete/complete-users-table.sql
+  - include:
+      file: db/changelog/users/complete/complete-roles-table.sql
+  - include:
+      file: db/changelog/users/complete/complete-users-roles-table.sql
