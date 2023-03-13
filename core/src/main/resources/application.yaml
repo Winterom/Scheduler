@@ -8,10 +8,6 @@ server:
 spring:
   liquibase:
     change-log: db/changelog/master.yaml
-  datasource:
-    url: "jdbc:postgresql://localhost:5432/template"
-    password: London8793
-    username: postgres
 
 logging:
   level:

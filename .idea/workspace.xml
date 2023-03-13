@@ -5,48 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="750a344e-c061-4730-8fc1-d19a16e5fd0b" name="Changes" comment="feat: add angular app">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/StartApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/commons/entities/ESortDirection.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/commons/entities/ESortedFields.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/commons/entities/Paging.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/commons/errors/AppResponseErrorDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/commons/utils/sql_query/SQLQueryBuilder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/commons/utils/url_query/EQueryParamsName.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/commons/utils/url_query/UrlQueryParam.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/commons/utils/url_query/UrlQueryParamImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/commons/utils/url_query/UrlResolver.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/commons/utils/url_query/UrlResolverImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/configs/AppConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/configs/ExceptionHandlerFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/configs/JwtRequestFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/configs/SecurityConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/controllers/AppUsersController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/dto/response/UserAccountGetAllPageResponseDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/dto/response/UserAccountGetByIdResponseDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/extractors/UserAccountWithRoleExtractor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/models/AppRole.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/models/UserAccount.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/models/UsersRoles.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/query_builders/SQLQueryBuilderUserAccountImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/repositories/UserRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/service/UserAccountDetailsService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/service/UserAccountService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/utils/JwtTokenUtil.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/resources/application.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/resources/db/changelog/master.yaml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/resources/db/changelog/users/complete/complete-authorities-table.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/resources/db/changelog/users/complete/complete-roles-table.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/resources/db/changelog/users/complete/complete-users-roles-table.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/resources/db/changelog/users/complete/complete-users-table.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/resources/db/changelog/users/create/add-fk-users-roles.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/resources/db/changelog/users/create/create-authorities-table.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/resources/db/changelog/users/create/create-roles-table.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/resources/db/changelog/users/create/create-users-roles-table.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/resources/db/changelog/users/create/create-users-table.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/resources/db/changelog/users/users.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/models/AppAuthorities.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/resources/db/changelog/users/create/add-fk-roles-authorities.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/resources/db/changelog/users/create/create-roles-authorities-table.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/core/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/StartApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/StartApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/configs/AppConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/configs/DatabaseConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/models/UserAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/models/UserAccount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/resources/db/changelog/users/users.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/resources/db/changelog/users/users.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,23 +41,6 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="core" type="f1a62948:ProjectNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="core" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="core" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="application" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="core" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="build" type="c8890929:TasksNode$1" />
               </path>
             </expand>
             <select />
@@ -140,7 +94,7 @@
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
+    "settings.editor.selected.configurable": "spring.boot"
   },
   "keyToStringList": {
     "DatabaseDriversLRU": [
@@ -321,9 +275,6 @@
     </task>
     <option name="localTasksCounter" value="3" />
     <servers />
-  </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
