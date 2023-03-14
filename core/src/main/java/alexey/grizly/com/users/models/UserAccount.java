@@ -3,12 +3,12 @@ package alexey.grizly.com.users.models;
 import alexey.grizly.com.commons.security.EUserStatus;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 
@@ -42,9 +42,9 @@ public class UserAccount implements UserDetails {
     @Column(value = "updatedAt")
     private LocalDateTime updatedAt;
     @Transient
-    private Set<GrantedAuthority> authorities;
+    private Set<AppAuthorities> authorities;
 
-    public Collection<? extends GrantedAuthority> getAuthorities() {
+    public Collection<AppAuthorities> getAuthorities() {
         return this.authorities;
     }
 
@@ -72,5 +72,21 @@ public class UserAccount implements UserDetails {
 
     public boolean isEnabled() {
         return this.status.equals(EUserStatus.ACTIVE);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("email", email)
+                .append("usersRoles", usersRoles)
+                .append("status", status)
+                .append("isEmailVerified", isEmailVerified)
+                .append("password", password)
+                .append("credentialExpiredTime", credentialExpiredTime)
+                .append("createdAt", createdAt)
+                .append("updatedAt", updatedAt)
+                .append("authorities", authorities.toString())
+                .toString();
     }
 }

@@ -3,6 +3,7 @@ package alexey.grizly.com.users.models;
 import alexey.grizly.com.commons.security.EAuthorities;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
@@ -29,6 +30,18 @@ public class AppAuthorities implements GrantedAuthority {
 
     @Override
     public String getAuthority() {
-       return null;
+       return this.authorities.name();
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .append("id", id)
+                .append("title", title)
+                .append("description", description)
+                .append("authorities", authorities)
+                .append("createdAt", createdAt)
+                .append("updatedAt", updatedAt)
+                .toString();
     }
 }

@@ -26,6 +26,7 @@ public interface UserRepository extends org.springframework.data.repository.Repo
     Optional<UserAccount> findByEmail(@Param("email") String email);
 
     @Modifying
-    @Query("INSERT INTO refresh_tokens (id,expired,token) values (:id,:expired,:token)")
+    @Query("INSERT INTO refresh_tokens (id,expired,token) " +
+            "values (:id,:expired,:token) ON CONFLICT (id) DO UPDATE set expired=:expired, token=:token")
     int saveRefreshToken(@Param("id") Long id, @Param("expired")Date expired,@Param("token") String token);
 }

@@ -5,11 +5,11 @@ import alexey.grizly.com.properties.AppGlobalProperties;
 import alexey.grizly.com.users.dto.request.AuthRequestDto;
 import alexey.grizly.com.users.dto.response.AuthResponseDto;
 import alexey.grizly.com.users.models.UserAccount;
+import alexey.grizly.com.users.service.AuthService;
 import alexey.grizly.com.users.service.RefreshTokenService;
 import alexey.grizly.com.users.utils.JwtTokenUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,12 +21,12 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/v1/auth")
 public class AuthController {
-    private final UserDetailsService authService;
+    private final AuthService authService;
     private final RefreshTokenService refreshTokenService;
     private final JwtTokenUtil jwtUtil;
     private final AppGlobalProperties properties;
 
-    public AuthController(UserDetailsService authService, RefreshTokenService refreshTokenService, JwtTokenUtil jwtUtil, AppGlobalProperties properties) {
+    public AuthController(AuthService authService, RefreshTokenService refreshTokenService, JwtTokenUtil jwtUtil, AppGlobalProperties properties) {
         this.authService = authService;
         this.refreshTokenService = refreshTokenService;
         this.jwtUtil = jwtUtil;
@@ -37,7 +37,7 @@ public class AuthController {
     /*Почта email1@one.ru Пароль 2012 */
     @PostMapping
     public ResponseEntity<?> authentication(@RequestBody AuthRequestDto authRequest){
-        UserAccount user = (UserAccount) authService.loadUserByUsername(authRequest.getEmail());
+        UserAccount user = (UserAccount) authService.authentication(authRequest);
         return getAuthResponseDto(user);
     }
 
