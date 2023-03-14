@@ -6,7 +6,6 @@ import lombok.Data;
 public class AuthResponseDto {
     private String access_token;
     private String refresh_token;
-    private String session;
 
     public static Builder builder(){
         return new Builder();
@@ -26,12 +25,6 @@ public class AuthResponseDto {
             dto.setRefresh_token(refreshToken);
             return this;
         }
-
-        public Builder setSession(String session){
-            dto.setSession(session);
-            return this;
-        }
-
 
         public AuthResponseDto build(){
             return this.dto;

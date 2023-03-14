@@ -42,7 +42,8 @@ public class UserAccountsController {
     public ResponseEntity<?> getUserById(@PathVariable Long id){
         Optional<UserAccount> userAccount = userAccountService.getUserById(id);
         if(userAccount.isEmpty()){
-            return new AppResponseErrorDto(HttpStatus.NOT_FOUND,"Не найден аккаунт с id: "+id).getResponseEntity();
+            AppResponseErrorDto dto = new AppResponseErrorDto(HttpStatus.NOT_FOUND,"Не найден аккаунт с id: "+id);
+            return new ResponseEntity<>(dto,HttpStatus.NOT_FOUND);
         }
         return ResponseEntity.ok(userAccount);
     }
