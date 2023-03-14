@@ -1,13 +1,16 @@
 package alexey.grizly.com.users.models;
 
+import alexey.grizly.com.commons.security.EUserStatus;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
 
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -24,49 +27,50 @@ public class UserAccount implements UserDetails {
 
     @MappedCollection(idColumn = "user_id",keyColumn = "user_id")
     private Set<UsersRoles> usersRoles;
-    @Column(value = "enabled")
-    private Boolean enabled;
+    @Column(value = "e_status")
+    private EUserStatus status;
 
     @Column(value = "is_email_verified")
     private Boolean isEmailVerified;
     @Column(value = "password")
     private String password;
+
+    @Column(value = "credential_expired")
+    private LocalDateTime credentialExpiredTime;
     @Column(value = "createdAt")
     private LocalDateTime createdAt;
     @Column(value = "updatedAt")
     private LocalDateTime updatedAt;
+    @Transient
     private Set<GrantedAuthority> authorities;
-    @Override
+
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.authorities;
     }
-    @Override
+
     public String getPassword() {
         return this.password;
     }
 
-    @Override
     public String getUsername() {
         return this.email;
     }
 
-    @Override
     public boolean isAccountNonExpired() {
         return true;
     }
 
-    @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return !(this.status.equals(EUserStatus.DISMISSED)
+                ||this.status.equals(EUserStatus.BANNED)
+                ||this.status.equals(EUserStatus.DELETED));
     }
 
-    @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return LocalDateTime.now().isBefore(this.credentialExpiredTime);
     }
 
-    @Override
     public boolean isEnabled() {
-        return this.enabled;
+        return this.status.equals(EUserStatus.ACTIVE);
     }
 }

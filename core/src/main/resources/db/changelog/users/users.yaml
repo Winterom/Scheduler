@@ -10,12 +10,21 @@ databaseChangeLog:
   - include:
       file: db/changelog/users/create/create-roles-authorities-table.sql
   - include:
+      file: db/changelog/users/create/create-refresh-token-table.sql
+  - include:
       file: db/changelog/users/create/add-fk-users-roles.sql
   - include:
       file: db/changelog/users/create/add-fk-roles-authorities.sql
+  - include:
+      file: db/changelog/users/create/add-fk-users-refresh-tokens.sql
   - include:
       file: db/changelog/users/complete/complete-users-table.sql
   - include:
       file: db/changelog/users/complete/complete-roles-table.sql
   - include:
+      file: db/changelog/users/complete/complete-authorities-table.sql
+  - include:
       file: db/changelog/users/complete/complete-users-roles-table.sql
+  - include:
+      file: db/changelog/users/complete/complete-roles-authorities-table.sql
+

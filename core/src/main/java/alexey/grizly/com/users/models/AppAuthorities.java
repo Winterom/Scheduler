@@ -1,5 +1,6 @@
 package alexey.grizly.com.users.models;
 
+import alexey.grizly.com.commons.security.EAuthorities;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
@@ -19,6 +20,8 @@ public class AppAuthorities implements GrantedAuthority {
     private String title;
     @Column(value = "description")
     private String description;
+    @Column(value = "e_authorities")
+    private EAuthorities authorities;
     @Column(value = "createdAt")
     private LocalDateTime createdAt;
     @Column(value = "updatedAt")

@@ -10,7 +10,7 @@ import javax.sql.DataSource;
 
 @Configuration
 public class DatabaseConfiguration {
-    @Bean
+    @Bean("primaryDb")
     @Primary
     public DataSource dataSource() {
         return DataSourceBuilder

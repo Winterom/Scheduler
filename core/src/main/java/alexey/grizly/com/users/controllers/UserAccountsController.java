@@ -23,11 +23,11 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("api/v1/users")
-public class AppUsersController {
+public class UserAccountsController {
     private final UserAccountService userAccountService;
 
     @Autowired
-    public AppUsersController(UserAccountService userAccountService) {
+    public UserAccountsController(UserAccountService userAccountService) {
         this.userAccountService = userAccountService;
     }
 
