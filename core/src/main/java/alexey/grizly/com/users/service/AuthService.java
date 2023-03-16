@@ -18,7 +18,8 @@ public class AuthService {
     }
 
     public UserDetails authentication(AuthRequestDto dto){
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(dto.getEmail(), dto.getPassword()));
+        Authentication authentication = authenticationManager
+                .authenticate(new UsernamePasswordAuthenticationToken(dto.getAuthToken(), dto.getPassword()));
         return (UserDetails) authentication.getPrincipal();
     }
 }

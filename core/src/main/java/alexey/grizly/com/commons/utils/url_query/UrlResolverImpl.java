@@ -4,8 +4,6 @@ package alexey.grizly.com.commons.utils.url_query;
 import alexey.grizly.com.commons.entities.ESortDirection;
 import alexey.grizly.com.commons.entities.ESortedFields;
 
-
-
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 

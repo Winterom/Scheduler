@@ -44,4 +44,6 @@ public class AppAuthorities implements GrantedAuthority {
                 .append("updatedAt", updatedAt)
                 .toString();
     }
+
+
 }

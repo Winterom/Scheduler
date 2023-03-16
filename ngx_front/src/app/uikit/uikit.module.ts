@@ -4,6 +4,8 @@ import { HamburgerComponent } from './hamburger/hamburger.component';
 import {FormsModule} from "@angular/forms";
 import { TableComponent } from './table/table.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
+import { InputComponent } from './input/input.component';
+import { ButtonComponent } from './button/button.component';
 
 
 
@@ -11,12 +13,16 @@ import { CheckboxComponent } from './checkbox/checkbox.component';
   declarations: [
     HamburgerComponent,
     TableComponent,
-    CheckboxComponent
+    CheckboxComponent,
+    InputComponent,
+    ButtonComponent
   ],
-  exports: [
-    HamburgerComponent,
-    TableComponent
-  ],
+    exports: [
+        HamburgerComponent,
+        TableComponent,
+        InputComponent,
+        ButtonComponent
+    ],
   imports: [
     CommonModule,
     FormsModule

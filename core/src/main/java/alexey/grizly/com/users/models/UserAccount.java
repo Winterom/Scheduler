@@ -11,7 +11,6 @@ import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
 import org.springframework.security.core.userdetails.UserDetails;
 
-
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Set;
@@ -89,4 +88,6 @@ public class UserAccount implements UserDetails {
                 .append("authorities", authorities.toString())
                 .toString();
     }
+
+
 }

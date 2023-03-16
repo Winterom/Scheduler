@@ -10,16 +10,14 @@ import alexey.grizly.com.users.service.RefreshTokenService;
 import alexey.grizly.com.users.utils.JwtTokenUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.CredentialsExpiredException;
-import org.springframework.security.authentication.DisabledException;
-import org.springframework.security.authentication.LockedException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
-
 
 
 @RestController
@@ -41,22 +39,14 @@ public class AuthController {
     /*Почта email1@one.ru Пароль 2012 */
     @PostMapping
     public ResponseEntity<?> authentication(@RequestBody @Validated AuthRequestDto authRequest, BindingResult bindingResult){
-        if(bindingResult.hasErrors()){
-
-        }
         String errorMessage;
-        try {
-            UserAccount user = (UserAccount) authService.authentication(authRequest);
-            return getAuthResponseDto(user);
-        }catch (LockedException|DisabledException e){
-            errorMessage="Аккаунт заблокирован. Обратитесь к администратору";
-        }catch (CredentialsExpiredException e){
-            errorMessage="Срок действия пароля истек. Обратитесь к администратору";
-        }catch (BadCredentialsException e){
+        if(bindingResult.hasErrors()){
             errorMessage = "Не правильная почта или пароль";
+            AppResponseErrorDto errorDto = new AppResponseErrorDto(HttpStatus.UNAUTHORIZED,errorMessage);
+            return new ResponseEntity<>(errorDto, HttpStatus.UNAUTHORIZED);
         }
-        AppResponseErrorDto errorDto = new AppResponseErrorDto(HttpStatus.UNAUTHORIZED,errorMessage);
-        return new ResponseEntity<>(errorDto, HttpStatus.UNAUTHORIZED);
+        UserAccount user = (UserAccount) authService.authentication(authRequest);
+        return getAuthResponseDto(user);
     }
 
 

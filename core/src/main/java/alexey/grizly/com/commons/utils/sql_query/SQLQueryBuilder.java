@@ -1,7 +1,5 @@
 package alexey.grizly.com.commons.utils.sql_query;
 
-import alexey.grizly.com.commons.utils.url_query.UrlQueryParam;
-
 import java.util.Map;
 
 public interface SQLQueryBuilder<T> {
