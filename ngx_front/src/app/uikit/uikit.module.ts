@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HamburgerComponent } from './hamburger/hamburger.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { TableComponent } from './table/table.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
 import { InputComponent } from './input/input.component';
 import { ButtonComponent } from './button/button.component';
+
 
 
 
@@ -23,9 +24,10 @@ import { ButtonComponent } from './button/button.component';
         InputComponent,
         ButtonComponent
     ],
-  imports: [
-    CommonModule,
-    FormsModule
-  ]
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule
+    ]
 })
 export class UikitModule { }

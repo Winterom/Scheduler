@@ -4,7 +4,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url("../../../../assets/images/fon.jpg");
+  background: url("../../../../assets/images/fon.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  color:#646664
 }
 .container{
   width: 40em;

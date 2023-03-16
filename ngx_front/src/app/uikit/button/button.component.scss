@@ -13,4 +13,7 @@ a.button:hover {
   background: #387ca4;
   cursor: pointer;
 }
+a.button:active{
+  box-shadow: inset 0 -1px 1px rgba(0,0,0,.1), inset 0 1px 2px rgba(0,0,0,.3), inset 0 0 0 60px rgba(2, 2, 135, 0.58);
+}
 
