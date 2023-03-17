@@ -1,21 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SCOPE_TYPE" value="4" />
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="750a344e-c061-4730-8fc1-d19a16e5fd0b" name="Changes" comment="feat: add authentication">
+    <list default="true" id="750a344e-c061-4730-8fc1-d19a16e5fd0b" name="Changes" comment="feat: add authentication form">
+      <change afterPath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/checkstyleidea-libs/readme.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/test/java/users/auth/AuthControllerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/test/java/users/auth/AuthServiceTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/core/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/controllers/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/controllers/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/dto/request/AuthRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/dto/request/AuthRequestDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/repositories/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/repositories/UserRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/login/login/login.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/login/login/login.component.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/login/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/login/login/login.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/button/ButtonDefinition.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/button/ButtonDefinition.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/button/button.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/button/button.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/button/button.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/button/button.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/input/InputDefinition.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/input/InputDefinition.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/input/input.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/input/input.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/input/input.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/input/input.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/uikit.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/uikit.module.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,8 +73,8 @@
       <list>
         <option value="Enum" />
         <option value="JUnit5 Test Class" />
-        <option value="Class" />
         <option value="TypeScript File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -84,6 +88,9 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2MubLmDa2bdTYCLgbGgOBDPhL9R" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -114,11 +121,12 @@
     "nodejs_interpreter_path": "node",
     "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
+    "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "SQL Resolution Scopes",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "org.infernus.idea.checkstyle.CheckStyleConfigurable",
     "spring.configuration.checksum": "1d2dfe7cbec4cb85764de7dce500cd05",
-    "ts.external.directory.path": "/Volumes/Работа/Scheduler/ngx_front/node_modules/typescript/lib"
+    "ts.external.directory.path": "C:\\Users\\winte\\IdeaProjects\\Scheduler\\ngx_front\\node_modules\\typescript\\lib"
   },
   "keyToStringList": {
     "DatabaseDriversLRU": [
@@ -141,6 +149,7 @@
       <recent name="" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\winte\IdeaProjects\Scheduler\core\config\checkstyle" />
       <recent name="C:\Users\winte\IdeaProjects\Scheduler\ngx_front\src\assets\images" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
@@ -151,7 +160,7 @@
       <recent name="alexey.grizly.com.users.utils" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.Angular CLI Server (ngx_front)">
+  <component name="RunManager" selected="Gradle.AuthServiceTest.inCorrectAuthentication">
     <configuration name="AuthControllerTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -175,7 +184,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="AuthControllerTest.authSuccessOk" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="AuthControllerTest.authenticationValidDtoTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/core" />
@@ -188,7 +197,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;users.auth.AuthControllerTest.authSuccessOk&quot;" />
+            <option value="&quot;users.auth.AuthControllerTest.authenticationValidDtoTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -198,7 +207,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="AuthControllerTest.contextLoads" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="AuthServiceTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/core" />
@@ -211,7 +220,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;users.auth.AuthControllerTest.contextLoads&quot;" />
+            <option value="&quot;users.auth.AuthServiceTest&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -221,44 +230,48 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="core [assemble]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="AuthServiceTest.correctAuthentication" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/core" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
+        <option name="scriptParameters" value="" />
         <option name="taskDescriptions">
           <list />
         </option>
         <option name="taskNames">
           <list>
-            <option value="assemble" />
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;users.auth.AuthServiceTest.correctAuthentication&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="core [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="AuthServiceTest.inCorrectAuthentication" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/core" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
+        <option name="scriptParameters" value="" />
         <option name="taskDescriptions">
           <list />
         </option>
         <option name="taskNames">
           <list>
-            <option value="build" />
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;users.auth.AuthServiceTest.inCorrectAuthentication&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
@@ -285,11 +298,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.AuthControllerTest.authSuccessOk" />
+        <item itemvalue="Gradle.AuthServiceTest.inCorrectAuthentication" />
+        <item itemvalue="Gradle.AuthServiceTest.correctAuthentication" />
+        <item itemvalue="Gradle.AuthControllerTest.authenticationValidDtoTest" />
         <item itemvalue="Gradle.AuthControllerTest" />
-        <item itemvalue="Gradle.AuthControllerTest.contextLoads" />
-        <item itemvalue="Gradle.core [build]" />
-        <item itemvalue="Gradle.core [assemble]" />
+        <item itemvalue="Gradle.AuthServiceTest" />
       </list>
     </recent_temporary>
   </component>
@@ -306,6 +319,7 @@
       <workItem from="1678827849261" duration="2435000" />
       <workItem from="1678873718671" duration="11011000" />
       <workItem from="1678959567282" duration="16085000" />
+      <workItem from="1679041112455" duration="17106000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1678620390716</created>
@@ -366,6 +380,11 @@
           <url>file://$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/controllers/AuthController.java</url>
           <line>47</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/service/AuthService.java</url>
+          <line>21</line>
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

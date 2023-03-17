@@ -26,8 +26,10 @@ export class LoginComponent implements OnInit {
     this.buttonDefinition.background ="#0E74B0";
     this.buttonDefinition.backgroundHover = "#387ca4";
     this.buttonDefinition.onClick=()=>{
-
+        this.submitForm();
     }
   }
+    submitForm(){
 
+    }
 }

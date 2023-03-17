@@ -41,7 +41,7 @@ public class AuthController {
     public ResponseEntity<?> authentication(@RequestBody @Validated AuthRequestDto authRequest, BindingResult bindingResult){
         String errorMessage;
         if(bindingResult.hasErrors()){
-            errorMessage = "Не правильная почта или пароль";
+            errorMessage = "Неверные учетные данные пользователя";
             AppResponseErrorDto errorDto = new AppResponseErrorDto(HttpStatus.UNAUTHORIZED,errorMessage);
             return new ResponseEntity<>(errorDto, HttpStatus.UNAUTHORIZED);
         }
@@ -58,7 +58,7 @@ public class AuthController {
         String refreshToken = jwtUtil.generateRefreshTokenFromEmail(user.getEmail(),refreshExpire,issuedDate);
         int resultSave = refreshTokenService.saveRefreshToken(user,refreshToken,refreshExpire);
         if(resultSave!=1){
-            AppResponseErrorDto errorDto = new AppResponseErrorDto(HttpStatus.UNAUTHORIZED,"");
+            AppResponseErrorDto errorDto = new AppResponseErrorDto(HttpStatus.UNAUTHORIZED,"Неверные учетные данные пользователя");
             return new ResponseEntity<>(errorDto,HttpStatus.UNAUTHORIZED);
         }
         AuthResponseDto dto =AuthResponseDto
