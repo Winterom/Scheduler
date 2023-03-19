@@ -4,5 +4,6 @@ export interface EventData{
 }
 
 export enum AppEvents{
-  CHANGE_VISIBLE_SIDEBAR
+  CHANGE_VISIBLE_SIDEBAR,
+  INPUT_SHOW_HIDE_PASSWORD
 }

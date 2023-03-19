@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {InputDefinition} from "./InputDefinition";
+import {InputDefinition, InputType} from "./InputDefinition";
+import {EventBusService} from "../../shared/services/eventBus/event-bus.service";
+import {AppEvents} from "../../shared/services/eventBus/EventData";
 
 
 @Component({
@@ -9,9 +11,22 @@ import {InputDefinition} from "./InputDefinition";
 })
 export class InputComponent implements OnInit {
   @Input() definition:InputDefinition = new InputDefinition();
-  constructor() { }
+  constructor(private eventBus:EventBusService) { }
 
   ngOnInit(): void {
+    if(this.definition.type===InputType.PASSWORD){
+      this.eventBus.on(AppEvents.INPUT_SHOW_HIDE_PASSWORD,(action:{state:boolean,id:string})=>{
+        if(action.id!=this.definition.id){
+          return;
+        }
+        if(action.state){
+          this.definition.type=InputType.TEXT
+        }else {
+          this.definition.type=InputType.PASSWORD;
+        }
+      })
+    }
+
   }
 
 }

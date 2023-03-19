@@ -1,5 +1,7 @@
-<div class="checkbox-rect">
-  <input type="checkbox" id="checkbox-rect1" name="check">
-  <label for="checkbox-rect1"></label>
+<div class="checkbox">
+  <label class="custom-checkbox" for="{{definition.id}}">
+  <input type="checkbox" (change)="onChange()" id="{{definition.id}}" [(ngModel)]="definition.state">
+    <span>{{definition.label}}</span>
+  </label>
 </div>
 

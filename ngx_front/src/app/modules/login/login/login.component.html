@@ -1,12 +1,31 @@
 <div class="container">
+  <div *ngIf="!showRestorePassword">
   <div class="title">Авторизация</div>
-  <div class="sub_title">Пожалуйста авторизуйтесь</div>
+  <form [formGroup]="authForm" novalidate (ngSubmit)="submitAuthForm()">
   <app-input [definition]="authTokenInput"></app-input>
   <div class="separator"></div>
   <app-input [definition]="passwordInput"></app-input>
-  <div class="separator"></div>
+    <app-checkbox [definition]="checkboxDefinition" ></app-checkbox>
   <div class="button_wrapper">
-  <app-button [definition]="buttonDefinition"></app-button>
+  <app-button [definition]="buttonAuthDefinition"></app-button>
   </div>
-  <div class="separator"></div>
+  </form>
+  <div class="restore_password">
+    <u (click)="restorePasswordShow()">Забыли пароль?</u>
+  </div>
+
+</div>
+  <div *ngIf="showRestorePassword">
+    <div class="title">Востановление пароля</div>
+    <div class="sub_title">Укажите почту или телефон владельца аккаунта</div>
+    <form [formGroup]="resetPasswordForm" novalidate (ngSubmit)="submitRestorePswForm()">
+      <app-input [definition]="authTokenInput"></app-input>
+      <div class="button_wrapper">
+      <app-button [definition]="buttonRestorePswDefinition"></app-button>
+      </div>
+    </form>
+    <div class="restore_password">
+      <u (click)="restorePasswordShow()">Назад к авторизации</u>
+    </div>
+  </div>
 </div>

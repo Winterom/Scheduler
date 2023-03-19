@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {EventBusService} from "../../../shared/service/eventBus/event-bus.service";
-import {AppEvents} from "../../../shared/service/eventBus/EventData";
+import {EventBusService} from "../../../shared/services/eventBus/event-bus.service";
+import {AppEvents} from "../../../shared/services/eventBus/EventData";
 
 
 @Component({

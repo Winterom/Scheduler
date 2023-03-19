@@ -22,7 +22,8 @@ import { ButtonComponent } from './button/button.component';
         HamburgerComponent,
         TableComponent,
         InputComponent,
-        ButtonComponent
+        ButtonComponent,
+        CheckboxComponent
     ],
     imports: [
         CommonModule,

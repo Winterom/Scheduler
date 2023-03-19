@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {EventBusService} from "../../shared/service/eventBus/event-bus.service";
-import {AppEvents} from "../../shared/service/eventBus/EventData";
+import {EventBusService} from "../../shared/services/eventBus/event-bus.service";
+import {AppEvents} from "../../shared/services/eventBus/EventData";
 
 @Component({
   selector: 'app-hamburger',
@@ -16,7 +16,6 @@ export class HamburgerComponent implements OnInit {
   }
 
   onChangeEvent(): void {
-    console.log(this.state);
     this.eventBus.emit({name:AppEvents.CHANGE_VISIBLE_SIDEBAR,value:this.state})
   }
 }

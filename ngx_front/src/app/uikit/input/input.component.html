@@ -1,4 +1,4 @@
 <div class="text-field text-field_floating-2">
-  <input class="text-field__input" type="email" id="email" name="email" placeholder="{{definition.placeholder}}">
-  <label class="text-field__label" for="email">{{definition.label}}</label>
+  <input class="text-field__input" type="{{definition.type}}" id="{{definition.id}}" [formControl]="definition.control" placeholder="{{definition.placeholder}}">
+  <label class="text-field__label" for="{{definition.id}}">{{definition.label}}</label>
 </div>
