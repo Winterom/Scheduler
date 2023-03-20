@@ -10,11 +10,13 @@ export function emailOrPhoneValidator(): ValidatorFn{
       return null;
     }
     const isEmail = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(value);
-
+    console.log("email: "+isEmail);
     const isPhone = /^(\\+\\d{1,3}( )?)?((\\(\\d{3}\\))|\\d{3})[- .]?\\d{3}[- .]?\\d{4}$|^(\\+\\d{1,3}( )?)?(\\d{3}[ ]?){2}\\d{3}$|^(\\+\\d{1,3}( )?)?(\\d{3}[ ]?)(\\d{2}[ ]?){2}\\d{2}$/.test(value);
-
+    console.log("phone: "+isPhone);
     const valueValid = isEmail||isPhone;
-
-    return !valueValid ? {notValid:true}: null;
+    console.log("validator phone email: "+valueValid);
+    const result = !valueValid ? {notPhoneOrEmail:true}: null;
+    console.log("validator result: "+result)
+    return result;
   }
 }

@@ -23,22 +23,11 @@ export class LoginComponent implements OnInit {
   public api:AuthenticationAPI = new AuthenticationAPI();
   public authForm : FormGroup;
   public resetPasswordForm:FormGroup;
-  public isSubmit:boolean=false;
   public showRestorePassword:boolean=false
 
   constructor(private eventBus:EventBusService) {
-    this.authTokenInput.control = new FormControl<string>('',[Validators.required,emailOrPhoneValidator]);
+    this.authTokenInput.control = new FormControl<string>('',[Validators.required,emailOrPhoneValidator()]);
     this.passwordInput.control = new FormControl<string>('',Validators.required);
-    this.authForm = new FormGroup<any>({
-      "tokenInput": this.authTokenInput.control,
-      "pswInput": this.passwordInput.control
-    })
-    this.resetPasswordForm = new FormGroup<any>({
-      "tokenInput":this.authTokenInput.control
-    })
-  }
-
-    ngOnInit(): void {
     this.authTokenInput.label="Email или Телефон";
     this.authTokenInput.placeholder ="email или телефон";
     this.passwordInput.label= "Пароль";
@@ -46,27 +35,47 @@ export class LoginComponent implements OnInit {
     this.passwordInput.type=InputType.PASSWORD;
     this.checkboxDefinition.label="Показать пароль";
     this.checkboxDefinition.onChange=()=>{
-        this.clickCheckbox();
-      }
+      this.clickCheckbox();
+    }
     this.buttonAuthDefinition.label="Войти";
     this.buttonAuthDefinition.background ="#0E74B0";
     this.buttonAuthDefinition.backgroundHover = "#387ca4";
 
     this.buttonAuthDefinition.onClick=()=>{
-        this.submitAuthForm();
+      this.submitAuthForm();
     }
-      this.buttonRestorePswDefinition.label="Отправить";
-      this.buttonRestorePswDefinition.background ="#0E74B0";
-      this.buttonRestorePswDefinition.backgroundHover = "#387ca4";
-      this.buttonRestorePswDefinition.onClick=()=>{
-        this.submitRestorePswForm();
-      }
+    this.buttonRestorePswDefinition.label="Отправить";
+    this.buttonRestorePswDefinition.background ="#0E74B0";
+    this.buttonRestorePswDefinition.backgroundHover = "#387ca4";
+
+    this.authForm = new FormGroup<any>({
+      "tokenInput": this.authTokenInput.control,
+      "pswInput": this.passwordInput.control
+    })
+    this.resetPasswordForm = new FormGroup<any>({
+      "tokenInput":this.authTokenInput.control
+    })
+
+  }
+
+    ngOnInit(): void {
 
   }
     submitAuthForm(){
-      this.isSubmit=true;
+      console.log(this.authForm)
       if(this.authForm.invalid){
         return;
+      }
+      const token = this.authForm.controls['tokenInput'];
+      console.log('token: '+token)
+      if(token!=null){
+        if(token.invalid){
+          console.log("token invalid")
+          return;
+        }else {
+          console.log("token valid")
+          return;
+        }
       }
       this.api.auth_api;
     }
@@ -80,6 +89,7 @@ export class LoginComponent implements OnInit {
     }
 
     restorePasswordShow(){
+      this.authTokenInput.control.reset();
       this.showRestorePassword=!this.showRestorePassword;
     }
 }

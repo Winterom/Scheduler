@@ -1,27 +1,44 @@
 <div class="container">
   <div *ngIf="!showRestorePassword">
-  <div class="title">Авторизация</div>
-  <form [formGroup]="authForm" novalidate (ngSubmit)="submitAuthForm()">
-  <app-input [definition]="authTokenInput"></app-input>
-  <div class="separator"></div>
-  <app-input [definition]="passwordInput"></app-input>
-    <app-checkbox [definition]="checkboxDefinition" ></app-checkbox>
-  <div class="button_wrapper">
-  <app-button [definition]="buttonAuthDefinition"></app-button>
-  </div>
-  </form>
-  <div class="restore_password">
-    <u (click)="restorePasswordShow()">Забыли пароль?</u>
-  </div>
+    <div class="title">Авторизация</div>
+    <form [formGroup]="authForm" novalidate (ngSubmit)="submitAuthForm()">
+      <app-input [definition]="authTokenInput"></app-input>
+      <div class="error" *ngIf="authTokenInput.control.hasError('required')&&authTokenInput.control.touched">
+          Поле обязательно для заполнения
+      </div>
+      <div class="error" *ngIf="authTokenInput.control.hasError('notPhoneOrEmail')&&authTokenInput.control.touched">
+          Введенное значение не является телефоном или email
+      </div>
+      <div class="separator"></div>
+      <app-input [definition]="passwordInput"></app-input>
+      <div class="error" *ngIf="passwordInput.control.hasError('required')&&passwordInput.control.touched">
+        Поле обязательно для заполнения
+      </div>
+      <div class="checkbox_wrapper">
+        <app-checkbox [definition]="checkboxDefinition"></app-checkbox>
+      </div>
+      <div class="button_wrapper">
+        <app-button [definition]="buttonAuthDefinition"></app-button>
+      </div>
+    </form>
+    <div class="restore_password">
+      <u (click)="restorePasswordShow()">Забыли пароль?</u>
+    </div>
 
-</div>
+  </div>
   <div *ngIf="showRestorePassword">
     <div class="title">Востановление пароля</div>
     <div class="sub_title">Укажите почту или телефон владельца аккаунта</div>
     <form [formGroup]="resetPasswordForm" novalidate (ngSubmit)="submitRestorePswForm()">
       <app-input [definition]="authTokenInput"></app-input>
+      <div class="error" *ngIf="authTokenInput.control.hasError('required')&&authTokenInput.control.touched">
+        Поле обязательно для заполнения
+      </div>
+      <div class="error" *ngIf="authTokenInput.control.hasError('notPhoneOrEmail')&&authTokenInput.control.touched">
+        Введенное значение не является телефоном или email
+      </div>
       <div class="button_wrapper">
-      <app-button [definition]="buttonRestorePswDefinition"></app-button>
+        <app-button [definition]="buttonRestorePswDefinition"></app-button>
       </div>
     </form>
     <div class="restore_password">
