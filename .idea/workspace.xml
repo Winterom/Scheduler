@@ -7,25 +7,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="750a344e-c061-4730-8fc1-d19a16e5fd0b" name="Changes" comment="feat: add AuthController and AuthService tests">
-      <change afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/login/reset-password/reset-password.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/login/reset-password/reset-password.component.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/login/reset-password/reset-password.component.ts" afterDir="false" />
+    <list default="true" id="750a344e-c061-4730-8fc1-d19a16e5fd0b" name="Changes" comment="feat: authentication form">
+      <change afterPath="$PROJECT_DIR$/ngx_front/src/app/shared/validators/MatchingPasswordsValidator.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front/src/app/shared/validators/PasswordStrangeValidator.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/configs/DatabaseConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/configs/DatabaseConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/controllers/UserAccountsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/controllers/UserAccountsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/app-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/login/AuthenticationAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/login/AuthenticationAPI.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/login/login.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/login/login.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/configs/DatabaseConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/configs/DatabaseConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/configs/ExceptionHandlerFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/configs/ExceptionHandlerFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/configs/JwtRequestFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/configs/JwtRequestFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/configs/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/configs/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/properties/AppGlobalProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/properties/UserGlobalProperties.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/controllers/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/controllers/AuthController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/login/login/login.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/login/login/login.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/login/login/login.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/login/login/login.component.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/login/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/login/login/login.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/login/reset-password/reset-password.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/login/reset-password/reset-password.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/login/reset-password/reset-password.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/login/reset-password/reset-password.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ngx_front/src/app/shared/validators/EmailOrPhoneValidator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/shared/validators/EmailOrPhoneValidator.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/button/button.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/button/button.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/button/button.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/button/button.component.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/input/InputDefinition.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/input/InputDefinition.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/input/input.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/input/input.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/input/input.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/input/input.component.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,8 +76,8 @@
       <list>
         <option value="Enum" />
         <option value="JUnit5 Test Class" />
-        <option value="TypeScript File" />
         <option value="Class" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -132,7 +129,7 @@
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;org.infernus.idea.checkstyle.CheckStyleConfigurable&quot;,
     &quot;spring.configuration.checksum&quot;: &quot;1d2dfe7cbec4cb85764de7dce500cd05&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\winte\\IdeaProjects\\Scheduler\\ngx_front\\node_modules\\typescript\\lib&quot;
+    &quot;ts.external.directory.path&quot;: &quot;/Volumes/Работа/Scheduler/ngx_front/node_modules/typescript/lib&quot;
   },
   &quot;keyToStringList&quot;: {
     &quot;DatabaseDriversLRU&quot;: [
@@ -190,7 +187,7 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="AuthControllerTest.authenticationValidDtoTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="AuthControllerTest.contextLoads" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/core" />
@@ -203,30 +200,7 @@
           <list>
             <option value=":test" />
             <option value="--tests" />
-            <option value="&quot;users.auth.AuthControllerTest.authenticationValidDtoTest&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="AuthServiceTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/core" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;users.auth.AuthServiceTest&quot;" />
+            <option value="&quot;users.auth.AuthControllerTest.contextLoads&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -282,6 +256,27 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
+    <configuration name="core [testClasses]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/core" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="testClasses" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <configuration name="Angular Application (ngx_front)" type="JavascriptDebugType" uri="http://localhost:4200">
       <method v="2" />
     </configuration>
@@ -304,11 +299,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.AuthControllerTest" />
+        <item itemvalue="Gradle.AuthControllerTest.contextLoads" />
+        <item itemvalue="Gradle.core [testClasses]" />
         <item itemvalue="Gradle.AuthServiceTest.inCorrectAuthentication" />
         <item itemvalue="Gradle.AuthServiceTest.correctAuthentication" />
-        <item itemvalue="Gradle.AuthControllerTest.authenticationValidDtoTest" />
-        <item itemvalue="Gradle.AuthControllerTest" />
-        <item itemvalue="Gradle.AuthServiceTest" />
       </list>
     </recent_temporary>
   </component>
@@ -326,6 +321,7 @@
       <workItem from="1678873718671" duration="11011000" />
       <workItem from="1678959567282" duration="16085000" />
       <workItem from="1679041112455" duration="17106000" />
+      <workItem from="1679341181706" duration="6166000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1678620390716</created>

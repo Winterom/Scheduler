@@ -1,7 +1,7 @@
 package alexey.grizly.com.users.controllers;
 
 import alexey.grizly.com.commons.errors.AppResponseErrorDto;
-import alexey.grizly.com.properties.AppGlobalProperties;
+import alexey.grizly.com.users.properties.UserGlobalProperties;
 import alexey.grizly.com.users.dto.request.AuthRequestDto;
 import alexey.grizly.com.users.dto.response.AuthResponseDto;
 import alexey.grizly.com.users.models.UserAccount;
@@ -26,9 +26,9 @@ public class AuthController {
     private final AuthService authService;
     private final RefreshTokenService refreshTokenService;
     private final JwtTokenUtil jwtUtil;
-    private final AppGlobalProperties properties;
+    private final UserGlobalProperties properties;
 
-    public AuthController(AuthService authService, RefreshTokenService refreshTokenService, JwtTokenUtil jwtUtil, AppGlobalProperties properties) {
+    public AuthController(AuthService authService, RefreshTokenService refreshTokenService, JwtTokenUtil jwtUtil, UserGlobalProperties properties) {
         this.authService = authService;
         this.refreshTokenService = refreshTokenService;
         this.jwtUtil = jwtUtil;
@@ -52,8 +52,8 @@ public class AuthController {
 
     private ResponseEntity<?> getAuthResponseDto(UserAccount user) {
         Date issuedDate = new Date();
-        Date accessExpires = new Date(issuedDate.getTime() + properties.getJwtLifetime());
-        Date refreshExpire = new Date(issuedDate.getTime()+properties.getJwtRefreshLifetime());
+        Date accessExpires = new Date(issuedDate.getTime() + properties.getJwtProperties().getJwtLifetime());
+        Date refreshExpire = new Date(issuedDate.getTime()+properties.getJwtProperties().getJwtRefreshLifetime());
         String accessToken = jwtUtil.generateToken(user.getAuthorities(), user.getEmail(), issuedDate,accessExpires);
         String refreshToken = jwtUtil.generateRefreshTokenFromEmail(user.getEmail(),refreshExpire,issuedDate);
         int resultSave = refreshTokenService.saveRefreshToken(user,refreshToken,refreshExpire);

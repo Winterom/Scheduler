@@ -22,14 +22,14 @@
       </div>
     </form>
     <div class="restore_password">
-      <u (click)="restorePasswordShow()">Забыли пароль?</u>
+      <u (click)="resetPasswordShow()">Забыли пароль?</u>
     </div>
 
   </div>
   <div *ngIf="showRestorePassword">
     <div class="title">Востановление пароля</div>
     <div class="sub_title">Укажите почту или телефон владельца аккаунта</div>
-    <form [formGroup]="resetPasswordForm" novalidate (ngSubmit)="submitRestorePswForm()">
+    <form [formGroup]="resetPasswordForm" novalidate (ngSubmit)="submitResetPswForm()">
       <app-input [definition]="authTokenInput"></app-input>
       <div class="error" *ngIf="authTokenInput.control.hasError('required')&&authTokenInput.control.touched">
         Поле обязательно для заполнения
@@ -42,7 +42,7 @@
       </div>
     </form>
     <div class="restore_password">
-      <u (click)="restorePasswordShow()">Назад к авторизации</u>
+      <u (click)="resetPasswordShow()">Назад к авторизации</u>
     </div>
   </div>
 </div>

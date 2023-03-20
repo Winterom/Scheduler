@@ -29,9 +29,7 @@ export class LoginComponent implements OnInit {
     this.authTokenInput.control = new FormControl<string>('',[Validators.required,emailOrPhoneValidator()]);
     this.passwordInput.control = new FormControl<string>('',Validators.required);
     this.authTokenInput.label="Email или Телефон";
-    this.authTokenInput.placeholder ="email или телефон";
     this.passwordInput.label= "Пароль";
-    this.passwordInput.placeholder="Пароль";
     this.passwordInput.type=InputType.PASSWORD;
     this.checkboxDefinition.label="Показать пароль";
     this.checkboxDefinition.onChange=()=>{
@@ -79,7 +77,7 @@ export class LoginComponent implements OnInit {
       }
       this.api.auth_api;
     }
-    submitRestorePswForm(){
+    submitResetPswForm(){
 
     }
     clickCheckbox(){
@@ -88,7 +86,7 @@ export class LoginComponent implements OnInit {
       this.eventBus.emit({name:AppEvents.INPUT_SHOW_HIDE_PASSWORD,value:{state,id}});
     }
 
-    restorePasswordShow(){
+    resetPasswordShow(){
       this.authTokenInput.control.reset();
       this.showRestorePassword=!this.showRestorePassword;
     }

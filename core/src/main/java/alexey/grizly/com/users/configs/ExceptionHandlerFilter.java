@@ -1,4 +1,4 @@
-package alexey.grizly.com.configs;
+package alexey.grizly.com.users.configs;
 
 import alexey.grizly.com.commons.errors.AppResponseErrorDto;
 import com.fasterxml.jackson.core.JsonProcessingException;
