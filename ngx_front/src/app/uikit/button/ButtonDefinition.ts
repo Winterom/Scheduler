@@ -1,6 +1,6 @@
-export class ButtonDefinition{
-  public label:string="";
-  public background:string="white";
-  public backgroundHover:string="white";
-  public onClick = ():void=>{}
+export interface ButtonDefinition{
+  label:string;
+  background:string;
+  backgroundHover:string;
+  onClick() :void
 }

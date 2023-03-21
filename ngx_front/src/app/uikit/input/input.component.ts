@@ -10,13 +10,13 @@ import {AppEvents} from "../../shared/services/eventBus/EventData";
   styleUrls: ['./input.component.scss']
 })
 export class InputComponent implements OnInit {
-  @Input() definition:InputDefinition = new InputDefinition();
+  @Input() definition:InputDefinition = new InputDefinition('','');
   constructor(private eventBus:EventBusService) { }
 
   ngOnInit(): void {
     if(this.definition.type===InputType.PASSWORD){
-      this.eventBus.on(AppEvents.INPUT_SHOW_HIDE_PASSWORD,(action:{state:boolean,id:string})=>{
-        if(action.id!=this.definition.id){
+      this.eventBus.on(AppEvents.INPUT_SHOW_HIDE_PASSWORD,(action:{state:boolean,id:string[]})=>{
+        if(!action.id.includes(this.definition.id)){
           return;
         }
         if(action.state){

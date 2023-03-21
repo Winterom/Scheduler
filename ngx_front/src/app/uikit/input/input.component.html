@@ -3,7 +3,7 @@
          type="{{definition.type}}"
          id="{{definition.id}}"
          [formControl]="definition.control"
-         placeholder="{{definition.placeholder}}"
+         placeholder="{{definition.label}}"
   [ngClass]="{'input-error':definition.control.invalid&&definition.control.touched}">
   <label class="text-field__label"
          for="{{definition.id}}">

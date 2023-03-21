@@ -1,10 +1,11 @@
 export class CheckboxDefinition{
-  public label:string='';
-  public id:string=this.getId();
+  public label:string;
+  public id:string;
   public onChange=()=>{};
   public state: boolean=false;
 
-  getId():string {
-    return crypto.randomUUID();
+  constructor(id:string,label:string) {
+    this.id=id;
+    this.label=label;
   }
 }

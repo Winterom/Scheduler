@@ -7,7 +7,7 @@ import {CheckboxDefinition} from "./CheckboxDefinition";
   styleUrls: ['./checkbox.component.scss']
 })
 export class CheckboxComponent implements OnInit{
-  @Input() definition:CheckboxDefinition = new CheckboxDefinition();
+  @Input() definition:CheckboxDefinition = new CheckboxDefinition('','');
   constructor() { }
 
   onChange(){

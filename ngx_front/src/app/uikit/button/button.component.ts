@@ -7,7 +7,13 @@ import {ButtonDefinition} from "./ButtonDefinition";
   styleUrls: ['./button.component.scss']
 })
 export class ButtonComponent implements OnInit {
-  @Input() definition:ButtonDefinition = new ButtonDefinition();
+  @Input() definition:ButtonDefinition = {
+    background:'',
+    backgroundHover:'',
+    label:'',
+    onClick() {
+    }
+  };
   constructor() { }
 
   ngOnInit(): void {

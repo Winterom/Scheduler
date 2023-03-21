@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {InputDefinition, InputType} from "../../../uikit/input/InputDefinition";
 import {ButtonDefinition} from "../../../uikit/button/ButtonDefinition";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
@@ -7,6 +7,8 @@ import {AuthenticationAPI} from "../AuthenticationAPI";
 import {CheckboxDefinition} from "../../../uikit/checkbox/CheckboxDefinition";
 import {EventBusService} from "../../../shared/services/eventBus/event-bus.service";
 import {AppEvents} from "../../../shared/services/eventBus/EventData";
+import {LoginButtonDefinition} from "./LoginButtonDefinition";
+import {ResetButtonDefinition} from "./ResetButtonDefinition";
 
 
 @Component({
@@ -14,12 +16,12 @@ import {AppEvents} from "../../../shared/services/eventBus/EventData";
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
-  public authTokenInput:InputDefinition = new InputDefinition();
-  public passwordInput:InputDefinition = new InputDefinition();
-  public buttonAuthDefinition:ButtonDefinition = new ButtonDefinition();
-  public buttonRestorePswDefinition:ButtonDefinition = new ButtonDefinition();
-  public checkboxDefinition:CheckboxDefinition = new CheckboxDefinition();
+export class LoginComponent{
+  public authTokenInput:InputDefinition = new InputDefinition('ath','Email или Телефон');
+  public passwordInput:InputDefinition = new InputDefinition('password','Пароль');
+  public buttonAuthDefinition:ButtonDefinition = new LoginButtonDefinition();
+  public buttonRestorePswDefinition:ButtonDefinition = new ResetButtonDefinition();
+  public checkboxDefinition:CheckboxDefinition = new CheckboxDefinition('showPsw','Показать пароль');
   public api:AuthenticationAPI = new AuthenticationAPI();
   public authForm : FormGroup;
   public resetPasswordForm:FormGroup;
@@ -28,23 +30,13 @@ export class LoginComponent implements OnInit {
   constructor(private eventBus:EventBusService) {
     this.authTokenInput.control = new FormControl<string>('',[Validators.required,emailOrPhoneValidator()]);
     this.passwordInput.control = new FormControl<string>('',Validators.required);
-    this.authTokenInput.label="Email или Телефон";
-    this.passwordInput.label= "Пароль";
     this.passwordInput.type=InputType.PASSWORD;
-    this.checkboxDefinition.label="Показать пароль";
     this.checkboxDefinition.onChange=()=>{
-      this.clickCheckbox();
+      this.clickShowPassword();
     }
-    this.buttonAuthDefinition.label="Войти";
-    this.buttonAuthDefinition.background ="#0E74B0";
-    this.buttonAuthDefinition.backgroundHover = "#387ca4";
-
     this.buttonAuthDefinition.onClick=()=>{
       this.submitAuthForm();
     }
-    this.buttonRestorePswDefinition.label="Отправить";
-    this.buttonRestorePswDefinition.background ="#0E74B0";
-    this.buttonRestorePswDefinition.backgroundHover = "#387ca4";
 
     this.authForm = new FormGroup<any>({
       "tokenInput": this.authTokenInput.control,
@@ -56,9 +48,6 @@ export class LoginComponent implements OnInit {
 
   }
 
-    ngOnInit(): void {
-
-  }
     submitAuthForm(){
       console.log(this.authForm)
       if(this.authForm.invalid){
@@ -80,7 +69,7 @@ export class LoginComponent implements OnInit {
     submitResetPswForm(){
 
     }
-    clickCheckbox(){
+    clickShowPassword(){
       const id=this.passwordInput.id;
       const state = this.checkboxDefinition.state;
       this.eventBus.emit({name:AppEvents.INPUT_SHOW_HIDE_PASSWORD,value:{state,id}});
