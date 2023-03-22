@@ -20,24 +20,25 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./reset-password.component.scss','../login/login.component.scss']
 })
 export class ResetPasswordComponent implements OnInit{
-  public authTokenInput:InputDefinition = new InputDefinition('auth','Email или Телефон');
-  public codeInput:InputDefinition = new InputDefinition('code','Введите код из почты или смс');
+  public emailOrPhoneInput:InputDefinition = new InputDefinition('auth','Email или Телефон');
+  public tokenInput:InputDefinition = new InputDefinition('code','Введите код из почты или смс');
   public buttonCheckCodeDefinition:ButtonDefinition = new ButtonCheckCodeDefinition();
   public checkCodeForm : FormGroup;
   public passwordInput: InputDefinition= new InputDefinition('password','Введите новый пароль');
   public confirmPasswordInput:InputDefinition = new InputDefinition('confirmPassword','Повторите новый пароль');
   public checkboxDefinition: CheckboxDefinition = new CheckboxDefinition('check','Показать пароли');
+  public passwordStrangeRequirement:PasswordStrangeRequirement = new PasswordStrangeRequirement();
 
 
   constructor(private eventBus:EventBusService,private activateRoute: ActivatedRoute) {
 
     this.confirmPasswordInput.type=InputType.PASSWORD;
     this.passwordInput.type = InputType.PASSWORD;
-    this.authTokenInput.control = new FormControl<string>('',[Validators.required,emailOrPhoneValidator()]);
-    this.codeInput.control = new FormControl<string>('',[Validators.required,
+    this.emailOrPhoneInput.control = new FormControl<string>('',[Validators.required,emailOrPhoneValidator()]);
+    this.tokenInput.control = new FormControl<string>('',[Validators.required,
       Validators.pattern('[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}')]);
     this.passwordInput.control = new FormControl<string>('',[Validators.required,
-                                      passwordStrangeValidator(new PasswordStrangeRequirement())]);
+                                      passwordStrangeValidator(this.passwordStrangeRequirement)]);
     this.confirmPasswordInput.control = new FormControl<string>('',[Validators.required]);
     this.checkboxDefinition.onChange=()=>{
       const id=[this.passwordInput.id,this.confirmPasswordInput.id];
@@ -45,8 +46,8 @@ export class ResetPasswordComponent implements OnInit{
       this.eventBus.emit({name:AppEvents.INPUT_SHOW_HIDE_PASSWORD,value:{state,id}});
     }
     this.checkCodeForm = new FormGroup({
-      'tokenInput':this.authTokenInput.control,
-      'verifyCodeInput':this.codeInput.control,
+      'tokenInput':this.emailOrPhoneInput.control,
+      'verifyCodeInput':this.tokenInput.control,
       'passwordInput': this.passwordInput.control,
       'confirmPassword': this.confirmPasswordInput.control
     },[checkIfMatchingPasswords(this.passwordInput.control,this.confirmPasswordInput.control)])
@@ -58,8 +59,13 @@ export class ResetPasswordComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    const rawParams = this.activateRoute.snapshot.params['token'];
-    const params = Buffer.from(rawParams,'base64').toLocaleString().split("||");
-    params.length
+    const token = this.activateRoute.snapshot.queryParams['token'];
+    if (token) {
+     this.tokenInput.control.setValue(token)
+    }
+    const mail = this.activateRoute.snapshot.queryParams['mail'];
+    if (mail) {
+      this.emailOrPhoneInput.control.setValue(mail)
+    }
   }
 }

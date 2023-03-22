@@ -6,7 +6,7 @@ import {ResetPasswordComponent} from "./modules/login/reset-password/reset-passw
 
 
 const routes: Routes = [
-  {path:"login/:token",component:LoginComponent},
+  {path:"login",component:LoginComponent},
   {path:"reset",component:ResetPasswordComponent},
   {path:"board",component:DashboardLayoutComponent,loadChildren:()=>import('./modules/dashboard/dashboard.module').then(m=>m.DashboardModule)},
   {path:"**",redirectTo:"board"}

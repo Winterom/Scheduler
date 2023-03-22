@@ -3,7 +3,7 @@ import {InputDefinition, InputType} from "../../../uikit/input/InputDefinition";
 import {ButtonDefinition} from "../../../uikit/button/ButtonDefinition";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {emailOrPhoneValidator} from "../../../shared/validators/EmailOrPhoneValidator";
-import {AuthenticationAPI} from "../AuthenticationAPI";
+import {AuthenticationAPI} from "../../../shared/services/API/AuthenticationAPI";
 import {CheckboxDefinition} from "../../../uikit/checkbox/CheckboxDefinition";
 import {EventBusService} from "../../../shared/services/eventBus/event-bus.service";
 import {AppEvents} from "../../../shared/services/eventBus/EventData";
@@ -17,7 +17,7 @@ import {ResetButtonDefinition} from "./ResetButtonDefinition";
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent{
-  public authTokenInput:InputDefinition = new InputDefinition('ath','Email или Телефон');
+  public emailOrPhoneInput:InputDefinition = new InputDefinition('ath','Email или Телефон');
   public passwordInput:InputDefinition = new InputDefinition('password','Пароль');
   public buttonAuthDefinition:ButtonDefinition = new LoginButtonDefinition();
   public buttonRestorePswDefinition:ButtonDefinition = new ResetButtonDefinition();
@@ -28,7 +28,7 @@ export class LoginComponent{
   public showRestorePassword:boolean=false
 
   constructor(private eventBus:EventBusService) {
-    this.authTokenInput.control = new FormControl<string>('',[Validators.required,emailOrPhoneValidator()]);
+    this.emailOrPhoneInput.control = new FormControl<string>('',[Validators.required,emailOrPhoneValidator()]);
     this.passwordInput.control = new FormControl<string>('',Validators.required);
     this.passwordInput.type=InputType.PASSWORD;
     this.checkboxDefinition.onChange=()=>{
@@ -39,11 +39,11 @@ export class LoginComponent{
     }
 
     this.authForm = new FormGroup<any>({
-      "tokenInput": this.authTokenInput.control,
+      "tokenInput": this.emailOrPhoneInput.control,
       "pswInput": this.passwordInput.control
     })
     this.resetPasswordForm = new FormGroup<any>({
-      "tokenInput":this.authTokenInput.control
+      "tokenInput":this.emailOrPhoneInput.control
     })
 
   }
@@ -76,7 +76,7 @@ export class LoginComponent{
     }
 
     resetPasswordShow(){
-      this.authTokenInput.control.reset();
+      this.emailOrPhoneInput.control.reset();
       this.showRestorePassword=!this.showRestorePassword;
     }
 }

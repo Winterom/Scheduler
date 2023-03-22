@@ -39,9 +39,8 @@ public class AuthController {
     /*Почта email1@one.ru Пароль 2012 */
     @PostMapping
     public ResponseEntity<?> authentication(@RequestBody @Validated AuthRequestDto authRequest, BindingResult bindingResult){
-        String errorMessage;
         if(bindingResult.hasErrors()){
-            errorMessage = "Неверные учетные данные пользователя";
+            String errorMessage = "Неверные учетные данные пользователя";
             AppResponseErrorDto errorDto = new AppResponseErrorDto(HttpStatus.UNAUTHORIZED,errorMessage);
             return new ResponseEntity<>(errorDto, HttpStatus.UNAUTHORIZED);
         }

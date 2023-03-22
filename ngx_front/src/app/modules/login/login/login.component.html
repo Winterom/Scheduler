@@ -2,11 +2,11 @@
   <div *ngIf="!showRestorePassword">
     <div class="title">Авторизация</div>
     <form [formGroup]="authForm" novalidate (ngSubmit)="submitAuthForm()">
-      <app-input [definition]="authTokenInput"></app-input>
-      <div class="error" *ngIf="authTokenInput.control.hasError('required')&&authTokenInput.control.touched">
+      <app-input [definition]="emailOrPhoneInput"></app-input>
+      <div class="error" *ngIf="emailOrPhoneInput.control.hasError('required')&&emailOrPhoneInput.control.touched">
           Поле обязательно для заполнения
       </div>
-      <div class="error" *ngIf="authTokenInput.control.hasError('notPhoneOrEmail')&&authTokenInput.control.touched">
+      <div class="error" *ngIf="emailOrPhoneInput.control.hasError('notPhoneOrEmail')&&emailOrPhoneInput.control.touched">
           Введенное значение не является телефоном или email
       </div>
       <div class="separator"></div>
@@ -30,11 +30,11 @@
     <div class="title">Востановление пароля</div>
     <div class="sub_title">Укажите почту или телефон владельца аккаунта</div>
     <form [formGroup]="resetPasswordForm" novalidate (ngSubmit)="submitResetPswForm()">
-      <app-input [definition]="authTokenInput"></app-input>
-      <div class="error" *ngIf="authTokenInput.control.hasError('required')&&authTokenInput.control.touched">
+      <app-input [definition]="emailOrPhoneInput"></app-input>
+      <div class="error" *ngIf="emailOrPhoneInput.control.hasError('required')&&emailOrPhoneInput.control.touched">
         Поле обязательно для заполнения
       </div>
-      <div class="error" *ngIf="authTokenInput.control.hasError('notPhoneOrEmail')&&authTokenInput.control.touched">
+      <div class="error" *ngIf="emailOrPhoneInput.control.hasError('notPhoneOrEmail')&&emailOrPhoneInput.control.touched">
         Введенное значение не является телефоном или email
       </div>
       <div class="button_wrapper">

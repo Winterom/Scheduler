@@ -1,4 +1,4 @@
-export class RootAPI{
+export class RootApi {
   private host:string="http://localhost";
   private app_prefix:string="application";
   private api_version:string="api/v1";
