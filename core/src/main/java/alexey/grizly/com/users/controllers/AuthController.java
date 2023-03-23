@@ -1,13 +1,15 @@
 package alexey.grizly.com.users.controllers;
 
 import alexey.grizly.com.commons.errors.AppResponseErrorDto;
-import alexey.grizly.com.users.properties.UserGlobalProperties;
 import alexey.grizly.com.users.dto.request.AuthRequestDto;
 import alexey.grizly.com.users.dto.response.AuthResponseDto;
 import alexey.grizly.com.users.models.UserAccount;
+import alexey.grizly.com.users.properties.UserGlobalProperties;
 import alexey.grizly.com.users.service.AuthService;
 import alexey.grizly.com.users.service.RefreshTokenService;
 import alexey.grizly.com.users.utils.JwtTokenUtil;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -38,18 +40,13 @@ public class AuthController {
 
     /*Почта email1@one.ru Пароль 2012 */
     @PostMapping
-    public ResponseEntity<?> authentication(@RequestBody @Validated AuthRequestDto authRequest, BindingResult bindingResult){
+    public ResponseEntity<?> authentication(@RequestBody @Validated AuthRequestDto authRequest, BindingResult bindingResult, HttpServletResponse response){
         if(bindingResult.hasErrors()){
             String errorMessage = "Неверные учетные данные пользователя";
             AppResponseErrorDto errorDto = new AppResponseErrorDto(HttpStatus.UNAUTHORIZED,errorMessage);
             return new ResponseEntity<>(errorDto, HttpStatus.UNAUTHORIZED);
         }
         UserAccount user = (UserAccount) authService.authentication(authRequest);
-        return getAuthResponseDto(user);
-    }
-
-
-    private ResponseEntity<?> getAuthResponseDto(UserAccount user) {
         Date issuedDate = new Date();
         Date accessExpires = new Date(issuedDate.getTime() + properties.getJwtProperties().getJwtLifetime());
         Date refreshExpire = new Date(issuedDate.getTime()+properties.getJwtProperties().getJwtRefreshLifetime());
@@ -60,12 +57,14 @@ public class AuthController {
             AppResponseErrorDto errorDto = new AppResponseErrorDto(HttpStatus.UNAUTHORIZED,"Неверные учетные данные пользователя");
             return new ResponseEntity<>(errorDto,HttpStatus.UNAUTHORIZED);
         }
-        AuthResponseDto dto =AuthResponseDto
-                .builder()
-                .setAccessToken(accessToken)
-                .setRefreshToken(refreshToken)
-                .build();
+        Cookie cookie = new Cookie("token",refreshToken);
+        cookie.setHttpOnly(true);
+        cookie.setMaxAge(properties.getJwtProperties().getJwtRefreshLifetime());
+        response.addCookie(cookie);
+        AuthResponseDto dto = new AuthResponseDto(accessToken);
         return ResponseEntity.ok(dto);
     }
+
+
 
 }

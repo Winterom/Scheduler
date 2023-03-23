@@ -8,5 +8,6 @@ import {UserService} from "./shared/services/user/user.service";
 })
 export class AppComponent {
   constructor(private user:UserService) {
+      this.user.init();
   }
 }

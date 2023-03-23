@@ -19,10 +19,10 @@ public class UserGlobalProperties {
 
     @Data
     public static class UserPasswordStrange{
-        private final Integer passwordMinLowerCase= 1;
-        private final Integer passwordMinNumber=1;
-        private final Integer passwordMinSymbol=2;
-        private final Integer passwordMinUpperCase= 1;
-        private final Integer passwordMinCharacters= 8;
+        private final Integer passwordMinLowerCase= 1;/*Минимальное количество прописных символов*/
+        private final Integer passwordMinNumber=1;/*Минимальное количество цифр*/
+        private final Integer passwordMinSymbol=2;/*Минимальное количество спец символов*/
+        private final Integer passwordMinUpperCase= 1;/*Минимальное количество заглавных символов*/
+        private final Integer passwordMinCharacters= 8;/*Минимальная длина пароля*/
     }
 }

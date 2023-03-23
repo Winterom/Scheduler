@@ -1,12 +1,14 @@
 import {RootApi} from "./RootApi";
 
 export class AuthenticationAPI extends RootApi{
+
     private _auth_api:string = "auth";
     private _sendCodeForResetPassword ='';
     private _passwordRequirements = '';
+    private _getRefresh = '';
 
   get sendCodeForResetPassword(): string {
-    return super.getRoot()+"/"+this._sendCodeForResetPassword;
+    return this.auth_api+"/"+this._sendCodeForResetPassword;
   }
 
   get auth_api(): string {
@@ -14,6 +16,9 @@ export class AuthenticationAPI extends RootApi{
   }
 
   get passwordRequirements(): string {
-    return super.getRoot()+"/"+this._passwordRequirements;
+    return  this.auth_api+"/"+this._passwordRequirements;
+  }
+  get getRefresh(): string {
+    return this.auth_api+"/"+this._getRefresh;
   }
 }

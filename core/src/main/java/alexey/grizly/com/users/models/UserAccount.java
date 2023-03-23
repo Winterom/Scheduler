@@ -23,14 +23,17 @@ public class UserAccount implements UserDetails {
     private Long id;
     @Column(value = "email")
     private String email;
-
+    @Column(value = "is_email_verified")
+    private Boolean isEmailVerified;
     @MappedCollection(idColumn = "user_id",keyColumn = "user_id")
     private Set<UsersRoles> usersRoles;
     @Column(value = "e_status")
     private EUserStatus status;
+    @Column(value = "phone")
+    private String phone;
+    @Column(value = "is_phone_verified")
+    private Boolean isPhoneVerified;
 
-    @Column(value = "is_email_verified")
-    private Boolean isEmailVerified;
     @Column(value = "password")
     private String password;
 

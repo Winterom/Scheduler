@@ -5,29 +5,9 @@ import lombok.Data;
 @Data
 public class AuthResponseDto {
     private String access_token;
-    private String refresh_token;
 
-    public static Builder builder(){
-        return new Builder();
+    public AuthResponseDto(String access_token){
+        this.access_token = access_token;
     }
 
-    public AuthResponseDto(){}
-    public static class Builder{
-        private final AuthResponseDto dto;
-        public Builder(){
-            this.dto = new AuthResponseDto();
-        }
-        public Builder setAccessToken(String accessToken){
-            dto.setAccess_token(accessToken);
-            return this;
-        }
-                public Builder setRefreshToken(String refreshToken){
-            dto.setRefresh_token(refreshToken);
-            return this;
-        }
-
-        public AuthResponseDto build(){
-            return this.dto;
-        }
-    }
 }

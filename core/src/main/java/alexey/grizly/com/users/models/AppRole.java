@@ -26,6 +26,4 @@ public class AppRole {
     private LocalDateTime createdAt;
     @Column(value = "updatedAt")
     private LocalDateTime updatedAt;
-
-
 }
