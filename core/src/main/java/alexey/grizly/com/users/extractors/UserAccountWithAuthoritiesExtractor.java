@@ -17,7 +17,9 @@ public class UserAccountWithAuthoritiesExtractor implements ResultSetExtractor<U
     public UserAccount extractData(ResultSet rs) throws DataAccessException, SQLException {
         UserAccount userAccount = new UserAccount();
         userAccount.setAuthorities(new HashSet<>());
-        rs.next();
+        if(!rs.next()){
+           return null;
+        }
         userAccount.setEmail(rs.getString("email"));
         userAccount.setId(rs.getLong("id"));
         userAccount.setStatus(EUserStatus.valueOf(rs.getString("e_status")));

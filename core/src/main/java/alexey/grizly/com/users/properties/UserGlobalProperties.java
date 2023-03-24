@@ -6,8 +6,8 @@ import org.springframework.stereotype.Component;
 @Data
 @Component
 public class UserGlobalProperties {
-    private JwtProperties jwtProperties;
-    private UserPasswordStrange userPasswordStrange;
+    private JwtProperties jwtProperties = new JwtProperties();
+    private UserPasswordStrange userPasswordStrange = new UserPasswordStrange();
 
     @Data
     public static class JwtProperties {

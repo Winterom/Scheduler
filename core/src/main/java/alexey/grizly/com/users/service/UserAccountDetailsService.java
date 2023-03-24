@@ -28,15 +28,19 @@ public class UserAccountDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String authToken) throws UsernameNotFoundException {
+        UserDetails userDetails = null;
         EmailValidator emailValidator = new EmailValidator();
         if(emailValidator.isValid(authToken,null)){
-            return loadByEmail(authToken);
+            userDetails = loadByEmail(authToken);
         }
         PhoneNumberValidator phoneValidator = new PhoneNumberValidator();
         if(phoneValidator.isValid(authToken,null)){
-            return loadByPhone(authToken);
+            userDetails = loadByPhone(authToken);
         }
-        return null;
+        if(userDetails==null){
+            throw new UsernameNotFoundException("Неверные учетные данные пользователя");
+        }
+        return userDetails;
     }
 
     private UserDetails loadByEmail(String email){

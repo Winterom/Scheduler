@@ -8,31 +8,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="750a344e-c061-4730-8fc1-d19a16e5fd0b" name="Changes" comment="feat: Authentication">
-      <change afterPath="$PROJECT_DIR$/ngx_front/src/app/services/auth/user.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/configs/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/configs/SecurityConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/controllers/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/controllers/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/dto/request/AuthRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/dto/request/AuthRequestDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/service/AuthService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/test/java/users/auth/AuthControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/test/java/users/auth/AuthControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/test/java/users/auth/AuthServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/test/java/users/auth/AuthServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/app.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/dashboard/dashboard-layout/dashboard-layout.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/dashboard/dashboard-layout/dashboard-layout.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/login/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/login/login/login.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/login/reset-password/reset-password.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/login/reset-password/reset-password.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/login/reset-password/reset-password.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/login/reset-password/reset-password.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/shared/interceptors/http-request-interceptor.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/shared/interceptors/http-request-interceptor.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/shared/services/API/AuthenticationAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/services/API/AuthenticationAPI.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/shared/services/API/RootApi.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/services/API/RootApi.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/shared/services/eventBus/EventData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/services/eventBus/EventData.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/shared/services/eventBus/event-bus.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/services/eventBus/event-bus.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/shared/services/user/EAuthority.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/services/auth/EAuthority.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/shared/services/user/User.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/services/auth/Tokens.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/shared/services/user/UserImpl.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/shared/services/user/user.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/services/auth/authentication.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/hamburger/hamburger.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/hamburger/hamburger.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/input/input.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/input/input.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/commons/security/EAuthorities.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/commons/security/EAuthorities.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/configs/SecurityConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/configs/SecurityConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/exception/UserErrorControllerAdvice.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/exception/UserErrorControllerAdvice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/extractors/UserAccountWithAuthoritiesExtractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/extractors/UserAccountWithAuthoritiesExtractor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/properties/UserGlobalProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/properties/UserGlobalProperties.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/service/UserAccountDetailsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/service/UserAccountDetailsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/resources/db/changelog/users/complete/complete-authorities-table.sql" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/resources/db/changelog/users/complete/complete-authorities-table.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -326,7 +309,7 @@
       <workItem from="1679481886094" duration="10332000" />
       <workItem from="1679564656468" duration="16050000" />
       <workItem from="1679637774491" duration="12042000" />
-      <workItem from="1679654518969" duration="4083000" />
+      <workItem from="1679654518969" duration="10582000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1678620390716</created>
@@ -377,7 +360,14 @@
       <option name="project" value="LOCAL" />
       <updated>1679586122947</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="feat: Authentication">
+      <created>1679658812493</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1679658812493</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

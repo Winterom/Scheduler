@@ -41,7 +41,6 @@ public class SecurityConfiguration {
         corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PUT","OPTIONS","PATCH", "DELETE"));
         corsConfiguration.setAllowCredentials(true);
         corsConfiguration.setExposedHeaders(List.of("Authorization"));
-
         http.cors().configurationSource(request -> corsConfiguration).and()
                 .csrf().disable()
                 .authorizeHttpRequests()
@@ -52,6 +51,7 @@ public class SecurityConfiguration {
                 .and()
                 .headers().frameOptions().disable()
                 .and()
+                .httpBasic().disable()
                 .exceptionHandling()
                 .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED));
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
