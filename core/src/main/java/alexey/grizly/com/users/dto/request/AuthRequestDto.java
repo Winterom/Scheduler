@@ -8,7 +8,7 @@ import lombok.Data;
 public class AuthRequestDto {
     @NotEmpty
     @Size(min = 4,max = 50)
-    private String authToken;
+    private String emailOrPhone;
     @NotEmpty
     @Size(min = 4,max = 100)
     private String password;

@@ -10,8 +10,8 @@ import {
 } from "../../../shared/validators/PasswordStrangeValidator";
 import {checkIfMatchingPasswords} from "../../../shared/validators/MatchingPasswordsValidator";
 import {ButtonCheckCodeDefinition} from "./ButtonCheckCodeDefinition";
-import {AppEvents} from "../../../shared/services/eventBus/EventData";
-import {EventBusService} from "../../../shared/services/eventBus/event-bus.service";
+import {AppEvents} from "../../../services/eventBus/EventData";
+import {EventBusService} from "../../../services/eventBus/event-bus.service";
 import {ActivatedRoute} from "@angular/router";
 
 @Component({

@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {
+  HTTP_INTERCEPTORS,
   HttpErrorResponse,
   HttpEvent,
   HttpHandler,
@@ -7,15 +8,16 @@ import {
   HttpRequest
 } from '@angular/common/http';
 import {catchError, Observable, throwError} from 'rxjs';
-import {UserService} from "../services/user/user.service";
-import {EventBusService} from "../services/eventBus/event-bus.service";
-import {AppEvents, EventData} from "../services/eventBus/EventData";
-import {AuthenticationAPI} from "../services/API/AuthenticationAPI";
+import {EventBusService} from "../../services/eventBus/event-bus.service";
+import {AppEvents, EventData} from "../../services/eventBus/EventData";
+import {AuthenticationAPI} from "../../services/API/AuthenticationAPI";
+import {UserService} from "../../services/auth/user.service";
 
 @Injectable()
 export class HttpRequestInterceptor implements HttpInterceptor {
   private isRefreshing = false;
-  constructor(private userService:UserService,private eventBus:EventBusService,private api:AuthenticationAPI) {}
+  private api:AuthenticationAPI= new AuthenticationAPI();
+  constructor(private userService:UserService, private eventBus:EventBusService ) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     request = request.clone({
@@ -47,6 +49,6 @@ export class HttpRequestInterceptor implements HttpInterceptor {
     return next.handle(request);
     }
 }
-/*export const httpInterceptorProviders = [
+export const httpInterceptorProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: HttpRequestInterceptor, multi: true },
-];*/
+];

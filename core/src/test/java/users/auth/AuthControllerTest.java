@@ -51,7 +51,7 @@ public class AuthControllerTest {
     @BeforeAll
     public static void setup() {
         authDto.setPassword("2011");
-        authDto.setAuthToken("email1@one.ru");
+        authDto.setEmailOrPhone("email1@one.ru");
         userAccount.setId(1L);
         userAccount.setEmail("email1@one.ru");
         userAccount.setPassword("$2y$10$jZM9lSaITCvsiqA3VY8LZOpOXASrk3aOHfVGsiJye0/m2.vGR7M2W");
@@ -79,7 +79,7 @@ public class AuthControllerTest {
 
     @Test
     public void authenticationNotValidNullTokenDtoTest() throws Exception {
-        authDto.setAuthToken(null);
+        authDto.setEmailOrPhone(null);
         mvc.perform(post("/api/v1/auth")
                         .content(this.objectMapper.writeValueAsString(authDto))
                         .contentType(MediaType.parseMediaType("application/json;charset=UTF-8")))
@@ -88,7 +88,7 @@ public class AuthControllerTest {
     }
     @Test
     public void authenticationNotValidMinLengthTokenDtoTest() throws Exception {
-        authDto.setAuthToken("dw");
+        authDto.setEmailOrPhone("dw");
         mvc.perform(post("/api/v1/auth")
                         .content(this.objectMapper.writeValueAsString(authDto))
                         .contentType(MediaType.parseMediaType("application/json;charset=UTF-8")))
@@ -97,7 +97,7 @@ public class AuthControllerTest {
     }
     @Test
     public void authenticationNotValidMaxLengthTokenDtoTest() throws Exception {
-        authDto.setAuthToken("dwklagj;lkhgaekh[eb,leab,eab[p,beapkaebp,aeLength51");
+        authDto.setEmailOrPhone("dwklagj;lkhgaekh[eb,leab,eab[p,beapkaebp,aeLength51");
         mvc.perform(post("/api/v1/auth")
                         .content(this.objectMapper.writeValueAsString(authDto))
                         .contentType(MediaType.parseMediaType("application/json;charset=UTF-8")))

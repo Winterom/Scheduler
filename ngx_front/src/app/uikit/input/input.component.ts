@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {InputDefinition, InputType} from "./InputDefinition";
-import {EventBusService} from "../../shared/services/eventBus/event-bus.service";
-import {AppEvents} from "../../shared/services/eventBus/EventData";
+import {EventBusService} from "../../services/eventBus/event-bus.service";
+import {AppEvents} from "../../services/eventBus/EventData";
 
 
 @Component({

@@ -47,7 +47,7 @@ public class AuthServiceTest {
     @BeforeAll
     public static void setup() {
         authDto.setPassword("2011");
-        authDto.setAuthToken("email1@one.ru");
+        authDto.setEmailOrPhone("email1@one.ru");
         userAccount.setId(1L);
         userAccount.setEmail("email1@one.ru");
         userAccount.setPassword("$2y$10$jZM9lSaITCvsiqA3VY8LZOpOXASrk3aOHfVGsiJye0/m2.vGR7M2W");
@@ -62,15 +62,15 @@ public class AuthServiceTest {
 
     @Test
     public void correctAuthentication(){
-        when(userAccountDetailsService.loadUserByUsername(authDto.getAuthToken())).thenReturn(userAccount);
+        when(userAccountDetailsService.loadUserByUsername(authDto.getEmailOrPhone())).thenReturn(userAccount);
         UserDetails details= authService.authentication(authDto);
-        assertThat(details.getUsername()).isEqualTo(authDto.getAuthToken());
+        assertThat(details.getUsername()).isEqualTo(authDto.getEmailOrPhone());
         assertTrue(encoder.matches(authDto.getPassword(),details.getPassword() ));
     }
     @Test
     public void inCorrectAuthentication(){
         userAccount.setPassword("$2y$10$SpW96iS3YUc6aBVhmIW6KuMC.i8r1dyxCISYtj51rF9uhJuKoZgWu");/*hash of "London"*/
-        when(userAccountDetailsService.loadUserByUsername(authDto.getAuthToken())).thenReturn(userAccount);
+        when(userAccountDetailsService.loadUserByUsername(authDto.getEmailOrPhone())).thenReturn(userAccount);
         assertThatThrownBy(()->authService.authentication(authDto)).isInstanceOf(BadCredentialsException.class);
 
     }

@@ -19,7 +19,7 @@ public class AuthService {
 
     public UserDetails authentication(AuthRequestDto dto){
         Authentication authentication = authenticationManager
-                .authenticate(new UsernamePasswordAuthenticationToken(dto.getAuthToken(), dto.getPassword()));
+                .authenticate(new UsernamePasswordAuthenticationToken(dto.getEmailOrPhone(), dto.getPassword()));
         return (UserDetails) authentication.getPrincipal();
     }
 }

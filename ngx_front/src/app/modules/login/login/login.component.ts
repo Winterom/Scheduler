@@ -3,12 +3,14 @@ import {InputDefinition, InputType} from "../../../uikit/input/InputDefinition";
 import {ButtonDefinition} from "../../../uikit/button/ButtonDefinition";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {emailOrPhoneValidator} from "../../../shared/validators/EmailOrPhoneValidator";
-import {AuthenticationAPI} from "../../../shared/services/API/AuthenticationAPI";
+import {AuthenticationAPI} from "../../../services/API/AuthenticationAPI";
 import {CheckboxDefinition} from "../../../uikit/checkbox/CheckboxDefinition";
-import {EventBusService} from "../../../shared/services/eventBus/event-bus.service";
-import {AppEvents} from "../../../shared/services/eventBus/EventData";
+import {EventBusService} from "../../../services/eventBus/event-bus.service";
+import {AppEvents} from "../../../services/eventBus/EventData";
 import {LoginButtonDefinition} from "./LoginButtonDefinition";
 import {ResetButtonDefinition} from "./ResetButtonDefinition";
+import {AuthenticationService} from "../../../services/auth/authentication.service";
+import {UserService} from "../../../services/auth/user.service";
 
 
 @Component({
@@ -26,45 +28,47 @@ export class LoginComponent{
   public authForm : FormGroup;
   public resetPasswordForm:FormGroup;
   public showRestorePassword:boolean=false
+  public errorMessage:string|null=null;
 
-  constructor(private eventBus:EventBusService) {
+  constructor(private eventBus:EventBusService,private authService:AuthenticationService,private user:UserService) {
     this.emailOrPhoneInput.control = new FormControl<string>('',[Validators.required,emailOrPhoneValidator()]);
     this.passwordInput.control = new FormControl<string>('',Validators.required);
     this.passwordInput.type=InputType.PASSWORD;
     this.checkboxDefinition.onChange=()=>{
       this.clickShowPassword();
     }
-    this.buttonAuthDefinition.onClick=()=>{
-      this.submitAuthForm();
-    }
 
     this.authForm = new FormGroup<any>({
-      "tokenInput": this.emailOrPhoneInput.control,
+      "emailOrPhoneInput": this.emailOrPhoneInput.control,
       "pswInput": this.passwordInput.control
     })
     this.resetPasswordForm = new FormGroup<any>({
-      "tokenInput":this.emailOrPhoneInput.control
+      "emailOrPhoneInput":this.emailOrPhoneInput.control
     })
 
   }
 
     submitAuthForm(){
-      console.log(this.authForm)
+      Object.keys(this.authForm.controls).forEach(key => {
+        this.authForm.get(key)?.markAsTouched();
+      });
       if(this.authForm.invalid){
         return;
       }
-      const token = this.authForm.controls['tokenInput'];
-      console.log('token: '+token)
-      if(token!=null){
-        if(token.invalid){
-          console.log("token invalid")
-          return;
-        }else {
-          console.log("token valid")
-          return;
-        }
+      const emailOrPhone = this.authForm.controls['emailOrPhoneInput'];
+      const password = this.authForm.controls['pswInput']
+      if(emailOrPhone.invalid||password.invalid){
+        return;
       }
-      this.api.auth_api;
+      this.errorMessage=null;
+      this.authService.login(emailOrPhone.value,password.value)
+        .subscribe({next:data=>{
+            this.user.update(data.access_token)
+          }, error:data=>{
+            console.log("error");
+            console.log(data);
+            this.errorMessage = data.message;
+          }} )
     }
     submitResetPswForm(){
 

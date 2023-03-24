@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {DashboardModule} from "./modules/dashboard/dashboard.module";
 import {LoginModule} from "./modules/login/login.module";
+import {httpInterceptorProviders} from "./shared/interceptors/http-request-interceptor.service";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -14,9 +16,10 @@ import {LoginModule} from "./modules/login/login.module";
     BrowserModule,
     AppRoutingModule,
     DashboardModule,
-    LoginModule
+    LoginModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
