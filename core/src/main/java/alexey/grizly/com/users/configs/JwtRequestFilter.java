@@ -2,6 +2,7 @@ package alexey.grizly.com.users.configs;
 
 
 import alexey.grizly.com.users.utils.JwtTokenUtil;
+import io.jsonwebtoken.ClaimJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -35,12 +36,17 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         String jwt = null;
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             jwt = authHeader.substring(7);
-            authToken = jwtTokenUtil.getEmailFromToken(jwt);
+            try {
+                authToken = jwtTokenUtil.getEmailFromToken(jwt);
+            }catch (ClaimJwtException e){
+                log.error(e.getMessage()+request);
+            }
+
         }
 
         if (authToken != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(authToken, request.getRemoteHost(),
-                    jwtTokenUtil.getRoles(jwt).stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList()));
+                    jwtTokenUtil.getAuthorities(jwt).stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList()));
             SecurityContextHolder.getContext().setAuthentication(token);
         }
         filterChain.doFilter(request, response);

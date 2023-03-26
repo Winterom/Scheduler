@@ -22,7 +22,7 @@ public class UserAccountsController {
 
     @GetMapping("user/password/change/token")
     public ResponseEntity<?> sendTokenForResetPassword(){
-        return ResponseEntity.ok("Инструкция по сбросу пароля отправлена на почту");
+        return null;
     }
 
     @PutMapping ("user/password/change")

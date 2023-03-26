@@ -27,7 +27,7 @@ public class UserErrorControllerAdvice {
     }
     @ExceptionHandler(value = BadCredentialsException.class)
     public ResponseEntity<AppResponseErrorDto> badCredentialCatch() {
-        String errorMessage="Не правильная учетные данные";
+        String errorMessage="Не правильные учетные данные";
         AppResponseErrorDto errorDto = new AppResponseErrorDto(HttpStatus.UNAUTHORIZED,errorMessage);
         return new ResponseEntity<>(errorDto, HttpStatus.UNAUTHORIZED);
     }

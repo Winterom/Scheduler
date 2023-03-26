@@ -16,6 +16,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @RestController
@@ -46,7 +47,7 @@ public class AuthController {
         Date issuedDate = new Date();
         Date accessExpires = new Date(issuedDate.getTime() + properties.getJwtProperties().getJwtLifetime());
         Date refreshExpire = new Date(issuedDate.getTime()+properties.getJwtProperties().getJwtRefreshLifetime());
-        String accessToken = jwtUtil.generateToken(user.getAuthorities(), user.getEmail(), issuedDate,accessExpires);
+        String accessToken = jwtUtil.generateToken(user.getAuthorities(), user.getEmail(), issuedDate,accessExpires, user.getId());
         String refreshToken = jwtUtil.generateRefreshTokenFromEmail(user.getEmail(),refreshExpire,issuedDate);
         int resultSave = refreshTokenService.saveRefreshToken(user,refreshToken,refreshExpire);
         if(resultSave!=1){
@@ -57,7 +58,12 @@ public class AuthController {
         cookie.setHttpOnly(true);
         cookie.setMaxAge(properties.getJwtProperties().getJwtRefreshLifetime());
         response.addCookie(cookie);
-        AuthResponseDto dto = new AuthResponseDto(accessToken);
+        SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        isoFormat.setTimeZone(properties.getGlobalProperties().getTimeZone());
+        String expire = isoFormat.format(accessExpires);
+        System.out.println("expire "+expire);
+        System.out.println("tek date "+issuedDate);
+        AuthResponseDto dto = new AuthResponseDto(accessToken, expire);
         return ResponseEntity.ok(dto);
     }
 

@@ -11,6 +11,7 @@ import {LoginButtonDefinition} from "./LoginButtonDefinition";
 import {ResetButtonDefinition} from "./ResetButtonDefinition";
 import {AuthenticationService} from "../../../services/auth/authentication.service";
 import {UserService} from "../../../services/auth/user.service";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -30,7 +31,10 @@ export class LoginComponent{
   public showRestorePassword:boolean=false
   public errorMessage:string|null=null;
 
-  constructor(private eventBus:EventBusService,private authService:AuthenticationService,private user:UserService) {
+  constructor(private eventBus:EventBusService,
+              private authService:AuthenticationService,
+              private user:UserService,
+              private router: Router) {
     this.emailOrPhoneInput.control = new FormControl<string>('',[Validators.required,emailOrPhoneValidator()]);
     this.passwordInput.control = new FormControl<string>('',Validators.required);
     this.passwordInput.type=InputType.PASSWORD;
@@ -63,11 +67,10 @@ export class LoginComponent{
       this.errorMessage=null;
       this.authService.login(emailOrPhone.value,password.value)
         .subscribe({next:data=>{
-            this.user.update(data.access_token)
+            this.user.update(data);
+            this.router.navigate(['board']);
           }, error:data=>{
-            console.log("error");
-            console.log(data);
-            this.errorMessage = data.message;
+            this.errorMessage = data.error.message;
           }} )
     }
     submitResetPswForm(){

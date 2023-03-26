@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from "@angular/router";
+import {EventBusService} from "../../../../services/eventBus/event-bus.service";
+import {AppEvents} from "../../../../services/eventBus/EventData";
 
 @Component({
   selector: 'app-top-menu',
@@ -8,9 +10,10 @@ import {Router} from "@angular/router";
 })
 export class TopMenuComponent  {
 
-  constructor(private router:Router) { }
+  constructor(private router:Router, private eventBus:EventBusService) { }
 
   logout(){
+    this.eventBus.emit({name:AppEvents.LOGOUT,value:null});
     this.router.navigate(['login']);
   }
 }

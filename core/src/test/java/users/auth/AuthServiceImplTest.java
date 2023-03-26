@@ -6,7 +6,7 @@ import alexey.grizly.com.commons.security.EUserStatus;
 import alexey.grizly.com.users.dto.request.AuthRequestDto;
 import alexey.grizly.com.users.models.AppAuthorities;
 import alexey.grizly.com.users.models.UserAccount;
-import alexey.grizly.com.users.service.AuthService;
+import alexey.grizly.com.users.service.AuthServiceImpl;
 import alexey.grizly.com.users.service.UserAccountDetailsService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -30,17 +30,17 @@ import static org.mockito.Mockito.when;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK,classes = {StartApplication.class})
 @ExtendWith({SpringExtension.class})
-public class AuthServiceTest {
+public class AuthServiceImplTest {
     private final static AuthRequestDto authDto = new AuthRequestDto();
     private final static UserAccount userAccount = new UserAccount();
-    private final AuthService authService;
+    private final AuthServiceImpl authServiceImpl;
     private final BCryptPasswordEncoder encoder;
     @MockBean
     private UserAccountDetailsService userAccountDetailsService;
 
     @Autowired
-    public AuthServiceTest(AuthService authService, BCryptPasswordEncoder encoder) {
-        this.authService = authService;
+    public AuthServiceImplTest(AuthServiceImpl authServiceImpl, BCryptPasswordEncoder encoder) {
+        this.authServiceImpl = authServiceImpl;
         this.encoder = encoder;
     }
 
@@ -63,7 +63,7 @@ public class AuthServiceTest {
     @Test
     public void correctAuthentication(){
         when(userAccountDetailsService.loadUserByUsername(authDto.getEmailOrPhone())).thenReturn(userAccount);
-        UserDetails details= authService.authentication(authDto);
+        UserDetails details= authServiceImpl.authentication(authDto);
         assertThat(details.getUsername()).isEqualTo(authDto.getEmailOrPhone());
         assertTrue(encoder.matches(authDto.getPassword(),details.getPassword() ));
     }
@@ -71,7 +71,7 @@ public class AuthServiceTest {
     public void inCorrectAuthentication(){
         userAccount.setPassword("$2y$10$SpW96iS3YUc6aBVhmIW6KuMC.i8r1dyxCISYtj51rF9uhJuKoZgWu");/*hash of "London"*/
         when(userAccountDetailsService.loadUserByUsername(authDto.getEmailOrPhone())).thenReturn(userAccount);
-        assertThatThrownBy(()->authService.authentication(authDto)).isInstanceOf(BadCredentialsException.class);
+        assertThatThrownBy(()-> authServiceImpl.authentication(authDto)).isInstanceOf(BadCredentialsException.class);
 
     }
 }

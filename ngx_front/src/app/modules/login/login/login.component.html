@@ -17,6 +17,7 @@
       <div class="checkbox_wrapper">
         <app-checkbox [definition]="checkboxDefinition"></app-checkbox>
       </div>
+      <div *ngIf="errorMessage!=null" class="error_response">{{errorMessage}}</div>
       <div class="button_wrapper">
         <app-button [definition]="buttonAuthDefinition"></app-button>
       </div>

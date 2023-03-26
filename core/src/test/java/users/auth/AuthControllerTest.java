@@ -7,7 +7,7 @@ import alexey.grizly.com.commons.security.EUserStatus;
 import alexey.grizly.com.users.dto.request.AuthRequestDto;
 import alexey.grizly.com.users.models.AppAuthorities;
 import alexey.grizly.com.users.models.UserAccount;
-import alexey.grizly.com.users.service.AuthService;
+import alexey.grizly.com.users.service.AuthServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -38,7 +38,7 @@ public class AuthControllerTest {
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final MockMvc mvc;
     @MockBean
-    private AuthService authService;
+    private AuthServiceImpl authServiceImpl;
     private final static AuthRequestDto authDto = new AuthRequestDto();
     private final static UserAccount userAccount = new UserAccount();
     private final AppResponseErrorDto errorDto = new AppResponseErrorDto(HttpStatus.UNAUTHORIZED,"Неверные учетные данные пользователя");
@@ -70,7 +70,7 @@ public class AuthControllerTest {
     }
     @Test
     public void authenticationValidDtoTest() throws Exception {
-        when(authService.authentication(authDto)).thenReturn(userAccount);
+        when(authServiceImpl.authentication(authDto)).thenReturn(userAccount);
         mvc.perform(post("/api/v1/auth")
                         .content(this.objectMapper.writeValueAsString(authDto))
                         .contentType(MediaType.parseMediaType("application/json;charset=UTF-8")))

@@ -3,9 +3,13 @@ package alexey.grizly.com.users.properties;
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
+import java.util.SimpleTimeZone;
+import java.util.TimeZone;
+
 @Data
 @Component
 public class UserGlobalProperties {
+    private GlobalProperties globalProperties = new GlobalProperties();
     private JwtProperties jwtProperties = new JwtProperties();
     private UserPasswordStrange userPasswordStrange = new UserPasswordStrange();
 
@@ -24,5 +28,10 @@ public class UserGlobalProperties {
         private final Integer passwordMinSymbol=2;/*Минимальное количество спец символов*/
         private final Integer passwordMinUpperCase= 1;/*Минимальное количество заглавных символов*/
         private final Integer passwordMinCharacters= 8;/*Минимальная длина пароля*/
+    }
+    @Data
+    public static class GlobalProperties{
+        private String host= "http://localhost:4200/";
+        private TimeZone timeZone = SimpleTimeZone.getTimeZone("Moscow");
     }
 }

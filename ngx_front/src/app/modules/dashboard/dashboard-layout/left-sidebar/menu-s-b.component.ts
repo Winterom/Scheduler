@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {UserService} from "../../../../services/auth/user.service";
 
 @Component({
   selector: 'app-left-sidebar',
@@ -7,6 +8,6 @@ import {Component} from '@angular/core';
 })
 export class MenuSBComponent {
 
-  constructor() { }
+  constructor(public userService:UserService) { }
 
 }

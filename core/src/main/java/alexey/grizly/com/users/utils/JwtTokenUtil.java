@@ -18,12 +18,13 @@ public class JwtTokenUtil {
 
 
     public String generateToken(
-            Collection<? extends GrantedAuthority> authorities, String email, Date issuedDate, Date expiredDate) {
+            Collection<? extends GrantedAuthority> authorities, String email, Date issuedDate, Date expiredDate,Long id) {
         Map<String, Object> claims = new HashMap<>();
-        List<String> rolesList = authorities.stream()
+        List<String> authoritiesList = authorities.stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
-        claims.put("roles", rolesList);
+        claims.put("authorities", authoritiesList);
+        claims.put("id",id);
         return
         Jwts.builder()
                 .setClaims(claims)
@@ -38,8 +39,8 @@ public class JwtTokenUtil {
         return getClaimFromToken(token, Claims::getSubject);
     }
 
-    public List<String> getRoles(String token) {
-        return getClaimFromToken(token, (Function<Claims, List<String>>) claims -> claims.get("roles", List.class));
+    public List<String> getAuthorities(String token) {
+        return getClaimFromToken(token, (Function<Claims, List<String>>) claims -> claims.get("authorities", List.class));
     }
     public String generateRefreshTokenFromEmail(String email,Date expires,Date issuedDate) {
         return Jwts.builder()
