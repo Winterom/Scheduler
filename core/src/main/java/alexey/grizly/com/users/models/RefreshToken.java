@@ -7,13 +7,13 @@ import org.springframework.data.relational.core.mapping.Table;
 
 import java.time.LocalDateTime;
 
-@Table
+@Table(name = "refresh_tokens")
 @Data
-public class ChangePasswordToken {
+public class RefreshToken {
     @Id
-    private Long id;            /*userId*/
+    private Long id;
+    @Column(value = "expired")
+    private LocalDateTime expired;
     @Column(value = "token")
     private String token;
-    @Column(value = "expire")
-    private LocalDateTime expire;
 }
