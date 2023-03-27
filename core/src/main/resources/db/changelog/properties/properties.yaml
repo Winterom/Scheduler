@@ -1,0 +1,3 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/properties/create/create-properties-table.sql

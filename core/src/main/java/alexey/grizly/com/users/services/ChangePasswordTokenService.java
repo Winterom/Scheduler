@@ -1,4 +1,4 @@
-package alexey.grizly.com.users.service;
+package alexey.grizly.com.users.services;
 
 import alexey.grizly.com.users.models.UserAccount;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;

@@ -1,4 +1,4 @@
-package alexey.grizly.com.users.exception;
+package alexey.grizly.com.users.exceptions;
 
 import alexey.grizly.com.commons.errors.AppResponseErrorDto;
 import org.springframework.http.HttpStatus;

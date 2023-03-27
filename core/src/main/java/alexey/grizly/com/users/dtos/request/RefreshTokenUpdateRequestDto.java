@@ -1,4 +1,4 @@
-package alexey.grizly.com.users.dto.request;
+package alexey.grizly.com.users.dtos.request;
 
 import lombok.Data;
 

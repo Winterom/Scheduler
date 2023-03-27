@@ -2,7 +2,7 @@ package alexey.grizly.com.mailing.listeners;
 
 
 import alexey.grizly.com.commons.events.UserPasswordRestoreSendEmailEvent;
-import alexey.grizly.com.mailing.service.AppMailSender;
+import alexey.grizly.com.mailing.services.AppMailSender;
 import org.springframework.context.ApplicationListener;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Component;

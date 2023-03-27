@@ -1,4 +1,4 @@
-package alexey.grizly.com.mailing.service;
+package alexey.grizly.com.mailing.services;
 
 
 

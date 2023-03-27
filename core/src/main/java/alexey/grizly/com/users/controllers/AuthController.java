@@ -1,12 +1,13 @@
 package alexey.grizly.com.users.controllers;
 
 import alexey.grizly.com.commons.errors.AppResponseErrorDto;
-import alexey.grizly.com.users.dto.request.AuthRequestDto;
-import alexey.grizly.com.users.dto.response.AuthResponseDto;
+import alexey.grizly.com.properties.models.GlobalProperties;
+import alexey.grizly.com.users.dtos.request.AuthRequestDto;
+import alexey.grizly.com.users.dtos.response.AuthResponseDto;
 import alexey.grizly.com.users.models.UserAccount;
-import alexey.grizly.com.users.properties.UserGlobalProperties;
-import alexey.grizly.com.users.service.AuthService;
-import alexey.grizly.com.users.service.RefreshTokenService;
+import alexey.grizly.com.properties.models.SecurityProperties;
+import alexey.grizly.com.users.services.AuthService;
+import alexey.grizly.com.users.services.RefreshTokenService;
 import alexey.grizly.com.users.utils.JwtTokenUtil;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
@@ -25,13 +26,15 @@ public class AuthController {
     private final AuthService authService;
     private final RefreshTokenService refreshTokenService;
     private final JwtTokenUtil jwtUtil;
-    private final UserGlobalProperties properties;
+    private final SecurityProperties properties;
+    private final GlobalProperties globalProperties;
 
-    public AuthController(AuthService authService, RefreshTokenService refreshTokenService, JwtTokenUtil jwtUtil, UserGlobalProperties properties) {
+    public AuthController(AuthService authService, RefreshTokenService refreshTokenService, JwtTokenUtil jwtUtil, SecurityProperties properties, GlobalProperties globalProperties) {
         this.authService = authService;
         this.refreshTokenService = refreshTokenService;
         this.jwtUtil = jwtUtil;
         this.properties = properties;
+        this.globalProperties = globalProperties;
     }
 
 
@@ -59,7 +62,7 @@ public class AuthController {
         cookie.setMaxAge(properties.getJwtProperties().getJwtRefreshLifetime());
         response.addCookie(cookie);
         SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-        isoFormat.setTimeZone(properties.getGlobalProperties().getTimeZone());
+        isoFormat.setTimeZone(globalProperties.getTimeZone());
         String expire = isoFormat.format(accessExpires);
         System.out.println("expire "+expire);
         System.out.println("tek date "+issuedDate);

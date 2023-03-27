@@ -1,6 +1,6 @@
-package alexey.grizly.com.users.service;
+package alexey.grizly.com.users.services;
 
-import alexey.grizly.com.users.dto.request.AuthRequestDto;
+import alexey.grizly.com.users.dtos.request.AuthRequestDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

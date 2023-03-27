@@ -1,10 +1,12 @@
-package alexey.grizly.com.mailing.properties;
+package alexey.grizly.com.properties.models;
 
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.stereotype.Component;
 
 @Data
+@Component
 public class EmailProperties {
     private String email;
     private String password;

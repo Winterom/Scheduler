@@ -3,9 +3,9 @@ package alexey.grizly.com.users.controllers;
 
 import alexey.grizly.com.commons.errors.AppResponseErrorDto;
 import alexey.grizly.com.commons.events.UserPasswordRestoreSendEmailEvent;
+import alexey.grizly.com.properties.models.GlobalProperties;
 import alexey.grizly.com.users.models.UserAccount;
-import alexey.grizly.com.users.properties.UserGlobalProperties;
-import alexey.grizly.com.users.service.UserAccountService;
+import alexey.grizly.com.users.services.UserAccountService;
 import jakarta.validation.constraints.Email;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ApplicationEventMulticaster;
@@ -21,13 +21,14 @@ import java.util.Base64;
 public class UserAccountsController {
     private final UserAccountService userAccountService;
     private final ApplicationEventMulticaster multicaster;
-    private final UserGlobalProperties properties;
+    private final GlobalProperties globalProperties;
 
     @Autowired
-    public UserAccountsController(UserAccountService userAccountService, ApplicationEventMulticaster multicaster, UserGlobalProperties properties) {
+    public UserAccountsController(UserAccountService userAccountService, ApplicationEventMulticaster multicaster, GlobalProperties globalProperties) {
         this.userAccountService = userAccountService;
         this.multicaster = multicaster;
-        this.properties = properties;
+
+        this.globalProperties = globalProperties;
     }
 
 
@@ -43,7 +44,7 @@ public class UserAccountsController {
             AppResponseErrorDto dto = new AppResponseErrorDto(HttpStatus.CONFLICT,"Упс что-то пошло не так...");
             return new ResponseEntity<>(dto, HttpStatus.CONFLICT);
         }
-        String url = properties.getGlobalProperties().getHost()+"/reset?token="+ Arrays.toString(Base64.getEncoder().encode((userAccount.getEmail() + "&&" + token).getBytes()));
+        String url =globalProperties.getHost()+"/reset?token="+ Arrays.toString(Base64.getEncoder().encode((userAccount.getEmail() + "&&" + token).getBytes()));
         UserPasswordRestoreSendEmailEvent event = new UserPasswordRestoreSendEmailEvent(new UserPasswordRestoreSendEmailEvent.EventParam(userAccount.getEmail(),url));
         multicaster.multicastEvent(event);
         return ResponseEntity.ok("Инструкции по восстановлению пароля отправлены на email: "+userAccount.getEmail());
