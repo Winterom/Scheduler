@@ -8,10 +8,10 @@ import org.springframework.stereotype.Component;
 @Data
 @Component
 public class EmailProperties {
-    private String email;
-    private String password;
-    private OutgoingSmtpServer smtpServer;
-    private IncomingServer incomingServer;
+    private String email="";
+    private String password="";
+    private OutgoingSmtpServer smtpServer=new OutgoingSmtpServer();
+    private IncomingServer incomingServer=new IncomingServer();
 
     @Getter
     @Setter
@@ -23,8 +23,6 @@ public class EmailProperties {
         private Integer portSSL;
         private Integer portTLS;
         private String transportProtocol;
-
-
     }
 
     @Getter

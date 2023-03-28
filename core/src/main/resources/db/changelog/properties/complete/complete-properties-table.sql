@@ -1,0 +1,4 @@
+INSERT INTO properties(clazz,property) VALUES
+      ('alexey.grizly.com.properties.models.EmailProperties','{"email": "", "password": "", "smtpServer": {"host": null, "portSSL": null, "portTLS": null, "enabledSSL": null, "enabledTLS": null, "requireAuth": null, "transportProtocol": null}, "incomingServer": {"portSSL": null, "enabledSSL": null, "imapServer": null, "serverType": null}}'::jsonb),
+      ('alexey.grizly.com.properties.models.GlobalProperties','{"host": "http://localhost:4200/", "timeZone": "GMT"}'::jsonb),
+      ('alexey.grizly.com.properties.models.SecurityProperties','{"jwtProperties": {"secret": "h4f8093h4f983yhrt9834hr0934hf0hf493g493gf438rh438th34g34g", "jwtLifetime": 3600000, "jwtRefreshLifetime": 36000000, "emailVerifyTokenLifeTime": 36000000}, "userPasswordStrange": {"passwordMinNumber": 1, "passwordMinSymbol": 2, "passwordMinLowerCase": 1, "passwordMinUpperCase": 1, "passwordMinCharacters": 8}}'::jsonb)
