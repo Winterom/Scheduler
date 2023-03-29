@@ -5,7 +5,6 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {emailOrPhoneValidator} from "../../../shared/validators/EmailOrPhoneValidator";
 import {CheckboxDefinition} from "../../../uikit/checkbox/CheckboxDefinition";
 import {
-  PasswordStrangeRequirement,
   passwordStrangeValidator
 } from "../../../shared/validators/PasswordStrangeValidator";
 import {checkIfMatchingPasswords} from "../../../shared/validators/MatchingPasswordsValidator";
@@ -13,6 +12,8 @@ import {ButtonCheckCodeDefinition} from "./ButtonCheckCodeDefinition";
 import {AppEvents} from "../../../services/eventBus/EventData";
 import {EventBusService} from "../../../services/eventBus/event-bus.service";
 import {ActivatedRoute} from "@angular/router";
+import {PasswordStrangeRequirement} from "./PasswordStrangeRequirement";
+import {ResetPasswordService} from "../../../services/auth/reset-password.service";
 
 @Component({
   selector: 'app-reset-password',
@@ -30,8 +31,9 @@ export class ResetPasswordComponent implements OnInit{
   public passwordStrangeRequirement:PasswordStrangeRequirement = new PasswordStrangeRequirement();
 
 
-  constructor(private eventBus:EventBusService,private activateRoute: ActivatedRoute) {
-
+  constructor(private eventBus:EventBusService,
+              private activateRoute: ActivatedRoute,
+              private resetService:ResetPasswordService) {
     this.confirmPasswordInput.type=InputType.PASSWORD;
     this.passwordInput.type = InputType.PASSWORD;
     this.emailOrPhoneInput.control = new FormControl<string>('',[Validators.required,emailOrPhoneValidator()]);
@@ -67,5 +69,13 @@ export class ResetPasswordComponent implements OnInit{
     if (mail) {
       this.emailOrPhoneInput.control.setValue(mail)
     }
+    this.resetService.
+      getPasswordRequirements()
+        .subscribe((data)=>{
+          this.passwordStrangeRequirement=data;
+          console.log(this.passwordStrangeRequirement)
+        })
+
   }
+
 }

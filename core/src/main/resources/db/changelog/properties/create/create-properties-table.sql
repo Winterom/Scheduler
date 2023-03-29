@@ -1,4 +1,4 @@
 CREATE TABLE properties (
     clazz VARCHAR(100) PRIMARY KEY,
-    property jsonb
+    property jsonb NOT NULL
 )

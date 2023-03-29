@@ -1,4 +1,5 @@
 import {AbstractControl, ValidationErrors, ValidatorFn} from "@angular/forms";
+import {PasswordStrangeRequirement} from "../../modules/login/reset-password/PasswordStrangeRequirement";
 
 export function passwordStrangeValidator(passRequirement:PasswordStrangeRequirement):ValidatorFn{
   return (control:AbstractControl) : ValidationErrors | null => {
@@ -22,10 +23,4 @@ export function passwordStrangeValidator(passRequirement:PasswordStrangeRequirem
   }
 }
 
-export class PasswordStrangeRequirement {
-  public passwordMinLowerCase:number =1;
-  public passwordMinNumber: number =1;
-  public passwordMinSymbol:number =2;
-  public passwordMinUpperCase: number =1;
-  public passwordMinCharacters: number =8;
-}
+

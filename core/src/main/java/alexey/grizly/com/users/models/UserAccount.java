@@ -1,6 +1,5 @@
 package alexey.grizly.com.users.models;
 
-import alexey.grizly.com.commons.security.EUserStatus;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.builder.ToStringBuilder;

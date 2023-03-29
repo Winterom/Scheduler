@@ -3,7 +3,7 @@ package users.auth;
 import alexey.grizly.com.StartApplication;
 import alexey.grizly.com.commons.errors.AppResponseErrorDto;
 import alexey.grizly.com.commons.security.EAuthorities;
-import alexey.grizly.com.commons.security.EUserStatus;
+import alexey.grizly.com.users.models.EUserStatus;
 import alexey.grizly.com.users.dtos.request.AuthRequestDto;
 import alexey.grizly.com.users.models.AppAuthorities;
 import alexey.grizly.com.users.models.UserAccount;
