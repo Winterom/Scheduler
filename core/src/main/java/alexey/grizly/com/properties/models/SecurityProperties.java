@@ -91,6 +91,7 @@ public class SecurityProperties {
         }
     }
 
+    /*Если значение установлено в 0 то при валидации не используется*/
     @Getter
     @Setter
     public static class UserPasswordStrange{

@@ -7,7 +7,7 @@ import alexey.grizly.com.users.models.EUserStatus;
 import alexey.grizly.com.users.dtos.request.AuthRequestDto;
 import alexey.grizly.com.users.models.AppAuthorities;
 import alexey.grizly.com.users.models.UserAccount;
-import alexey.grizly.com.users.services.AuthServiceImpl;
+import alexey.grizly.com.users.services.impl.AuthServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;

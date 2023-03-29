@@ -1,4 +1,4 @@
-package alexey.grizly.com.users.services;
+package alexey.grizly.com.users.services.impl;
 
 
 import alexey.grizly.com.users.extractors.UserAccountWithAuthoritiesExtractor;

@@ -1,6 +1,6 @@
 package alexey.grizly.com.users.configs;
 
-import alexey.grizly.com.users.services.UserAccountDetailsService;
+import alexey.grizly.com.users.services.impl.UserAccountDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

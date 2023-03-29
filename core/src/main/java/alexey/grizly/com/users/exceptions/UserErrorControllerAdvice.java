@@ -21,7 +21,7 @@ public class UserErrorControllerAdvice {
     }
     @ExceptionHandler(value = CredentialsExpiredException.class)
     public ResponseEntity<AppResponseErrorDto> credentialExpiredCatch() {
-        String errorMessage="Срок действия пароля истек. Обратитесь к администратору";
+        String errorMessage="Срок действия пароля истек. Воспользуйтесь восстановлением пароля";
         AppResponseErrorDto errorDto = new AppResponseErrorDto(HttpStatus.UNAUTHORIZED,errorMessage);
         return new ResponseEntity<>(errorDto, HttpStatus.UNAUTHORIZED);
     }
