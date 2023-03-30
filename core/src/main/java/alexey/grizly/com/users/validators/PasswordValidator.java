@@ -14,76 +14,52 @@ public class PasswordValidator  implements ConstraintValidator<Password, String>
         this.userPasswordStrange = userPasswordStrange;
     }
 
-
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        boolean validMinCharacter = true;
-        boolean validMinNumber = true;
-        boolean validMinSymbol = true;
-        boolean validMinLowCase = true;
-        boolean validMinUpperCase = true;
         if(value==null||value.trim().isEmpty()||value.length()>=50){
             return false;
         }
         if(userPasswordStrange.getPasswordMinCharacters()!=null&&
             userPasswordStrange.getPasswordMinCharacters()!=0){
             if (value.length()<userPasswordStrange.getPasswordMinCharacters()){
-                validMinCharacter=false;
+               return false;
             }
         }
+        StringBuilder sb = new StringBuilder();
         if(userPasswordStrange.getPasswordMinNumber()!=null&&
         userPasswordStrange.getPasswordMinNumber()!=0){
-            Pattern pattern = Pattern.compile("([^0-9]*[0-9])");
-            Matcher matcher = pattern.matcher(value);
-            int matches=0;
-            while (matcher.find()){
-                matches++;
-            }
-            if (matches<userPasswordStrange.getPasswordMinNumber()){
-                validMinNumber=false;
-            }
+            sb.append("([^0-9]*[0-9])")
+                    .append("{")
+                    .append(userPasswordStrange.getPasswordMinNumber())
+                    .append("}");
         }
         if(userPasswordStrange.getPasswordMinSymbol()!=null&&
           userPasswordStrange.getPasswordMinSymbol()!=0){
-            Pattern pattern = Pattern.compile("([$@!%*?&])");
-            Matcher matcher = pattern.matcher(value);
-            int matches=0;
-            while (matcher.find()){
-                matches++;
-            }
-            if (matches<userPasswordStrange.getPasswordMinSymbol()){
-                validMinSymbol=false;
-            }
+            sb.append("([$@!%*?&])")
+                    .append("{")
+                    .append(userPasswordStrange.getPasswordMinSymbol())
+                    .append("}");
         }
         if(userPasswordStrange.getPasswordMinLowerCase()!=null&&
                 userPasswordStrange.getPasswordMinLowerCase()!=0){
-            Pattern pattern = Pattern.compile("([^a-z]*[a-z])");
-            Matcher matcher = pattern.matcher(value);
-            int matches=0;
-            while (matcher.find()){
-                matches++;
-            }
-            if (matches<userPasswordStrange.getPasswordMinLowerCase()){
-                validMinLowCase=false;
-            }
+            sb.append("([^a-z]*[a-z])")
+                    .append("{")
+                    .append(userPasswordStrange.getPasswordMinLowerCase())
+                    .append("}");
         }
         if(userPasswordStrange.getPasswordMinUpperCase()!=null&&
                 userPasswordStrange.getPasswordMinUpperCase()!=0){
-            Pattern pattern = Pattern.compile("([^A-Z]*[A-Z])");
-            Matcher matcher = pattern.matcher(value);
-            int matches=0;
-            while (matcher.find()){
-                matches++;
-            }
-            if (matches<userPasswordStrange.getPasswordMinUpperCase()){
-                validMinUpperCase=false;
-            }
+            sb.append("([^A-Z]*[A-Z])")
+                    .append("{")
+                    .append(userPasswordStrange.getPasswordMinUpperCase())
+                    .append("}");
         }
-        return validMinCharacter
-                && validMinNumber
-                && validMinSymbol
-                && validMinLowCase
-                && validMinUpperCase;
+        if(sb.isEmpty()){
+            return true;
+        }
+        Pattern pattern = Pattern.compile(sb.toString());
+        Matcher matcher = pattern.matcher(value);
+        return (matcher.find());
     }
 
 }

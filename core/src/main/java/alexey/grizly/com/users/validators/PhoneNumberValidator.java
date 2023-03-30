@@ -9,10 +9,10 @@ public class PhoneNumberValidator implements ConstraintValidator<PhoneNumber, St
     public void initialize(PhoneNumber constraintAnnotation) {
         ConstraintValidator.super.initialize(constraintAnnotation);
     }
-
     @Override
     public boolean isValid(String contactField, ConstraintValidatorContext validatorContext) {
-        return contactField != null && contactField.matches("^\\+\\d{11}")
-                && (contactField.length() > 8) && (contactField.length() < 14);
+        return contactField != null
+                &&contactField.length()==12
+                &&contactField.matches("^\\+\\d{11}");
     }
 }

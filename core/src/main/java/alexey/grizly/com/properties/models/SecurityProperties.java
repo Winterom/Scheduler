@@ -95,11 +95,11 @@ public class SecurityProperties {
     @Getter
     @Setter
     public static class UserPasswordStrange{
-        private Integer passwordMinLowerCase;/*Минимальное количество прописных символов*/
-        private Integer passwordMinNumber;/*Минимальное количество цифр*/
-        private Integer passwordMinSymbol;/*Минимальное количество спец символов*/
-        private Integer passwordMinUpperCase;/*Минимальное количество заглавных символов*/
-        private Integer passwordMinCharacters;/*Минимальная длина пароля*/
+        private Integer passwordMinLowerCase=0;/*Минимальное количество прописных символов*/
+        private Integer passwordMinNumber=0;/*Минимальное количество цифр*/
+        private Integer passwordMinSymbol=0;/*Минимальное количество спец символов*/
+        private Integer passwordMinUpperCase=0;/*Минимальное количество заглавных символов*/
+        private Integer passwordMinCharacters=0;/*Минимальная длина пароля*/
 
         @Override
         public String toString() {
