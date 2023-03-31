@@ -2,4 +2,8 @@ databaseChangeLog:
   - include:
       file: db/changelog/properties/create/create-properties-table.sql
   - include:
+      file: db/changelog/properties/create/create-email-properties-table.sql
+  - include:
       file: db/changelog/properties/complete/complete-properties-table.sql
+  - include:
+      file: db/changelog/properties/complete/complete-email-properties-table.sql

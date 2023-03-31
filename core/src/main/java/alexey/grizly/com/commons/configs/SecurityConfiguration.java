@@ -1,4 +1,4 @@
-package alexey.grizly.com.users.configs;
+package alexey.grizly.com.commons.configs;
 
 import alexey.grizly.com.users.services.impl.UserAccountDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;

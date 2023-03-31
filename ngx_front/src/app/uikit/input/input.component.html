@@ -4,7 +4,9 @@
          id="{{definition.id}}"
          [formControl]="definition.control"
          placeholder="{{definition.label}}"
-  [ngClass]="{'input-error':definition.control.invalid&&definition.control.touched}">
+         [ngClass]="{'input-error':definition.control.invalid&&definition.control.touched}"
+         [readOnly]=definition.isReadOnly
+  >
   <label class="text-field__label"
          for="{{definition.id}}">
     {{definition.label}}</label>

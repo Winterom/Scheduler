@@ -6,6 +6,7 @@ export class InputDefinition{
   public control:FormControl = new FormControl<string>('');
   public type:InputType = InputType.TEXT;
   public id:string;
+  public isReadOnly:boolean=false;
   constructor(id:string,label:string) {
     this.id=id;
     this.label=label;

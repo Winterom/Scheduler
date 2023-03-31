@@ -31,10 +31,7 @@ $unactiveHoverColor: #dddddd;
   box-sizing: border-box;
 }
 
-body {
-  -webkit-font-smoothing: antialiased;
-  background: #ecf0f1;
-}
+
 
 h1 {
   text-align: center;
@@ -50,6 +47,7 @@ h1 {
     list-style: none;
     margin: 0;
     padding: 0;
+
     li {
       label {
         cursor: pointer;
@@ -97,6 +95,7 @@ h1 {
     background: white;
     color: #111;
     position: relative;
+    border-radius: 2px;
     &:after {
       content: '';
       display: block;

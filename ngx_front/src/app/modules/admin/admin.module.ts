@@ -6,6 +6,9 @@ import { GlobalSettingsComponent } from './global-settings/global-settings.compo
 import { AuthorityComponent } from './authrority/authority.component';
 import {RouterModule, Routes} from "@angular/router";
 import {UikitModule} from "../../uikit/uikit.module";
+import { AppSettingsComponent } from './global-settings/app-settings/app-settings.component';
+import { MailSettingsComponent } from './global-settings/mail-settings/mail-settings.component';
+import { SecuritySettingsComponent } from './global-settings/security-settings/security-settings.component';
 
 const routes:Routes=[
   {path:'',component:GlobalSettingsComponent},
@@ -20,7 +23,10 @@ const routes:Routes=[
     UserListComponent,
     UserByIdComponent,
     GlobalSettingsComponent,
-    AuthorityComponent
+    AuthorityComponent,
+    AppSettingsComponent,
+    MailSettingsComponent,
+    SecuritySettingsComponent
   ],
     imports: [
         CommonModule,

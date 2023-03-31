@@ -1,4 +1,4 @@
-package alexey.grizly.com.users.configs;
+package alexey.grizly.com.commons.configs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
