@@ -1,17 +1,24 @@
 import {Injectable, OnDestroy} from "@angular/core";
-import * as SockJS from "sockjs-client";
-import {Stomp} from "@stomp/stompjs";
+import {Client, StompConfig} from "@stomp/stompjs";
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class WebsocketService implements  OnDestroy{
-  socket = new SockJS("");
-  stompClient = Stomp.over(this.socket);
+  config = new StompConfig();
+  stompClient = new Client();
 
-  constructor() {}
+  constructor() {
+    this.config.brokerURL="ws://localhost:8080/application/ws";
+    this.stompClient.configure(this.config);
+    this.stompClient.activate();
+  }
 
   ngOnDestroy(): void {
+    this.stompClient.deactivate().then(()=>{
+      console.log("disconnected")
+    });
   }
 
 

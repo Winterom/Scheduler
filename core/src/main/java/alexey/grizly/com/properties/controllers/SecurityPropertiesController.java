@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class SecurityPropertiesController {
     private final SecurityProperties securityProperties;
 
+
     @Autowired
     public SecurityPropertiesController(SecurityProperties securityProperties) {
         this.securityProperties = securityProperties;
