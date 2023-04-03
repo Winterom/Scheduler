@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("api/v1/properties/security")
-public class SecurityPropertiesController {
+public class PasswordPropertiesController {
     private final SecurityProperties securityProperties;
 
 
     @Autowired
-    public SecurityPropertiesController(SecurityProperties securityProperties) {
+    public PasswordPropertiesController(SecurityProperties securityProperties) {
         this.securityProperties = securityProperties;
     }
 

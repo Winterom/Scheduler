@@ -3,22 +3,20 @@ package alexey.grizly.com.properties.controllers;
 
 import alexey.grizly.com.properties.services.EmailPropertiesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.annotation.SubscribeMapping;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
-/*@RequestMapping("api/v1/properties/mailing")*/
-public class EmailPropertiesController {
+public class EmailPropertiesControllerWS {
     private final EmailPropertiesService emailPropertiesService;
 
     @Autowired
-    public EmailPropertiesController(EmailPropertiesService emailPropertiesService) {
+    public EmailPropertiesControllerWS(EmailPropertiesService emailPropertiesService) {
         this.emailPropertiesService = emailPropertiesService;
     }
-
-
+    @SubscribeMapping("/emails")
     public void getMailList(){
-
+        System.out.println("Прилетело сообщение");
     }
 }
