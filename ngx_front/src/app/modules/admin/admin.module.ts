@@ -9,6 +9,7 @@ import {UikitModule} from "../../uikit/uikit.module";
 import { AppSettingsComponent } from './global-settings/app-settings/app-settings.component';
 import { MailSettingsComponent } from './global-settings/mail-settings/mail-settings.component';
 import { SecuritySettingsComponent } from './global-settings/security-settings/security-settings.component';
+import {StompModule} from "../../services/WS/stomp.module";
 
 const routes:Routes=[
   {path:'',component:GlobalSettingsComponent},
@@ -31,7 +32,8 @@ const routes:Routes=[
     imports: [
         CommonModule,
         RouterModule.forChild(routes),
-        UikitModule
+        UikitModule,
+        StompModule
     ]
 })
 export class AdminModule { }

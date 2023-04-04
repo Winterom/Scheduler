@@ -1,35 +1,21 @@
-import {Injectable, OnDestroy} from "@angular/core";
-import {Client, StompConfig} from "@stomp/stompjs";
-import {RootWSApi} from "../API/RootWSApi";
+import {Injectable} from "@angular/core";
+import {RxStomp} from "@stomp/rx-stomp";
+import {WSConfig} from "./WSConfig";
 
 @Injectable({
   providedIn: 'root'
 })
-export class WebsocketService implements  OnDestroy{
-  private config = new StompConfig();
-  private _stompClient = new Client();
-  private api:RootWSApi = new RootWSApi();
+export class WebsocketService extends RxStomp {
+  private config = new WSConfig();
 
   constructor() {
-    this._stompClient.debug = function (str) {
-      console.log(str);
-    };
-    this._stompClient.onConnect= function (){
-      console.log("ура подключились!")
-    };
-    this.config.brokerURL=this.api.getWSRootApi();
-    this._stompClient.configure(this.config);
-    this._stompClient.activate();
-  }
-
-  ngOnDestroy(): void {
-    this._stompClient.deactivate().then(()=>{
-      console.log("disconnected")
-    });
+    super();
+    super.configure(this.config);
+    super.activate();
   }
 
 
-  get stompClient(): Client {
-    return this._stompClient;
-  }
+
+
+
 }
