@@ -8,21 +8,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="750a344e-c061-4730-8fc1-d19a16e5fd0b" name="Changes" comment="feat: Authentication">
-      <change afterPath="$PROJECT_DIR$/ngx_front/src/app/services/API/RootApi.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ngx_front/src/app/services/WS/WSConfig.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ngx_front/src/app/services/WS/stomp.module.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ngx_front/src/app/services/WS/ws-service-factory.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/commons/configs/AuthWSInterceptor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/commons/configs/SocketSecurityConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/commons/configs/DatabaseConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/commons/configs/DatabaseConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/core/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/commons/configs/WebsocketConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/commons/configs/WebsocketConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/commons/security/EAuthorities.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/commons/security/EAuthorities.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/properties/controllers/EmailPropertiesControllerWS.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/properties/controllers/EmailPropertiesControllerWS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/admin.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/admin.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/mail-settings/EmailsWSApi.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/mail-settings/EmailsWSApi.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/mail-settings/mail-settings.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/mail-settings/mail-settings.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/services/API/RootHTTPApi.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/services/API/RootHTTPApi.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/services/API/RootWSApi.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/services/API/RootWSApi.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/services/WS/WSConfig.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/services/WS/WSConfig.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/services/WS/stomp.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/services/WS/stomp.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/services/WS/websocket.events.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/services/WS/websocket.interfaces.ts" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ngx_front/src/app/services/WS/websocket.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/services/WS/websocket.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/services/WS/ws-service-factory.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/services/auth/user.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/services/auth/user.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,8 +77,8 @@
         <option value="JUnit5 Test Class" />
         <option value="Interface" />
         <option value="Enum" />
-        <option value="Class" />
         <option value="TypeScript File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -342,6 +342,9 @@
       <workItem from="1680069195340" duration="20956000" />
       <workItem from="1680242456818" duration="26495000" />
       <workItem from="1680515490407" duration="10659000" />
+      <workItem from="1680778366339" duration="10718000" />
+      <workItem from="1680855119793" duration="7699000" />
+      <workItem from="1680867131998" duration="11885000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1678620390716</created>
@@ -420,7 +423,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680271272593</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="feat: Authentication">
+      <created>1680608395875</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1680608395875</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -445,6 +455,17 @@
     <MESSAGE value="feat: reset password form" />
     <MESSAGE value="feat: Authentication" />
     <option name="LAST_COMMIT_MESSAGE" value="feat: Authentication" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/commons/configs/AuthWSInterceptor.java</url>
+          <line>26</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

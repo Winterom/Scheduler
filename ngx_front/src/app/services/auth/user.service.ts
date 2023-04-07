@@ -73,8 +73,11 @@ export class UserService {
     this._id = payload.id;
   }
 
-  get email(): string | null {
-    return this._email;
+  get email(): string {
+    if(this._email!=null){
+      return this._email;
+    }
+    return '';
   }
 
   get authorities(): Set<string> {
@@ -82,6 +85,7 @@ export class UserService {
   }
 
   get token(): string | null {
+    console.log(this._token);
     return this._token;
   }
 }

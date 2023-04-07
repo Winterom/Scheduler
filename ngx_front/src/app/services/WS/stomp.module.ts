@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {WebsocketService} from "./websocket.service";
-import {rxStompServiceFactory} from "./ws-service-factory";
-
 
 
 @NgModule({
@@ -12,8 +10,7 @@ import {rxStompServiceFactory} from "./ws-service-factory";
   ],
   providers:[
     {
-      provide: WebsocketService,
-      useFactory: rxStompServiceFactory
+      provide: WebsocketService
     }
   ]
 })
