@@ -20,7 +20,7 @@ import java.util.List;
 
 @Configuration
 @EnableWebSocketMessageBroker
-@Order(Ordered.HIGHEST_PRECEDENCE + 99)
+@Order(Ordered.HIGHEST_PRECEDENCE + 20)
 public class WebsocketConfiguration implements WebSocketMessageBrokerConfigurer {
     private final JwtTokenUtil jwtTokenUtil;
 

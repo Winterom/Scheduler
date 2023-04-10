@@ -9,7 +9,6 @@ import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
 import org.springframework.messaging.support.ChannelInterceptor;
 import org.springframework.messaging.support.MessageHeaderAccessor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -47,7 +46,7 @@ public class AuthWSInterceptor implements ChannelInterceptor {
 
         }
         if (authToken != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(authToken, accessor.getSessionAttributes().get("ip"),
+            UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(authToken, accessor.getHeader("simpSessionId"),
                     jwtTokenUtil.getAuthorities(jwt).stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList()));
             SecurityContextHolder.getContext().setAuthentication(token);
 

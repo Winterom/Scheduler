@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.messaging.simp.annotation.SubscribeMapping;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 
 import java.security.Principal;
@@ -22,7 +21,7 @@ public class EmailPropertiesControllerWS {
         this.emailPropertiesService = emailPropertiesService;
         this.messagingTemplate = messagingTemplate;
     }
-    @PreAuthorize(value = "hasAuthority('GLOBAL_SETTINGS_READ')")
+   /* @PreAuthorize(value = "hasAuthority('GLOBAL_SETTINGS_READ')")*/
     @MessageMapping("/emails")
     public void getMailList(Principal principal){
         System.out.println(principal);
