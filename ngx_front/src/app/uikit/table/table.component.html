@@ -2,8 +2,8 @@
   <table>
     <thead>
     <tr>
-      <th *ngIf="tableDefinition.isCheckColumn" style="width: 8em">
-          <app-checkbox></app-checkbox>
+      <th *ngIf="tableDefinition.isCheckColumn" style="width: 3em">
+          <app-checkbox [definition]="checkBoxDefinition"></app-checkbox>
       </th>
       <ng-container *ngFor="let column of getHeaderDefinition(); let i = index">
         <th (click)="changeSortDirection(i)" [style.width]="column.width" >

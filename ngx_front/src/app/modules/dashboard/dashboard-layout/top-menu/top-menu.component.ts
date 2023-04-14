@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
 import {Router} from "@angular/router";
 import {EventBusService} from "../../../../services/eventBus/event-bus.service";
 import {AppEvents} from "../../../../services/eventBus/EventData";

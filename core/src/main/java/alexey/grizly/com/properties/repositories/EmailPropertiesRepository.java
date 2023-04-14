@@ -9,6 +9,6 @@ import java.util.List;
 @Repository
 public interface EmailPropertiesRepository extends org.springframework
         .data.repository.Repository<EmailProperty,Long>{
-    @Query()
-    List<EmailProperty> getAllProperties();
+    @Query("SELECT * FROM email_properties WHERE is_enabled=true")
+    List<EmailProperty> getAllEnabledProperties();
 }

@@ -1,4 +1,4 @@
-package alexey.grizly.com.properties.models;
+package alexey.grizly.com.properties.properties;
 
 import alexey.grizly.com.properties.services.PropertiesService;
 import com.fasterxml.jackson.annotation.JsonIgnore;

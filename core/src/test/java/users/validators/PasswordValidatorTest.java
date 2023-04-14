@@ -1,6 +1,6 @@
 package users.validators;
 
-import alexey.grizly.com.properties.models.SecurityProperties;
+import alexey.grizly.com.properties.properties.SecurityProperties;
 import alexey.grizly.com.users.validators.PasswordValidator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;

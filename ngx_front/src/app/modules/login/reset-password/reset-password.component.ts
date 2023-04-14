@@ -4,9 +4,7 @@ import {ButtonDefinition} from "../../../uikit/button/ButtonDefinition";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {emailOrPhoneValidator} from "../../../shared/validators/EmailOrPhoneValidator";
 import {CheckboxDefinition} from "../../../uikit/checkbox/CheckboxDefinition";
-import {
-  passwordStrangeValidator
-} from "../../../shared/validators/PasswordStrangeValidator";
+import {passwordStrangeValidator} from "../../../shared/validators/PasswordStrangeValidator";
 import {checkIfMatchingPasswords} from "../../../shared/validators/MatchingPasswordsValidator";
 import {ButtonCheckCodeDefinition} from "./ButtonCheckCodeDefinition";
 import {AppEvents} from "../../../services/eventBus/EventData";

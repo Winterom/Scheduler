@@ -5,7 +5,6 @@ import {AuthenticationAPI} from "../API/AuthenticationAPI";
 import {Tokens} from "./Tokens";
 
 
-
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };

@@ -28,7 +28,7 @@ export interface TableHeaderColumnDefinition{
   width:string;
 }
 export enum SORT_DIRECTION{
-  ASC="asc",DESC="desc"
+  ASC="asc",DESC="desc",NONE="none"
 }
 export enum VALUE_TYPE{
   STRING='string',NUMBER='number',DATE='date'

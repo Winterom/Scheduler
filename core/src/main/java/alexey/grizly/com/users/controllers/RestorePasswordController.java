@@ -3,8 +3,8 @@ package alexey.grizly.com.users.controllers;
 
 import alexey.grizly.com.commons.errors.AppResponseErrorDto;
 import alexey.grizly.com.commons.events.UserPasswordRestoreSendEmailEvent;
-import alexey.grizly.com.properties.models.GlobalProperties;
-import alexey.grizly.com.properties.models.SecurityProperties;
+import alexey.grizly.com.properties.properties.GlobalProperties;
+import alexey.grizly.com.properties.properties.SecurityProperties;
 import alexey.grizly.com.users.dtos.request.RestorePasswordRequestDto;
 import alexey.grizly.com.users.models.UserAccount;
 import alexey.grizly.com.users.services.UserPasswordService;

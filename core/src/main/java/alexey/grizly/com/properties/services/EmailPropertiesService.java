@@ -17,6 +17,6 @@ public class EmailPropertiesService {
 
 
     public List<EmailProperty> getEmailPropertyList(){
-        return propertyRepository.getAllProperties();
+        return propertyRepository.getAllEnabledProperties();
     }
 }

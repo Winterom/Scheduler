@@ -1,6 +1,6 @@
 package alexey.grizly.com.properties.dtos.security.responses;
 
-import alexey.grizly.com.properties.models.SecurityProperties;
+import alexey.grizly.com.properties.properties.SecurityProperties;
 import lombok.Data;
 
 @Data

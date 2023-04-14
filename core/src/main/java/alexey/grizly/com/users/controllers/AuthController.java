@@ -1,11 +1,11 @@
 package alexey.grizly.com.users.controllers;
 
 import alexey.grizly.com.commons.errors.AppResponseErrorDto;
-import alexey.grizly.com.properties.models.GlobalProperties;
+import alexey.grizly.com.properties.properties.GlobalProperties;
 import alexey.grizly.com.users.dtos.request.AuthRequestDto;
 import alexey.grizly.com.users.dtos.response.AuthResponseDto;
 import alexey.grizly.com.users.models.UserAccount;
-import alexey.grizly.com.properties.models.SecurityProperties;
+import alexey.grizly.com.properties.properties.SecurityProperties;
 import alexey.grizly.com.users.services.AuthService;
 import alexey.grizly.com.users.services.RefreshTokenService;
 import alexey.grizly.com.users.utils.JwtTokenUtil;

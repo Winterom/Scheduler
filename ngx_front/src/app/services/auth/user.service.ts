@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Subscription} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {EventBusService} from "../eventBus/event-bus.service";

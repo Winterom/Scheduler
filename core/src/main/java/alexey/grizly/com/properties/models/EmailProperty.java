@@ -4,6 +4,7 @@ package alexey.grizly.com.properties.models;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 
@@ -14,11 +15,18 @@ import org.springframework.data.relational.core.mapping.Table;
 public class EmailProperty {
     @Id
     private Long id;
+    @Column(value = "type")
     private EMAIL_TYPE type;
+    @Column(value = "is_enabled")
     private Boolean isEnabled;
+    @Column(value = "description")
     private String description;
+    @Column(value = "email")
     private String email;
+    @Column(value = "password")
     private String password;
+    @Column(value = "alias")
+    private String alias;
     private OutgoingSmtpServer smtpServer = new OutgoingSmtpServer();
     private IncomingServer incomingServer = new IncomingServer();
 

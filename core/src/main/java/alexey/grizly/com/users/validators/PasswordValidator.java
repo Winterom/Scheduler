@@ -1,6 +1,6 @@
 package alexey.grizly.com.users.validators;
 
-import alexey.grizly.com.properties.models.SecurityProperties;
+import alexey.grizly.com.properties.properties.SecurityProperties;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
