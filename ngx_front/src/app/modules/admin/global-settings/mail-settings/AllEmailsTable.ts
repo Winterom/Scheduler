@@ -1,7 +1,5 @@
-import {SORT_DIRECTION} from "../../../../uikit/table/TableDefinition";
 
 export interface AllEmailsTable{
-  headers:ColumnSorting;
   rows:Set<RowEmailTable>;
 }
 
@@ -14,7 +12,3 @@ interface RowEmailTable{
   email:string;
 }
 
-interface ColumnSorting{
-  column:string;
-  direction:SORT_DIRECTION;
-}

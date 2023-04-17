@@ -5,10 +5,11 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {AllEmailsTable} from "./AllEmailsTable";
 import {SORT_DIRECTION} from "../../../../uikit/table/TableDefinition";
 
-export interface EmailsRequestParam{
+export interface EmailsSortParam{
     header:string;
     direction:SORT_DIRECTION;
 }
+
 
 @Injectable({
   providedIn: 'root'
@@ -16,15 +17,15 @@ export interface EmailsRequestParam{
 export class EmailsService {
   private api:EmailsWSApi = new EmailsWSApi();
   constructor(private http: HttpClient) { }
-  public emailList(param:EmailsRequestParam[]): Observable<AllEmailsTable> {
-    const httpParam = new HttpParams();
+  public emailList(param:EmailsSortParam[]): Observable<AllEmailsTable> {
+    let httpParam = new HttpParams();
     param.forEach(function (value){
-
+        httpParam = httpParam.append('sort',value.header+','+value.direction)
     })
     return this.http.get<AllEmailsTable>(
       this.api.getEmailsListApi(),
       {
-
+        params:httpParam
       },
     )
   }

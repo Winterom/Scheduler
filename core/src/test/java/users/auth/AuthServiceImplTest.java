@@ -50,7 +50,6 @@ public class AuthServiceImplTest {
         authDto.setEmailOrPhone("email1@one.ru");
         userAccount.setId(1L);
         userAccount.setEmail("email1@one.ru");
-        userAccount.setPassword("$2y$10$jZM9lSaITCvsiqA3VY8LZOpOXASrk3aOHfVGsiJye0/m2.vGR7M2W");
         userAccount.setStatus(EUserStatus.ACTIVE);
         userAccount.setCredentialExpiredTime(LocalDateTime.now().plusHours(6));
         Set<AppAuthorities> authorities = new HashSet<>();
@@ -62,6 +61,8 @@ public class AuthServiceImplTest {
 
     @Test
     public void correctAuthentication(){
+
+        userAccount.setPassword("$2y$10$jZM9lSaITCvsiqA3VY8LZOpOXASrk3aOHfVGsiJye0/m2.vGR7M2W");
         when(userAccountDetailsService.loadUserByUsername(authDto.getEmailOrPhone())).thenReturn(userAccount);
         UserDetails details= authServiceImpl.authentication(authDto);
         assertThat(details.getUsername()).isEqualTo(authDto.getEmailOrPhone());

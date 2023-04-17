@@ -1,10 +1,11 @@
 import {RootWSApi} from "../../../../services/API/RootWSApi";
+import {RootHTTPApi} from "../../../../services/API/RootHTTPApi";
 
-export class EmailsWSApi extends RootWSApi{
-  private readonly emailList:string = '/emails';
+export class EmailsWSApi extends RootHTTPApi{
+  private readonly emailList:string = '/emails/table';
 
 
   getEmailsListApi():string{
-    return super.getDestinationPrefix() + this.emailList;
+    return super.getRoot() + this.emailList;
   }
 }

@@ -47,8 +47,17 @@ export interface TableHeaderColumnDefinition{
   width:string;
 }
 
-export interface TableRows{
-  getValueByHeader(header:TableHeaderColumnDefinition):string|number;
+export abstract class TableRows{
+  abstract id:number;
+  abstract cells:Map<TableHeaderColumnDefinition,string|number|boolean>
+  getValueByHeader(header:TableHeaderColumnDefinition):string|number|boolean{
+    const value = this.cells.get(header);
+    if(value==undefined){
+      return '';
+    }else {
+      return value;
+    }
+  }
 }
 
 export enum SORT_DIRECTION{
