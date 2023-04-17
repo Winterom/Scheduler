@@ -1,6 +1,16 @@
 export class TableDefinition{
+  private _tableID:string=''
   private _isCheckColumn:boolean=false;
   private _headerDefinition:TableHeaderColumnDefinition[]= [];
+  private _rows:TableRows[]=[];
+
+  get tableID(): string {
+    return this._tableID;
+  }
+
+  set tableID(value: string) {
+    this._tableID = value;
+  }
 
   set headerDefinition(value: TableHeaderColumnDefinition[]) {
     this._headerDefinition = value;
@@ -20,13 +30,27 @@ export class TableDefinition{
     }
     return this._headerDefinition;
   }
+
+  get rows(): TableRows[] {
+    return this._rows;
+  }
+
+  set rows(value: TableRows[]) {
+    this._rows = value;
+  }
 }
+
 export interface TableHeaderColumnDefinition{
   title:string;
   sort:SORT_DIRECTION;
   type:VALUE_TYPE;
   width:string;
 }
+
+export interface TableRows{
+  getValueByHeader(header:TableHeaderColumnDefinition):string|number;
+}
+
 export enum SORT_DIRECTION{
   ASC="asc",DESC="desc",NONE="none"
 }

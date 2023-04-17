@@ -8,61 +8,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="750a344e-c061-4730-8fc1-d19a16e5fd0b" name="Changes" comment="feat: Authentication">
-      <change afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/mail-settings/AllEmailsTable.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/mail-settings/emails.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/core/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/properties/controllers/PasswordPropertiesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/properties/controllers/PasswordPropertiesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/properties/dtos/security/responses/EmailPropertiesTableResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/properties/dtos/security/responses/EmailPropertiesTableResponseDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/properties/dtos/security/responses/PasswordStrangeResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/properties/dtos/security/responses/PasswordStrangeResponseDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/properties/extractors/EmailPropertyExtractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/properties/extractors/EmailPropertyExtractor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/properties/models/EmailProperty.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/properties/models/EmailProperty.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/properties/models/GlobalProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/properties/properties/GlobalProperties.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/properties/models/SecurityProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/properties/properties/SecurityProperties.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/properties/repositories/EmailPropertiesRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/properties/repositories/EmailPropertiesRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/properties/services/EmailPropertiesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/properties/services/EmailPropertiesService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/controllers/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/controllers/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/controllers/RestorePasswordController.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/controllers/RestorePasswordController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/validators/PasswordValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/validators/PasswordValidator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/resources/db/changelog/properties/complete/complete-email-properties-table.sql" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/resources/db/changelog/properties/complete/complete-email-properties-table.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/resources/db/changelog/properties/complete/complete-properties-table.sql" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/resources/db/changelog/properties/complete/complete-properties-table.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/resources/db/changelog/properties/create/create-email-properties-table.sql" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/resources/db/changelog/properties/create/create-email-properties-table.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/test/java/users/validators/PasswordValidatorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/test/java/users/validators/PasswordValidatorTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/app-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/app.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/guards/dashboard.guard.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/guards/dashboard.guard.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/admin.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/admin.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/authrority/authority.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/authrority/authority.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/app-settings/app-settings.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/app-settings/app-settings.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/global-settings.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/global-settings.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/commons/configs/DatabaseConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/commons/configs/DatabaseConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/mail-settings/AllEmailsTable.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/mail-settings/AllEmailsTable.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/mail-settings/EmailsWSApi.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/mail-settings/EmailsWSApi.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/mail-settings/emails.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/mail-settings/emails.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/mail-settings/mail-settings.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/mail-settings/mail-settings.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/security-settings/security-settings.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/security-settings/security-settings.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/user-list/user-by-id/user-by-id.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/user-list/user-by-id/user-by-id.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/user-list/user-list.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/user-list/user-list.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/dashboard/dashboard-layout/left-sidebar/bottom-sb-menu/bottom-menu-s-b.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/dashboard/dashboard-layout/left-sidebar/bottom-sb-menu/bottom-menu-s-b.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/dashboard/dashboard-layout/left-sidebar/top-sb-menu/top-menu-s-b.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/dashboard/dashboard-layout/left-sidebar/top-sb-menu/top-menu-s-b.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/dashboard/dashboard-layout/top-menu/chat-notification/chat-notification.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/dashboard/dashboard-layout/top-menu/chat-notification/chat-notification.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/dashboard/dashboard-layout/top-menu/notification/notification.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/dashboard/dashboard-layout/top-menu/notification/notification.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/dashboard/dashboard-layout/top-menu/top-menu.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/dashboard/dashboard-layout/top-menu/top-menu.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/dashboard/dashboard.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/dashboard/dashboard.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/desktop/desktop.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/desktop/desktop.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/desktop/desktop/desktop.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/desktop/desktop/desktop.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/login/login.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/login/login.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/login/reset-password/reset-password.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/login/reset-password/reset-password.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/profile/profile.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/profile/profile.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/profile/profile.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/profile/profile.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/services/WS/WSConfig.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/services/WS/stomp.module.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/services/WS/websocket.service.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/services/auth/authentication.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/services/auth/authentication.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/services/auth/reset-password.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/services/auth/reset-password.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/services/auth/user.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/services/auth/user.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/services/eventBus/event-bus.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/services/eventBus/event-bus.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/services/eventBus/EventData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/services/eventBus/EventData.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/table/TableDefinition.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/table/TableDefinition.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/table/table.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/table/table.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/table/table.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/table/table.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/uikit.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/uikit.module.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,7 +81,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="websocket" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -142,45 +98,45 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers&quot;: &quot;true&quot;,
-    &quot;create.test.in.the.same.root&quot;: &quot;true&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-19&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/winte/IdeaProjects/Scheduler/core/src/main/java/alexey/grizly/com/users&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;org.infernus.idea.checkstyle.CheckStyleConfigurable&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;1d2dfe7cbec4cb85764de7dce500cd05&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\winte\\IdeaProjects\\Scheduler\\ngx_front\\node_modules\\typescript\\lib&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers": "true",
+    "create.test.in.the.same.root": "true",
+    "jdk.selected.JAVA_MODULE": "openjdk-19",
+    "last_opened_file_path": "C:/Users/winte/IdeaProjects/Scheduler/core/src/main/java/alexey/grizly/com/users",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "node",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.0",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "org.infernus.idea.checkstyle.CheckStyleConfigurable",
+    "spring.configuration.checksum": "1d2dfe7cbec4cb85764de7dce500cd05",
+    "ts.external.directory.path": "/Volumes/Работа/Scheduler/ngx_front/node_modules/typescript/lib"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;postgresql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
     ],
-    &quot;com.intellij.ide.scratch.LRUPopupBuilder$1/SQL Dialect&quot;: [
-      &quot;PostgreSQL&quot;
+    "com.intellij.ide.scratch.LRUPopupBuilder$1/SQL Dialect": [
+      "PostgreSQL"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\winte\IdeaProjects\Scheduler\core\src\main\java\alexey\grizly\com\users" />
@@ -382,15 +338,6 @@
       <workItem from="1680069195340" duration="20956000" />
       <workItem from="1680242456818" duration="26495000" />
       <workItem from="1680515490407" duration="10659000" />
-      <workItem from="1680778366339" duration="10718000" />
-      <workItem from="1680855119793" duration="7699000" />
-      <workItem from="1680867131998" duration="11885000" />
-      <workItem from="1681136948689" duration="2265000" />
-      <workItem from="1681193513454" duration="818000" />
-      <workItem from="1681303355659" duration="8607000" />
-      <workItem from="1681390537105" duration="877000" />
-      <workItem from="1681451606900" duration="19000" />
-      <workItem from="1681464593118" duration="3119000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1678620390716</created>
@@ -469,21 +416,7 @@
       <option name="project" value="LOCAL" />
       <updated>1680271272593</updated>
     </task>
-    <task id="LOCAL-00012" summary="feat: Authentication">
-      <created>1680608395875</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1680608395875</updated>
-    </task>
-    <task id="LOCAL-00013" summary="feat: Authentication">
-      <created>1681139189511</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1681139189511</updated>
-    </task>
-    <option name="localTasksCounter" value="14" />
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
