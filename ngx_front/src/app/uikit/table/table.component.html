@@ -64,7 +64,7 @@
         <td *ngIf="tableDefinition.isCheckColumn" style="width: 3em">
           <app-checkbox [definition]="getRowCheckBoxDefinition(i)"></app-checkbox>
         </td>
-        <td *ngFor="let header of tableDefinition.headerDefinition| keyvalue; let h=index" [style.width]="header.value.width">
+        <td *ngFor="let header of tableDefinition.headerDefinition| keyvalue; let h=index" [style.width]="header.value.width"[style.text-align]="header.value.align" >
           {{row.getValueByHeader(header.value)}}
         </td>
       </tr>

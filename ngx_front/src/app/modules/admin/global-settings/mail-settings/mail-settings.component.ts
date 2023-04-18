@@ -24,10 +24,10 @@ export class MailSettingsComponent implements OnInit{
 
   constructor(private eventBus:EventBusService,private emailsService:EmailsService) {
     this.emailTable.isCheckColumn=true;
-    this.emailTable.headerDefinition.set(EmailTableTitle.EMAIL,{sort: SORT_DIRECTION.ASC, type: VALUE_TYPE.STRING, width: '20%'});
-    this.emailTable.headerDefinition.set(EmailTableTitle.DESTINATION,{sort: SORT_DIRECTION.NONE, type: VALUE_TYPE.STRING, width: '20%'});
-    this.emailTable.headerDefinition.set(EmailTableTitle.USAGE,{sort: SORT_DIRECTION.ASC, type: VALUE_TYPE.STRING, width: '15%'});
-    this.emailTable.headerDefinition.set(EmailTableTitle.DESCRIPTION,{sort: SORT_DIRECTION.NONE, type: VALUE_TYPE.STRING, width: '40%'})
+    this.emailTable.headerDefinition.set(EmailTableTitle.EMAIL,{sort: SORT_DIRECTION.ASC, type: VALUE_TYPE.STRING, width: '20%',align:'center'});
+    this.emailTable.headerDefinition.set(EmailTableTitle.DESTINATION,{sort: SORT_DIRECTION.NONE, type: VALUE_TYPE.STRING, width: '20%',align:'center'});
+    this.emailTable.headerDefinition.set(EmailTableTitle.USAGE,{sort: SORT_DIRECTION.ASC, type: VALUE_TYPE.STRING, width: '15%',align:'center'});
+    this.emailTable.headerDefinition.set(EmailTableTitle.DESCRIPTION,{sort: SORT_DIRECTION.NONE, type: VALUE_TYPE.STRING, width: '40%',align:'left'})
     this.emailTable.tableID='emails_property_table';
     this.emailTable.rows = [];
   }

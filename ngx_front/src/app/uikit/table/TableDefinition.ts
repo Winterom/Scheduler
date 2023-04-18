@@ -41,6 +41,7 @@ export interface TableHeaderColumnDefinition{
   sort:SORT_DIRECTION;
   type:VALUE_TYPE;
   width:string;
+  align:string;
 }
 
 export abstract class TableRows{
