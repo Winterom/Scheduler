@@ -1,7 +1,7 @@
 export class TableDefinition{
   private _tableID:string=''
   private _isCheckColumn:boolean=false;
-  private _headerDefinition:TableHeaderColumnDefinition[]= [];
+  private _headerDefinition:Map<string,TableHeaderColumnDefinition>= new Map<string, TableHeaderColumnDefinition>();
   private _rows:TableRows[]=[];
 
   get tableID(): string {
@@ -12,7 +12,7 @@ export class TableDefinition{
     this._tableID = value;
   }
 
-  set headerDefinition(value: TableHeaderColumnDefinition[]) {
+  set headerDefinition(value: Map<string,TableHeaderColumnDefinition>) {
     this._headerDefinition = value;
   }
 
@@ -24,10 +24,7 @@ export class TableDefinition{
     this._isCheckColumn = value;
   }
 
-  get headerDefinition(): TableHeaderColumnDefinition[] {
-    if (!this._headerDefinition){
-      return [];
-    }
+  get headerDefinition():Map<string,TableHeaderColumnDefinition> {
     return this._headerDefinition;
   }
 
@@ -41,7 +38,6 @@ export class TableDefinition{
 }
 
 export interface TableHeaderColumnDefinition{
-  title:string;
   sort:SORT_DIRECTION;
   type:VALUE_TYPE;
   width:string;
@@ -64,6 +60,6 @@ export enum SORT_DIRECTION{
   ASC="asc",DESC="desc",NONE="none"
 }
 export enum VALUE_TYPE{
-  STRING='string',NUMBER='number',DATE='date'
+  STRING='string',NUMBER='number',DATE='date',BOOLEAN='boolean'
 }
 

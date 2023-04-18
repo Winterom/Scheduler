@@ -8,20 +8,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="750a344e-c061-4730-8fc1-d19a16e5fd0b" name="Changes" comment="feat: Authentication">
-      <change afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/table-toolbar/ToolBarDefinition.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/table-toolbar/table-toolbar.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/table-toolbar/table-toolbar.component.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/table-toolbar/table-toolbar.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/commons/configs/DatabaseConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/commons/configs/DatabaseConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/properties/controllers/EmailPropertiesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/properties/controllers/EmailPropertiesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/test/java/users/auth/AuthServiceImplTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/test/java/users/auth/AuthServiceImplTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/global-settings.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/global-settings.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/mail-settings/AllEmailsTable.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/mail-settings/AllEmailsTable.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/mail-settings/EmailsWSApi.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/mail-settings/EmailsWSApi.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/mail-settings/emails.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/mail-settings/emails.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/mail-settings/mail-settings.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/mail-settings/mail-settings.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/user-list/UsersTableDefinition.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/user-list/UsersTableDefinition.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/table/TableDefinition.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/table/TableDefinition.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/uikit.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/uikit.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/table/table.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/table/table.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/table/table.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/table/table.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -169,7 +164,7 @@
       <recent name="alexey.grizly.com.users.utils" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.StartApplication">
+  <component name="RunManager" selected="npm.Angular CLI Server (ngx_front)">
     <configuration name="AuthServiceImplTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -348,6 +343,7 @@
       <workItem from="1681390537105" duration="877000" />
       <workItem from="1681451606900" duration="19000" />
       <workItem from="1681464593118" duration="3119000" />
+      <workItem from="1681812062167" duration="9949000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1678620390716</created>
@@ -440,7 +436,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681139189511</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="feat: Authentication">
+      <created>1681740874167</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1681740874167</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -1,9 +1,5 @@
 
-export interface AllEmailsTable{
-  rows:Set<RowEmailTable>;
-}
-
-interface RowEmailTable{
+export interface RowEmailTable{
   id:number;
   type:string;
   isEnabled:boolean;

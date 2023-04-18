@@ -24,12 +24,10 @@ export class MailSettingsComponent implements OnInit{
 
   constructor(private eventBus:EventBusService,private emailsService:EmailsService) {
     this.emailTable.isCheckColumn=true;
-    this.emailTable.headerDefinition = [
-      {title: EmailTableTitle.EMAIL, sort: SORT_DIRECTION.ASC, type: VALUE_TYPE.STRING, width: '20%'},
-      {title: EmailTableTitle.DESTINATION, sort: SORT_DIRECTION.NONE, type: VALUE_TYPE.STRING, width: '20%'},
-      {title: EmailTableTitle.USAGE, sort: SORT_DIRECTION.ASC, type: VALUE_TYPE.STRING, width: '15%'},
-      {title: EmailTableTitle.DESCRIPTION, sort: SORT_DIRECTION.NONE, type: VALUE_TYPE.STRING, width: '40%'}
-    ];
+    this.emailTable.headerDefinition.set(EmailTableTitle.EMAIL,{sort: SORT_DIRECTION.ASC, type: VALUE_TYPE.STRING, width: '20%'});
+    this.emailTable.headerDefinition.set(EmailTableTitle.DESTINATION,{sort: SORT_DIRECTION.NONE, type: VALUE_TYPE.STRING, width: '20%'});
+    this.emailTable.headerDefinition.set(EmailTableTitle.USAGE,{sort: SORT_DIRECTION.ASC, type: VALUE_TYPE.STRING, width: '15%'});
+    this.emailTable.headerDefinition.set(EmailTableTitle.DESCRIPTION,{sort: SORT_DIRECTION.NONE, type: VALUE_TYPE.STRING, width: '40%'})
     this.emailTable.tableID='emails_property_table';
     this.emailTable.rows = [];
   }
@@ -49,10 +47,33 @@ export class MailSettingsComponent implements OnInit{
       direction: this.getSortDirection(EmailTableTitle.USAGE)
     }]
     this.emailsService.emailList(param).subscribe({next:data=>{
-        this.emailTable.rows = []
-        data.rows.forEach((value)=>{
-
-        });
+        const rows = new Set<EmailTableRow>;
+        const headers = this.emailTable.headerDefinition;
+        console.log(data)
+        data.forEach(function (value){
+          let row = new EmailTableRow(value.id)
+          row.alias = value.alias;
+          row.email_type = value.type;
+          const emailH = headers.get(EmailTableTitle.EMAIL)
+          if(emailH){
+            row.cells.set(emailH,value.email)
+          }
+          const destH = headers.get(EmailTableTitle.DESTINATION);
+          if(destH){
+            row.cells.set(destH,value.type)
+          }
+          const enabledH = headers.get(EmailTableTitle.USAGE);
+          if(enabledH){
+            row.cells.set(enabledH,value.isEnabled)
+          }
+          const descH = headers.get(EmailTableTitle.DESCRIPTION);
+          if(descH){
+            row.cells.set(descH,value.description)
+          }
+          rows.add(row);
+        })
+      this.emailTable.rows=Array.from(rows);
+      console.log(rows)
       }});
   }
 
@@ -61,8 +82,8 @@ export class MailSettingsComponent implements OnInit{
 
   }
 
-  getSortDirection(title:string):SORT_DIRECTION {
-    const header = this.emailTable.headerDefinition.find(elem => elem.title === title);
+  getSortDirection(title:EmailTableTitle):SORT_DIRECTION {
+    const header = this.emailTable.headerDefinition.get(title);
     // @ts-ignore
     return header.sort;
   }
@@ -72,4 +93,15 @@ export enum EmailTableTitle{
   DESTINATION='Назначение',
   USAGE = 'Используется',
   DESCRIPTION = 'Описание'
+}
+
+class EmailTableRow extends TableRows{
+  cells: Map<TableHeaderColumnDefinition, string | number | boolean> = new Map<TableHeaderColumnDefinition, string | number | boolean>();
+  id: number;
+  email_type:string='';
+  alias:string='';
+  constructor(id:number) {
+    super();
+    this.id = id;
+  }
 }

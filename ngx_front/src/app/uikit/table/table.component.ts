@@ -15,16 +15,15 @@ export class TableComponent {
   constructor(private eventBus:EventBusService) {
 
   }
-   getHeaderDefinition():TableHeaderColumnDefinition[]{
+   getHeaderDefinition():Map<string,TableHeaderColumnDefinition>{
      return this.tableDefinition.headerDefinition;
   }
 
-  changeSortDirection(index:number){
-    const header = this.tableDefinition.headerDefinition[index];
-    if(header.sort===SORT_DIRECTION.NONE){
+  changeSortDirection(title:string){
+    const header = this.tableDefinition.headerDefinition.get(title);
+    if(!header||header.sort===SORT_DIRECTION.NONE){
       return;
     }
-
     this.eventBus.emit({name:AppEvents.TABLE_COLUMN_CHANGE_SORT,
       value:this.tableDefinition.tableID})
     if(header.sort===SORT_DIRECTION.DESC){
