@@ -1,6 +1,6 @@
 package alexey.grizly.com.properties.extractors;
 
-import alexey.grizly.com.properties.models.EMAIL_TYPE;
+import alexey.grizly.com.properties.models.EEmailType;
 import alexey.grizly.com.properties.models.EmailProperty;
 
 import org.springframework.dao.DataAccessException;
@@ -18,7 +18,7 @@ public class EmailPropertyExtractor  implements ResultSetExtractor<EmailProperty
         EmailProperty property = new EmailProperty();
         property.setId(rs.getLong("id"));
         property.setEmail(rs.getString("email"));
-        property.setType(EMAIL_TYPE.valueOf(rs.getString("type")));
+        property.setType(EEmailType.valueOf(rs.getString("type")));
         property.setIsEnabled(rs.getBoolean("is_enabled"));
         property.setDescription(rs.getString("description"));
         property.setAlias(rs.getString("alias"));

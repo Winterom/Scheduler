@@ -26,7 +26,7 @@ export class MailSettingsComponent implements OnInit{
     this.emailTable.isCheckColumn=true;
     this.emailTable.headerDefinition.set(EmailTableTitle.EMAIL,{sort: SORT_DIRECTION.ASC, type: VALUE_TYPE.STRING, width: '20%',align:'center'});
     this.emailTable.headerDefinition.set(EmailTableTitle.DESTINATION,{sort: SORT_DIRECTION.NONE, type: VALUE_TYPE.STRING, width: '20%',align:'center'});
-    this.emailTable.headerDefinition.set(EmailTableTitle.USAGE,{sort: SORT_DIRECTION.ASC, type: VALUE_TYPE.STRING, width: '15%',align:'center'});
+    this.emailTable.headerDefinition.set(EmailTableTitle.USAGE,{sort: SORT_DIRECTION.ASC, type: VALUE_TYPE.BOOLEAN, width: '15%',align:'center'});
     this.emailTable.headerDefinition.set(EmailTableTitle.DESCRIPTION,{sort: SORT_DIRECTION.NONE, type: VALUE_TYPE.STRING, width: '40%',align:'left'})
     this.emailTable.tableID='emails_property_table';
     this.emailTable.rows = [];
@@ -49,7 +49,6 @@ export class MailSettingsComponent implements OnInit{
     this.emailsService.emailList(param).subscribe({next:data=>{
         const rows = new Set<EmailTableRow>;
         const headers = this.emailTable.headerDefinition;
-        console.log(data)
         data.forEach(function (value){
           let row = new EmailTableRow(value.id)
           row.alias = value.alias;

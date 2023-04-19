@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {SORT_DIRECTION, TableDefinition, TableHeaderColumnDefinition} from "./TableDefinition";
+import {SORT_DIRECTION, TableDefinition, TableHeaderColumnDefinition, VALUE_TYPE} from "./TableDefinition";
 import {CheckboxDefinition} from "../checkbox/CheckboxDefinition";
 import {EventBusService} from "../../services/eventBus/event-bus.service";
 import {AppEvents} from "../../services/eventBus/EventData";
@@ -9,11 +9,19 @@ import {AppEvents} from "../../services/eventBus/EventData";
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
 })
-export class TableComponent {
+export class TableComponent{
   @Input() tableDefinition: TableDefinition = new TableDefinition();
   public checkBoxDefinition:CheckboxDefinition = new CheckboxDefinition('main','');
-  constructor(private eventBus:EventBusService) {
+  private rowsCheckBoxDefinitions:Map<string,CheckboxDefinition>=new Map<string, CheckboxDefinition>();
 
+  constructor(private eventBus:EventBusService) {
+    this.checkBoxDefinition.onChange=()=>{
+        this.rowsCheckBoxDefinitions.forEach((value)=>{
+          const id:string = String(value.id);
+          const state = this.checkBoxDefinition.state;
+          this.eventBus.emit({name:AppEvents.CHECK_BOX_CHANGE_STATE,value:{id,state}});
+        })
+    }
   }
    getHeaderDefinition():Map<string,TableHeaderColumnDefinition>{
      return this.tableDefinition.headerDefinition;
@@ -33,7 +41,14 @@ export class TableComponent {
     }
   }
 
-  getRowCheckBoxDefinition(id:number):CheckboxDefinition{
-    return new CheckboxDefinition(String(id),'');
+  completeRowCheckBoxDefinition(id:number):CheckboxDefinition{
+    const definition = new CheckboxDefinition(String(id)+'_email','');
+    this.rowsCheckBoxDefinitions.set(String(id)+'_email',definition)
+    return definition;
   }
+
+  isHeaderValueType(header:TableHeaderColumnDefinition):boolean{
+    return header.type===VALUE_TYPE.BOOLEAN;
+  }
+
 }

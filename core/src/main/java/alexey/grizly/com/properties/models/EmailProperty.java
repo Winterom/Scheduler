@@ -16,7 +16,7 @@ public class EmailProperty {
     @Id
     private Long id;
     @Column(value = "type")
-    private EMAIL_TYPE type;
+    private EEmailType type;
     @Column(value = "is_enabled")
     private Boolean isEnabled;
     @Column(value = "description")

@@ -8,4 +8,8 @@ INSERT INTO email_properties (type, description, email, password,
          ('ADMIN_SENDER','Почта с которой производится рассылка уведомлений о смене пароля, истечении срока действия пароля, блокировки аккоунта и так далее',
           'test.marketplace20@gmail.com','nxmiagjiyzcwhqgw',true,'administrative','smtp.gmail.com',true,
           true,true,465,587,'SMTP','IMAP','imap.gmail.com',
+          true,993),
+         ('REGISTER_SENDER','Почта с которой производится рассылка уведомлений о записи на прием, отмены записи и любых других изменений связанных с раписанием премов',
+          'test.marketplace20@gmail.com','nxmiagjiyzcwhqgw',true,'administrative','smtp.gmail.com',true,
+          true,true,465,587,'SMTP','IMAP','imap.gmail.com',
           true,993)

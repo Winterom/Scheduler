@@ -1,6 +1,6 @@
 <div class="checkbox">
   <label class="custom-checkbox" for="{{definition.id}}">
-  <input type="checkbox" (change)="onChange()" id="{{definition.id}}" [(ngModel)]="definition.state">
+  <input type="checkbox" (change)="onChange($event)" id="{{definition.id}}" [(ngModel)]="state" >
     <span>{{definition.label}}</span>
   </label>
 </div>

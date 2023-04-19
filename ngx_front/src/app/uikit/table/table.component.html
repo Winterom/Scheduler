@@ -61,11 +61,28 @@
     <table>
       <tbody>
       <tr *ngFor="let row of tableDefinition.rows; let i=index">
-        <td *ngIf="tableDefinition.isCheckColumn" style="width: 3em">
-          <app-checkbox [definition]="getRowCheckBoxDefinition(i)"></app-checkbox>
+        <td *ngIf="tableDefinition.isCheckColumn" style="width: 3em; text-align: center; font-size: 0.8em">
+          <app-checkbox [definition]="completeRowCheckBoxDefinition(row.id)"></app-checkbox>
         </td>
-        <td *ngFor="let header of tableDefinition.headerDefinition| keyvalue; let h=index" [style.width]="header.value.width"[style.text-align]="header.value.align" >
-          {{row.getValueByHeader(header.value)}}
+        <td *ngFor="let header of tableDefinition.headerDefinition| keyvalue; let h=index" [style.width]="header.value.width" [style.text-align]="header.value.align" >
+          <div *ngIf="isHeaderValueType(header.value);then isBoolean else templateName"></div>
+          <ng-template #isBoolean>
+            <div *ngIf="row.getValueByHeader(header.value)===false">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-circle" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
+              </svg>
+            </div>
+            <div *ngIf="row.getValueByHeader(header.value)===true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2-circle" viewBox="0 0 16 16">
+                <path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z"/>
+                <path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z"/>
+              </svg>
+            </div>
+          </ng-template>
+          <ng-template #templateName>
+            {{row.getValueByHeader(header.value)}}
+          </ng-template>
         </td>
       </tr>
       </tbody>
