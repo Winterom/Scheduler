@@ -6,7 +6,6 @@ import {TableComponent} from './table/table.component';
 import {CheckboxComponent} from './checkbox/checkbox.component';
 import {InputComponent} from './input/input.component';
 import {ButtonComponent} from './button/button.component';
-import { TableToolbarComponent } from './table-toolbar/table-toolbar.component';
 
 
 @NgModule({
@@ -16,7 +15,6 @@ import { TableToolbarComponent } from './table-toolbar/table-toolbar.component';
     CheckboxComponent,
     InputComponent,
     ButtonComponent,
-    TableToolbarComponent
   ],
     exports: [
         HamburgerComponent,

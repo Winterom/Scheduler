@@ -6,12 +6,13 @@ import alexey.grizly.com.properties.models.EmailProperty;
 import alexey.grizly.com.properties.services.EmailPropertiesService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.http.HttpRequest;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 
@@ -25,11 +26,22 @@ public class EmailPropertiesController {
     }
 
     @GetMapping("/table")
-    public List<EmailPropertiesTableResponseDto> getEmailsPropertiesList (HttpServletRequest request){
-        System.out.println(request.getQueryString());
+    public List<EmailPropertiesTableResponseDto> getEmailsPropertiesList (@RequestParam MultiValueMap<String,String> params){
+        MultiValueMap<String,String> validParam = resolveParam(params);
         List<EmailProperty> emailProperties = emailPropertiesService.getEmailPropertyList();
         return emailProperties.stream().map(EmailPropertiesTableResponseDto::new).collect(Collectors.toList());
     }
 
+    private MultiValueMap<String,String> resolveParam(MultiValueMap<String,String> params){
+       List<String> sort = params.get("sort");
+       if(sort!=null){
+
+       }
+       List<String> filter = params.get("filter");
+       if (filter!=null){
+
+       }
+       return params;
+    }
 
 }

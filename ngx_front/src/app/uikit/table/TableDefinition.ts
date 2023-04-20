@@ -46,6 +46,7 @@ export interface TableHeaderColumnDefinition{
 
 export abstract class TableRows{
   abstract id:number;
+  isActive:boolean=false;
   abstract cells:Map<TableHeaderColumnDefinition,string|number|boolean>
   getValueByHeader(header:TableHeaderColumnDefinition):string|number|boolean{
     const value = this.cells.get(header);

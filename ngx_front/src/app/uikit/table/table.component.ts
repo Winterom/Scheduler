@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {SORT_DIRECTION, TableDefinition, TableHeaderColumnDefinition, VALUE_TYPE} from "./TableDefinition";
+import {SORT_DIRECTION, TableDefinition, TableHeaderColumnDefinition, TableRows, VALUE_TYPE} from "./TableDefinition";
 import {CheckboxDefinition} from "../checkbox/CheckboxDefinition";
 import {EventBusService} from "../../services/eventBus/event-bus.service";
 import {AppEvents} from "../../services/eventBus/EventData";
@@ -51,4 +51,11 @@ export class TableComponent{
     return header.type===VALUE_TYPE.BOOLEAN;
   }
 
+  selectRow(row:TableRows){
+      const activeRow = this.tableDefinition.rows.filter((value)=>{return value.isActive});
+      if(activeRow.length>0){
+        activeRow[0].isActive=false;
+      }
+      row.isActive=true;
+  }
 }

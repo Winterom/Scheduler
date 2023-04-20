@@ -6,7 +6,7 @@ import {SORT_DIRECTION} from "../../../../uikit/table/TableDefinition";
 import {RowEmailTable} from "./AllEmailsTable";
 
 export interface EmailsSortParam{
-    header:string;
+    column:string;
     direction:SORT_DIRECTION;
 }
 
@@ -20,7 +20,7 @@ export class EmailsService {
   public emailList(param:EmailsSortParam[]): Observable<RowEmailTable[]> {
     let httpParam = new HttpParams();
     param.forEach(function (value){
-        httpParam = httpParam.append('sort',value.header+','+value.direction)
+        httpParam = httpParam.append('sort',value.column+','+value.direction)
     })
     return this.http.get<RowEmailTable[]>(
       this.api.getEmailsListApi(),

@@ -3,13 +3,14 @@ import {InputDefinition} from "../../../../uikit/input/InputDefinition";
 import {
   SORT_DIRECTION,
   TableDefinition,
-  TableHeaderColumnDefinition, TableRows,
+  TableHeaderColumnDefinition,
+  TableRows,
   VALUE_TYPE
 } from "../../../../uikit/table/TableDefinition";
 import {EventBusService} from "../../../../services/eventBus/event-bus.service";
 import {AppEvents} from "../../../../services/eventBus/EventData";
 import {EmailsService, EmailsSortParam} from "./emails.service";
-
+import {RowEmailTable} from "./AllEmailsTable";
 
 
 @Component({
@@ -39,46 +40,43 @@ export class MailSettingsComponent implements OnInit{
       }
       this.onChangeDirection();
     })
-    const param: EmailsSortParam[]= [{
-      header: EmailTableTitle.EMAIL,
-      direction: this.getSortDirection(EmailTableTitle.EMAIL)
-    },{
-      header:EmailTableTitle.USAGE,
-      direction: this.getSortDirection(EmailTableTitle.USAGE)
-    }]
-    this.emailsService.emailList(param).subscribe({next:data=>{
-        const rows = new Set<EmailTableRow>;
-        const headers = this.emailTable.headerDefinition;
-        data.forEach(function (value){
-          let row = new EmailTableRow(value.id)
-          row.alias = value.alias;
-          row.email_type = value.type;
-          const emailH = headers.get(EmailTableTitle.EMAIL)
-          if(emailH){
-            row.cells.set(emailH,value.email)
-          }
-          const destH = headers.get(EmailTableTitle.DESTINATION);
-          if(destH){
-            row.cells.set(destH,value.type)
-          }
-          const enabledH = headers.get(EmailTableTitle.USAGE);
-          if(enabledH){
-            row.cells.set(enabledH,value.isEnabled)
-          }
-          const descH = headers.get(EmailTableTitle.DESCRIPTION);
-          if(descH){
-            row.cells.set(descH,value.description)
-          }
-          rows.add(row);
-        })
-      this.emailTable.rows=Array.from(rows);
-      console.log(rows)
+    this.updateTable();
+
+  }
+
+  updateTable(){
+    this.emailsService.emailList(this.getQueryParam()).subscribe({next:data=>{
+    const rows = new Set<EmailTableRow>;
+    const headers = this.emailTable.headerDefinition;
+    data.forEach(function (value){
+      let row = new EmailTableRow(value.id)
+      row.alias = value.alias;
+      row.email_type = value.type;
+      const emailH = headers.get(EmailTableTitle.EMAIL)
+      if(emailH){
+        row.cells.set(emailH,value.email)
+      }
+      const destH = headers.get(EmailTableTitle.DESTINATION);
+      if(destH){
+        row.cells.set(destH,value.type)
+      }
+      const enabledH = headers.get(EmailTableTitle.USAGE);
+      if(enabledH){
+        row.cells.set(enabledH,value.isEnabled)
+      }
+      const descH = headers.get(EmailTableTitle.DESCRIPTION);
+      if(descH){
+        row.cells.set(descH,value.description)
+      }
+      rows.add(row);
+    })
+    this.emailTable.rows=Array.from(rows);
       }});
   }
 
-  onChangeDirection(){
-    console.log('Изменилась сортировка');
 
+  onChangeDirection(){
+    this.updateTable();
   }
 
   getSortDirection(title:EmailTableTitle):SORT_DIRECTION {
@@ -86,6 +84,17 @@ export class MailSettingsComponent implements OnInit{
     // @ts-ignore
     return header.sort;
   }
+  private getQueryParam(): EmailsSortParam[]{
+    return [{
+      column: 'email',
+      direction: this.getSortDirection(EmailTableTitle.EMAIL)
+    }, {
+      column: 'isEnabled',
+      direction: this.getSortDirection(EmailTableTitle.USAGE)
+    }];
+  }
+
+
 }
 export enum EmailTableTitle{
   EMAIL='Email',
@@ -93,6 +102,7 @@ export enum EmailTableTitle{
   USAGE = 'Используется',
   DESCRIPTION = 'Описание'
 }
+
 
 class EmailTableRow extends TableRows{
   cells: Map<TableHeaderColumnDefinition, string | number | boolean> = new Map<TableHeaderColumnDefinition, string | number | boolean>();
