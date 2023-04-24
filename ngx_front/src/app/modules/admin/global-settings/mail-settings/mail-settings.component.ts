@@ -11,6 +11,7 @@ import {EventBusService} from "../../../../services/eventBus/event-bus.service";
 import {AppEvents} from "../../../../services/eventBus/EventData";
 import {EmailsService, EmailsSortParam} from "./emails.service";
 import {RowEmailTable} from "./AllEmailsTable";
+import {TableToolbarDefinition} from "../../../../uikit/table-toolbar/TableToolbarDefinition";
 
 
 @Component({
@@ -22,6 +23,7 @@ export class MailSettingsComponent implements OnInit{
   public mailInput:InputDefinition = new InputDefinition('email','email');
   public passwordInput:InputDefinition = new InputDefinition('password','пароль');
   public emailTable:TableDefinition = new TableDefinition();
+  public toolBarDefinition = new TableToolbarDefinition();
 
   constructor(private eventBus:EventBusService,private emailsService:EmailsService) {
     this.emailTable.isCheckColumn=true;

@@ -11,14 +11,12 @@ public class EmailPropertiesTableResponseDto {
     private String type;
     private Boolean isEnabled;
     private String description;
-    private String alias;
     private String email;
 
     public EmailPropertiesTableResponseDto(@NotNull EmailProperty emailProperty) {
         this.id = emailProperty.getId();
         this.type = emailProperty.getType().getTitle();
         this.isEnabled = emailProperty.getIsEnabled();
-        this.alias = emailProperty.getAlias();
         this.description = emailProperty.getDescription();
         this.email = emailProperty.getEmail();
     }

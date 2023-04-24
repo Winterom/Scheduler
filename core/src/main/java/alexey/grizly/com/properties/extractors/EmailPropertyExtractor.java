@@ -21,7 +21,6 @@ public class EmailPropertyExtractor  implements ResultSetExtractor<EmailProperty
         property.setType(EEmailType.valueOf(rs.getString("type")));
         property.setIsEnabled(rs.getBoolean("is_enabled"));
         property.setDescription(rs.getString("description"));
-        property.setAlias(rs.getString("alias"));
         property.getSmtpServer().setHost(rs.getString("smtpHost"));
         property.getSmtpServer().setEnabledSSL(rs.getBoolean("smtpEnabledSSL"));
         property.getSmtpServer().setEnabledTLS(rs.getBoolean("smtpEnabledTLS"));

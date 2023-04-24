@@ -5,7 +5,6 @@ CREATE TABLE email_properties(
     email VARCHAR(100) not null,
     password VARCHAR(250) not null,
     is_enabled BOOLEAN not null,
-    alias VARCHAR(30) not null,
     smtpHost VARCHAR(300),
     smtpEnabledSSL BOOLEAN,
     smtpEnabledTLS BOOLEAN,

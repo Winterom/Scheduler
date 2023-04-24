@@ -1,4 +1,4 @@
-package alexey.grizly.com.commons.utils.url_query;
+package alexey.grizly.com.commons.query.type;
 
 public enum EQueryParamsName {
     PAGE("page"),

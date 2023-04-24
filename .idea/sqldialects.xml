@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SqlDialectMappings">
+    <file url="file://$PROJECT_DIR$/core/src/main/resources/db/changelog/properties/complete/complete-email-properties-table.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/core/src/main/resources/db/changelog/properties/create/create-email-properties-table.sql" dialect="PostgreSQL" />
     <file url="file://$PROJECT_DIR$/core/src/main/resources/db/changelog/properties/create/create-properties-table.sql" dialect="PostgreSQL" />
   </component>
 </project>

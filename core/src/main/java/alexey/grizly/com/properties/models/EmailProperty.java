@@ -25,8 +25,6 @@ public class EmailProperty {
     private String email;
     @Column(value = "password")
     private String password;
-    @Column(value = "alias")
-    private String alias;
     private OutgoingSmtpServer smtpServer = new OutgoingSmtpServer();
     private IncomingServer incomingServer = new IncomingServer();
 

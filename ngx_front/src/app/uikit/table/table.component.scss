@@ -18,6 +18,7 @@
   font-size: 14px;
   vertical-align: top;
   cursor: pointer;
+  word-wrap: break-word
 }
 .scroll-table tbody tr:nth-child(even){
   background: #f3f3f3;
@@ -62,6 +63,6 @@ th svg{
 }
 .selected{
   box-sizing: border-box;
-  border: 3px solid darkgreen !important;
+  border: 3px solid #148aff !important;
   font-weight: bold;
 }

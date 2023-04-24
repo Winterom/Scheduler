@@ -27,21 +27,11 @@ public class EmailPropertiesController {
 
     @GetMapping("/table")
     public List<EmailPropertiesTableResponseDto> getEmailsPropertiesList (@RequestParam MultiValueMap<String,String> params){
-        MultiValueMap<String,String> validParam = resolveParam(params);
+        System.out.println(params);
         List<EmailProperty> emailProperties = emailPropertiesService.getEmailPropertyList();
         return emailProperties.stream().map(EmailPropertiesTableResponseDto::new).collect(Collectors.toList());
     }
 
-    private MultiValueMap<String,String> resolveParam(MultiValueMap<String,String> params){
-       List<String> sort = params.get("sort");
-       if(sort!=null){
 
-       }
-       List<String> filter = params.get("filter");
-       if (filter!=null){
-
-       }
-       return params;
-    }
 
 }

@@ -1,4 +1,4 @@
-package alexey.grizly.com.commons.entities;
+package alexey.grizly.com.commons.query.type;
 
 import lombok.Data;
 
