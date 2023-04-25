@@ -7,6 +7,7 @@ import {CheckboxComponent} from './checkbox/checkbox.component';
 import {InputComponent} from './input/input.component';
 import {ButtonComponent} from './button/button.component';
 import { TableToolbarComponent } from './table-toolbar/table-toolbar.component';
+import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
 
 
 @NgModule({
@@ -17,15 +18,17 @@ import { TableToolbarComponent } from './table-toolbar/table-toolbar.component';
     InputComponent,
     ButtonComponent,
     TableToolbarComponent,
+    ModalDialogComponent,
   ],
-  exports: [
-    HamburgerComponent,
-    TableComponent,
-    InputComponent,
-    ButtonComponent,
-    CheckboxComponent,
-    TableToolbarComponent
-  ],
+    exports: [
+        HamburgerComponent,
+        TableComponent,
+        InputComponent,
+        ButtonComponent,
+        CheckboxComponent,
+        TableToolbarComponent,
+        ModalDialogComponent
+    ],
     imports: [
         CommonModule,
         FormsModule,

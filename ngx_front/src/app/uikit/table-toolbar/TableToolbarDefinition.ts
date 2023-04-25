@@ -3,10 +3,16 @@ export class TableToolbarDefinition {
 }
 
 export enum EToolbarButton{
-  ADD,DELETE,EDIT
+  ADD,DELETE,EDIT, UPDATE
 }
 
 export class TBButton{
   label:string='';
   action=()=>{};
+  image:boolean=false;
+
+  constructor(label: string, action: () => void) {
+    this.label = label;
+    this.action = action;
+  }
 }

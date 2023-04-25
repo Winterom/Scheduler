@@ -17,6 +17,7 @@ public class EmailQueryProcessorImpl implements SqlQueryProcessor {
         if(params.sortedFields()!=null){
             appendSorted(params.sortedFields());
         }
+        return null;
     }
 
     private void appendSorted(MultiValueMap<ESortDirection,String> sortedFields){

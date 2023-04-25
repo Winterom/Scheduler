@@ -1,4 +1,6 @@
 <div class="container">
-  <div *ngIf="hasButton(EToolbarButton.ADD)"></div>
-
+  <a *ngFor="let button of definition.buttons|keyvalue" class="button" (click)="button.value.action()">
+   {{button.value.label}}
+    <img *ngIf="button.value.image" src="assets/images/add.png" alt="">
+  </a>
 </div>

@@ -10,8 +10,7 @@ import {
 import {EventBusService} from "../../../../services/eventBus/event-bus.service";
 import {AppEvents} from "../../../../services/eventBus/EventData";
 import {EmailsService, EmailsSortParam} from "./emails.service";
-import {RowEmailTable} from "./AllEmailsTable";
-import {TableToolbarDefinition} from "../../../../uikit/table-toolbar/TableToolbarDefinition";
+import {EToolbarButton, TableToolbarDefinition, TBButton} from "../../../../uikit/table-toolbar/TableToolbarDefinition";
 
 
 @Component({
@@ -33,6 +32,9 @@ export class MailSettingsComponent implements OnInit{
     this.emailTable.headerDefinition.set(EmailTableTitle.DESCRIPTION,{sort: SORT_DIRECTION.NONE, type: VALUE_TYPE.STRING, width: '40%',align:'left'})
     this.emailTable.tableID='emails_property_table';
     this.emailTable.rows = [];
+    this.toolBarDefinition.buttons.set(EToolbarButton.ADD, new TBButton("Создать",()=>{}))
+    this.toolBarDefinition.buttons.set(EToolbarButton.DELETE, new TBButton("Удалить",()=>{}))
+    this.toolBarDefinition.buttons.set(EToolbarButton.UPDATE, new TBButton("Обновить",()=>{this.updateTable()}))
   }
 
   ngOnInit(): void {

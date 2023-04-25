@@ -2,10 +2,10 @@ package alexey.grizly.com.users.controllers;
 
 import alexey.grizly.com.commons.errors.AppResponseErrorDto;
 import alexey.grizly.com.properties.properties.GlobalProperties;
+import alexey.grizly.com.properties.properties.SecurityProperties;
 import alexey.grizly.com.users.dtos.request.AuthRequestDto;
 import alexey.grizly.com.users.dtos.response.AuthResponseDto;
 import alexey.grizly.com.users.models.UserAccount;
-import alexey.grizly.com.properties.properties.SecurityProperties;
 import alexey.grizly.com.users.services.AuthService;
 import alexey.grizly.com.users.services.RefreshTokenService;
 import alexey.grizly.com.users.utils.JwtTokenUtil;
@@ -15,7 +15,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

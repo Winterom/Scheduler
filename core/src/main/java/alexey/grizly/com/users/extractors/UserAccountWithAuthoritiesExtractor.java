@@ -1,8 +1,8 @@
 package alexey.grizly.com.users.extractors;
 
 import alexey.grizly.com.commons.security.EAuthorities;
-import alexey.grizly.com.users.models.EUserStatus;
 import alexey.grizly.com.users.models.AppAuthorities;
+import alexey.grizly.com.users.models.EUserStatus;
 import alexey.grizly.com.users.models.UserAccount;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;

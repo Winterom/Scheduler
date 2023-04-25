@@ -2,7 +2,6 @@ package alexey.grizly.com.users.services.impl;
 
 
 import alexey.grizly.com.users.models.UserAccount;
-import alexey.grizly.com.users.repositories.UserRepository;
 import alexey.grizly.com.users.services.ChangePasswordTokenService;
 import alexey.grizly.com.users.services.UserPasswordService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +15,11 @@ import java.util.UUID;
 
 @Service
 public class UserPasswordServiceImpl implements UserPasswordService {
-    private final UserRepository userRepository;
     private final NamedParameterJdbcTemplate jdbcTemplate;
     private final ChangePasswordTokenService changePasswordTokenService;
 
     @Autowired
-    public UserPasswordServiceImpl(UserRepository userRepository, NamedParameterJdbcTemplate jdbcTemplate, ChangePasswordTokenService changePasswordTokenService) {
-        this.userRepository = userRepository;
+    public UserPasswordServiceImpl( NamedParameterJdbcTemplate jdbcTemplate, ChangePasswordTokenService changePasswordTokenService) {
         this.jdbcTemplate = jdbcTemplate;
         this.changePasswordTokenService = changePasswordTokenService;
     }

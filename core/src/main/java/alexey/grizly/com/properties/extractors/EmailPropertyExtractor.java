@@ -2,7 +2,6 @@ package alexey.grizly.com.properties.extractors;
 
 import alexey.grizly.com.properties.models.EEmailType;
 import alexey.grizly.com.properties.models.EmailProperty;
-
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
