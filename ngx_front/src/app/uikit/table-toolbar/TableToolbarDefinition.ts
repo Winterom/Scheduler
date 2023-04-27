@@ -1,10 +1,7 @@
 export class TableToolbarDefinition {
-    public buttons:Map<EToolbarButton,TBButton> =new Map;
+    public buttons:Set<TBButton> =new Set;
 }
 
-export enum EToolbarButton{
-  ADD,DELETE,EDIT, UPDATE
-}
 
 export class TBButton{
   label:string='';

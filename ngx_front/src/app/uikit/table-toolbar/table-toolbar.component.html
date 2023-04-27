@@ -1,6 +1,6 @@
 <div class="container">
-  <a *ngFor="let button of definition.buttons|keyvalue" class="button" (click)="button.value.action()">
-   {{button.value.label}}
-    <img *ngIf="button.value.image" src="assets/images/add.png" alt="">
+  <a *ngFor="let button of definition.buttons" class="button" (click)="button.action()">
+   {{button.label}}
+    <img *ngIf="button.image" src="assets/images/add.png" alt="">
   </a>
 </div>

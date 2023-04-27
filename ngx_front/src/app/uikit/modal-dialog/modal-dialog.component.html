@@ -1,8 +1,13 @@
-<div class="container">
-  <div class="header">
-    Это заголовок
-  </div>
-  <div class="content">
-    Это контент
+<div id="openModal" class="modal" [ngClass]="{modal_target:isVisible}">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">{{definition.header}}</h3>
+        <a  title="Close" class="close" (click)="changeVisible($event)">×</a>
+      </div>
+      <div class="modal-body">
+        <p>{{definition.text}}</p>
+      </div>
+    </div>
   </div>
 </div>
