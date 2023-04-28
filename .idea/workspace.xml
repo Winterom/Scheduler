@@ -8,14 +8,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="750a344e-c061-4730-8fc1-d19a16e5fd0b" name="Changes" comment="feat: Authentication">
+      <change afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/filters-and-search/filters-and-search.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/filters-and-search/filters-and-search.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/filters-and-search/filters-and-search.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/search-input/search-input.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/search-input/search-input.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/search-input/search-input.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/select/SelectDefinition.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/select/select.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/select/select.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/select/select.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/mail-settings/mail-settings.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/mail-settings/mail-settings.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/modal-dialog/modal-dialog.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/modal-dialog/modal-dialog.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/modal-dialog/modal-dialog.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/modal-dialog/modal-dialog.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/modal-dialog/modal-dialog.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/modal-dialog/modal-dialog.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/table-toolbar/TableToolbarDefinition.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/table-toolbar/TableToolbarDefinition.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/table-toolbar/table-toolbar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/table-toolbar/table-toolbar.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/table-toolbar/table-toolbar.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/table-toolbar/table-toolbar.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/mail-settings/mail-settings.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/mail-settings/mail-settings.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/table/table.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/table/table.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/table/table.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/table/table.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/uikit.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/uikit.module.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -170,7 +177,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.StartApplication">
+  <component name="RunManager" selected="npm.Angular CLI Server (ngx_front)">
     <configuration name="AuthServiceImplTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -355,6 +362,7 @@
       <workItem from="1681891884190" duration="15080000" />
       <workItem from="1681985594021" duration="15189000" />
       <workItem from="1682342595977" duration="16995000" />
+      <workItem from="1682667365527" duration="14045000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1678620390716</created>
@@ -475,7 +483,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681907425514</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="feat: Authentication">
+      <created>1682604330724</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1682604330724</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

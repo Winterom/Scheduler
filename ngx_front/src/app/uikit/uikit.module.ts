@@ -8,6 +8,9 @@ import {InputComponent} from './input/input.component';
 import {ButtonComponent} from './button/button.component';
 import { TableToolbarComponent } from './table-toolbar/table-toolbar.component';
 import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
+import { FiltersAndSearchComponent } from './filters-and-search/filters-and-search.component';
+import { SelectComponent } from './select/select.component';
+import { SearchInputComponent } from './search-input/search-input.component';
 
 
 @NgModule({
@@ -19,6 +22,9 @@ import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
     ButtonComponent,
     TableToolbarComponent,
     ModalDialogComponent,
+    FiltersAndSearchComponent,
+    SelectComponent,
+    SearchInputComponent,
   ],
     exports: [
         HamburgerComponent,
@@ -27,7 +33,8 @@ import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
         ButtonComponent,
         CheckboxComponent,
         TableToolbarComponent,
-        ModalDialogComponent
+        ModalDialogComponent,
+        FiltersAndSearchComponent
     ],
     imports: [
         CommonModule,

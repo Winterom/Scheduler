@@ -1,0 +1,4 @@
+<select class="select-css">
+  <option [ngValue]="null">Выбирите поле</option>
+  <option *ngFor="let row of definition.rows" [ngValue]="row.id">{{row.title}}</option>
+</select>

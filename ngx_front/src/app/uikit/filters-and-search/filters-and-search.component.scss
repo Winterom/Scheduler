@@ -1,0 +1,26 @@
+.container{
+  border: 2px solid black;
+  width: 100%;
+  min-height: 40px;
+  margin-bottom: 0.5em;
+  margin-top: 2em;
+  padding-left: 1.5em;
+}
+.title{
+  position: relative;
+  top: -0.6em;
+  right: -1.5em;
+  font-size: 1.4em;
+  font-weight: bold;
+  width: 10em;
+  background: white;
+}
+.search{
+  font-size: 1.3em;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.search p{
+  margin-right: 1em ;
+}

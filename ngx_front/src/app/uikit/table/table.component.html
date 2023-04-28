@@ -2,7 +2,7 @@
   <table>
     <thead>
     <tr>
-      <th *ngIf="tableDefinition.isCheckColumn" style="width: 3em">
+      <th *ngIf="tableDefinition.isCheckColumn" style="width: 3em; font-size: 0.8em">
           <app-checkbox [definition]="checkBoxDefinition"></app-checkbox>
       </th>
       <ng-container *ngFor="let header of getHeaderDefinition()| keyvalue; let i = index">
