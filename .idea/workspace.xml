@@ -7,22 +7,56 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="750a344e-c061-4730-8fc1-d19a16e5fd0b" name="Changes" comment="feat: Authentication">
-      <change afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/filters-and-search/filters-and-search.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/filters-and-search/filters-and-search.component.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/filters-and-search/filters-and-search.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/search-input/search-input.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/search-input/search-input.component.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/search-input/search-input.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/select/SelectDefinition.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/select/select.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/select/select.component.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/select/select.component.ts" afterDir="false" />
+    <list default="true" id="750a344e-c061-4730-8fc1-d19a16e5fd0b" name="Changes" comment="feat: authentication">
+      <change afterPath="$PROJECT_DIR$/ngx_front2.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/.editorconfig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/angular.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/app-routing.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/app.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/app.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/app.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/app.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/guards/desktop.guard.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/desktop/desktop.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/desktop/desktop.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/desktop/desktop.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/desktop/desktop.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/global-settings/global-settings.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/global-settings/global-settings.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/global-settings/global-settings.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/global-settings/settings.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/login/login.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/login/login/login.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/login/login/login.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/login/login/login.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/login/reset/reset.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/login/reset/reset.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/login/reset/reset.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/widget-layout/widget-layout.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/widget-layout/widget-layout.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/widget-layout/widget-layout.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/widget-layout/widget.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/assets/.gitkeep" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/assets/images/desktop_back.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/assets/images/login.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/assets/images/roles.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/assets/images/settings_tools.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/assets/images/users.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/assets/locale/ru.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/main.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/styles.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/tsconfig.app.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/tsconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/tsconfig.spec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/mail-settings/mail-settings.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/mail-settings/mail-settings.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/table/table.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/table/table.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/table/table.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/table/table.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/uikit.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front/src/app/uikit/uikit.module.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,7 +119,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="websocket" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -94,7 +128,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectId" id="2MubLmDa2bdTYCLgbGgOBDPhL9R" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -117,7 +151,7 @@
     &quot;com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers&quot;: &quot;true&quot;,
     &quot;create.test.in.the.same.root&quot;: &quot;true&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-19&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/winte/IdeaProjects/Scheduler/ngx_front/src/assets/images&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Volumes/Работа/Scheduler/ngx_front2/frontend/src/assets/images&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -130,11 +164,14 @@
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;org.infernus.idea.checkstyle.CheckStyleConfigurable&quot;,
     &quot;spring.configuration.checksum&quot;: &quot;1d2dfe7cbec4cb85764de7dce500cd05&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\winte\\IdeaProjects\\Scheduler\\ngx_front\\node_modules\\typescript\\lib&quot;
+    &quot;ts.external.directory.path&quot;: &quot;/Volumes/Работа/Scheduler/ngx_front/node_modules/typescript/lib&quot;
   },
   &quot;keyToStringList&quot;: {
     &quot;DatabaseDriversLRU&quot;: [
       &quot;postgresql&quot;
+    ],
+    &quot;com.intellij.ide.scratch.LRUPopupBuilder$1/&quot;: [
+      &quot;PostgreSQL&quot;
     ],
     &quot;com.intellij.ide.scratch.LRUPopupBuilder$1/SQL Dialect&quot;: [
       &quot;PostgreSQL&quot;
@@ -143,21 +180,21 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\winte\IdeaProjects\Scheduler\ngx_front\src\assets\images" />
+      <recent name="$PROJECT_DIR$/ngx_front2/frontend/src/assets/images" />
+      <recent name="$PROJECT_DIR$/ngx_front2/src/assets/images" />
       <recent name="C:\Users\winte\IdeaProjects\Scheduler\core\src\main\java\alexey\grizly\com\users" />
       <recent name="C:\Users\winte\IdeaProjects\Scheduler\core\src\main\java\alexey\grizly\com\users\dto\request" />
       <recent name="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/configs" />
-      <recent name="$PROJECT_DIR$/core/src/main/resources" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\winte\IdeaProjects\Scheduler\ngx_front\src\app\services\WS" />
-      <recent name="C:\Users\winte\IdeaProjects\Scheduler\ngx_front\src\app\services\auth" />
-      <recent name="C:\Users\winte\IdeaProjects\Scheduler\ngx_front\src\app" />
-      <recent name="C:\Users\winte\IdeaProjects\Scheduler\ngx_front\src\app\shared\services\API" />
-      <recent name="C:\Users\winte\IdeaProjects\Scheduler\core\config\checkstyle" />
+      <recent name="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/widget-layout" />
+      <recent name="$PROJECT_DIR$/ngx_front2/frontend/src/app/modules" />
+      <recent name="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/global-settings" />
+      <recent name="$PROJECT_DIR$/ngx_front2/frontend/src/app/modules/desktop/widget-layout" />
+      <recent name="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages" />
     </key>
     <key name="ExtractSuperBase.RECENT_KEYS">
       <recent name="alexey.grizly.com.properties.models" />
@@ -170,60 +207,7 @@
       <recent name="alexey.grizly.com.users.utils" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="configurationTypes">
-      <set>
-        <option value="JarApplication" />
-      </set>
-    </option>
-  </component>
-  <component name="RunManager" selected="npm.Angular CLI Server (ngx_front)">
-    <configuration name="AuthServiceImplTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/core" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;users.auth.AuthServiceImplTest&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-    <configuration name="AuthServiceImplTest.correctAuthentication" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/core" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;users.auth.AuthServiceImplTest.correctAuthentication&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="npm.Angular CLI Server (ngx_front2)">
     <configuration name="PasswordValidatorTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -238,6 +222,29 @@
             <option value=":test" />
             <option value="--tests" />
             <option value="&quot;users.validators.PasswordValidatorTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="PasswordValidatorTest.validLowCaseCount" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/core" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;users.validators.PasswordValidatorTest.validLowCaseCount&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
@@ -270,23 +277,48 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="core [test]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="PasswordValidatorTest.validSpecSymbolCount" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/core" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
+        <option name="scriptParameters" value="" />
         <option name="taskDescriptions">
           <list />
         </option>
         <option name="taskNames">
           <list>
-            <option value="test" />
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;users.validators.PasswordValidatorTest.validSpecSymbolCount&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="PasswordValidatorTest.validUpperCaseCount" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/core" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;users.validators.PasswordValidatorTest.validUpperCaseCount&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
@@ -301,6 +333,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Angular CLI Server (ngx_front2)" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/ngx_front2/frontend/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <configuration name="Angular CLI Server (ngx_front)" type="js.build_tools.npm">
       <package-json value="$PROJECT_DIR$/ngx_front/package.json" />
       <command value="run" />
@@ -313,11 +355,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Gradle.AuthServiceImplTest" />
-        <item itemvalue="Gradle.AuthServiceImplTest.correctAuthentication" />
-        <item itemvalue="Gradle.core [test]" />
         <item itemvalue="Gradle.PasswordValidatorTest" />
         <item itemvalue="Gradle.PasswordValidatorTest.validNumberCount" />
+        <item itemvalue="Gradle.PasswordValidatorTest.validUpperCaseCount" />
+        <item itemvalue="Gradle.PasswordValidatorTest.validSpecSymbolCount" />
+        <item itemvalue="Gradle.PasswordValidatorTest.validLowCaseCount" />
       </list>
     </recent_temporary>
   </component>
@@ -347,22 +389,12 @@
       <workItem from="1680069195340" duration="20956000" />
       <workItem from="1680242456818" duration="26495000" />
       <workItem from="1680515490407" duration="10659000" />
-      <workItem from="1680778366339" duration="10718000" />
-      <workItem from="1680855119793" duration="7699000" />
-      <workItem from="1680867131998" duration="11885000" />
-      <workItem from="1681136948689" duration="2265000" />
-      <workItem from="1681193513454" duration="818000" />
-      <workItem from="1681303355659" duration="8607000" />
-      <workItem from="1681390537105" duration="877000" />
-      <workItem from="1681451606900" duration="19000" />
-      <workItem from="1681464593118" duration="3119000" />
-      <workItem from="1681812062167" duration="10670000" />
-      <workItem from="1681886173441" duration="4065000" />
-      <workItem from="1681890645375" duration="61000" />
-      <workItem from="1681891884190" duration="15080000" />
-      <workItem from="1681985594021" duration="15189000" />
-      <workItem from="1682342595977" duration="16995000" />
-      <workItem from="1682667365527" duration="14045000" />
+      <workItem from="1682054179233" duration="754000" />
+      <workItem from="1682057461653" duration="10363000" />
+      <workItem from="1683400572331" duration="982000" />
+      <workItem from="1683402080498" duration="4650000" />
+      <workItem from="1683406793699" duration="9180000" />
+      <workItem from="1683454363183" duration="9064000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1678620390716</created>
@@ -441,71 +473,11 @@
       <option name="project" value="LOCAL" />
       <updated>1680271272593</updated>
     </task>
-    <task id="LOCAL-00012" summary="feat: Authentication">
-      <created>1680608395875</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1680608395875</updated>
-    </task>
-    <task id="LOCAL-00013" summary="feat: Authentication">
-      <created>1681139189511</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1681139189511</updated>
-    </task>
-    <task id="LOCAL-00014" summary="feat: Authentication">
-      <created>1681740874167</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1681740874167</updated>
-    </task>
-    <task id="LOCAL-00015" summary="feat: Authentication">
-      <created>1681822286380</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1681822286380</updated>
-    </task>
-    <task id="LOCAL-00016" summary="feat: Authentication">
-      <created>1681822986099</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1681822986099</updated>
-    </task>
-    <task id="LOCAL-00017" summary="feat: Authentication">
-      <created>1681907425514</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1681907425514</updated>
-    </task>
-    <task id="LOCAL-00018" summary="feat: Authentication">
-      <created>1682604330724</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1682604330724</updated>
-    </task>
-    <option name="localTasksCounter" value="19" />
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.History.Properties">
-    <option name="COLUMN_ID_ORDER">
-      <list>
-        <option value="Default.Root" />
-        <option value="Default.Author" />
-        <option value="Default.Date" />
-        <option value="Default.Subject" />
-        <option value="Space.CommitStatus" />
-      </list>
-    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">

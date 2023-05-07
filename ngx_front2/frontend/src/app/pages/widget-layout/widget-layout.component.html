@@ -1,0 +1,12 @@
+<p-sidebar [(visible)]="sidebarVisible">
+  <h3>Sidebar</h3>
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+  </p>
+</p-sidebar>
+<div class="top_menu">
+  <div><p-button type="button" class="mr-2" (click)="sidebarVisible = true" icon="pi pi-arrow-right"></p-button></div>
+  <div><p-button icon="pi pi-times" styleClass="p-button-danger"></p-button></div>
+</div>
+<router-outlet></router-outlet>
