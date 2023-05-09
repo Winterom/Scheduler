@@ -11,7 +11,7 @@ const routes: Routes = [
   {path:'desktop',component:DesktopComponent
   ,loadChildren:()=>import('./pages/desktop/desktop.module').then(m=>m.DesktopModule)
     /*,canActivate:[() => inject(desktopGuard).canActivate()*/},
-  {path:'widget',component:WidgetLayoutComponent,
+  {path:'',component:WidgetLayoutComponent,
   loadChildren:()=>import('./pages/widget-layout/widget.module').then(t=>t.WidgetModule)},
   {path:"**",redirectTo:"login"}
 ];

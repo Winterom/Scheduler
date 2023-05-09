@@ -6,6 +6,8 @@ import {GlobalSettingsComponent} from "../global-settings/global-settings.compon
 import {SettingsModule} from "../global-settings/settings.module";
 import {SidebarModule} from "primeng/sidebar";
 import {ButtonModule} from "primeng/button";
+import {TooltipModule} from "primeng/tooltip";
+import {StyleClassModule} from "primeng/styleclass";
 
 const routes: Routes =[
   {path:'settings',component:GlobalSettingsComponent}
@@ -21,6 +23,8 @@ const routes: Routes =[
     RouterModule.forChild(routes),
     SidebarModule,
     ButtonModule,
+    TooltipModule,
+    StyleClassModule,
   ]
 })
 export class WidgetModule { }

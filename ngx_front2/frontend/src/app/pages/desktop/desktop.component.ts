@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { MenuItem } from 'primeng/api';
 
 
@@ -18,7 +18,7 @@ export class DesktopComponent implements OnInit{
         label: 'Settings',
         icon: '../../../assets/images/settings_tools.png',
         tooltipOptions: {tooltipLabel:'Настройки приложения',tooltipPosition:'right'},
-        routerLink:['/desktop/settings']
+        routerLink:['/settings']
       },
       {
         label: 'Users',

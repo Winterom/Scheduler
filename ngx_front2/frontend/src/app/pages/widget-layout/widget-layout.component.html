@@ -1,12 +1,18 @@
-<p-sidebar [(visible)]="sidebarVisible">
-  <h3>Sidebar</h3>
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-  </p>
-</p-sidebar>
 <div class="top_menu">
-  <div><p-button type="button" class="mr-2" (click)="sidebarVisible = true" icon="pi pi-arrow-right"></p-button></div>
-  <div><p-button icon="pi pi-times" styleClass="p-button-danger"></p-button></div>
+  <div class="container">
+    <div class="logo">Logotype</div>
+    <div class="tool">
+      <div class="button">
+        <i class="pi pi-align-left" pTooltip="Открыть меню" style="font-size: 2em"></i>
+      </div>
+      <div class="button" pTooltip="Закрыть" (click)="closeWidget()">
+        <i class="pi pi-power-off"></i>
+      </div>
+
+    </div>
+  </div>
 </div>
-<router-outlet></router-outlet>
+<div class="wd_content">
+  <router-outlet></router-outlet>
+</div>
+

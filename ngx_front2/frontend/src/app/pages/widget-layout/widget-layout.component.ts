@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {EventBusService} from "../../services/eventBus/event-bus.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-settings',
@@ -6,5 +8,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./widget-layout.component.scss']
 })
 export class WidgetLayoutComponent {
-  sidebarVisible:boolean=true;
+  constructor(private eventBus:EventBusService,private router: Router) {
+  }
+
+  closeWidget(){
+    this.router.navigate(['desktop']);
+  }
 }
