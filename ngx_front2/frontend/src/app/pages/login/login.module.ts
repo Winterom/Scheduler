@@ -7,12 +7,14 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {PasswordModule} from "primeng/password";
 import {ButtonModule} from "primeng/button";
 import {InputMaskModule} from "primeng/inputmask";
+import {RegistrationComponent} from "./registration/registration.component";
 
 
 @NgModule({
   declarations: [
     LoginComponent,
-    ResetComponent
+    ResetComponent,
+    RegistrationComponent
   ],
   imports: [
     CommonModule,

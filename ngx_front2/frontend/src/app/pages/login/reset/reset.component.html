@@ -1,1 +1,19 @@
-<p>reset works!</p>
+<div class="container">
+    <div class="title">Восстановление пароля</div>
+    <div class="w-full text-center">Укажите email аккаунта, для которого хотите восстановить пароль.
+      На почту будет отправлена инструкция по восстановлению пароля</div>
+    <form>
+      <div class="mt-4">
+        <span class="p-float-label">
+        <input pInputText id="emailOrPhone2" class="p-inputtext-sm w-full"/>
+        <label htmlFor="emailOrPhone2">Email</label>
+    </span>
+      </div>
+      <div class="flex justify-content-evenly mt-3">
+        <p-button label="Отмена" styleClass="p-button-raised" [loading]="loading"
+                  (click)="returnToLoginPage()"></p-button>
+        <p-button label="Отправить" styleClass="p-button-raised" [loading]="loading" (click)="submitFrm()"></p-button>
+      </div>
+    </form>
+  </div>
+

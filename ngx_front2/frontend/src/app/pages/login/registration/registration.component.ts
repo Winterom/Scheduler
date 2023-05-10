@@ -2,15 +2,14 @@ import { Component } from '@angular/core';
 import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-reset',
-  templateUrl: './reset.component.html',
+  selector: 'app-registration',
+  templateUrl: './registration.component.html',
   styleUrls: ['../../login/login.scss']
 })
-export class ResetComponent {
+export class RegistrationComponent {
   loading: boolean = false;
-
-  constructor(private router: Router) {
-  }
+  pswStrange:string='';
+  constructor(private router: Router) {}
   returnToLoginPage() {
     this.router.navigate(['login']);
   }

@@ -1,9 +1,15 @@
 <div class="container">
-  <div *ngIf="currentPage===CURRENT_PAGE.LOGIN">
     <div class="title">Авторизация</div>
-    <form>
+    <form [formGroup]="authForm"
+          novalidate
+          (ngSubmit)="login()">
     <span class="p-float-label">
-        <input pInputText id="emailOrPhone" class="p-inputtext-sm w-full"/>
+        <input pInputText
+        id="emailOrPhone"
+        class="p-inputtext-sm w-full"
+        formControlName="emailOrPhoneInput"
+        [ngClass]="{'ng-invalid ng-dirty':emailOrPhoneInput.hasError('required')&&emailOrPhoneInput.touched}"
+        />
         <label htmlFor="emailOrPhone">Email или телефон</label>
     </span>
     <span class="p-float-label mt-4">
@@ -21,83 +27,4 @@
       </div>
     </form>
   </div>
-  <div *ngIf="currentPage===CURRENT_PAGE.REGISTER">
-    <div class="title">Регистрация</div>
-    <form class="mt-3">
-      <div class="flex justify-content-start align-items-center">
-        <div class="mr-2 text-2xl font-bold">+7</div>
-        <span class="p-float-label">
-          <p-inputMask mask="999-999-9999" id="phone"></p-inputMask>
-          <label htmlFor="phone">Телефон</label>
-        </span>
-      </div>
-      <div class="mt-4">
-        <span class="p-float-label">
-          <input pInputText id="email2" class="p-inputtext-sm w-full"/>
-          <label htmlFor="email2">Email</label>
-        </span>
-      </div>
-      <div class="mt-4">
-        <span class="p-float-label w-full">
-          <input pInputText id="surname" class="p-inputtext-sm w-full"/>
-          <label htmlFor="surname">Фамилия</label>
-        </span>
-      </div>
-      <div class="mt-4">
-        <span class="p-float-label w-full">
-          <input pInputText id="name" class="p-inputtext-sm w-full"/>
-          <label htmlFor="name">Имя</label>
-        </span>
-      </div>
-      <div class="mt-4">
-        <span class="p-float-label w-full">
-          <input pInputText id="lastName" class="p-inputtext-sm w-full"/>
-          <label htmlFor="lastName">Отчество</label>
-        </span>
-      </div>
-      <div class="mt-2">
-        <h4 class="text-center">Требования к паролю</h4>
-        <p class="mt-1">{{pswStrange}}</p>
-      </div>
-      <div class="mt-4">
-        <span class="p-float-label mt-4">
-          <p-password id="newPassword" class="w-full" [feedback]="false"
-                    styleClass="p-password p-component p-inputwrapper p-input-icon-right" [style]="{'width':'100%'}"
-                    [inputStyle]="{'width':'100%'}" [toggleMask]="true"></p-password>
-          <label htmlFor="newPassword">Пароль</label>
-        </span>
-      </div>
-      <div class="mt-4">
-        <span class="p-float-label mt-4">
-          <p-password id="repeatPassword" class="w-full" [feedback]="false"
-                      styleClass="p-password p-component p-inputwrapper p-input-icon-right" [style]="{'width':'100%'}"
-                      [inputStyle]="{'width':'100%'}" [toggleMask]="true"></p-password>
-          <label htmlFor="repeatPassword">Повторите пароль</label>
-        </span>
-      </div>
-      <div class="flex justify-content-evenly mt-4">
-        <p-button label="Отмена" styleClass="p-button-raised" [loading]="loading"
-                  (click)="selectLoginPage()"></p-button>
-        <p-button label="Регистрация" styleClass="p-button-raised" [loading]="loading" (click)="register()"></p-button>
-      </div>
-    </form>
-  </div>
-  <div *ngIf="currentPage===CURRENT_PAGE.RESTORE">
-    <div class="title">Восстановление пароля</div>
-    <div class="w-full text-center">Укажите email аккаунта, для которого хотите восстановить пароль.
-      На почту будет отправлена инструкция по восстановлению пароля</div>
-    <form>
-      <div class="mt-4">
-        <span class="p-float-label">
-        <input pInputText id="emailOrPhone2" class="p-inputtext-sm w-full"/>
-        <label htmlFor="emailOrPhone2">Email</label>
-    </span>
-      </div>
-      <div class="flex justify-content-evenly mt-3">
-        <p-button label="Отмена" styleClass="p-button-raised" [loading]="loading"
-                  (click)="selectLoginPage()"></p-button>
-        <p-button label="Отправить" styleClass="p-button-raised" [loading]="loading" (click)="register()"></p-button>
-      </div>
-    </form>
-  </div>
-</div>
+

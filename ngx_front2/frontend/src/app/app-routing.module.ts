@@ -4,9 +4,11 @@ import {LoginComponent} from "./pages/login/login/login.component";
 import {ResetComponent} from "./pages/login/reset/reset.component";
 import {DesktopComponent} from "./pages/desktop/desktop.component";
 import {WidgetLayoutComponent} from "./pages/widget-layout/widget-layout.component";
+import {RegistrationComponent} from "./pages/login/registration/registration.component";
 
 const routes: Routes = [
   {path:'login',component:LoginComponent},
+  {path:'registration',component:RegistrationComponent},
   {path:'reset',component:ResetComponent},
   {path:'desktop',component:DesktopComponent
   ,loadChildren:()=>import('./pages/desktop/desktop.module').then(m=>m.DesktopModule)

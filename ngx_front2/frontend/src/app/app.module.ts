@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {TranslateModule} from "@ngx-translate/core";
 import {LoginModule} from "./pages/login/login.module";
+import {HttpClientModule} from "@angular/common/http";
 
 
 
@@ -17,6 +18,7 @@ import {LoginModule} from "./pages/login/login.module";
     BrowserAnimationsModule,
     AppRoutingModule,
     LoginModule,
+    HttpClientModule,
     TranslateModule.forRoot()
   ],
   providers: [],

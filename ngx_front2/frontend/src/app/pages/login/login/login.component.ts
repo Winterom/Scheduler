@@ -1,38 +1,42 @@
 import { Component } from '@angular/core';
+import {Router} from "@angular/router";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {LoginService} from "./login.service";
 
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['../../login/login.scss']
 })
 export class LoginComponent {
-  currentPage:CURRENT_PAGE=CURRENT_PAGE.LOGIN;
   loading: boolean = false;
-  pswStrange:string='';
-  protected readonly CURRENT_PAGE = CURRENT_PAGE;
-
+  public authForm : FormGroup;
+  emailOrPhoneInput:FormControl;
+  passwordInput:FormControl;
+  constructor(private router: Router,private loginService:LoginService,) {
+    this.emailOrPhoneInput = new FormControl<string>('',[Validators.required]);
+    this.passwordInput = new FormControl<string>('',Validators.required);
+    this.authForm = new FormGroup<any>({
+      "emailOrPhoneInput": this.emailOrPhoneInput,
+      "pswInput": this.passwordInput
+    })
+  }
   login() {
+    Object.keys(this.authForm.controls).forEach(key => {
+      this.authForm.get(key)?.markAsTouched();
+    });
 
   }
 
-  register() {
-
-  }
-  selectLoginPage(){
-    this.currentPage=CURRENT_PAGE.LOGIN
-  }
   selectRegisterPage(){
-    this.currentPage=CURRENT_PAGE.REGISTER
+    this.router.navigate(['registration']);
   }
   selectRestorePage(){
-    this.currentPage=CURRENT_PAGE.RESTORE
+    this.router.navigate(['reset']);
   }
 
 
-}
-enum CURRENT_PAGE{
-  LOGIN,REGISTER,RESTORE
 }
 
 
