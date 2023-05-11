@@ -13,9 +13,15 @@
         <label htmlFor="emailOrPhone">Email или телефон</label>
     </span>
     <span class="p-float-label mt-4">
-      <p-password id="password" class="w-full" [feedback]="false"
-                    styleClass="p-password p-component p-inputwrapper p-input-icon-right" [style]="{'width':'100%'}"
-                    [inputStyle]="{'width':'100%'}" [toggleMask]="true"></p-password>
+      <p-password
+        id="password" class="w-full"
+        [feedback]="false"
+        styleClass="p-password p-component p-inputwrapper p-input-icon-right" [style]="{'width':'100%'}"
+        [inputStyle]="{'width':'100%'}"
+        [toggleMask]="true"
+        [ngClass]="{'ng-invalid ng-dirty':passwordInput.hasError('required')&&passwordInput.touched}"
+        formControlName="pswInput"
+        ></p-password>
       <label htmlFor="password">Пароль</label>
     </span>
       <div class="flex justify-content-between align-items-center mt-3">
