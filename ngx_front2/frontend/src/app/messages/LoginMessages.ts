@@ -10,6 +10,7 @@ export namespace LoginMessage{
     severity='error';
     summary='Ошибка';
     detail=''
+    life=5000;
   }
 }
 

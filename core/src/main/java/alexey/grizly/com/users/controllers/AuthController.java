@@ -32,47 +32,44 @@ public class AuthController {
     private final SecurityProperties properties;
     private final GlobalProperties globalProperties;
 
-    public AuthController(AuthService authService, RefreshTokenService refreshTokenService, JwtTokenUtil jwtUtil, SecurityProperties properties, GlobalProperties globalProperties) {
-        this.authService = authService;
-        this.refreshTokenService = refreshTokenService;
-        this.jwtUtil = jwtUtil;
-        this.properties = properties;
-        this.globalProperties = globalProperties;
+    public AuthController(final AuthService authService, final RefreshTokenService refreshTokenService, final JwtTokenUtil jwtUtil, final SecurityProperties properties, final GlobalProperties globalProperties) {
+    this.authService = authService;
+    this.refreshTokenService = refreshTokenService;
+    this.jwtUtil = jwtUtil;
+    this.properties = properties;
+    this.globalProperties = globalProperties;
     }
-
-
     /*Почта email1@one.ru Пароль 2012 */
     @PostMapping
-    public ResponseEntity<?> authentication(@RequestBody @Validated AuthRequestDto authRequest, BindingResult bindingResult, HttpServletResponse response){
-        if(bindingResult.hasErrors()){
+    public ResponseEntity<?> authentication(@RequestBody @Validated final AuthRequestDto authRequest, BindingResult bindingResult, HttpServletResponse response) {
+        if (bindingResult.hasErrors()) {
             String errorMessage = "Неверные учетные данные пользователя";
-            AppResponseErrorDto errorDto = new AppResponseErrorDto(HttpStatus.UNAUTHORIZED,errorMessage);
+            AppResponseErrorDto errorDto = new AppResponseErrorDto(HttpStatus.UNAUTHORIZED, errorMessage);
             return new ResponseEntity<>(errorDto, HttpStatus.UNAUTHORIZED);
         }
         UserAccount user = (UserAccount) authService.authentication(authRequest);
         Date issuedDate = new Date();
         Date accessExpires = new Date(issuedDate.getTime() + properties.getJwtProperties().getJwtLifetime());
-        Date refreshExpire = new Date(issuedDate.getTime()+properties.getJwtProperties().getJwtRefreshLifetime());
-        String accessToken = jwtUtil.generateToken(user.getAuthorities(), user.getEmail(), issuedDate,accessExpires, user.getId());
-        String refreshToken = jwtUtil.generateRefreshTokenFromEmail(user.getEmail(),refreshExpire,issuedDate);
-        int resultSave = refreshTokenService.saveRefreshToken(user,refreshToken,refreshExpire);
-        if(resultSave!=1){
-            AppResponseErrorDto errorDto = new AppResponseErrorDto(HttpStatus.UNAUTHORIZED,"Неверные учетные данные пользователя");
-            return new ResponseEntity<>(errorDto,HttpStatus.UNAUTHORIZED);
+        Date refreshExpire = new Date(issuedDate.getTime() + properties.getJwtProperties().getJwtRefreshLifetime());
+        String accessToken = jwtUtil.generateToken(user.getAuthorities(), user.getEmail(), issuedDate, accessExpires, user.getId());
+        String refreshToken = jwtUtil.generateRefreshTokenFromEmail(user.getEmail(), refreshExpire, issuedDate);
+        int resultSave = refreshTokenService.saveRefreshToken(user, refreshToken, refreshExpire);
+        if (resultSave != 1) {
+            AppResponseErrorDto errorDto = new AppResponseErrorDto(HttpStatus.UNAUTHORIZED, "Неверные учетные данные пользователя");
+            return new ResponseEntity<>(errorDto, HttpStatus.UNAUTHORIZED);
         }
-        Cookie cookie = new Cookie("token",refreshToken);
+        Cookie cookie = new Cookie("token", refreshToken);
         cookie.setHttpOnly(true);
         cookie.setMaxAge(properties.getJwtProperties().getJwtRefreshLifetime());
         response.addCookie(cookie);
         SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
         isoFormat.setTimeZone(globalProperties.getTimeZone());
         String expire = isoFormat.format(accessExpires);
-        System.out.println("expire "+expire);
-        System.out.println("tek date "+issuedDate);
+        System.out.println("expire " + expire);
+        System.out.println("tek date " + issuedDate);
         AuthResponseDto dto = new AuthResponseDto(accessToken, expire);
         return ResponseEntity.ok(dto);
     }
-
 
 
 }

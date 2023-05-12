@@ -4,7 +4,6 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {PasswordStrangeRequirement} from "../../../types/PasswordStrangeRequirement";
 import {checkIfMatchingPasswords} from "../../../services/validators/MatchingPasswordsValidator";
 import {ChangePasswordService} from "./change-password.service";
-
 import {passwordStrangeValidator} from "../../../services/validators/PasswordStrangeValidator";
 import {MessageService} from "primeng/api";
 import {LoginMessage} from "../../../messages/LoginMessages";
@@ -55,6 +54,7 @@ export class ChangePasswordComponent implements OnInit{
   }
   submitFrm() {
     this.loading =true;
+    let hasError=false;
     Object.keys(this.authForm.controls).forEach(key => {
       this.authForm.get(key)?.markAsTouched();
     });
@@ -63,39 +63,56 @@ export class ChangePasswordComponent implements OnInit{
       let message = new LoginMessage.ErrorLoginMessage;
       message.detail='Введен не корректный email';
       this.messageService.add(message);
+      hasError=true;
     }
     if (this.emailControl.hasError('required')){
       let message = new LoginMessage.ErrorLoginMessage;
       message.detail='Введен не корректный email';
       this.messageService.add(message);
+      hasError=true;
     }
     /***************************************************************************/
     if(this.tokenControl.hasError('required')){
       let message = new LoginMessage.ErrorLoginMessage;
       message.detail='Введите токен';
       this.messageService.add(message);
+      hasError=true;
     }
     if(this.tokenControl.hasError('pattern')){
       let message = new LoginMessage.ErrorLoginMessage;
       message.detail='Введен не корректный токен';
       this.messageService.add(message);
+      hasError=true;
     }
     /***************************************************************************/
     if(this.passwordControl.hasError('required')){
       let message = new LoginMessage.ErrorLoginMessage;
       message.detail='Введите пароль';
       this.messageService.add(message);
+      hasError=true;
     }
     if(this.passwordControl.hasError('passwordStrange')){
       let message = new LoginMessage.ErrorLoginMessage;
       message.detail='Пароль не соотвествует требованиям';
       this.messageService.add(message);
+      hasError=true;
     }
     /***************************************************************************/
     if(this.confirmPasswordControl.hasError('required')){
       let message = new LoginMessage.ErrorLoginMessage;
       message.detail='Повторите пароль';
       this.messageService.add(message);
+      hasError=true;
+    }
+    if(this.authForm.hasError('match_error')){
+      let message = new LoginMessage.ErrorLoginMessage;
+      message.detail='Пароли не совпадают';
+      this.messageService.add(message);
+      hasError=true;
+    }
+    if(hasError){
+      this.loading=false;
+      return;
     }
   }
 

@@ -1,6 +1,5 @@
 package alexey.grizly.com.users.controllers;
 
-
 import alexey.grizly.com.commons.errors.AppResponseErrorDto;
 import alexey.grizly.com.commons.events.UserPasswordRestoreSendEmailEvent;
 import alexey.grizly.com.properties.properties.GlobalProperties;
@@ -10,6 +9,8 @@ import alexey.grizly.com.users.models.UserAccount;
 import alexey.grizly.com.users.services.UserPasswordService;
 import alexey.grizly.com.users.validators.PasswordValidator;
 import jakarta.validation.constraints.Email;
+import java.util.Arrays;
+import java.util.Base64;
 import org.hibernate.validator.internal.constraintvalidators.bv.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ApplicationEventMulticaster;
@@ -18,8 +19,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
-import java.util.Base64;
 
 @RestController
 @RequestMapping("api/v1/users")
@@ -32,9 +31,13 @@ public class RestorePasswordController {
 
 
     @Autowired
-    public RestorePasswordController(UserPasswordService userPasswordService, ApplicationEventMulticaster multicaster, GlobalProperties globalProperties, SecurityProperties properties, BCryptPasswordEncoder bCryptPasswordEncoder) {
-        this.userPasswordService = userPasswordService;
-        this.multicaster = multicaster;
+    public RestorePasswordController(final UserPasswordService pUserPasswordService,
+                                     final ApplicationEventMulticaster pMulticaster,
+                                     final GlobalProperties globalProperties,
+                                     final SecurityProperties properties,
+                                     final BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.userPasswordService = pUserPasswordService;
+        this.multicaster = pMulticaster;
         this.globalProperties = globalProperties;
         securityProperties = properties;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
@@ -53,7 +56,7 @@ public class RestorePasswordController {
             AppResponseErrorDto dto = new AppResponseErrorDto(HttpStatus.CONFLICT,"Упс что-то пошло не так...");
             return new ResponseEntity<>(dto, HttpStatus.CONFLICT);
         }
-        String url =globalProperties.getHost()+"/reset?token="+ Arrays.toString(Base64.getEncoder().encode((userAccount.getEmail() + "&&" + token).getBytes()));
+        String url =globalProperties.getHost() + "/reset?token=" + Arrays.toString(Base64.getEncoder().encode((userAccount.getEmail() + "&&" + token).getBytes()));
         UserPasswordRestoreSendEmailEvent event = new UserPasswordRestoreSendEmailEvent(new UserPasswordRestoreSendEmailEvent.EventParam(userAccount.getEmail(),url));
         multicaster.multicastEvent(event);
         return ResponseEntity.ok("Инструкции по восстановлению пароля отправлены на email: "+userAccount.getEmail());

@@ -7,21 +7,23 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Component;
 
+@SuppressWarnings("checkstyle:MissingJavadocType")
 @Component
 public class UserPasswordRestoreListener implements
         ApplicationListener<UserPasswordRestoreSendEmailEvent> {
+
     private final AppMailSender appMailSender;
 
-    public UserPasswordRestoreListener(AppMailSender appMailSender) {
+    public UserPasswordRestoreListener(final AppMailSender appMailSender) {
         this.appMailSender = appMailSender;
     }
 
     @Override
-    public void onApplicationEvent(UserPasswordRestoreSendEmailEvent event) {
+    public void onApplicationEvent(final UserPasswordRestoreSendEmailEvent event) {
         eventHandler(event);
     }
 
-    private void eventHandler(UserPasswordRestoreSendEmailEvent event){
+    private void eventHandler(final UserPasswordRestoreSendEmailEvent event){
         SimpleMailMessage message = new SimpleMailMessage();
         String from = appMailSender.getMailSender().getUsername();
         message.setFrom(from);
@@ -30,7 +32,7 @@ public class UserPasswordRestoreListener implements
 
         message
                 .setText("Для завершения восстановления пароля  " +
-                        " перейдите по ссылке "+event.getParam().getRestorePasswordUrl());
+                        " перейдите по ссылке " + event.getParam().getRestorePasswordUrl());
         /*appMailSender.getMailSender().send(message);*/
     }
 }

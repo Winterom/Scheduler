@@ -41,7 +41,6 @@ export class LoginComponent {
       this.messageService.add(message);
     }
     if(this.emailOrPhoneInput.invalid||this.passwordInput.invalid){
-
       this.loading=false;
       return;
     }
