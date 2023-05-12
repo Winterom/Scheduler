@@ -8,178 +8,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="750a344e-c061-4730-8fc1-d19a16e5fd0b" name="Changes" comment="feat: Authentication">
-      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/login/change-password/change-password.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/login/change-password/change-password.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/login/change-password/change-password.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/login/restore-password/restore.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/.browserslistrc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/.editorconfig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/angular.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/karma.conf.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/app-routing.module.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/app.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/app.component.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/app.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/app.module.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/guards/dashboard.guard.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/interceptors/http-request-interceptor.service.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/admin.module.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/authrority/authority.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/authrority/authority.component.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/authrority/authority.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/app-settings/app-settings.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/app-settings/app-settings.component.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/app-settings/app-settings.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/global-settings.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/global-settings.component.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/global-settings.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/mail-settings/AllEmailsTable.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/mail-settings/EmailsWSApi.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/mail-settings/emails.service.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/mail-settings/mail-settings.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/mail-settings/mail-settings.component.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/mail-settings/mail-settings.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/security-settings/security-settings.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/security-settings/security-settings.component.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/global-settings/security-settings/security-settings.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/user-list/UsersTableDefinition.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/user-list/user-by-id/user-by-id.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/user-list/user-by-id/user-by-id.component.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/user-list/user-by-id/user-by-id.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/user-list/user-list.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/user-list/user-list.component.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/admin/user-list/user-list.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/dashboard/dashboard-layout/dashboard-layout.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/dashboard/dashboard-layout/dashboard-layout.component.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/dashboard/dashboard-layout/dashboard-layout.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/dashboard/dashboard-layout/left-sidebar/bottom-sb-menu/bottom-menu-s-b.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/dashboard/dashboard-layout/left-sidebar/bottom-sb-menu/bottom-menu-s-b.component.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/dashboard/dashboard-layout/left-sidebar/bottom-sb-menu/bottom-menu-s-b.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/dashboard/dashboard-layout/left-sidebar/menu-s-b.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/dashboard/dashboard-layout/left-sidebar/menu-s-b.component.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/dashboard/dashboard-layout/left-sidebar/menu-s-b.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/dashboard/dashboard-layout/left-sidebar/top-sb-menu/top-menu-s-b.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/dashboard/dashboard-layout/left-sidebar/top-sb-menu/top-menu-s-b.component.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/dashboard/dashboard-layout/left-sidebar/top-sb-menu/top-menu-s-b.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/dashboard/dashboard-layout/top-menu/chat-notification/chat-notification.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/dashboard/dashboard-layout/top-menu/chat-notification/chat-notification.component.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/dashboard/dashboard-layout/top-menu/chat-notification/chat-notification.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/dashboard/dashboard-layout/top-menu/notification/notification.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/dashboard/dashboard-layout/top-menu/notification/notification.component.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/dashboard/dashboard-layout/top-menu/notification/notification.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/dashboard/dashboard-layout/top-menu/top-menu.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/dashboard/dashboard-layout/top-menu/top-menu.component.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/dashboard/dashboard-layout/top-menu/top-menu.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/dashboard/dashboard.module.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/desktop/desktop.module.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/desktop/desktop/desktop.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/desktop/desktop/desktop.component.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/desktop/desktop/desktop.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/login/login.module.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/login/login/LoginButtonDefinition.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/login/login/ResetButtonDefinition.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/login/login/login.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/login/login/login.component.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/login/login/login.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/login/reset-password/ButtonCheckCodeDefinition.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/login/reset-password/PasswordStrangeRequirement.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/login/reset-password/reset-password.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/login/reset-password/reset-password.component.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/login/reset-password/reset-password.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/profile/profile.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/profile/profile.component.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/profile/profile.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/modules/profile/profile.module.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/services/API/AuthenticationAPI.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/services/API/RootApi.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/services/API/RootHTTPApi.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/services/API/RootWSApi.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/services/auth/EAuthority.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/services/auth/Tokens.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/services/auth/authentication.service.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/services/auth/reset-password.service.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/services/auth/user.service.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/services/eventBus/EventData.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/services/eventBus/event-bus.service.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/shared/validators/EmailOrPhoneValidator.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/shared/validators/MatchingPasswordsValidator.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/shared/validators/PasswordStrangeValidator.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/button/ButtonDefinition.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/button/button.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/button/button.component.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/button/button.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/checkbox/CheckboxDefinition.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/checkbox/checkbox.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/checkbox/checkbox.component.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/checkbox/checkbox.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/filters-and-search/filters-and-search.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/filters-and-search/filters-and-search.component.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/filters-and-search/filters-and-search.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/hamburger/hamburger.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/hamburger/hamburger.component.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/hamburger/hamburger.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/input/InputDefinition.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/input/input.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/input/input.component.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/input/input.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/modal-dialog/ModalDialogDefinition.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/modal-dialog/modal-dialog.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/modal-dialog/modal-dialog.component.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/modal-dialog/modal-dialog.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/search-input/search-input.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/search-input/search-input.component.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/search-input/search-input.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/select/SelectDefinition.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/select/select.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/select/select.component.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/select/select.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/table-toolbar/TableToolbarDefinition.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/table-toolbar/table-toolbar.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/table-toolbar/table-toolbar.component.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/table-toolbar/table-toolbar.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/table/TableDefinition.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/table/table.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/table/table.component.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/table/table.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/app/uikit/uikit.module.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/assets/.gitkeep" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/assets/fonts.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/assets/fonts/Roboto-Bold.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/assets/fonts/Roboto-Light.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/assets/fonts/Roboto-Medium.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/assets/fonts/Roboto-Regular.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/assets/images/add.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/assets/images/femail_picture.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/assets/images/fon.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/assets/images/male_picture.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/assets/minireset.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/environments/environment.prod.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/environments/environment.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/main.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/polyfills.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/styles.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/src/test.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/tsconfig.app.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/tsconfig.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front/tsconfig.spec.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/app-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/login/login.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/login/login.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/login/login.scss" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/login/login.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/login/login/login.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/login/login/login.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/commons/configs/package-info.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/controllers/package-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/mailing/listeners/UserPasswordRestoreListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/mailing/listeners/UserPasswordRestoreListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/controllers/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/controllers/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/controllers/RestorePasswordController.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/controllers/RestorePasswordController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/messages/LoginMessages.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/messages/LoginMessages.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/login/change-password/change-password.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/login/change-password/change-password.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/login/change-password/change-password.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/login/change-password/change-password.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/login/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/login/login/login.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/login/login/login.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/login/login/login.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/login/registration/registration.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/login/registration/registration.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/login/reset/reset.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/login/restore-password/restore.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/login/reset/reset.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/login/restore-password/restore.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/services/API/AuthenticationAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/services/API/AuthenticationAPI.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/services/validators/PasswordStrangeValidator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/services/validators/PasswordStrangeValidator.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/types/PasswordStrangeRequirement.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/types/PasswordStrangeRequirement.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/login/restore-password/restore.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/login/restore-password/restore.component.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -237,6 +76,7 @@
         <option value="Class" />
         <option value="SCSS File" />
         <option value="TypeScript File" />
+        <option value="package-info" />
       </list>
     </option>
   </component>
@@ -288,7 +128,7 @@
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.0",
     "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "org.infernus.idea.checkstyle.CheckStyleConfigurable",
+    "settings.editor.selected.configurable": "preferences.sourceCode.Java",
     "spring.configuration.checksum": "1d2dfe7cbec4cb85764de7dce500cd05",
     "ts.external.directory.path": "C:\\Users\\winte\\IdeaProjects\\Scheduler\\ngx_front2\\frontend\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
@@ -515,7 +355,7 @@
       <workItem from="1681985594021" duration="15189000" />
       <workItem from="1682342595977" duration="16995000" />
       <workItem from="1682667365527" duration="14045000" />
-      <workItem from="1683723987490" duration="44540000" />
+      <workItem from="1683723987490" duration="48730000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1678620390716</created>
@@ -657,7 +497,21 @@
       <option name="project" value="LOCAL" />
       <updated>1683817662050</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="feat: Authentication">
+      <created>1683895855112</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1683895855112</updated>
+    </task>
+    <task id="LOCAL-00022" summary="feat: Authentication">
+      <created>1683895867690</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1683895867690</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
