@@ -4,14 +4,14 @@ import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {httpOptions} from "../../../services/API/RootHTTPApi";
 import {AuthToken} from "../../../types/authToken";
-import {PasswordStrangeRequirement} from "../../../types/PasswordStrangeRequirement";
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
-  api:AuthenticationAPI = new AuthenticationAPI();
-  constructor(private http: HttpClient) { }
+
+  constructor(private http: HttpClient, private api:AuthenticationAPI) { }
 
   public login(emailOrPhone: string, password: string): Observable<AuthToken> {
     return this.http.post<AuthToken>(
@@ -24,10 +24,4 @@ export class LoginService {
     )
   }
 
-  public getPasswordRequirements(): Observable<PasswordStrangeRequirement> {
-    return this.http.get<PasswordStrangeRequirement>(
-      this.api.passwordRequirements,
-      httpOptions
-    );
-  }
 }

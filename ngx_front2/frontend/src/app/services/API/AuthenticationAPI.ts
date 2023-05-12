@@ -1,5 +1,8 @@
 import {RootHTTPApi} from "./RootHTTPApi";
-
+import {Injectable} from "@angular/core";
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthenticationAPI extends RootHTTPApi{
 
     private _auth_api:string = "auth";

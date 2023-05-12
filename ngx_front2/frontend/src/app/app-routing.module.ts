@@ -1,15 +1,17 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {LoginComponent} from "./pages/login/login/login.component";
-import {ResetComponent} from "./pages/login/reset/reset.component";
+import {RestoreComponent} from "./pages/login/restore-password/restore.component";
 import {DesktopComponent} from "./pages/desktop/desktop.component";
 import {WidgetLayoutComponent} from "./pages/widget-layout/widget-layout.component";
 import {RegistrationComponent} from "./pages/login/registration/registration.component";
+import {ChangePasswordComponent} from "./pages/login/change-password/change-password.component";
 
 const routes: Routes = [
   {path:'login',component:LoginComponent},
   {path:'registration',component:RegistrationComponent},
-  {path:'reset',component:ResetComponent},
+  {path:'restore',component:RestoreComponent},
+  {path:'change',component:ChangePasswordComponent},
   {path:'desktop',component:DesktopComponent
   ,loadChildren:()=>import('./pages/desktop/desktop.module').then(m=>m.DesktopModule)
     /*,canActivate:[() => inject(desktopGuard).canActivate()*/},

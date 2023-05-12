@@ -30,7 +30,18 @@ export class LoginComponent {
     Object.keys(this.authForm.controls).forEach(key => {
       this.authForm.get(key)?.markAsTouched();
     });
+    if(this.emailOrPhoneInput.hasError('required')){
+      let message = new LoginMessage.ErrorLoginMessage;
+      message.detail='Введите телефон или email';
+      this.messageService.add(message);
+    }
+    if(this.passwordInput.hasError('required')){
+      let message = new LoginMessage.ErrorLoginMessage;
+      message.detail='Введите пароль';
+      this.messageService.add(message);
+    }
     if(this.emailOrPhoneInput.invalid||this.passwordInput.invalid){
+
       this.loading=false;
       return;
     }
@@ -55,7 +66,7 @@ export class LoginComponent {
     this.router.navigate(['registration']);
   }
   selectRestorePage(){
-    this.router.navigate(['reset']);
+    this.router.navigate(['restore']);
   }
 
 

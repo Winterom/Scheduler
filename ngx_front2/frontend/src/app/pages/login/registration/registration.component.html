@@ -53,9 +53,17 @@
         </span>
       </div>
       <div class="flex justify-content-evenly mt-4">
-        <p-button label="Отмена" styleClass="p-button-raised" [loading]="loading"
-                  (click)="returnToLoginPage()"></p-button>
-        <p-button label="Регистрация" styleClass="p-button-raised" [loading]="loading" (click)="submitFrm()"></p-button>
+        <p-button
+          label="Отмена"
+          styleClass="p-button-raised"
+          (click)="returnToLoginPage()">
+        </p-button>
+        <p-button
+          label="Регистрация"
+          styleClass="p-button-raised"
+          [loading]="loading"
+          [disabled]="loading"
+          (click)="submitFrm()"></p-button>
       </div>
     </form>
   </div>

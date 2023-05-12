@@ -1,5 +1,6 @@
 import {AbstractControl, ValidationErrors, ValidatorFn} from "@angular/forms";
-import {PasswordStrangeRequirement} from "../../modules/login/reset-password/PasswordStrangeRequirement";
+import {PasswordStrangeRequirement} from "../../types/PasswordStrangeRequirement";
+
 
 export function passwordStrangeValidator(passRequirement:PasswordStrangeRequirement):ValidatorFn{
   return (control:AbstractControl) : ValidationErrors | null => {
@@ -8,12 +9,12 @@ export function passwordStrangeValidator(passRequirement:PasswordStrangeRequirem
       return null;
     }
     const pattern = [
-      `(?=([^a-z]*[a-z])\{${passRequirement.passwordMinLowerCase},\})`,
-      `(?=([^A-Z]*[A-Z])\{${passRequirement.passwordMinUpperCase},\})`,
-      `(?=([^0-9]*[0-9])\{${passRequirement.passwordMinNumber},\})`,
-      `(?=(\.\*[\$\@\$\!\%\*\?\&])\{${passRequirement.passwordMinSymbol},\})`,
+      `(?=([^a-z]*[a-z])\{${passRequirement.minLowerCase},\})`,
+      `(?=([^A-Z]*[A-Z])\{${passRequirement.minUpperCase},\})`,
+      `(?=([^0-9]*[0-9])\{${passRequirement.minNumber},\})`,
+      `(?=(\.\*[\$\@\$\!\%\*\?\&])\{${passRequirement.minSymbol},\})`,
       `[A-Za-z\\d\$\@\$\!\%\*\?\&\.]{${
-        passRequirement.passwordMinCharacters
+        passRequirement.minCharacters
       },}`
     ]
       .map(item => item.toString())
