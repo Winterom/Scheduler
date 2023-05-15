@@ -5,7 +5,10 @@
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
-    <content url="file://$MODULE_DIR$" />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/ngx_front2/frontend/dist" />
+      <excludeFolder url="file://$MODULE_DIR$/ngx_front2/frontend/tmp" />
+    </content>
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>

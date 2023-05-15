@@ -31,29 +31,29 @@ public class RestorePasswordController {
 
 
     @Autowired
-    public RestorePasswordController(final UserPasswordService pUserPasswordService,
-                                     final ApplicationEventMulticaster pMulticaster,
+    public RestorePasswordController(final UserPasswordService userPasswordService,
+                                     final ApplicationEventMulticaster applicationEventMulticaster,
                                      final GlobalProperties globalProperties,
                                      final SecurityProperties properties,
                                      final BCryptPasswordEncoder bCryptPasswordEncoder) {
-        this.userPasswordService = pUserPasswordService;
-        this.multicaster = pMulticaster;
-        this.globalProperties = globalProperties;
-        securityProperties = properties;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    this.userPasswordService = userPasswordService;
+    this.multicaster = applicationEventMulticaster;
+    this.globalProperties = globalProperties;
+    this.securityProperties = properties;
+    this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
 
     @GetMapping("user/password/change/token/{email}")
-    public ResponseEntity<?> sendTokenForResetPassword(@PathVariable @Email String email){
+    public ResponseEntity<?> sendTokenForResetPassword(@PathVariable @Email final String email){
         UserAccount userAccount = userPasswordService.getSimpleUserAccount(email);
         if(userAccount==null){
-            AppResponseErrorDto dto = new AppResponseErrorDto(HttpStatus.NOT_FOUND,"Аккаунт с email: "+email+" не существует");
+            AppResponseErrorDto dto = new AppResponseErrorDto(HttpStatus.NOT_FOUND, "Аккаунт с email: " + email + " не существует");
             return new ResponseEntity<>(dto, HttpStatus.NOT_FOUND);
         }
         String token = userPasswordService.generateAndSaveRestorePasswordToken(userAccount);
-        if(token==null){
-            AppResponseErrorDto dto = new AppResponseErrorDto(HttpStatus.CONFLICT,"Упс что-то пошло не так...");
+        if (token == null){
+            AppResponseErrorDto dto = new AppResponseErrorDto(HttpStatus.CONFLICT, "Упс что-то пошло не так...");
             return new ResponseEntity<>(dto, HttpStatus.CONFLICT);
         }
         String url =globalProperties.getHost() + "/reset?token=" + Arrays.toString(Base64.getEncoder().encode((userAccount.getEmail() + "&&" + token).getBytes()));
@@ -63,13 +63,12 @@ public class RestorePasswordController {
     }
 
     @PutMapping ("user/password/change")
-    public ResponseEntity<?> changePassword(@RequestBody RestorePasswordRequestDto dto){
+    public ResponseEntity<?> changePassword(@RequestBody final RestorePasswordRequestDto dto){
         EmailValidator emailValidator = new EmailValidator();
         PasswordValidator passwordValidator = new PasswordValidator(securityProperties.getUserPasswordStrange());
-        if(!emailValidator.isValid(dto.getEmail(),null)
+        if(!emailValidator.isValid(dto.getEmail(), null)
                 || !passwordValidator.isValid(dto.getPassword(), null)
-                || (dto.getToken()==null||dto.getToken().trim().length()!=36)
-                ){
+                || (dto.getToken() == null || dto.getToken().trim().length() != 36)) {
             String errorMessage = "Невалидные учетные данные пользователя";
             AppResponseErrorDto errorDto = new AppResponseErrorDto(HttpStatus.BAD_REQUEST,errorMessage);
             return new ResponseEntity<>(errorDto, HttpStatus.BAD_REQUEST);
@@ -79,7 +78,7 @@ public class RestorePasswordController {
             return ResponseEntity.ok("Пароль изменен, перейдите к авторизации");
         }
         String errorMessage = "Неверные учетные данные пользователя";
-        AppResponseErrorDto errorDto = new AppResponseErrorDto(HttpStatus.NOT_ACCEPTABLE,errorMessage);
+        AppResponseErrorDto errorDto = new AppResponseErrorDto(HttpStatus.NOT_ACCEPTABLE, errorMessage);
         return new ResponseEntity<>(errorDto, HttpStatus.NOT_ACCEPTABLE);
     }
 

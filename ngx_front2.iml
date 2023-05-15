@@ -5,6 +5,8 @@
     <content url="file://$MODULE_DIR$/ngx_front2">
       <excludeFolder url="file://$MODULE_DIR$/ngx_front2/dist" />
       <excludeFolder url="file://$MODULE_DIR$/ngx_front2/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/ngx_front2/frontend/dist" />
+      <excludeFolder url="file://$MODULE_DIR$/ngx_front2/frontend/tmp" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
