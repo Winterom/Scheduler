@@ -4,8 +4,7 @@ import alexey.grizly.com.commons.errors.AppResponseErrorDto;
 import alexey.grizly.com.commons.events.UserPasswordRestoreSendEmailEvent;
 import alexey.grizly.com.properties.properties.GlobalProperties;
 import alexey.grizly.com.properties.properties.SecurityProperties;
-import alexey.grizly.com.users.dtos.request.ChangePasswordRequestDto;
-import alexey.grizly.com.users.dtos.request.UserRegistrationRequestDto;
+import alexey.grizly.com.users.dtos.request.RestorePasswordRequestDto;
 import alexey.grizly.com.users.models.UserAccount;
 import alexey.grizly.com.users.services.UserPasswordService;
 import alexey.grizly.com.users.validators.PasswordValidator;
@@ -23,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/v1/users")
-public class UsersController {
+public class RestorePasswordController {
     private final UserPasswordService userPasswordService;
     private final ApplicationEventMulticaster multicaster;
     private final GlobalProperties globalProperties;
@@ -32,11 +31,11 @@ public class UsersController {
 
 
     @Autowired
-    public UsersController(final UserPasswordService pUserPasswordService,
-                           final ApplicationEventMulticaster pMulticaster,
-                           final GlobalProperties globalProperties,
-                           final SecurityProperties properties,
-                           final BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public RestorePasswordController(final UserPasswordService pUserPasswordService,
+                                     final ApplicationEventMulticaster pMulticaster,
+                                     final GlobalProperties globalProperties,
+                                     final SecurityProperties properties,
+                                     final BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userPasswordService = pUserPasswordService;
         this.multicaster = pMulticaster;
         this.globalProperties = globalProperties;
@@ -45,8 +44,8 @@ public class UsersController {
     }
 
 
-    @GetMapping("password/change/token/{email}")
-    public ResponseEntity<?> sendTokenForResetPassword(@PathVariable @Email final String email){
+    @GetMapping("user/password/change/token/{email}")
+    public ResponseEntity<?> sendTokenForResetPassword(@PathVariable @Email String email){
         UserAccount userAccount = userPasswordService.getSimpleUserAccount(email);
         if(userAccount==null){
             AppResponseErrorDto dto = new AppResponseErrorDto(HttpStatus.NOT_FOUND,"Аккаунт с email: "+email+" не существует");
@@ -63,8 +62,8 @@ public class UsersController {
         return ResponseEntity.ok("Инструкции по восстановлению пароля отправлены на email: "+userAccount.getEmail());
     }
 
-    @PutMapping ("password/change")
-    public ResponseEntity<?> changePassword(@RequestBody final ChangePasswordRequestDto dto){
+    @PutMapping ("user/password/change")
+    public ResponseEntity<?> changePassword(@RequestBody RestorePasswordRequestDto dto){
         EmailValidator emailValidator = new EmailValidator();
         PasswordValidator passwordValidator = new PasswordValidator(securityProperties.getUserPasswordStrange());
         if(!emailValidator.isValid(dto.getEmail(),null)
@@ -77,15 +76,11 @@ public class UsersController {
         }
         String passwordHash = bCryptPasswordEncoder.encode(dto.getPassword());
         if(userPasswordService.updatePassword(dto.getEmail(), passwordHash,dto.getToken())){
-            return ResponseEntity.ok("Пароль успешно изменен, перейдите к авторизации");
+            return ResponseEntity.ok("Пароль изменен, перейдите к авторизации");
         }
         String errorMessage = "Неверные учетные данные пользователя";
         AppResponseErrorDto errorDto = new AppResponseErrorDto(HttpStatus.NOT_ACCEPTABLE,errorMessage);
         return new ResponseEntity<>(errorDto, HttpStatus.NOT_ACCEPTABLE);
     }
 
-    @PostMapping("/registration")
-    public ResponseEntity<?> registrationNewUser(@RequestBody final UserRegistrationRequestDto dto){
-        return ResponseEntity.ok("ura");
-    }
 }
