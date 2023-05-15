@@ -3,7 +3,7 @@ import {UsersAPI} from "../../../services/API/UsersAPI";
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {httpOptions} from "../../../services/API/RootHTTPApi";
-import {AuthToken} from "../../../types/authToken";
+import {AuthToken} from "../../../types/AuthToken";
 
 
 @Injectable({

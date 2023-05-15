@@ -18,4 +18,25 @@ export class RegistrationService {
       httpOptions
     );
   }
+  public registration(email:string,
+                      phone:string,
+                      surname:string,
+                      name:string,
+                      lastname:string,
+                      password:string):Observable<any>{
+    return this.http.post(this.api.registration,{
+      email: email,
+      phone:phone,
+      surname:surname,
+      name:name,
+      lastname:lastname,
+      password:password
+    },httpOptions);
+  }
+
+  public checkEmail(email:string):Observable<any>{
+    return this.http.post(this.api.checkEmail,{
+      email:email
+    },httpOptions)
+  }
 }

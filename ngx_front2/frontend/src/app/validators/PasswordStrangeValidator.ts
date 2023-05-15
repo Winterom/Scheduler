@@ -8,6 +8,7 @@ export function passwordStrangeValidator(passRequirement:PasswordStrangeRequirem
     if (!value) {
       return null;
     }
+    console.log(passRequirement)
     const pattern = [
       `(?=([^a-z]*[a-z])\{${passRequirement.minLowerCase},\})`,
       `(?=([^A-Z]*[A-Z])\{${passRequirement.minUpperCase},\})`,

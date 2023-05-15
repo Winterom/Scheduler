@@ -4,7 +4,7 @@ import alexey.grizly.com.commons.errors.AppResponseErrorDto;
 import alexey.grizly.com.commons.events.UserPasswordRestoreSendEmailEvent;
 import alexey.grizly.com.properties.properties.GlobalProperties;
 import alexey.grizly.com.properties.properties.SecurityProperties;
-import alexey.grizly.com.users.dtos.request.RestorePasswordRequestDto;
+import alexey.grizly.com.users.dtos.request.ChangePasswordRequestDto;
 import alexey.grizly.com.users.models.UserAccount;
 import alexey.grizly.com.users.services.UserPasswordService;
 import alexey.grizly.com.users.validators.PasswordValidator;
@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/v1/users")
-public class RestorePasswordController {
+public class UsersController {
     private final UserPasswordService userPasswordService;
     private final ApplicationEventMulticaster multicaster;
     private final GlobalProperties globalProperties;
@@ -31,7 +31,7 @@ public class RestorePasswordController {
 
 
     @Autowired
-    public RestorePasswordController(final UserPasswordService pUserPasswordService,
+    public UsersController(final UserPasswordService pUserPasswordService,
                                      final ApplicationEventMulticaster pMulticaster,
                                      final GlobalProperties globalProperties,
                                      final SecurityProperties properties,
@@ -44,7 +44,7 @@ public class RestorePasswordController {
     }
 
 
-    @GetMapping("user/password/change/token/{email}")
+    @GetMapping("password/change/token/{email}")
     public ResponseEntity<?> sendTokenForResetPassword(@PathVariable @Email String email){
         UserAccount userAccount = userPasswordService.getSimpleUserAccount(email);
         if(userAccount==null){
@@ -62,8 +62,8 @@ public class RestorePasswordController {
         return ResponseEntity.ok("Инструкции по восстановлению пароля отправлены на email: "+userAccount.getEmail());
     }
 
-    @PutMapping ("user/password/change")
-    public ResponseEntity<?> changePassword(@RequestBody RestorePasswordRequestDto dto){
+    @PutMapping ("password/change")
+    public ResponseEntity<?> changePassword(@RequestBody ChangePasswordRequestDto dto){
         EmailValidator emailValidator = new EmailValidator();
         PasswordValidator passwordValidator = new PasswordValidator(securityProperties.getUserPasswordStrange());
         if(!emailValidator.isValid(dto.getEmail(),null)
@@ -83,4 +83,8 @@ public class RestorePasswordController {
         return new ResponseEntity<>(errorDto, HttpStatus.NOT_ACCEPTABLE);
     }
 
+    @PostMapping("")
+    public void registration(){
+
+    }
 }

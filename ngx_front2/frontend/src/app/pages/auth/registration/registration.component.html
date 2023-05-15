@@ -1,85 +1,138 @@
 <div class="container" style="width: 55rem">
-    <div class="title">Регистрация</div>
-    <form class="mt-3">
-      <div class="flex justify-content-between">
-        <div class="w-25rem">
-          <h4 class="text-center">Основные учетные данные</h4>
-      <div class="flex justify-content-start align-items-center">
-        <div class="mr-2 text-2xl font-bold">+7</div>
-        <span class="p-float-label">
-          <p-inputMask mask="999-999-9999" id="phone" [style]="{'min-width':'100%'}"></p-inputMask>
+  <div class="title">Регистрация</div>
+  <form
+    class="mt-3"
+    [formGroup]="registrationForm"
+    novalidate
+    (ngSubmit)="submitFrm()">
+    <div class="flex justify-content-between">
+      <div class="w-25rem">
+        <h4 class="text-center">Основные учетные данные</h4>
+        <div class="flex justify-content-start align-items-center">
+          <div class="mr-2 text-2xl font-bold">+7</div>
+          <span class="p-float-label">
+          <p-inputMask
+            mask="999-999-9999"
+            id="phone"
+            formControlName="phone"
+            [ngClass]="{'ng-invalid ng-dirty':(phoneControl.hasError('required')||phoneControl.hasError('pattern'))&&phoneControl.touched}"
+          ></p-inputMask>
           <label htmlFor="phone">Телефон</label>
         </span>
-      </div>
-      <div class="mt-5">
+        </div>
+        <div class="mt-5">
         <span class="p-float-label">
-          <input pInputText id="email2" class="p-inputtext-sm w-full"/>
-          <label htmlFor="email2">Email</label>
+          <input
+            pInputText
+            id="email"
+            class="p-inputtext-sm w-full"
+            formControlName="email"
+
+            [ngClass]="{'ng-invalid ng-dirty':(emailControl.hasError('required')||emailControl.hasError('email'))&&emailControl.touched}"
+          />
+          <label htmlFor="email">Email</label>
         </span>
-      </div>
-      <div class="mt-5">
+        </div>
+        <div class="mt-5">
         <span class="p-float-label w-full">
-          <input pInputText id="surname" class="p-inputtext-sm w-full"/>
+          <input
+            pInputText id="surname"
+            class="p-inputtext-sm w-full"
+            formControlName="surname"
+            [ngClass]="{'ng-invalid ng-dirty':(surnameControl.hasError('required')||surnameControl.hasError('pattern'))&&surnameControl.touched}"
+          />
           <label htmlFor="surname">Фамилия</label>
         </span>
-      </div>
-      <div class="mt-5">
+        </div>
+        <div class="mt-5">
         <span class="p-float-label w-full">
-          <input pInputText id="name" class="p-inputtext-sm w-full"/>
+          <input
+            pInputText
+            id="name"
+            class="p-inputtext-sm w-full"
+            formControlName="name"
+            [ngClass]="{'ng-invalid ng-dirty':(nameControl.hasError('required')||nameControl.hasError('pattern'))&&nameControl.touched}"
+          />
           <label htmlFor="name">Имя</label>
         </span>
-      </div>
-      <div class="mt-5">
+        </div>
+        <div class="mt-5">
         <span class="p-float-label w-full">
-          <input pInputText id="lastName" class="p-inputtext-sm w-full"/>
+          <input
+            pInputText
+            id="lastName"
+            class="p-inputtext-sm w-full"
+            formControlName="lastname"
+            [ngClass]="{'ng-invalid ng-dirty':lastnameControl.hasError('pattern')&&lastnameControl.touched}"
+          />
           <label htmlFor="lastName">Отчество</label>
         </span>
-      </div>
         </div>
-        <div class="w-25rem">
-      <div>
-        <h4 class="text-center">Требования к паролю</h4>
-        <p>Пароль должен соотвествовать следующим требованиям:</p>
-        <div *ngIf="pswStrangeReq.minCharacters!=0" > - минимальная длина пароля - <span class="font-bold text-red-800">{{pswStrangeReq.minCharacters}}</span></div>
-        <div *ngIf="pswStrangeReq.minLowerCase!=0"> - минимально прописных симвоволов - <span class="font-bold text-red-800">{{pswStrangeReq.minLowerCase}}</span></div>
-        <div *ngIf="pswStrangeReq.minUpperCase!=0"> - минимально заглавных симвоволов - <span class="font-bold text-red-800">{{pswStrangeReq.minUpperCase}}</span></div>
-        <div *ngIf="pswStrangeReq.minNumber!=0"> - минимально количество цифр - <span class="font-bold text-red-800">{{pswStrangeReq.minNumber}}</span></div>
-        <div *ngIf="pswStrangeReq.minSymbol!=0"> - минимально количество спецсимволов($@!%*?&) - <span class="font-bold text-red-800">{{pswStrangeReq.minSymbol}}</span></div>
       </div>
-      <div class="mt-4">
+      <div class="w-25rem">
+        <div>
+          <h4 class="text-center">Требования к паролю</h4>
+          <p>Пароль должен соотвествовать следующим требованиям:</p>
+          <div *ngIf="pswStrangeReq.minCharacters!=0"> - минимальная длина пароля - <span
+            class="font-bold text-red-800">{{pswStrangeReq.minCharacters}}</span></div>
+          <div *ngIf="pswStrangeReq.minLowerCase!=0"> - минимально прописных симвоволов - <span
+            class="font-bold text-red-800">{{pswStrangeReq.minLowerCase}}</span></div>
+          <div *ngIf="pswStrangeReq.minUpperCase!=0"> - минимально заглавных симвоволов - <span
+            class="font-bold text-red-800">{{pswStrangeReq.minUpperCase}}</span></div>
+          <div *ngIf="pswStrangeReq.minNumber!=0"> - минимально количество цифр - <span
+            class="font-bold text-red-800">{{pswStrangeReq.minNumber}}</span></div>
+          <div *ngIf="pswStrangeReq.minSymbol!=0"> - минимально количество спецсимволов($@!%*?&) - <span
+            class="font-bold text-red-800">{{pswStrangeReq.minSymbol}}</span></div>
+        </div>
+        <div class="mt-4">
         <span class="p-float-label mt-4">
-          <p-password id="newPassword" class="w-full" [feedback]="false"
-                      styleClass="p-password p-component p-inputwrapper p-input-icon-right" [style]="{'width':'100%'}"
-                      [inputStyle]="{'width':'100%'}" [toggleMask]="true"></p-password>
+          <p-password
+            id="newPassword"
+            class="w-full" [feedback]="false"
+            styleClass="p-password p-component p-inputwrapper p-input-icon-right"
+            [style]="{'width':'100%'}"
+            [inputStyle]="{'width':'100%'}"
+            [toggleMask]="true"
+            formControlName="newPassword"
+            [ngClass]="{'ng-invalid ng-dirty':(passwordControl.hasError('required')||passwordControl.hasError('passwordStrange'))&&passwordControl.touched}"
+          ></p-password>
           <label htmlFor="newPassword">Пароль</label>
         </span>
-      </div>
-      <div class="mt-4">
+        </div>
+        <div class="mt-4">
         <span class="p-float-label mt-4">
-          <p-password id="repeatPassword" class="w-full" [feedback]="false"
-                      styleClass="p-password p-component p-inputwrapper p-input-icon-right" [style]="{'width':'100%'}"
-                      [inputStyle]="{'width':'100%'}" [toggleMask]="true"></p-password>
+          <p-password
+            id="repeatPassword"
+            class="w-full"
+            [feedback]="false"
+            styleClass="p-password p-component p-inputwrapper p-input-icon-right"
+            [style]="{'width':'100%'}"
+            [inputStyle]="{'width':'100%'}"
+            [toggleMask]="true"
+            formControlName="confirmPassword"
+            [ngClass]="{'ng-invalid ng-dirty':(confirmPasswordControl.hasError('required')||registrationForm.hasError('match_error'))&&confirmPasswordControl.touched}"
+          ></p-password>
           <label htmlFor="repeatPassword">Повторите пароль</label>
         </span>
-      </div>
         </div>
-          </div>
-      <div class="flex justify-content-center mt-4">
-        <p-button
-          label="Отмена"
-          styleClass="p-button-raised"
-          [disabled]="loading"
-          (click)="returnToLoginPage()">
-        </p-button>
-        <p-button
-          label="Регистрация"
-          styleClass="p-button-raised ml-5"
-          [loading]="loading"
-          [disabled]="loading"
-          (click)="submitFrm()"></p-button>
       </div>
-
-    </form>
-  </div>
+    </div>
+    <div class="flex justify-content-center mt-4">
+      <p-button
+        label="Отмена"
+        styleClass="p-button-raised"
+        [disabled]="loading"
+        (click)="returnToLoginPage()">
+      </p-button>
+      <p-button
+        label="Регистрация"
+        styleClass="p-button-raised ml-5"
+        [loading]="loading"
+        [disabled]="loading"
+        (click)="submitFrm()"></p-button>
+    </div>
+  </form>
+</div>
+<p-toast></p-toast>
 
 

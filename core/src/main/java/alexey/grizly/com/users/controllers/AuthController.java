@@ -65,8 +65,6 @@ public class AuthController {
         SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
         isoFormat.setTimeZone(globalProperties.getTimeZone());
         String expire = isoFormat.format(accessExpires);
-        System.out.println("expire " + expire);
-        System.out.println("tek date " + issuedDate);
         AuthResponseDto dto = new AuthResponseDto(accessToken, expire);
         return ResponseEntity.ok(dto);
     }

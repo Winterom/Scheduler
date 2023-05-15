@@ -17,7 +17,7 @@ import {LoginMessage} from "../../../messages/LoginMessages";
 })
 export class ChangePasswordComponent implements OnInit{
   loading:boolean=false;
-  authForm : FormGroup;
+  changePasswordForm : FormGroup;
   passwordControl:FormControl;
   confirmPasswordControl:FormControl;
   emailControl:FormControl;
@@ -30,11 +30,11 @@ export class ChangePasswordComponent implements OnInit{
               private messageService: MessageService,
               private activateRoute: ActivatedRoute
   ) {
-    this.passwordControl = new FormControl<string>('',[Validators.required, passwordStrangeValidator(this.pswStrangeReq)]);
+    this.passwordControl = new FormControl<string>('',[Validators.required]);
     this.confirmPasswordControl = new FormControl<string>('',Validators.required);
     this.emailControl = new FormControl<string>('',[Validators.required,Validators.email]);
     this.tokenControl = new FormControl<string>('',[Validators.required,Validators.pattern('[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}')])
-    this.authForm = new FormGroup<any>({
+    this.changePasswordForm = new FormGroup<any>({
       "newPassword": this.passwordControl,
       "confirmPassword": this.confirmPasswordControl,
       "email":this.emailControl,
@@ -44,6 +44,7 @@ export class ChangePasswordComponent implements OnInit{
   ngOnInit(): void {
     this.changePasswordService.getPasswordRequirements().subscribe({next:data=>{
       this.pswStrangeReq=data;
+      this.passwordControl.addValidators(passwordStrangeValidator(this.pswStrangeReq))
       }});
     const token = this.activateRoute.snapshot.queryParams['token'];
     if (token) {
@@ -57,8 +58,8 @@ export class ChangePasswordComponent implements OnInit{
   submitFrm() {
     this.loading =true;
     let hasError=false;
-    Object.keys(this.authForm.controls).forEach(key => {
-      this.authForm.get(key)?.markAsTouched();
+    Object.keys(this.changePasswordForm.controls).forEach(key => {
+      this.changePasswordForm.get(key)?.markAsTouched();
     });
     /***************************************************************************/
     if (this.emailControl.hasError('email')){
@@ -69,7 +70,7 @@ export class ChangePasswordComponent implements OnInit{
     }
     if (this.emailControl.hasError('required')){
       let message = new LoginMessage.ErrorLoginMessage;
-      message.detail='Введен не корректный email';
+      message.detail='Email не введен';
       this.messageService.add(message);
       hasError=true;
     }
@@ -95,7 +96,7 @@ export class ChangePasswordComponent implements OnInit{
     }
     if(this.passwordControl.hasError('passwordStrange')){
       let message = new LoginMessage.ErrorLoginMessage;
-      message.detail='Пароль не соотвествует требованиям';
+      message.detail='Пароль не соответствует требованиям';
       this.messageService.add(message);
       hasError=true;
     }
@@ -106,7 +107,7 @@ export class ChangePasswordComponent implements OnInit{
       this.messageService.add(message);
       hasError=true;
     }
-    if(this.authForm.hasError('match_error')){
+    if(this.changePasswordForm.hasError('match_error')){
       let message = new LoginMessage.ErrorLoginMessage;
       message.detail='Пароли не совпадают';
       this.messageService.add(message);

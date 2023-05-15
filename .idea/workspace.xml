@@ -7,18 +7,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="750a344e-c061-4730-8fc1-d19a16e5fd0b" name="Changes" comment="feat: Authentication">
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/commons/configs/package-info.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/controllers/package-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/mailing/listeners/UserPasswordRestoreListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/mailing/listeners/UserPasswordRestoreListener.java" afterDir="false" />
+    <list default="true" id="750a344e-c061-4730-8fc1-d19a16e5fd0b" name="Changes" comment="feat: authentication">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/controllers/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/controllers/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/controllers/RestorePasswordController.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/controllers/RestorePasswordController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/messages/LoginMessages.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/messages/LoginMessages.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/login/change-password/change-password.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/login/change-password/change-password.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/login/change-password/change-password.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/login/change-password/change-password.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/login/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/login/login/login.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/login/registration/registration.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/login/registration/registration.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/login/restore-password/restore.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/login/restore-password/restore.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/controllers/UsersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/controllers/UsersController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/auth/change-password/change-password.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/auth/change-password/change-password.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/auth/change-password/change-password.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/auth/change-password/change-password.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/auth/login/login.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/auth/login/login.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/auth/registration/registration.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/auth/registration/registration.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/auth/registration/registration.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/auth/registration/registration.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/auth/registration/registration.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/auth/registration/registration.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/services/API/UsersAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/services/API/UsersAPI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/types/authToken.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/types/AuthToken.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/validators/EmailOrPhoneValidator.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/validators/PasswordStrangeValidator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/validators/PasswordStrangeValidator.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,17 +75,15 @@
         <option value="JUnit5 Test Class" />
         <option value="Interface" />
         <option value="Enum" />
-        <option value="Class" />
-        <option value="SCSS File" />
         <option value="TypeScript File" />
-        <option value="package-info" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="websocket" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -114,10 +114,9 @@
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
     "com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers": "true",
     "create.test.in.the.same.root": "true",
-    "ignore.virus.scanning.warn.message": "true",
+    "git-widget-placeholder": "dev",
     "jdk.selected.JAVA_MODULE": "openjdk-19",
-    "last_opened_file_path": "C:/Users/winte/IdeaProjects/Scheduler/ngx_front/src/assets/images",
-    "list.type.of.created.stylesheet": "SCSS",
+    "last_opened_file_path": "/Volumes/Работа/Scheduler/ngx_front2/frontend/src/app/types",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -128,14 +127,17 @@
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.0",
     "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "preferences.sourceCode.Java",
+    "settings.editor.selected.configurable": "editing.templates",
     "spring.configuration.checksum": "1d2dfe7cbec4cb85764de7dce500cd05",
-    "ts.external.directory.path": "C:\\Users\\winte\\IdeaProjects\\Scheduler\\ngx_front2\\frontend\\node_modules\\typescript\\lib",
+    "ts.external.directory.path": "/Volumes/Работа/Scheduler/ngx_front2/frontend/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
     "DatabaseDriversLRU": [
       "postgresql"
+    ],
+    "com.intellij.ide.scratch.LRUPopupBuilder$1/": [
+      "PostgreSQL"
     ],
     "com.intellij.ide.scratch.LRUPopupBuilder$1/SQL Dialect": [
       "PostgreSQL"
@@ -144,21 +146,21 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\winte\IdeaProjects\Scheduler\ngx_front\src\assets\images" />
-      <recent name="C:\Users\winte\IdeaProjects\Scheduler\core\src\main\java\alexey\grizly\com\users" />
-      <recent name="C:\Users\winte\IdeaProjects\Scheduler\core\src\main\java\alexey\grizly\com\users\dto\request" />
-      <recent name="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/configs" />
-      <recent name="$PROJECT_DIR$/core/src/main/resources" />
+      <recent name="$PROJECT_DIR$/ngx_front2/frontend/src/app/types" />
+      <recent name="$PROJECT_DIR$/ngx_front2/frontend/src/app/services" />
+      <recent name="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/login/login" />
+      <recent name="$PROJECT_DIR$/ngx_front2/frontend/src/assets" />
+      <recent name="$PROJECT_DIR$/ngx_front2/frontend/src/app/service" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\winte\IdeaProjects\Scheduler\ngx_front2\frontend\src\app\pages\login\registration" />
-      <recent name="C:\Users\winte\IdeaProjects\Scheduler\ngx_front2\frontend\src\app\pages\login" />
-      <recent name="C:\Users\winte\IdeaProjects\Scheduler\ngx_front\src\app\services\WS" />
-      <recent name="C:\Users\winte\IdeaProjects\Scheduler\ngx_front\src\app\services\auth" />
-      <recent name="C:\Users\winte\IdeaProjects\Scheduler\ngx_front\src\app" />
+      <recent name="$PROJECT_DIR$/ngx_front2/frontend/src/app" />
+      <recent name="$PROJECT_DIR$/ngx_front2/frontend/src/app/types" />
+      <recent name="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/widget-layout" />
+      <recent name="$PROJECT_DIR$/ngx_front2/frontend/src/app/modules" />
+      <recent name="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/global-settings" />
     </key>
     <key name="ExtractSuperBase.RECENT_KEYS">
       <recent name="alexey.grizly.com.properties.models" />
@@ -171,62 +173,7 @@
       <recent name="alexey.grizly.com.users.utils" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="configurationTypes">
-      <set>
-        <option value="JarApplication" />
-      </set>
-    </option>
-  </component>
-  <component name="RunManager" selected="npm.Angular CLI Server (ngx_front)">
-    <configuration name="AuthServiceImplTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/core" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;users.auth.AuthServiceImplTest&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <ForceTestExec>false</ForceTestExec>
-      <method v="2" />
-    </configuration>
-    <configuration name="AuthServiceImplTest.correctAuthentication" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/core" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;users.auth.AuthServiceImplTest.correctAuthentication&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <ForceTestExec>false</ForceTestExec>
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="npm.Angular CLI Server (ngx_front2)">
     <configuration name="PasswordValidatorTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -251,23 +198,97 @@
       <ForceTestExec>false</ForceTestExec>
       <method v="2" />
     </configuration>
-    <configuration name="core [test]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+    <configuration name="PasswordValidatorTest.validLowCaseCount" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/core" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
+        <option name="scriptParameters" value="" />
         <option name="taskDescriptions">
           <list />
         </option>
         <option name="taskNames">
           <list>
-            <option value="test" />
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;users.validators.PasswordValidatorTest.validLowCaseCount&quot;" />
           </list>
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <ForceTestExec>false</ForceTestExec>
+      <method v="2" />
+    </configuration>
+    <configuration name="PasswordValidatorTest.validNumberCount" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/core" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;users.validators.PasswordValidatorTest.validNumberCount&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <ForceTestExec>false</ForceTestExec>
+      <method v="2" />
+    </configuration>
+    <configuration name="PasswordValidatorTest.validSpecSymbolCount" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/core" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;users.validators.PasswordValidatorTest.validSpecSymbolCount&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <ForceTestExec>false</ForceTestExec>
+      <method v="2" />
+    </configuration>
+    <configuration name="PasswordValidatorTest.validUpperCaseCount" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/core" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;users.validators.PasswordValidatorTest.validUpperCaseCount&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
       <DebugAllEnabled>false</DebugAllEnabled>
       <ForceTestExec>false</ForceTestExec>
@@ -283,7 +304,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Angular CLI Server (ngx_front)" type="js.build_tools.npm">
+    <configuration name="Angular CLI Server (ngx_front2)" type="js.build_tools.npm">
       <package-json value="$PROJECT_DIR$/ngx_front2/frontend/package.json" />
       <command value="run" />
       <scripts>
@@ -293,8 +314,8 @@
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/ngx_front2/frontend/package.json" />
+    <configuration name="Angular CLI Server (ngx_front)" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/ngx_front/package.json" />
       <command value="run" />
       <scripts>
         <script value="start" />
@@ -305,11 +326,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.start" />
-        <item itemvalue="Gradle.AuthServiceImplTest" />
-        <item itemvalue="Gradle.AuthServiceImplTest.correctAuthentication" />
-        <item itemvalue="Gradle.core [test]" />
         <item itemvalue="Gradle.PasswordValidatorTest" />
+        <item itemvalue="Gradle.PasswordValidatorTest.validNumberCount" />
+        <item itemvalue="Gradle.PasswordValidatorTest.validUpperCaseCount" />
+        <item itemvalue="Gradle.PasswordValidatorTest.validSpecSymbolCount" />
+        <item itemvalue="Gradle.PasswordValidatorTest.validLowCaseCount" />
       </list>
     </recent_temporary>
   </component>
@@ -339,23 +360,17 @@
       <workItem from="1680069195340" duration="20956000" />
       <workItem from="1680242456818" duration="26495000" />
       <workItem from="1680515490407" duration="10659000" />
-      <workItem from="1680778366339" duration="10718000" />
-      <workItem from="1680855119793" duration="7699000" />
-      <workItem from="1680867131998" duration="11885000" />
-      <workItem from="1681136948689" duration="2265000" />
-      <workItem from="1681193513454" duration="818000" />
-      <workItem from="1681303355659" duration="8607000" />
-      <workItem from="1681390537105" duration="877000" />
-      <workItem from="1681451606900" duration="19000" />
-      <workItem from="1681464593118" duration="3119000" />
-      <workItem from="1681812062167" duration="10670000" />
-      <workItem from="1681886173441" duration="4065000" />
-      <workItem from="1681890645375" duration="61000" />
-      <workItem from="1681891884190" duration="15080000" />
-      <workItem from="1681985594021" duration="15189000" />
-      <workItem from="1682342595977" duration="16995000" />
-      <workItem from="1682667365527" duration="14045000" />
-      <workItem from="1683723987490" duration="48730000" />
+      <workItem from="1682054179233" duration="754000" />
+      <workItem from="1682057461653" duration="10363000" />
+      <workItem from="1683400572331" duration="982000" />
+      <workItem from="1683402080498" duration="4650000" />
+      <workItem from="1683406793699" duration="9180000" />
+      <workItem from="1683454363183" duration="11221000" />
+      <workItem from="1683493027285" duration="11362000" />
+      <workItem from="1683575638920" duration="1402000" />
+      <workItem from="1683577064750" duration="1198000" />
+      <workItem from="1683578499042" duration="3395000" />
+      <workItem from="1683623986892" duration="13778000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1678620390716</created>
@@ -434,99 +449,18 @@
       <option name="project" value="LOCAL" />
       <updated>1680271272593</updated>
     </task>
-    <task id="LOCAL-00012" summary="feat: Authentication">
-      <created>1680608395875</created>
+    <task id="LOCAL-00012" summary="feat: authentication">
+      <created>1683490117501</created>
       <option name="number" value="00012" />
       <option name="presentableId" value="LOCAL-00012" />
       <option name="project" value="LOCAL" />
-      <updated>1680608395875</updated>
+      <updated>1683490117501</updated>
     </task>
-    <task id="LOCAL-00013" summary="feat: Authentication">
-      <created>1681139189511</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1681139189511</updated>
-    </task>
-    <task id="LOCAL-00014" summary="feat: Authentication">
-      <created>1681740874167</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1681740874167</updated>
-    </task>
-    <task id="LOCAL-00015" summary="feat: Authentication">
-      <created>1681822286380</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1681822286380</updated>
-    </task>
-    <task id="LOCAL-00016" summary="feat: Authentication">
-      <created>1681822986099</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1681822986099</updated>
-    </task>
-    <task id="LOCAL-00017" summary="feat: Authentication">
-      <created>1681907425514</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1681907425514</updated>
-    </task>
-    <task id="LOCAL-00018" summary="feat: Authentication">
-      <created>1682604330724</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1682604330724</updated>
-    </task>
-    <task id="LOCAL-00019" summary="feat: Authentication">
-      <created>1683731119745</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1683731119745</updated>
-    </task>
-    <task id="LOCAL-00020" summary="feat: Authentication">
-      <created>1683817662050</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1683817662050</updated>
-    </task>
-    <task id="LOCAL-00021" summary="feat: Authentication">
-      <created>1683895855112</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1683895855112</updated>
-    </task>
-    <task id="LOCAL-00022" summary="feat: Authentication">
-      <created>1683895867690</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1683895867690</updated>
-    </task>
-    <option name="localTasksCounter" value="23" />
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.History.Properties">
-    <option name="COLUMN_ID_ORDER">
-      <list>
-        <option value="Default.Root" />
-        <option value="Default.Author" />
-        <option value="Default.Date" />
-        <option value="Default.Subject" />
-        <option value="Space.CommitStatus" />
-      </list>
-    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -546,7 +480,8 @@
     <MESSAGE value="feat: add authentication" />
     <MESSAGE value="feat: reset password form" />
     <MESSAGE value="feat: Authentication" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: Authentication" />
+    <MESSAGE value="feat: authentication" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: authentication" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
