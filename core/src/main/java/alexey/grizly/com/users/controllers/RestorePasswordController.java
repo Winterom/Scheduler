@@ -47,7 +47,7 @@ public class RestorePasswordController {
     @GetMapping("user/password/change/token/{email}")
     public ResponseEntity<?> sendTokenForResetPassword(@PathVariable @Email final String email){
         UserAccount userAccount = userPasswordService.getSimpleUserAccount(email);
-        if(userAccount==null){
+        if(userAccount == null){
             AppResponseErrorDto dto = new AppResponseErrorDto(HttpStatus.NOT_FOUND, "Аккаунт с email: " + email + " не существует");
             return new ResponseEntity<>(dto, HttpStatus.NOT_FOUND);
         }
