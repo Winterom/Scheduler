@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {TranslateModule} from "@ngx-translate/core";
-import {LoginModule} from "./pages/login/login.module";
+import {LoginModule} from "./pages/auth/login.module";
 import {HttpClientModule} from "@angular/common/http";
 
 

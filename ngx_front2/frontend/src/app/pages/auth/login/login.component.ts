@@ -9,7 +9,7 @@ import {LoginMessage} from "../../../messages/LoginMessages";
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['../../login/login.scss'],
+  styleUrls: ['../login.scss'],
   providers:[MessageService]
 })
 export class LoginComponent {

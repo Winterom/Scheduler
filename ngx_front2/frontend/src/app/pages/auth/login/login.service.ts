@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {AuthenticationAPI} from "../../../services/API/AuthenticationAPI";
+import {UsersAPI} from "../../../services/API/UsersAPI";
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {httpOptions} from "../../../services/API/RootHTTPApi";
@@ -11,7 +11,7 @@ import {AuthToken} from "../../../types/authToken";
 })
 export class LoginService {
 
-  constructor(private http: HttpClient, private api:AuthenticationAPI) { }
+  constructor(private http: HttpClient, private api:UsersAPI) { }
 
   public login(emailOrPhone: string, password: string): Observable<AuthToken> {
     return this.http.post<AuthToken>(

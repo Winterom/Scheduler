@@ -1,5 +1,5 @@
 import {AbstractControl, ValidationErrors, ValidatorFn} from "@angular/forms";
-import {PasswordStrangeRequirement} from "../../types/PasswordStrangeRequirement";
+import {PasswordStrangeRequirement} from "../types/PasswordStrangeRequirement";
 
 
 export function passwordStrangeValidator(passRequirement:PasswordStrangeRequirement):ValidatorFn{

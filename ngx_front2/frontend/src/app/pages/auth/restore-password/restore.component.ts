@@ -4,7 +4,7 @@ import {Router} from "@angular/router";
 @Component({
   selector: 'app-reset',
   templateUrl: './restore.component.html',
-  styleUrls: ['../../login/login.scss']
+  styleUrls: ['../login.scss']
 })
 export class RestoreComponent {
   loading: boolean = false;

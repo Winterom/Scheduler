@@ -2,9 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {PasswordStrangeRequirement} from "../../../types/PasswordStrangeRequirement";
-import {checkIfMatchingPasswords} from "../../../services/validators/MatchingPasswordsValidator";
+import {checkIfMatchingPasswords} from "../../../validators/MatchingPasswordsValidator";
 import {ChangePasswordService} from "./change-password.service";
-import {passwordStrangeValidator} from "../../../services/validators/PasswordStrangeValidator";
+import {passwordStrangeValidator} from "../../../validators/PasswordStrangeValidator";
 import {MessageService} from "primeng/api";
 import {LoginMessage} from "../../../messages/LoginMessages";
 
@@ -22,7 +22,9 @@ export class ChangePasswordComponent implements OnInit{
   confirmPasswordControl:FormControl;
   emailControl:FormControl;
   tokenControl:FormControl;
+  state: 'change'|'complete'= 'change';
   pswStrangeReq:PasswordStrangeRequirement= new PasswordStrangeRequirement();
+  completeMessage: string='';
   constructor(private router: Router,
               private changePasswordService:ChangePasswordService,
               private messageService: MessageService,
@@ -114,6 +116,22 @@ export class ChangePasswordComponent implements OnInit{
       this.loading=false;
       return;
     }
+    this.changePasswordService.putUpdatePassword(this.emailControl.value,
+      this.tokenControl.value,
+      this.passwordControl.value).subscribe({next:data=>{
+          this.completeMessage=data.message;
+          this.state='complete';
+        },error:err=>{
+          let message = new LoginMessage.ErrorLoginMessage;
+          message.detail=err.error.message;
+          console.log(err)
+          this.messageService.add(message);
+          this.loading=false;
+      }
+      })
   }
 
+  returnToAuth() {
+    this.router.navigate(['login'])
+  }
 }

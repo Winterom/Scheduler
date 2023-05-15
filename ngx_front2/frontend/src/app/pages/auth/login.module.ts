@@ -12,6 +12,7 @@ import {ToastModule} from "primeng/toast";
 import {MessagesModule} from "primeng/messages";
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import {InputTextareaModule} from "primeng/inputtextarea";
+import {CardModule} from "primeng/card";
 
 
 @NgModule({
@@ -21,16 +22,17 @@ import {InputTextareaModule} from "primeng/inputtextarea";
     RegistrationComponent,
     ChangePasswordComponent
   ],
-  imports: [
-    CommonModule,
-    InputTextModule,
-    ReactiveFormsModule,
-    PasswordModule,
-    ButtonModule,
-    InputMaskModule,
-    ToastModule,
-    MessagesModule,
-    InputTextareaModule
-  ]
+    imports: [
+        CommonModule,
+        InputTextModule,
+        ReactiveFormsModule,
+        PasswordModule,
+        ButtonModule,
+        InputMaskModule,
+        ToastModule,
+        MessagesModule,
+        InputTextareaModule,
+        CardModule
+    ]
 })
 export class LoginModule { }

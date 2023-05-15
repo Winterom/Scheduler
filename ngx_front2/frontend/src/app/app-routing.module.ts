@@ -1,11 +1,11 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {LoginComponent} from "./pages/login/login/login.component";
-import {RestoreComponent} from "./pages/login/restore-password/restore.component";
+import {LoginComponent} from "./pages/auth/login/login.component";
+import {RestoreComponent} from "./pages/auth/restore-password/restore.component";
 import {DesktopComponent} from "./pages/desktop/desktop.component";
 import {WidgetLayoutComponent} from "./pages/widget-layout/widget-layout.component";
-import {RegistrationComponent} from "./pages/login/registration/registration.component";
-import {ChangePasswordComponent} from "./pages/login/change-password/change-password.component";
+import {RegistrationComponent} from "./pages/auth/registration/registration.component";
+import {ChangePasswordComponent} from "./pages/auth/change-password/change-password.component";
 
 const routes: Routes = [
   {path:'login',component:LoginComponent},

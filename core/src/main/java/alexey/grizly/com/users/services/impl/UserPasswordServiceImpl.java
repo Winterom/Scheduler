@@ -1,6 +1,7 @@
 package alexey.grizly.com.users.services.impl;
 
 
+import alexey.grizly.com.properties.properties.SecurityProperties;
 import alexey.grizly.com.users.models.UserAccount;
 import alexey.grizly.com.users.services.ChangePasswordTokenService;
 import alexey.grizly.com.users.services.UserPasswordService;
@@ -10,18 +11,22 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
+import java.util.Random;
 
 
 @Service
 public class UserPasswordServiceImpl implements UserPasswordService {
     private final NamedParameterJdbcTemplate jdbcTemplate;
     private final ChangePasswordTokenService changePasswordTokenService;
+    private final SecurityProperties securityProperties;
 
     @Autowired
-    public UserPasswordServiceImpl( NamedParameterJdbcTemplate jdbcTemplate, ChangePasswordTokenService changePasswordTokenService) {
+    public UserPasswordServiceImpl(final NamedParameterJdbcTemplate jdbcTemplate,
+                                   final ChangePasswordTokenService changePasswordTokenService,
+                                   final SecurityProperties securityProperties) {
         this.jdbcTemplate = jdbcTemplate;
         this.changePasswordTokenService = changePasswordTokenService;
+        this.securityProperties = securityProperties;
     }
 
     @Override
@@ -44,6 +49,16 @@ public class UserPasswordServiceImpl implements UserPasswordService {
         return true;
     }
     private String generateRestorePasswordToken(){
-        return UUID.randomUUID().toString();
+        int leftLimit = 48; // numeral '0'
+        int rightLimit = 122; // letter 'z'
+        int targetStringLength = this.securityProperties.getRestorePasswordTokenLength();
+        Random random = new Random();
+        String generatedString = random.ints(leftLimit, rightLimit + 1)
+                .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
+                .limit(targetStringLength)
+                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                .toString();
+        System.out.println(generatedString);
+        return generatedString;
     }
 }

@@ -16,6 +16,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 public class SecurityProperties {
     private JwtProperties jwtProperties;
     private UserPasswordStrange userPasswordStrange;
+    private Integer restorePasswordTokenLength;
     @JsonIgnore
     private PropertiesService propertiesService;
     @JsonIgnore
@@ -48,12 +49,12 @@ public class SecurityProperties {
             this.writeLock.lock();
             this.jwtProperties = newProperty.jwtProperties;
             this.userPasswordStrange = newProperty.getUserPasswordStrange();
+            this.restorePasswordTokenLength = newProperty.getRestorePasswordTokenLength();
         }finally {
             this.writeLock.unlock();
         }
 
     }
-
     public JwtProperties getJwtProperties() {
         try {
             this.readLock.lock();
@@ -70,6 +71,16 @@ public class SecurityProperties {
         }finally {
             this.readLock.unlock();
         }
+    }
+
+    public Integer getRestorePasswordTokenLength() {
+        try{
+            this.readLock.lock();
+            return this.restorePasswordTokenLength;
+        }finally {
+            this.readLock.unlock();
+        }
+
     }
 
     @Getter
