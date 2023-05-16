@@ -8,6 +8,8 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+import java.time.temporal.TemporalUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
@@ -16,7 +18,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 public class SecurityProperties {
     private JwtProperties jwtProperties;
     private UserPasswordStrange userPasswordStrange;
-    private Integer restorePasswordTokenLength;
+    private RestorePasswordTokenProperty restorePasswordTokenProperty;
     @JsonIgnore
     private PropertiesService propertiesService;
     @JsonIgnore
@@ -49,11 +51,36 @@ public class SecurityProperties {
             this.writeLock.lock();
             this.jwtProperties = newProperty.jwtProperties;
             this.userPasswordStrange = newProperty.getUserPasswordStrange();
-            this.restorePasswordTokenLength = newProperty.getRestorePasswordTokenLength();
+            this.restorePasswordTokenProperty = newProperty.getRestorePasswordTokenProperty();
         }finally {
             this.writeLock.unlock();
         }
 
+    }
+    public void updateUserPasswordStrange(UserPasswordStrange properties){
+        try {
+            this.writeLock.lock();
+            this.userPasswordStrange = properties;
+        }finally {
+            this.writeLock.unlock();
+        }
+    }
+
+    public void updateRestorePasswordTokenProperty(RestorePasswordTokenProperty properties){
+        try {
+            this.writeLock.lock();
+            this.restorePasswordTokenProperty = properties;
+        }finally {
+            this.writeLock.unlock();
+        }
+    }
+    public void updateJwtProperties(JwtProperties properties){
+        try {
+            this.writeLock.lock();
+            this.jwtProperties = properties;
+        }finally {
+            this.writeLock.unlock();
+        }
     }
     public JwtProperties getJwtProperties() {
         try {
@@ -73,10 +100,10 @@ public class SecurityProperties {
         }
     }
 
-    public Integer getRestorePasswordTokenLength() {
+    public RestorePasswordTokenProperty getRestorePasswordTokenProperty() {
         try{
             this.readLock.lock();
-            return this.restorePasswordTokenLength;
+            return this.restorePasswordTokenProperty;
         }finally {
             this.readLock.unlock();
         }
@@ -122,6 +149,13 @@ public class SecurityProperties {
                     ", passwordMinCharacters=" + passwordMinCharacters +
                     '}';
         }
+    }
+    @Getter
+    @Setter
+    public static class RestorePasswordTokenProperty {
+        private Integer restorePasswordTokenLength;
+        private Long restorePasswordTokenLifetime;
+        private TemporalUnit unit;
     }
 
 }

@@ -8,6 +8,7 @@ import alexey.grizly.com.users.dtos.response.AuthResponseDto;
 import alexey.grizly.com.users.models.UserAccount;
 import alexey.grizly.com.users.services.AuthService;
 import alexey.grizly.com.users.services.RefreshTokenService;
+import alexey.grizly.com.users.services.impl.RefreshTokenServiceImpl;
 import alexey.grizly.com.users.utils.JwtTokenUtil;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
@@ -32,7 +33,7 @@ public class AuthController {
     private final SecurityProperties properties;
     private final GlobalProperties globalProperties;
 
-    public AuthController(final AuthService authService, final RefreshTokenService refreshTokenService, final JwtTokenUtil jwtUtil, final SecurityProperties properties, final GlobalProperties globalProperties) {
+    public AuthController(final AuthService authService, final RefreshTokenServiceImpl refreshTokenService, final JwtTokenUtil jwtUtil, final SecurityProperties properties, final GlobalProperties globalProperties) {
     this.authService = authService;
     this.refreshTokenService = refreshTokenService;
     this.jwtUtil = jwtUtil;
@@ -53,7 +54,7 @@ public class AuthController {
         Date refreshExpire = new Date(issuedDate.getTime() + properties.getJwtProperties().getJwtRefreshLifetime());
         String accessToken = jwtUtil.generateToken(user.getAuthorities(), user.getEmail(), issuedDate, accessExpires, user.getId());
         String refreshToken = jwtUtil.generateRefreshTokenFromEmail(user.getEmail(), refreshExpire, issuedDate);
-        int resultSave = refreshTokenService.saveRefreshToken(user, refreshToken, refreshExpire);
+        int resultSave = refreshTokenService.saveRefreshToken(user.getId(), refreshToken, refreshExpire);
         if (resultSave != 1) {
             AppResponseErrorDto errorDto = new AppResponseErrorDto(HttpStatus.UNAUTHORIZED, "Неверные учетные данные пользователя");
             return new ResponseEntity<>(errorDto, HttpStatus.UNAUTHORIZED);

@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Date;
 
 @Repository
-public interface RefreshTokenRepository{
+public interface AuthRepository {
     int saveRefreshToken(Long id, Date expired, String token);
 }

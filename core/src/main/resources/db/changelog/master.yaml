@@ -3,3 +3,5 @@ databaseChangeLog:
       file: db/changelog/users/users.yaml
   - include:
       file: db/changelog/properties/properties.yaml
+  - include:
+      file: db/changelog/hr/hr.yaml
