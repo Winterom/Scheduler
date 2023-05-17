@@ -64,7 +64,7 @@ public class AuthServiceImplTest {
 
         userAccount.setPassword("$2y$10$jZM9lSaITCvsiqA3VY8LZOpOXASrk3aOHfVGsiJye0/m2.vGR7M2W");
         when(userAccountDetailsService.loadUserByUsername(authDto.getEmailOrPhone())).thenReturn(userAccount);
-        UserDetails details= authServiceImpl.authentication(authDto);
+        UserDetails details= authServiceImpl.authentication(authDto.getEmailOrPhone(),authDto.getPassword());
         assertThat(details.getUsername()).isEqualTo(authDto.getEmailOrPhone());
         assertTrue(encoder.matches(authDto.getPassword(),details.getPassword() ));
     }
@@ -72,7 +72,7 @@ public class AuthServiceImplTest {
     public void inCorrectAuthentication(){
         userAccount.setPassword("$2y$10$SpW96iS3YUc6aBVhmIW6KuMC.i8r1dyxCISYtj51rF9uhJuKoZgWu");/*hash of "London"*/
         when(userAccountDetailsService.loadUserByUsername(authDto.getEmailOrPhone())).thenReturn(userAccount);
-        assertThatThrownBy(()-> authServiceImpl.authentication(authDto)).isInstanceOf(BadCredentialsException.class);
+        assertThatThrownBy(()-> authServiceImpl.authentication(authDto.getEmailOrPhone(),authDto.getPassword())).isInstanceOf(BadCredentialsException.class);
 
     }
 }

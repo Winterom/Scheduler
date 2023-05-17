@@ -38,10 +38,10 @@ public class UsersController {
 
     @Autowired
     public UsersController(final UserAccountService pUserAccountService,
-                                     final ApplicationEventMulticaster pMulticaster,
-                                     final GlobalProperties globalProperties,
-                                     final SecurityProperties properties,
-                                     final BCryptPasswordEncoder bCryptPasswordEncoder) {
+                           final ApplicationEventMulticaster pMulticaster,
+                           final GlobalProperties globalProperties,
+                           final SecurityProperties properties,
+                           final BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userAccountService = pUserAccountService;
         this.multicaster = pMulticaster;
         this.globalProperties = globalProperties;
@@ -108,13 +108,12 @@ public class UsersController {
                                             dto.getPhone(),
                                             passwordHash,
                                             credentialExpired,
-                                            EUserStatus.ACTIVE,
+                                            EUserStatus.NEW_USER,
                                             createdAt);
         if(userId==null){
             return new ResponseEntity<>("Не удалось создать аккаунт",
                     HttpStatus.BAD_REQUEST);
         }
-
         return ResponseEntity.ok("Аккаунт успешно создан");
     }
     private String generateRestorePasswordToken(){

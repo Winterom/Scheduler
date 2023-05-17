@@ -10,6 +10,6 @@ public class AuthRequestDto {
     @Size(min = 4,max = 50)
     private String emailOrPhone;
     @NotEmpty
-    @Size(min = 4,max = 100)
+    @Size(min = 4,max = 50)
     private String password;
 }

@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 import java.util.Date;
 @Repository
 public class AuthRepositoryImpl implements AuthRepository {
+    private static final String SAVE_REFRESH_TOKEN="INSERT INTO refresh_tokens (id,expired,token) VALUES (:id,:expired,:token) "+
+            "ON CONFLICT (id) DO UPDATE set expired=:expired, token=:token";
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
     @Autowired
@@ -23,7 +25,7 @@ public class AuthRepositoryImpl implements AuthRepository {
                 .addValue("id", id)
                 .addValue("expired", expired)
                 .addValue("token", token);
-        return jdbcTemplate.update("INSERT INTO refresh_tokens (id,expired,token) values (:id,:expired,:token) " +
-                "ON CONFLICT (id) DO UPDATE set expired=:expired, token=:token", namedParameters);
+        return jdbcTemplate.update(SAVE_REFRESH_TOKEN
+                , namedParameters);
     }
 }

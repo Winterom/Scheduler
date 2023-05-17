@@ -22,7 +22,7 @@ public class AppAuthorities implements GrantedAuthority {
 
     @Override
     public String getAuthority() {
-       return this.authorities.name();
+       return this.authorities.toString();
     }
 
     @Override

@@ -48,7 +48,7 @@ public class AuthController {
             AppResponseErrorDto errorDto = new AppResponseErrorDto(HttpStatus.UNAUTHORIZED, errorMessage);
             return new ResponseEntity<>(errorDto, HttpStatus.UNAUTHORIZED);
         }
-        UserAccount user = (UserAccount) authService.authentication(authRequest);
+        UserAccount user = (UserAccount) authService.authentication(authRequest.getEmailOrPhone(),authRequest.getPassword());
         Date issuedDate = new Date();
         Date accessExpires = new Date(issuedDate.getTime() + properties.getJwtProperties().getJwtLifetime());
         Date refreshExpire = new Date(issuedDate.getTime() + properties.getJwtProperties().getJwtRefreshLifetime());

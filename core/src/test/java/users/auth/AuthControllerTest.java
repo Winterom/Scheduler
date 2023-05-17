@@ -70,7 +70,7 @@ public class AuthControllerTest {
     }
     @Test
     public void authenticationValidDtoTest() throws Exception {
-        when(authServiceImpl.authentication(authDto)).thenReturn(userAccount);
+        when(authServiceImpl.authentication(authDto.getEmailOrPhone(),authDto.getPassword())).thenReturn(userAccount);
         mvc.perform(post("/api/v1/auth")
                         .content(this.objectMapper.writeValueAsString(authDto))
                         .contentType(MediaType.parseMediaType("application/json;charset=UTF-8")))

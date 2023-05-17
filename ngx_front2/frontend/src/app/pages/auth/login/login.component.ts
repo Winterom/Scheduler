@@ -52,10 +52,11 @@ export class LoginComponent {
           this.loading=false;
           this.messageService.add(new LoginMessage.SuccessLoginMessage)
           this.router.navigate(['desktop']);
-        }, error:data=>{
-        this.loading=false;
+        }, error:err=>{
+          this.loading=false;
+          console.log(err)
           let message = new LoginMessage.ErrorLoginMessage;
-          message.detail=data.error.message;
+          message.detail=err.error.message;
           this.messageService.add(message);
           this.loading=false;
         }} )

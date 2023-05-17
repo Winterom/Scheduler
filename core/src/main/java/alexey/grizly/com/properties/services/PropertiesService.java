@@ -2,6 +2,7 @@ package alexey.grizly.com.properties.services;
 
 
 import alexey.grizly.com.properties.models.PropertiesModel;
+import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -19,11 +20,14 @@ public class PropertiesService {
         this.propertiesConverter = propertiesConverter;
         this.jdbcTemplate = jdbcTemplate;
     }
-
+    @Nullable
     public Object getProperty(Class<?> clazz){
         MapSqlParameterSource param = new MapSqlParameterSource();
         param.addValue("clazz",clazz.getName());
         PropertiesModel propertiesModel = jdbcTemplate.queryForObject("SELECT clazz,property FROM properties where clazz=:clazz",param, new BeanPropertyRowMapper<>(PropertiesModel.class));
+        if(propertiesModel==null){
+            return null;
+        }
         return propertiesConverter.convertFromJson(propertiesModel.getProperty(),clazz);
     }
 

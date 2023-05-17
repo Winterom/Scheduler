@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
@@ -45,6 +44,7 @@ public class SecurityProperties {
     @PostConstruct
     public void init(){
         updateProperty((SecurityProperties) propertiesService.getProperty(SecurityProperties.class));
+
     }
 
     public void updateProperty(SecurityProperties newProperty){
@@ -169,14 +169,14 @@ public class SecurityProperties {
     @Getter
     @Setter
     public static class RestorePasswordTokenProperty {
-        private Integer restorePasswordTokenLength;
-        private Long restorePasswordTokenLifetime;
-        private ChronoUnit unit;
+        private Integer restorePasswordTokenLength=40;
+        private Long restorePasswordTokenLifetime = 24L;
+        private ChronoUnit unit=ChronoUnit.HOURS;
     }
     @Getter
     @Setter
     public static class PasswordProperty {
-        private Long passwordExpired;
-        private ChronoUnit unit;
+        private Long passwordExpired = 6L;
+        private ChronoUnit unit = ChronoUnit.MONTHS;
     }
 }

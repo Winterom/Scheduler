@@ -1,6 +1,5 @@
 package alexey.grizly.com.users.services.impl;
 
-import alexey.grizly.com.users.dtos.request.AuthRequestDto;
 import alexey.grizly.com.users.services.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,9 +17,9 @@ public class AuthServiceImpl implements AuthService {
         this.authenticationManager = authenticationManager;
     }
     @Override
-    public UserDetails authentication(AuthRequestDto dto){
+    public UserDetails authentication(String emailOrPhone, String password){
         Authentication authentication = authenticationManager
-                .authenticate(new UsernamePasswordAuthenticationToken(dto.getEmailOrPhone(), dto.getPassword()));
+                .authenticate(new UsernamePasswordAuthenticationToken(emailOrPhone, password));
         return (UserDetails) authentication.getPrincipal();
     }
 }

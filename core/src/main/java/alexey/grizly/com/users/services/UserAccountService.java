@@ -6,9 +6,9 @@ import alexey.grizly.com.users.models.UserAccount;
 import java.time.LocalDateTime;
 
 public interface UserAccountService {
-    int saveRestorePasswordToken(final Long userId,
-                                    final LocalDateTime expire,
-                                    final String token);
+    void saveRestorePasswordToken(final Long userId,
+                                  final LocalDateTime expire,
+                                  final String token);
 
     UserAccount getSimpleUserAccount(final String email);
 

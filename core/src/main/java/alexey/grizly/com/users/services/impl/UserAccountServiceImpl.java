@@ -5,8 +5,8 @@ package alexey.grizly.com.users.services.impl;
 import alexey.grizly.com.users.models.EUserStatus;
 import alexey.grizly.com.users.models.UserAccount;
 import alexey.grizly.com.users.repositories.UserAccountRepository;
+import alexey.grizly.com.users.services.RoleForUserService;
 import alexey.grizly.com.users.services.UserAccountService;
-import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,19 +19,20 @@ import java.time.LocalDateTime;
 public class UserAccountServiceImpl implements UserAccountService {
 
        private final UserAccountRepository userAccountRepository;
+       private final RoleForUserService roleForUserService;
 
     @Autowired
-    public UserAccountServiceImpl(final UserAccountRepository userAccountRepository) {
+    public UserAccountServiceImpl(final UserAccountRepository userAccountRepository, RoleForUserService roleForUserService) {
         this.userAccountRepository = userAccountRepository;
+        this.roleForUserService = roleForUserService;
     }
 
     @Override
-    @Nullable
     @Transactional
-    public int saveRestorePasswordToken(final Long userId,
-                                           final LocalDateTime expireDate,
-                                           final String token){
-        return userAccountRepository.saveRestorePasswordToken(userId,expireDate,token);
+    public void saveRestorePasswordToken(final Long userId,
+                                         final LocalDateTime expireDate,
+                                         final String token){
+        userAccountRepository.saveRestorePasswordToken(userId, expireDate, token);
     }
 
     @Override
@@ -54,7 +55,7 @@ public class UserAccountServiceImpl implements UserAccountService {
                                         LocalDateTime createdAt) {
         Long userId = userAccountRepository.registrationNewUser(email,
                 phone,passwordHash,credentialExpired,status,createdAt);
-
+        roleForUserService.setDefaultRoleForNewUser(userId);
         return userId;
     }
 
