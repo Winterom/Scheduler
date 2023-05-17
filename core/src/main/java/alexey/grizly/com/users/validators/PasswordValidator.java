@@ -3,17 +3,23 @@ package alexey.grizly.com.users.validators;
 import alexey.grizly.com.properties.properties.SecurityProperties;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
+import lombok.*;
 
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Setter
+@Getter
 public class PasswordValidator  implements ConstraintValidator<Password, String> {
-    private  final SecurityProperties.UserPasswordStrange userPasswordStrange;
 
-    public PasswordValidator(SecurityProperties.UserPasswordStrange userPasswordStrange) {
+    private SecurityProperties.UserPasswordStrange userPasswordStrange;
+
+
+    public PasswordValidator (SecurityProperties.UserPasswordStrange userPasswordStrange){
         this.userPasswordStrange = userPasswordStrange;
     }
+
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
@@ -21,21 +27,21 @@ public class PasswordValidator  implements ConstraintValidator<Password, String>
             return false;
         }
         if(userPasswordStrange.getPasswordMinCharacters()!=null&&
-            userPasswordStrange.getPasswordMinCharacters()!=0){
-            if (value.length()<userPasswordStrange.getPasswordMinCharacters()){
+                userPasswordStrange.getPasswordMinCharacters()!=0){
+            if (value.length()< userPasswordStrange.getPasswordMinCharacters()){
                return false;
             }
         }
         StringBuilder sb = new StringBuilder();
         if(userPasswordStrange.getPasswordMinNumber()!=null&&
-        userPasswordStrange.getPasswordMinNumber()!=0){
+                userPasswordStrange.getPasswordMinNumber()!=0){
             sb.append("([^0-9]*[0-9])")
                     .append("{")
                     .append(userPasswordStrange.getPasswordMinNumber())
                     .append("}");
         }
         if(userPasswordStrange.getPasswordMinSymbol()!=null&&
-          userPasswordStrange.getPasswordMinSymbol()!=0){
+                userPasswordStrange.getPasswordMinSymbol()!=0){
             sb.append("([$@!%*?&])")
                     .append("{")
                     .append(userPasswordStrange.getPasswordMinSymbol())

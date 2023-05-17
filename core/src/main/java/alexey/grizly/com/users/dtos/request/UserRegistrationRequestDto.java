@@ -3,6 +3,7 @@ package alexey.grizly.com.users.dtos.request;
 import alexey.grizly.com.users.validators.Password;
 import alexey.grizly.com.users.validators.PhoneNumber;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
@@ -17,10 +18,12 @@ public class UserRegistrationRequestDto {
     @Size(min = 5,max = 50,message = "Пароль не соответствует требований")
     @Password(message = "Пароль не соответствует требований")
     private String password;
-    @Size(min = 1,max = 50,message = "Длина поля имя не соответствует требованиям")
+    @NotBlank(message = "Поле Имя не должно быть пустым")
+    @Size(min = 1,max = 50,message = "Длина поля Имя не соответствует требованиям")
     private String name;
-    @Size(min = 1,max = 50,message = "Длина поля имя не соответствует требованиям")
+    @NotBlank(message = "Поле Фамилия не должна быть пустым")
+    @Size(min = 1,max = 50,message = "Длина поля Фамилия не соответствует требованиям")
     private String surname;
-    @Size(max = 50,message = "Длина поля имя не соответствует требованиям")
+    @Size(max = 50,message = "Длина поля Отчество не соответствует требованиям")
     private String lastname;
 }
