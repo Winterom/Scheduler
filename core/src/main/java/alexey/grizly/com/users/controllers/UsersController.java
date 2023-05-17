@@ -6,25 +6,24 @@ import alexey.grizly.com.properties.properties.GlobalProperties;
 import alexey.grizly.com.properties.properties.SecurityProperties;
 import alexey.grizly.com.users.dtos.request.ChangePasswordRequestDto;
 import alexey.grizly.com.users.dtos.request.UserRegistrationRequestDto;
+import alexey.grizly.com.users.models.EUserStatus;
 import alexey.grizly.com.users.models.UserAccount;
 import alexey.grizly.com.users.services.UserAccountService;
-import alexey.grizly.com.users.validators.PasswordValidator;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
 import jakarta.validation.constraints.Email;
-
-import java.time.LocalDateTime;
-import java.util.*;
-
-import org.hibernate.validator.internal.constraintvalidators.bv.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ApplicationEventMulticaster;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import java.security.SecureRandom;
+import java.time.LocalDateTime;
+import java.util.*;
 
 
 @RestController
@@ -60,11 +59,8 @@ public class UsersController {
         }
         LocalDateTime expireTokenTime = LocalDateTime.now().plus(securityProperties.getRestorePasswordTokenProperty().getRestorePasswordTokenLifetime(),
                 securityProperties.getRestorePasswordTokenProperty().getUnit());
-        Boolean result = userAccountService.generateAndSaveRestorePasswordToken(userAccount.getId(),expireTokenTime);
-        if(result){
-            AppResponseErrorDto dto = new AppResponseErrorDto(HttpStatus.CONFLICT,"Упс что-то пошло не так...");
-            return new ResponseEntity<>(dto, HttpStatus.CONFLICT);
-        }
+        String token = generateRestorePasswordToken();
+        userAccountService.saveRestorePasswordToken(userAccount.getId(),expireTokenTime,token);
         String url =globalProperties.getHost() + "/reset?token=" + Arrays.toString(Base64.getEncoder().encode((userAccount.getEmail() + "&&" + token).getBytes()));
         UserPasswordRestoreSendEmailEvent event = new UserPasswordRestoreSendEmailEvent(new UserPasswordRestoreSendEmailEvent.EventParam(userAccount.getEmail(),url));
         multicaster.multicastEvent(event);
@@ -73,15 +69,15 @@ public class UsersController {
 
     @PutMapping ("password/change")
     public ResponseEntity<?> changePassword(@RequestBody final ChangePasswordRequestDto dto){
-        EmailValidator emailValidator = new EmailValidator();
-        PasswordValidator passwordValidator = new PasswordValidator(securityProperties.getUserPasswordStrange());
-        if(!emailValidator.isValid(dto.getEmail(),null)
-                || !passwordValidator.isValid(dto.getPassword(), null)
-                || (dto.getToken()==null||dto.getToken().trim().length()!=36)
-                ){
-            String errorMessage = "Невалидные учетные данные пользователя";
-            AppResponseErrorDto errorDto = new AppResponseErrorDto(HttpStatus.BAD_REQUEST,errorMessage);
-            return new ResponseEntity<>(errorDto, HttpStatus.BAD_REQUEST);
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        Set<ConstraintViolation<ChangePasswordRequestDto>> violations = validator.validate(dto);
+        if(!violations.isEmpty()) {
+            List<String> errorMessage = new ArrayList<>(6);
+            for (ConstraintViolation<ChangePasswordRequestDto> violation : violations) {
+                errorMessage.add(violation.getMessage());
+                return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
+            }
         }
         String passwordHash = bCryptPasswordEncoder.encode(dto.getPassword());
         if(userAccountService.updatePassword(dto.getEmail(), passwordHash,dto.getToken())){
@@ -93,7 +89,7 @@ public class UsersController {
     }
 
     @PostMapping("registration")
-    public ResponseEntity<?> registration(@RequestBody UserRegistrationRequestDto dto){
+    public ResponseEntity<?> registration(@RequestBody final UserRegistrationRequestDto dto){
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
         Set<ConstraintViolation<UserRegistrationRequestDto>> violations = validator.validate(dto);
@@ -104,6 +100,34 @@ public class UsersController {
                 return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
             }
         }
+        String passwordHash = bCryptPasswordEncoder.encode(dto.getPassword());
+        LocalDateTime createdAt = LocalDateTime.now();
+        LocalDateTime credentialExpired = createdAt.plus(securityProperties.getPasswordProperty().getPasswordExpired(),
+                securityProperties.getPasswordProperty().getUnit());
+        Long userId = userAccountService.createNewUserAccount(dto.getEmail(),
+                                            dto.getPhone(),
+                                            passwordHash,
+                                            credentialExpired,
+                                            EUserStatus.ACTIVE,
+                                            createdAt);
+        if(userId==null){
+            return new ResponseEntity<>("Не удалось создать аккаунт",
+                    HttpStatus.BAD_REQUEST);
+        }
 
+        return ResponseEntity.ok("Аккаунт успешно создан");
+    }
+    private String generateRestorePasswordToken(){
+        int leftLimit = 48; // numeral '0'
+        int rightLimit = 122; // letter 'z'
+        int targetStringLength = this.securityProperties.getRestorePasswordTokenProperty().getRestorePasswordTokenLength();
+        Random random = new SecureRandom();
+        String generatedString = random.ints(leftLimit, rightLimit + 1)
+                .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
+                .limit(targetStringLength)
+                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                .toString();
+        System.out.println(generatedString);
+        return generatedString;
     }
 }

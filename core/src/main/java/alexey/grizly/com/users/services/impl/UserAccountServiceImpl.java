@@ -1,41 +1,37 @@
 package alexey.grizly.com.users.services.impl;
 
 
-import alexey.grizly.com.properties.properties.SecurityProperties;
+
+import alexey.grizly.com.users.models.EUserStatus;
 import alexey.grizly.com.users.models.UserAccount;
 import alexey.grizly.com.users.repositories.UserAccountRepository;
-import alexey.grizly.com.users.services.RefreshTokenService;
 import alexey.grizly.com.users.services.UserAccountService;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.Random;
+
 
 
 @Service
 public class UserAccountServiceImpl implements UserAccountService {
-       private final SecurityProperties securityProperties;
+
        private final UserAccountRepository userAccountRepository;
 
     @Autowired
-    public UserAccountServiceImpl(final SecurityProperties securityProperties,
-                                  final UserAccountRepository userAccountRepository) {
-        this.securityProperties = securityProperties;
+    public UserAccountServiceImpl(final UserAccountRepository userAccountRepository) {
         this.userAccountRepository = userAccountRepository;
     }
 
     @Override
     @Nullable
-    public Boolean generateAndSaveRestorePasswordToken(final Long userId, final LocalDateTime expireDate){
-        String token = generateRestorePasswordToken();
-        int count = userAccountRepository.saveRestorePasswordToken(userId,expireDate,token);
-        return count == 1;
+    @Transactional
+    public int saveRestorePasswordToken(final Long userId,
+                                           final LocalDateTime expireDate,
+                                           final String token){
+        return userAccountRepository.saveRestorePasswordToken(userId,expireDate,token);
     }
 
     @Override
@@ -48,23 +44,19 @@ public class UserAccountServiceImpl implements UserAccountService {
         return true;
     }
 
-
     @Override
-    public UserAccount registration() {
-        return null;
+    @Transactional
+    public Long createNewUserAccount(String email,
+                                        String phone,
+                                        String passwordHash,
+                                        LocalDateTime credentialExpired,
+                                        EUserStatus status,
+                                        LocalDateTime createdAt) {
+        Long userId = userAccountRepository.registrationNewUser(email,
+                phone,passwordHash,credentialExpired,status,createdAt);
+
+        return userId;
     }
 
-    private String generateRestorePasswordToken(){
-        int leftLimit = 48; // numeral '0'
-        int rightLimit = 122; // letter 'z'
-        int targetStringLength = this.securityProperties.getRestorePasswordTokenProperty().getRestorePasswordTokenLength();
-        Random random = new Random();
-        String generatedString = random.ints(leftLimit, rightLimit + 1)
-                .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
-                .limit(targetStringLength)
-                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
-                .toString();
-        System.out.println(generatedString);
-        return generatedString;
-    }
+
 }

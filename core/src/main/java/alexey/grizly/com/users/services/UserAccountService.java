@@ -1,15 +1,22 @@
 package alexey.grizly.com.users.services;
 
+import alexey.grizly.com.users.models.EUserStatus;
 import alexey.grizly.com.users.models.UserAccount;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public interface UserAccountService {
-    Boolean generateAndSaveRestorePasswordToken(final Long userId, final LocalDateTime expire);
+    int saveRestorePasswordToken(final Long userId,
+                                    final LocalDateTime expire,
+                                    final String token);
 
     UserAccount getSimpleUserAccount(final String email);
 
     boolean updatePassword(final String email, final String passwordHash, final String token);
-    UserAccount registration();
+    Long createNewUserAccount(final String email,
+                              final String phone,
+                              final String passwordHash,
+                              final LocalDateTime credentialExpired,
+                              final EUserStatus status,
+                              final LocalDateTime createdAt);
 }

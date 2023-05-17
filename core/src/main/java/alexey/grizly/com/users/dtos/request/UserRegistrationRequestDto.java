@@ -17,10 +17,10 @@ public class UserRegistrationRequestDto {
     @Size(min = 5,max = 50,message = "Пароль не соответствует требований")
     @Password(message = "Пароль не соответствует требований")
     private String password;
-    @Size(min = 1,max = 50,message = "Длина поля имя не ")
+    @Size(min = 1,max = 50,message = "Длина поля имя не соответствует требованиям")
     private String name;
-    @Size(min = 1,max = 50)
+    @Size(min = 1,max = 50,message = "Длина поля имя не соответствует требованиям")
     private String surname;
-    @Size(max = 50)
+    @Size(max = 50,message = "Длина поля имя не соответствует требованиям")
     private String lastname;
 }

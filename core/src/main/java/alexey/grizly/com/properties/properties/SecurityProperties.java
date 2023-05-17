@@ -8,17 +8,18 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalUnit;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-@Getter
+
 @Component
 public class SecurityProperties {
     private JwtProperties jwtProperties;
     private UserPasswordStrange userPasswordStrange;
     private RestorePasswordTokenProperty restorePasswordTokenProperty;
+    private PasswordProperty passwordProperty;
     @JsonIgnore
     private PropertiesService propertiesService;
     @JsonIgnore
@@ -52,32 +53,41 @@ public class SecurityProperties {
             this.jwtProperties = newProperty.jwtProperties;
             this.userPasswordStrange = newProperty.getUserPasswordStrange();
             this.restorePasswordTokenProperty = newProperty.getRestorePasswordTokenProperty();
+            this.passwordProperty = newProperty.getPasswordProperty();
         }finally {
             this.writeLock.unlock();
         }
 
     }
-    public void updateUserPasswordStrange(UserPasswordStrange properties){
+    public void updateUserPasswordStrange(UserPasswordStrange propertiy){
         try {
             this.writeLock.lock();
-            this.userPasswordStrange = properties;
+            this.userPasswordStrange = propertiy;
         }finally {
             this.writeLock.unlock();
         }
     }
 
-    public void updateRestorePasswordTokenProperty(RestorePasswordTokenProperty properties){
+    public void updateRestorePasswordTokenProperty(RestorePasswordTokenProperty property){
         try {
             this.writeLock.lock();
-            this.restorePasswordTokenProperty = properties;
+            this.restorePasswordTokenProperty = property;
         }finally {
             this.writeLock.unlock();
         }
     }
-    public void updateJwtProperties(JwtProperties properties){
+    public void updateJwtProperties(JwtProperties property){
         try {
             this.writeLock.lock();
-            this.jwtProperties = properties;
+            this.jwtProperties = property;
+        }finally {
+            this.writeLock.unlock();
+        }
+    }
+    public void updatePasswordProperty(PasswordProperty property){
+        try {
+            this.writeLock.lock();
+            this.passwordProperty = property;
         }finally {
             this.writeLock.unlock();
         }
@@ -107,9 +117,15 @@ public class SecurityProperties {
         }finally {
             this.readLock.unlock();
         }
-
     }
-
+    public PasswordProperty getPasswordProperty() {
+        try{
+            this.readLock.lock();
+            return this.passwordProperty;
+        }finally {
+            this.readLock.unlock();
+        }
+    }
     @Getter
     @Setter
     public static class JwtProperties {
@@ -129,7 +145,7 @@ public class SecurityProperties {
         }
     }
 
-    /*Если значение установлено в 0 то при валидации не используется*/
+    /*Если значение установлено в 0, то при валидации не используется*/
     @Getter
     @Setter
     public static class UserPasswordStrange{
@@ -155,7 +171,12 @@ public class SecurityProperties {
     public static class RestorePasswordTokenProperty {
         private Integer restorePasswordTokenLength;
         private Long restorePasswordTokenLifetime;
-        private TemporalUnit unit;
+        private ChronoUnit unit;
     }
-
+    @Getter
+    @Setter
+    public static class PasswordProperty {
+        private Long passwordExpired;
+        private ChronoUnit unit;
+    }
 }
