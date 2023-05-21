@@ -54,7 +54,6 @@ export class LoginComponent {
           this.router.navigate(['desktop']);
         }, error:err=>{
           this.loading=false;
-          console.log(err)
           let message = new LoginMessage.ErrorLoginMessage;
           message.detail=err.error.message;
           this.messageService.add(message);

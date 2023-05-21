@@ -5,12 +5,18 @@ import jakarta.validation.ConstraintValidatorContext;
 
 
 public class PhoneNumberValidator implements ConstraintValidator<PhoneNumber, String> {
+    private boolean required = true;
     @Override
-    public void initialize(PhoneNumber constraintAnnotation) {
-        ConstraintValidator.super.initialize(constraintAnnotation);
+    public void initialize(PhoneNumber phoneNumber) {
+        ConstraintValidator.super.initialize(phoneNumber);
+        this.required= phoneNumber.required();
     }
+
     @Override
     public boolean isValid(String contactField, ConstraintValidatorContext validatorContext) {
+        if(!required){
+            return true;
+        }
         return contactField != null
                 &&contactField.length()==12
                 &&contactField.matches("^\\+\\d{11}");

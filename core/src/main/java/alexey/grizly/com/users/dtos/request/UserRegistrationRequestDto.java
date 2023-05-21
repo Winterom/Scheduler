@@ -9,14 +9,14 @@ import lombok.Data;
 
 @Data
 public class UserRegistrationRequestDto {
-    @Email(message = "Не валидный email")
+    @Email(regexp=".*@.*\\..*",message = "Не валидный email")
     @Size(min = 5, max = 50, message = "Не валидный email")
     private String email;
     @Size(min = 5, max = 50,message = "Не валидный номер телефона")
-    @PhoneNumber(message = "Не валидный номер телефона")
+    @PhoneNumber(message = "Не валидный номер телефона",required = false)
     private String phone;
     @Size(min = 5,max = 50,message = "Пароль не соответствует требований")
-    @Password(message = "Пароль не соответствует требований")
+    @Password
     private String password;
     @NotBlank(message = "Поле Имя не должно быть пустым")
     @Size(min = 1,max = 50,message = "Длина поля Имя не соответствует требованиям")

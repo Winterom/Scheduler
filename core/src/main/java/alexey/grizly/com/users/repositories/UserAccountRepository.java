@@ -22,4 +22,8 @@ public interface UserAccountRepository {
                              final LocalDateTime credentialExpired,
                              final EUserStatus status,
                              final LocalDateTime createdAt);
+
+    Long countOfUsageEmail(String email);
+
+    Long countOfUsagePhone(String phone);
 }

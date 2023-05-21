@@ -7,7 +7,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Component;
 
-@SuppressWarnings("checkstyle:MissingJavadocType")
+
 @Component
 public class UserPasswordRestoreListener implements
         ApplicationListener<UserPasswordRestoreSendEmailEvent> {

@@ -9,11 +9,11 @@ import alexey.grizly.com.users.dtos.request.UserRegistrationRequestDto;
 import alexey.grizly.com.users.models.EUserStatus;
 import alexey.grizly.com.users.models.UserAccount;
 import alexey.grizly.com.users.services.UserAccountService;
+import alexey.grizly.com.users.validators.PhoneNumberValidator;
 import jakarta.validation.ConstraintViolation;
-import jakarta.validation.Validation;
 import jakarta.validation.Validator;
-import jakarta.validation.ValidatorFactory;
 import jakarta.validation.constraints.Email;
+import org.hibernate.validator.internal.constraintvalidators.hv.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ApplicationEventMulticaster;
 import org.springframework.http.HttpStatus;
@@ -34,19 +34,20 @@ public class UsersController {
     private final GlobalProperties globalProperties;
     private final SecurityProperties securityProperties;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-
+    private final Validator validator;
 
     @Autowired
     public UsersController(final UserAccountService pUserAccountService,
                            final ApplicationEventMulticaster pMulticaster,
                            final GlobalProperties globalProperties,
                            final SecurityProperties properties,
-                           final BCryptPasswordEncoder bCryptPasswordEncoder) {
+                           final BCryptPasswordEncoder bCryptPasswordEncoder, Validator validator) {
         this.userAccountService = pUserAccountService;
         this.multicaster = pMulticaster;
         this.globalProperties = globalProperties;
         securityProperties = properties;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.validator = validator;
     }
 
 
@@ -69,8 +70,6 @@ public class UsersController {
 
     @PutMapping ("password/change")
     public ResponseEntity<?> changePassword(@RequestBody final ChangePasswordRequestDto dto){
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        Validator validator = factory.getValidator();
         Set<ConstraintViolation<ChangePasswordRequestDto>> violations = validator.validate(dto);
         if(!violations.isEmpty()) {
             List<String> errorMessage = new ArrayList<>(6);
@@ -90,8 +89,6 @@ public class UsersController {
 
     @PostMapping("registration")
     public ResponseEntity<?> registration(@RequestBody final UserRegistrationRequestDto dto){
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        Validator validator = factory.getValidator();
         Set<ConstraintViolation<UserRegistrationRequestDto>> violations = validator.validate(dto);
         if(!violations.isEmpty()) {
             List<String> errorMessage = new ArrayList<>(6);
@@ -116,6 +113,34 @@ public class UsersController {
         }
         return ResponseEntity.ok("Аккаунт успешно создан");
     }
+
+    @GetMapping("check-email/{email}")
+    public ResponseEntity<?> emailBusyCheck(@PathVariable String email){
+        EmailValidator validator = new EmailValidator();
+        if(!validator.isValid(email,null)){
+            AppResponseErrorDto errorDto =new AppResponseErrorDto(HttpStatus.BAD_REQUEST,"Невалидные параметры запроса");
+            return new ResponseEntity<>(errorDto, HttpStatus.BAD_REQUEST);
+        }
+        if(userAccountService.emailBusyCheck(email)){
+            AppResponseErrorDto errorDto =new AppResponseErrorDto(HttpStatus.CONFLICT,"email "+ email +" занят другим аккаунтом");
+            return new ResponseEntity<>(errorDto, HttpStatus.CONFLICT);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("check-phone/{phone}")
+    public ResponseEntity<?> phoneBusyCheck(@PathVariable String phone){
+        PhoneNumberValidator validator = new PhoneNumberValidator();
+        if(!validator.isValid(phone,null)){
+            AppResponseErrorDto errorDto =new AppResponseErrorDto(HttpStatus.BAD_REQUEST,"Невалидные параметры запроса");
+            return new ResponseEntity<>(errorDto, HttpStatus.BAD_REQUEST);
+        }
+        if(userAccountService.phoneBusyCheck(phone)){
+            AppResponseErrorDto errorDto =new AppResponseErrorDto(HttpStatus.CONFLICT,"Телефон "+ phone +" занят другим аккаунтом");
+            return new ResponseEntity<>(errorDto, HttpStatus.CONFLICT);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
     private String generateRestorePasswordToken(){
         int leftLimit = 48; // numeral '0'
         int rightLimit = 122; // letter 'z'
@@ -129,4 +154,5 @@ public class UsersController {
         System.out.println(generatedString);
         return generatedString;
     }
+
 }

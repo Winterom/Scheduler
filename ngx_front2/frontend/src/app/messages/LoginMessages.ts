@@ -6,6 +6,12 @@ export namespace LoginMessage{
     summary='OK';
     detail='Аутентификация выполнена'
   }
+  export class SuccessCheckEmail extends SuccessLoginMessage{
+    constructor() {
+      super();
+      super.detail = 'email введен правильно и свободен';
+    }
+  }
   export class ErrorLoginMessage implements Message {
     severity='error';
     summary='Ошибка';

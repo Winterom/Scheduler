@@ -3,6 +3,7 @@ package alexey.grizly.com.users.repositories.impl;
 import alexey.grizly.com.users.models.EUserStatus;
 import alexey.grizly.com.users.models.UserAccount;
 import alexey.grizly.com.users.repositories.UserAccountRepository;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -17,11 +18,14 @@ import java.time.LocalDateTime;
 
 @Repository
 public class UserAccountRepositoryImpl implements UserAccountRepository {
-    private final static String SELECT_SIMPLE_USER="SELECT * FROM users WHERE email=:email";
+    private final static String SELECT_SIMPLE_USER="SELECT * FROM users WHERE email=:email;";
     private final static String SAVE_RESTORE_PASSWORD_TOKEN="INSERT INTO restore_psw_token(id, token, expire) VALUE(:id,:token,:expire) "+
-            "ON CONFLICT (id) DO UPDATE SET token=:token, expire=:expire";
+            "ON CONFLICT (id) DO UPDATE SET token = :token, expire = :expire;";
     private final static String CREATE_NEW_USER="INSERT INTO users (email, phone, password, credential_expired, e_status, createdat) "+
-            "VALUE (:email,:phone,:password,:credentialExpired,:status,:createdAt)";
+            "VALUES (:email,:phone,:password,:credentialExpired, :status, :createdAt);";
+    private final static String COUNT_USAGE_EMAIL="SELECT COUNT(u.email) FROM users as u where u.email = :email;";
+
+    private final static String COUNT_USAGE_PHONE ="SELECT COUNT(u.phone) FROM users as u where u.phone = :phone;";
     
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
@@ -55,13 +59,31 @@ public class UserAccountRepositoryImpl implements UserAccountRepository {
                                    final LocalDateTime createdAt) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         SqlParameterSource namedParameters = new MapSqlParameterSource()
-                .addValue("email", email)
+                .addValue("email", email.toLowerCase())
                 .addValue("phone", phone)
                 .addValue("password", passwordHash)
                 .addValue("credentialExpired",credentialExpired)
                 .addValue("status",status.toString())
                 .addValue("createdAt",createdAt);
-        jdbcTemplate.update(CREATE_NEW_USER, namedParameters,keyHolder);
+        jdbcTemplate.update(CREATE_NEW_USER, namedParameters,keyHolder,new String[] { "id" });
         return keyHolder.getKey().longValue();
+    }
+
+    @Override
+    public Long countOfUsageEmail(@NonNls String email) {
+        SqlParameterSource namedParameters = new MapSqlParameterSource()
+                .addValue("email",email);
+        return jdbcTemplate
+                .queryForObject(COUNT_USAGE_EMAIL,
+                        namedParameters,Long.class);
+    }
+
+    @Override
+    public Long countOfUsagePhone(String phone) {
+        SqlParameterSource namedParameters = new MapSqlParameterSource()
+                .addValue("phone",phone);
+        return jdbcTemplate
+                .queryForObject(COUNT_USAGE_PHONE,
+                        namedParameters,Long.class);
     }
 }

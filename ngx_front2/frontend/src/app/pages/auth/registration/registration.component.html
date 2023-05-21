@@ -6,7 +6,7 @@
     novalidate
     (ngSubmit)="submitFrm()">
     <div class="flex justify-content-between">
-      <div class="w-25rem">
+      <div class="w-25rem flex flex-column justify-content-between">
         <h4 class="text-center">Основные учетные данные</h4>
         <div class="flex justify-content-start align-items-center">
           <div class="mr-2 text-2xl font-bold">+7</div>
@@ -15,7 +15,8 @@
             mask="999-999-9999"
             id="phone"
             formControlName="phone"
-            [ngClass]="{'ng-invalid ng-dirty':(phoneControl.hasError('required')||phoneControl.hasError('pattern'))&&phoneControl.touched}"
+            (focusout)="checkPhone()"
+            [ngClass]="{'ng-invalid ng-dirty':(phoneControl.invalid)&&phoneControl.touched}"
           ></p-inputMask>
           <label htmlFor="phone">Телефон</label>
         </span>
@@ -27,8 +28,8 @@
             id="email"
             class="p-inputtext-sm w-full"
             formControlName="email"
-
-            [ngClass]="{'ng-invalid ng-dirty':(emailControl.hasError('required')||emailControl.hasError('email'))&&emailControl.touched}"
+            (focusout)="checkEmail()"
+            [ngClass]="{'ng-invalid ng-dirty':(emailControl.invalid)&&emailControl.touched}"
           />
           <label htmlFor="email">Email</label>
         </span>
@@ -69,7 +70,7 @@
         </span>
         </div>
       </div>
-      <div class="w-25rem">
+      <div class="w-25rem flex flex-column justify-content-between">
         <div>
           <h4 class="text-center">Требования к паролю</h4>
           <p>Пароль должен соотвествовать следующим требованиям:</p>

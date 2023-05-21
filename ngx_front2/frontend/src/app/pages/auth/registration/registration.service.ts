@@ -35,8 +35,9 @@ export class RegistrationService {
   }
 
   public checkEmail(email:string):Observable<any>{
-    return this.http.post(this.api.checkEmail,{
-      email:email
-    },httpOptions)
+    return this.http.get(this.api.checkEmail+email,httpOptions)
+  }
+  public checkPhone(phone:string):Observable<any>{
+    return this.http.get(this.api.checkPhone+phone,httpOptions)
   }
 }

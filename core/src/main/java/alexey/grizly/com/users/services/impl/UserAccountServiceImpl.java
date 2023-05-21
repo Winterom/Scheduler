@@ -7,6 +7,7 @@ import alexey.grizly.com.users.models.UserAccount;
 import alexey.grizly.com.users.repositories.UserAccountRepository;
 import alexey.grizly.com.users.services.RoleForUserService;
 import alexey.grizly.com.users.services.UserAccountService;
+import org.jetbrains.annotations.NonNls;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -57,6 +58,16 @@ public class UserAccountServiceImpl implements UserAccountService {
                 phone,passwordHash,credentialExpired,status,createdAt);
         roleForUserService.setDefaultRoleForNewUser(userId);
         return userId;
+    }
+
+    @Override
+    public boolean emailBusyCheck(@NonNls String email) {
+       return userAccountRepository.countOfUsageEmail(email) > 0;
+    }
+
+    @Override
+    public boolean phoneBusyCheck(String phone) {
+        return userAccountRepository.countOfUsagePhone(phone) > 0;
     }
 
 

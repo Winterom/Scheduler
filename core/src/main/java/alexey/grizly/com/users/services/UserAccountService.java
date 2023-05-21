@@ -19,4 +19,7 @@ public interface UserAccountService {
                               final LocalDateTime credentialExpired,
                               final EUserStatus status,
                               final LocalDateTime createdAt);
+    boolean emailBusyCheck(String email);
+
+    boolean phoneBusyCheck(String phone);
 }

@@ -20,6 +20,7 @@ export function passwordStrangeValidator(passRequirement:PasswordStrangeRequirem
     ]
       .map(item => item.toString())
       .join("");
+    console.log(pattern);
     const  resultValidation = RegExp(pattern).test(value);
     return !resultValidation ? {passwordStrange: true} : null;
   }

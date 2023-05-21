@@ -12,7 +12,8 @@ import java.lang.annotation.Target;
 @Target( { ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Password {
-    String message() default "All requirements are not met";
+
+    String message() default "Не выполнены все требования к паролю";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

@@ -11,14 +11,19 @@ export class UsersAPI extends RootHTTPApi{
     private readonly _passwordRequirements:string = 'properties/security/password/strange';
     private readonly _updatePassword: string  = 'password/change'
     private readonly _registration:string='registration'
-    private readonly _checkEmail:string='emails/check'
+    private readonly _checkEmail:string='check-email'
+    private readonly _checkPhone:string='check-phone'
 
   get sendCodeForResetPassword(): string {
     return this.user_api+'/'+this._sendCodeForResetPassword;
   }
 
+  get checkPhone(): string {
+    return this.user_api+'/'+this._checkPhone+'/';
+  }
+
   get checkEmail(): string {
-    return this.user_api+'/'+this._checkEmail;
+    return this.user_api+'/'+this._checkEmail+'/';
   }
 
   get registration(): string {
