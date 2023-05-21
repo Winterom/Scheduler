@@ -6,7 +6,7 @@ import {checkIfMatchingPasswords} from "../../../validators/MatchingPasswordsVal
 import {ChangePasswordService} from "./change-password.service";
 import {passwordStrangeValidator} from "../../../validators/PasswordStrangeValidator";
 import {MessageService} from "primeng/api";
-import {LoginMessage} from "../../../messages/LoginMessages";
+import {AuthMessage} from "../../../messages/AuthMessages";
 
 
 @Component({
@@ -63,52 +63,52 @@ export class ChangePasswordComponent implements OnInit{
     });
     /***************************************************************************/
     if (this.emailControl.hasError('email')){
-      let message = new LoginMessage.ErrorLoginMessage;
+      let message = new AuthMessage.ErrorLoginMessage;
       message.detail='Введен не корректный email';
       this.messageService.add(message);
       hasError=true;
     }
     if (this.emailControl.hasError('required')){
-      let message = new LoginMessage.ErrorLoginMessage;
+      let message = new AuthMessage.ErrorLoginMessage;
       message.detail='Email не введен';
       this.messageService.add(message);
       hasError=true;
     }
     /***************************************************************************/
     if(this.tokenControl.hasError('required')){
-      let message = new LoginMessage.ErrorLoginMessage;
+      let message = new AuthMessage.ErrorLoginMessage;
       message.detail='Введите токен';
       this.messageService.add(message);
       hasError=true;
     }
     if(this.tokenControl.hasError('pattern')){
-      let message = new LoginMessage.ErrorLoginMessage;
+      let message = new AuthMessage.ErrorLoginMessage;
       message.detail='Введен не корректный токен';
       this.messageService.add(message);
       hasError=true;
     }
     /***************************************************************************/
     if(this.passwordControl.hasError('required')){
-      let message = new LoginMessage.ErrorLoginMessage;
+      let message = new AuthMessage.ErrorLoginMessage;
       message.detail='Введите пароль';
       this.messageService.add(message);
       hasError=true;
     }
     if(this.passwordControl.hasError('passwordStrange')){
-      let message = new LoginMessage.ErrorLoginMessage;
+      let message = new AuthMessage.ErrorLoginMessage;
       message.detail='Пароль не соответствует требованиям';
       this.messageService.add(message);
       hasError=true;
     }
     /***************************************************************************/
     if(this.confirmPasswordControl.hasError('required')){
-      let message = new LoginMessage.ErrorLoginMessage;
+      let message = new AuthMessage.ErrorLoginMessage;
       message.detail='Повторите пароль';
       this.messageService.add(message);
       hasError=true;
     }
     if(this.changePasswordForm.hasError('match_error')){
-      let message = new LoginMessage.ErrorLoginMessage;
+      let message = new AuthMessage.ErrorLoginMessage;
       message.detail='Пароли не совпадают';
       this.messageService.add(message);
       hasError=true;
@@ -123,7 +123,7 @@ export class ChangePasswordComponent implements OnInit{
           this.completeMessage=data.message;
           this.state='complete';
         },error:err=>{
-          let message = new LoginMessage.ErrorLoginMessage;
+          let message = new AuthMessage.ErrorLoginMessage;
           message.detail=err.error.message;
           console.log(err)
           this.messageService.add(message);

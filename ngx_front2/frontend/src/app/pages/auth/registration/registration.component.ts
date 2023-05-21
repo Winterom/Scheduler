@@ -5,7 +5,7 @@ import {PasswordStrangeRequirement} from "../../../types/PasswordStrangeRequirem
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {passwordStrangeValidator} from "../../../validators/PasswordStrangeValidator";
 import {checkIfMatchingPasswords} from "../../../validators/MatchingPasswordsValidator";
-import {LoginMessage} from "../../../messages/LoginMessages";
+import {AuthMessage} from "../../../messages/AuthMessages";
 import {MessageService} from "primeng/api";
 
 
@@ -26,6 +26,7 @@ export class RegistrationComponent implements OnInit {
   surnameControl: FormControl;
   lastnameControl: FormControl;
   phoneControl: FormControl;
+  resultSuccess:boolean=false;
 
   constructor(private router: Router,
               private messageService: MessageService,
@@ -69,26 +70,26 @@ export class RegistrationComponent implements OnInit {
     });
     /***************************************************************************/
     if (this.emailControl.hasError('email')) {
-      let message = new LoginMessage.ErrorLoginMessage;
+      let message = new AuthMessage.ErrorLoginMessage;
       message.detail = 'Введен не корректный email';
       this.messageService.add(message);
       hasError = true;
     }
     if (this.emailControl.hasError('required')) {
-      let message = new LoginMessage.ErrorLoginMessage;
+      let message = new AuthMessage.ErrorLoginMessage;
       message.detail = 'Email не введен';
       this.messageService.add(message);
       hasError = true;
     }
     /***************************************************************************/
     if (this.surnameControl.hasError('required')) {
-      let message = new LoginMessage.ErrorLoginMessage;
+      let message = new AuthMessage.ErrorLoginMessage;
       message.detail = 'Не введена фамилия пользователя';
       this.messageService.add(message);
       hasError = true;
     }
     if (this.surnameControl.hasError('pattern')) {
-      let message = new LoginMessage.ErrorLoginMessage;
+      let message = new AuthMessage.ErrorLoginMessage;
       message.detail = 'Недопустимые символы в фамилии пользователя';
       this.messageService.add(message);
       hasError = true;
@@ -96,46 +97,46 @@ export class RegistrationComponent implements OnInit {
 
     /***************************************************************************/
     if (this.nameControl.hasError('required')) {
-      let message = new LoginMessage.ErrorLoginMessage;
+      let message = new AuthMessage.ErrorLoginMessage;
       message.detail = 'Не введено имя пользователя';
       this.messageService.add(message);
       hasError = true;
     }
     if (this.nameControl.hasError('pattern')) {
-      let message = new LoginMessage.ErrorLoginMessage;
+      let message = new AuthMessage.ErrorLoginMessage;
       message.detail = 'Недопустимые символы в имени пользователя';
       this.messageService.add(message);
       hasError = true;
     }
     /***************************************************************************/
     if (this.lastnameControl.hasError('pattern')) {
-      let message = new LoginMessage.ErrorLoginMessage;
+      let message = new AuthMessage.ErrorLoginMessage;
       message.detail = 'Недопустимые символы в отчестве пользователя';
       this.messageService.add(message);
       hasError = true;
     }
     /***************************************************************************/
     if (this.passwordControl.hasError('required')) {
-      let message = new LoginMessage.ErrorLoginMessage;
+      let message = new AuthMessage.ErrorLoginMessage;
       message.detail = 'Введите пароль';
       this.messageService.add(message);
       hasError = true;
     }
     if (this.passwordControl.hasError('passwordStrange')) {
-      let message = new LoginMessage.ErrorLoginMessage;
+      let message = new AuthMessage.ErrorLoginMessage;
       message.detail = 'Пароль не соответствует требованиям';
       this.messageService.add(message);
       hasError = true;
     }
     /***************************************************************************/
     if (this.confirmPasswordControl.hasError('required')) {
-      let message = new LoginMessage.ErrorLoginMessage;
+      let message = new AuthMessage.ErrorLoginMessage;
       message.detail = 'Повторите пароль';
       this.messageService.add(message);
       hasError = true;
     }
     if (this.registrationForm.hasError('match_error')) {
-      let message = new LoginMessage.ErrorLoginMessage;
+      let message = new AuthMessage.ErrorLoginMessage;
       message.detail = 'Пароли не совпадают';
       this.messageService.add(message);
       hasError = true;
@@ -146,7 +147,7 @@ export class RegistrationComponent implements OnInit {
     }
     this.regService.registration(
       this.emailControl.value,
-      this.phoneControl.value,
+      '+7'+this.phoneControl.value,
       this.surnameControl.value,
       this.nameControl.value,
       this.lastnameControl.value,
@@ -154,11 +155,13 @@ export class RegistrationComponent implements OnInit {
     ).subscribe({
       next: () => {
         this.loading = false;
+        this.resultSuccess=true;
       }, error: err => {
         this.loading = false;
-        let message = new LoginMessage.ErrorLoginMessage;
+        let message = new AuthMessage.ErrorLoginMessage;
         message.detail = err.error.message;
         this.messageService.add(message);
+        this.resultSuccess=false;
       }
     })
   }
@@ -169,10 +172,10 @@ export class RegistrationComponent implements OnInit {
     }
     this.regService.checkEmail(this.emailControl.value).subscribe({
       next: () => {
-        this.messageService.add(new LoginMessage.SuccessCheckEmail);
+        this.messageService.add(new AuthMessage.SuccessCheckEmail);
         this.emailControl.updateValueAndValidity();
       },error:err=>{
-        let message = new LoginMessage.ErrorLoginMessage;
+        let message = new AuthMessage.ErrorLoginMessage;
         message.detail = err.error.message;
         this.messageService.add(message);
         this.emailControl.setErrors({emailBusy:true});
@@ -186,10 +189,10 @@ export class RegistrationComponent implements OnInit {
     console.log('phone '+this.phoneControl.value);
     this.regService.checkPhone(this.phoneControl.value).subscribe({
       next: () => {
-        this.messageService.add(new LoginMessage.SuccessCheckEmail);
+        this.messageService.add(new AuthMessage.SuccessCheckEmail);
         this.phoneControl.updateValueAndValidity();
       },error:err=>{
-        let message = new LoginMessage.ErrorLoginMessage;
+        let message = new AuthMessage.ErrorLoginMessage;
         message.detail = err.error.message;
         this.messageService.add(message);
         this.phoneControl.setErrors({phoneBusy:true});

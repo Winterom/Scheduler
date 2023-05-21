@@ -3,7 +3,7 @@ import {Router} from "@angular/router";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {LoginService} from "./login.service";
 import {MessageService} from "primeng/api";
-import {LoginMessage} from "../../../messages/LoginMessages";
+import {AuthMessage} from "../../../messages/AuthMessages";
 
 
 @Component({
@@ -31,12 +31,12 @@ export class LoginComponent {
       this.authForm.get(key)?.markAsTouched();
     });
     if(this.emailOrPhoneInput.hasError('required')){
-      let message = new LoginMessage.ErrorLoginMessage;
+      let message = new AuthMessage.ErrorLoginMessage;
       message.detail='Введите телефон или email';
       this.messageService.add(message);
     }
     if(this.passwordInput.hasError('required')){
-      let message = new LoginMessage.ErrorLoginMessage;
+      let message = new AuthMessage.ErrorLoginMessage;
       message.detail='Введите пароль';
       this.messageService.add(message);
     }
@@ -50,11 +50,11 @@ export class LoginComponent {
           /*this.user.update(data);*/
           console.log(data);
           this.loading=false;
-          this.messageService.add(new LoginMessage.SuccessLoginMessage)
+          this.messageService.add(new AuthMessage.SuccessLoginMessage)
           this.router.navigate(['desktop']);
         }, error:err=>{
           this.loading=false;
-          let message = new LoginMessage.ErrorLoginMessage;
+          let message = new AuthMessage.ErrorLoginMessage;
           message.detail=err.error.message;
           this.messageService.add(message);
           this.loading=false;

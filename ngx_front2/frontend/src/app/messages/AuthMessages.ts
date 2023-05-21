@@ -1,6 +1,6 @@
 import {Message} from "primeng/api";
 
-export namespace LoginMessage{
+export namespace AuthMessage{
   export class SuccessLoginMessage implements Message{
     severity='success';
     summary='OK';

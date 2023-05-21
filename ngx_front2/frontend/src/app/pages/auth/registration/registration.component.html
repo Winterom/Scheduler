@@ -1,4 +1,4 @@
-<div class="container" style="width: 56rem">
+<div *ngIf="!resultSuccess" class="container" style="width: 56rem">
   <div class="text-4xl text-center">Регистрация</div>
   <div class="text-center">Поля помеченные <span class="text-pink-500">*</span> обязательны к заполнению</div>
   <form
@@ -82,7 +82,7 @@
       </div>
       <div class="w-25rem flex flex-column justify-content-between">
         <div>
-          <h4 class="text-center">Требования к паролю</h4>
+          <h4 class="text-center">Пароль</h4>
           <p>Пароль должен соотвествовать следующим требованиям:</p>
           <div *ngIf="pswStrangeReq.minCharacters!=0"> - минимальная длина пароля - <span
             class="font-bold text-red-800">{{pswStrangeReq.minCharacters}}</span></div>
@@ -149,6 +149,23 @@
         (click)="submitFrm()"></p-button>
     </div>
   </form>
+</div>
+<div *ngIf="resultSuccess" class="container">
+  <div class="text-4xl text-center">Регистрация</div>
+  <div class="mt-2 text-xl">
+    <p style="text-indent: 2rem">Вы успешно зарегистрировались. На указанную Вами электронную почту отправлено
+  письмо с предложением подтвердить email. Полноценно аккаунт сможет функционировать после
+      одобрения ответственным лицом и назначения Вам прав в приложении.</p>
+    <p style="text-indent: 2rem"> Сейчас Вы можете авторизоваться и подтвердить или изменить свои учетные данные.</p>
+  </div>
+  <div class="mt-3 flex justify-content-center">
+    <p-button
+      label="Авторизация"
+      styleClass="p-button-raised"
+      [disabled]="loading"
+      (click)="returnToLoginPage()">
+    </p-button>
+  </div>
 </div>
 <p-toast></p-toast>
 
