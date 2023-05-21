@@ -152,7 +152,7 @@ export class RegistrationComponent implements OnInit {
       this.lastnameControl.value,
       this.passwordControl.value
     ).subscribe({
-      next: message => {
+      next: () => {
         this.loading = false;
       }, error: err => {
         this.loading = false;
@@ -168,7 +168,7 @@ export class RegistrationComponent implements OnInit {
       return;
     }
     this.regService.checkEmail(this.emailControl.value).subscribe({
-      next: data => {
+      next: () => {
         this.messageService.add(new LoginMessage.SuccessCheckEmail);
         this.emailControl.updateValueAndValidity();
       },error:err=>{
@@ -180,11 +180,12 @@ export class RegistrationComponent implements OnInit {
     })
   }
   checkPhone() {
-    if (this.phoneControl.errors != null) {
+    if (this.phoneControl.errors != null||this.phoneControl.value===0) {
       return;
     }
+    console.log('phone '+this.phoneControl.value);
     this.regService.checkPhone(this.phoneControl.value).subscribe({
-      next: data => {
+      next: () => {
         this.messageService.add(new LoginMessage.SuccessCheckEmail);
         this.phoneControl.updateValueAndValidity();
       },error:err=>{
