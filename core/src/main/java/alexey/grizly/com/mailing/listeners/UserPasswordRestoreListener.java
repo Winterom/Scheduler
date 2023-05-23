@@ -28,11 +28,9 @@ public class UserPasswordRestoreListener implements
         String from = appMailSender.getMailSender().getUsername();
         message.setFrom(from);
         message.setTo(event.getParam().getEmail());
-        message.setSubject("Регистрация на сайте");
-
-        message
-                .setText("Для завершения восстановления пароля  " +
+        message.setSubject("Восстановление пароля");
+        message.setText("Для восстановления пароля  " +
                         " перейдите по ссылке " + event.getParam().getRestorePasswordUrl());
-        /*appMailSender.getMailSender().send(message);*/
+        appMailSender.getMailSender().send(message);
     }
 }

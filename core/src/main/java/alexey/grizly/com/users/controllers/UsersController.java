@@ -6,6 +6,7 @@ import alexey.grizly.com.properties.properties.GlobalProperties;
 import alexey.grizly.com.properties.properties.SecurityProperties;
 import alexey.grizly.com.users.dtos.request.ChangePasswordRequestDto;
 import alexey.grizly.com.users.dtos.request.UserRegistrationRequestDto;
+import alexey.grizly.com.users.dtos.response.UserResponseDto;
 import alexey.grizly.com.users.models.EUserStatus;
 import alexey.grizly.com.users.models.UserAccount;
 import alexey.grizly.com.users.services.UserAccountService;
@@ -51,12 +52,12 @@ public class UsersController {
     }
 
 
-    @GetMapping("password/change/token/{email}")
+    @GetMapping("password/change/{email}")
     public ResponseEntity<?> sendTokenForResetPassword(@PathVariable @Email final String email){
         UserAccount userAccount = userAccountService.getSimpleUserAccount(email);
         if(userAccount==null){
-            AppResponseErrorDto dto = new AppResponseErrorDto(HttpStatus.NOT_FOUND,"Аккаунт с email: "+email+" не существует");
-            return new ResponseEntity<>(dto, HttpStatus.NOT_FOUND);
+            AppResponseErrorDto dto = new AppResponseErrorDto(HttpStatus.BAD_REQUEST,"Аккаунт с email: "+email+" не существует");
+            return new ResponseEntity<>(dto, HttpStatus.BAD_REQUEST);
         }
         LocalDateTime expireTokenTime = LocalDateTime.now().plus(securityProperties.getRestorePasswordTokenProperty().getRestorePasswordTokenLifetime(),
                 securityProperties.getRestorePasswordTokenProperty().getUnit());
@@ -65,7 +66,7 @@ public class UsersController {
         String url =globalProperties.getHost() + "/reset?token=" + Arrays.toString(Base64.getEncoder().encode((userAccount.getEmail() + "&&" + token).getBytes()));
         UserPasswordRestoreSendEmailEvent event = new UserPasswordRestoreSendEmailEvent(new UserPasswordRestoreSendEmailEvent.EventParam(userAccount.getEmail(),url));
         multicaster.multicastEvent(event);
-        return ResponseEntity.ok("Инструкции по восстановлению пароля отправлены на email: "+userAccount.getEmail());
+        return ResponseEntity.ok(new UserResponseDto(userAccount.getEmail()));
     }
 
     @PutMapping ("password/change")
@@ -80,7 +81,7 @@ public class UsersController {
         }
         String passwordHash = bCryptPasswordEncoder.encode(dto.getPassword());
         if(userAccountService.updatePassword(dto.getEmail(), passwordHash,dto.getToken())){
-            return ResponseEntity.ok("Пароль изменен, перейдите к авторизации");
+            return ResponseEntity.ok(new UserResponseDto("Пароль изменен, перейдите к авторизации"));
         }
         String errorMessage = "Неверные учетные данные пользователя";
         AppResponseErrorDto errorDto = new AppResponseErrorDto(HttpStatus.NOT_ACCEPTABLE,errorMessage);
@@ -111,7 +112,7 @@ public class UsersController {
             return new ResponseEntity<>("Не удалось создать аккаунт",
                     HttpStatus.BAD_REQUEST);
         }
-        return ResponseEntity.ok("Аккаунт успешно создан");
+        return ResponseEntity.ok(new UserResponseDto("Аккаунт успешно создан"));
     }
 
     @GetMapping("check-email/{email}")

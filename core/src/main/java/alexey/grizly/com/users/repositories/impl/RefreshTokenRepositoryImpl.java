@@ -1,6 +1,6 @@
 package alexey.grizly.com.users.repositories.impl;
 
-import alexey.grizly.com.users.repositories.AuthRepository;
+import alexey.grizly.com.users.repositories.RefreshTokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -9,13 +9,13 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 @Repository
-public class AuthRepositoryImpl implements AuthRepository {
+public class RefreshTokenRepositoryImpl implements RefreshTokenRepository {
     private static final String SAVE_REFRESH_TOKEN="INSERT INTO refresh_tokens (id,expired,token) VALUES (:id,:expired,:token) "+
             "ON CONFLICT (id) DO UPDATE set expired=:expired, token=:token";
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
     @Autowired
-    public AuthRepositoryImpl(final NamedParameterJdbcTemplate jdbcTemplate) {
+    public RefreshTokenRepositoryImpl(final NamedParameterJdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 

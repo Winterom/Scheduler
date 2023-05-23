@@ -172,6 +172,14 @@ public class SecurityProperties {
         private Integer restorePasswordTokenLength=40;
         private Long restorePasswordTokenLifetime = 24L;
         private ChronoUnit unit=ChronoUnit.HOURS;
+
+        public void setRestorePasswordTokenLength(Integer restorePasswordTokenLength) {
+            if(restorePasswordTokenLength>40){
+                this.restorePasswordTokenLength=40;
+                return;
+            }
+            this.restorePasswordTokenLength = restorePasswordTokenLength;
+        }
     }
     @Getter
     @Setter

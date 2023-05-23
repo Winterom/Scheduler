@@ -1,11 +1,13 @@
 package alexey.grizly.com.users.repositories.impl;
 
+import alexey.grizly.com.users.extractors.UserAccountSimpleRowMapper;
 import alexey.grizly.com.users.models.EUserStatus;
 import alexey.grizly.com.users.models.UserAccount;
 import alexey.grizly.com.users.repositories.UserAccountRepository;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -19,7 +21,7 @@ import java.time.LocalDateTime;
 @Repository
 public class UserAccountRepositoryImpl implements UserAccountRepository {
     private final static String SELECT_SIMPLE_USER="SELECT * FROM users WHERE email=:email;";
-    private final static String SAVE_RESTORE_PASSWORD_TOKEN="INSERT INTO restore_psw_token(id, token, expire) VALUE(:id,:token,:expire) "+
+    private final static String SAVE_RESTORE_PASSWORD_TOKEN="INSERT INTO restore_psw_token(id, token, expire) VALUES (:id,:token,:expire) "+
             "ON CONFLICT (id) DO UPDATE SET token = :token, expire = :expire;";
     private final static String CREATE_NEW_USER="INSERT INTO users (email, phone, password, credential_expired, e_status, createdat) "+
             "VALUES (:email,:phone,:password,:credentialExpired, :status, :createdAt);";
@@ -34,10 +36,15 @@ public class UserAccountRepositoryImpl implements UserAccountRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    @Nullable
     @Override
     public UserAccount getSimpleUserAccount(final String email) {
         SqlParameterSource namedParameters = new MapSqlParameterSource().addValue("email", email);
-        return jdbcTemplate.queryForObject(SELECT_SIMPLE_USER,namedParameters,UserAccount.class);
+        try {
+            return jdbcTemplate.queryForObject(SELECT_SIMPLE_USER,namedParameters, new UserAccountSimpleRowMapper());
+        }catch (EmptyResultDataAccessException e){
+            return null;
+        }
     }
     @Override
     @Transactional

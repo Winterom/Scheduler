@@ -4,6 +4,8 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {LoginService} from "./login.service";
 import {MessageService} from "primeng/api";
 import {AuthMessage} from "../../../messages/AuthMessages";
+import {UserService} from "../../../services/user.service";
+import addErrorMessage = AuthMessage.addErrorMessage;
 
 
 @Component({
@@ -17,7 +19,11 @@ export class LoginComponent {
   public authForm : FormGroup;
   emailOrPhoneInput:FormControl;
   passwordInput:FormControl;
-  constructor(private router: Router,private loginService:LoginService,private messageService: MessageService) {
+  constructor(private router: Router,
+              private loginService:LoginService,
+              private messageService: MessageService,
+              private user:UserService
+  ) {
     this.emailOrPhoneInput = new FormControl<string>('',[Validators.required]);
     this.passwordInput = new FormControl<string>('',Validators.required);
     this.authForm = new FormGroup<any>({
@@ -31,14 +37,11 @@ export class LoginComponent {
       this.authForm.get(key)?.markAsTouched();
     });
     if(this.emailOrPhoneInput.hasError('required')){
-      let message = new AuthMessage.ErrorLoginMessage;
-      message.detail='Введите телефон или email';
-      this.messageService.add(message);
+      addErrorMessage(this.messageService,'Введите телефон или email')
+
     }
     if(this.passwordInput.hasError('required')){
-      let message = new AuthMessage.ErrorLoginMessage;
-      message.detail='Введите пароль';
-      this.messageService.add(message);
+      addErrorMessage(this.messageService,'Введите пароль')
     }
     if(this.emailOrPhoneInput.invalid||this.passwordInput.invalid){
       this.loading=false;
@@ -47,10 +50,16 @@ export class LoginComponent {
 
     this.loginService.login(this.emailOrPhoneInput.value,this.passwordInput.value)
       .subscribe({next:data=>{
-          /*this.user.update(data);*/
-          console.log(data);
+          console.log('response '+data.access_token);
+          this.user.token=data.access_token;
+          if(!this.user.isAuth){
+            let message = new AuthMessage.ErrorLoginMessage;
+            message.detail='Токен авторизации не валиден!';
+            this.messageService.add(message);
+            this.loading=false;
+            return;
+          }
           this.loading=false;
-          this.messageService.add(new AuthMessage.SuccessLoginMessage)
           this.router.navigate(['desktop']);
         }, error:err=>{
           this.loading=false;

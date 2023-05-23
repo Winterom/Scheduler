@@ -12,30 +12,17 @@ import java.util.Set;
 @Getter
 @Setter
 public class UserAccount implements UserDetails {
-
     private Long id;
-
     private String email;
-
     private Boolean isEmailVerified;
-
     private Set<UsersRoles> usersRoles;
-
     private EUserStatus status;
-
     private String phone;
-
     private Boolean isPhoneVerified;
-
-
     private String password;
-
     private LocalDateTime credentialExpiredTime;
-
     private LocalDateTime createdAt;
-
     private LocalDateTime updatedAt;
-
     private Set<AppAuthorities> authorities;
 
     public Collection<AppAuthorities> getAuthorities() {
@@ -83,6 +70,4 @@ public class UserAccount implements UserDetails {
                 .append("authorities", authorities.toString())
                 .toString();
     }
-
-
 }

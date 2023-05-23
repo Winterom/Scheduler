@@ -8,6 +8,7 @@ import alexey.grizly.com.users.repositories.UserAccountRepository;
 import alexey.grizly.com.users.services.RoleForUserService;
 import alexey.grizly.com.users.services.UserAccountService;
 import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,6 +37,7 @@ public class UserAccountServiceImpl implements UserAccountService {
         userAccountRepository.saveRestorePasswordToken(userId, expireDate, token);
     }
 
+    @Nullable
     @Override
     public UserAccount getSimpleUserAccount(final String email){
         return userAccountRepository.getSimpleUserAccount(email);

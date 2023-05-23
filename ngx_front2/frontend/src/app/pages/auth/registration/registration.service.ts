@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {UsersAPI} from "../../../services/API/UsersAPI";
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {Observable, shareReplay} from "rxjs";
 import {PasswordStrangeRequirement} from "../../../types/PasswordStrangeRequirement";
 import {httpOptions} from "../../../services/API/RootHTTPApi";
 
@@ -31,7 +31,7 @@ export class RegistrationService {
       name:name,
       lastname:lastname,
       password:password
-    },httpOptions);
+    },httpOptions).pipe(shareReplay());
   }
 
   public checkEmail(email:string):Observable<any>{

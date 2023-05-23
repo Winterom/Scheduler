@@ -7,6 +7,7 @@ import {passwordStrangeValidator} from "../../../validators/PasswordStrangeValid
 import {checkIfMatchingPasswords} from "../../../validators/MatchingPasswordsValidator";
 import {AuthMessage} from "../../../messages/AuthMessages";
 import {MessageService} from "primeng/api";
+import addErrorMessage = AuthMessage.addErrorMessage;
 
 
 @Component({
@@ -70,75 +71,52 @@ export class RegistrationComponent implements OnInit {
     });
     /***************************************************************************/
     if (this.emailControl.hasError('email')) {
-      let message = new AuthMessage.ErrorLoginMessage;
-      message.detail = 'Введен не корректный email';
-      this.messageService.add(message);
+      addErrorMessage(this.messageService,'Введен не корректный email')
       hasError = true;
     }
     if (this.emailControl.hasError('required')) {
-      let message = new AuthMessage.ErrorLoginMessage;
-      message.detail = 'Email не введен';
-      this.messageService.add(message);
+      addErrorMessage(this.messageService,'Email не введен')
       hasError = true;
     }
     /***************************************************************************/
     if (this.surnameControl.hasError('required')) {
-      let message = new AuthMessage.ErrorLoginMessage;
-      message.detail = 'Не введена фамилия пользователя';
-      this.messageService.add(message);
+      addErrorMessage(this.messageService,'Не введена фамилия пользователя')
       hasError = true;
     }
     if (this.surnameControl.hasError('pattern')) {
-      let message = new AuthMessage.ErrorLoginMessage;
-      message.detail = 'Недопустимые символы в фамилии пользователя';
-      this.messageService.add(message);
+      addErrorMessage(this.messageService,'Недопустимые символы в фамилии пользователя')
       hasError = true;
     }
-
     /***************************************************************************/
     if (this.nameControl.hasError('required')) {
-      let message = new AuthMessage.ErrorLoginMessage;
-      message.detail = 'Не введено имя пользователя';
-      this.messageService.add(message);
+      addErrorMessage(this.messageService,'Не введено имя пользователя')
       hasError = true;
     }
     if (this.nameControl.hasError('pattern')) {
-      let message = new AuthMessage.ErrorLoginMessage;
-      message.detail = 'Недопустимые символы в имени пользователя';
-      this.messageService.add(message);
+      addErrorMessage(this.messageService,'Недопустимые символы в имени пользователя')
       hasError = true;
     }
     /***************************************************************************/
     if (this.lastnameControl.hasError('pattern')) {
-      let message = new AuthMessage.ErrorLoginMessage;
-      message.detail = 'Недопустимые символы в отчестве пользователя';
-      this.messageService.add(message);
+      addErrorMessage(this.messageService,'Недопустимые символы в отчестве пользователя')
       hasError = true;
     }
     /***************************************************************************/
     if (this.passwordControl.hasError('required')) {
-      let message = new AuthMessage.ErrorLoginMessage;
-      message.detail = 'Введите пароль';
-      this.messageService.add(message);
+      addErrorMessage(this.messageService,'Введите пароль')
       hasError = true;
     }
     if (this.passwordControl.hasError('passwordStrange')) {
-      let message = new AuthMessage.ErrorLoginMessage;
-      message.detail = 'Пароль не соответствует требованиям';
-      this.messageService.add(message);
+      addErrorMessage(this.messageService,'Пароль не соответствует требованиям')
       hasError = true;
     }
     /***************************************************************************/
     if (this.confirmPasswordControl.hasError('required')) {
-      let message = new AuthMessage.ErrorLoginMessage;
-      message.detail = 'Повторите пароль';
-      this.messageService.add(message);
+      addErrorMessage(this.messageService,'Повторите пароль')
       hasError = true;
     }
     if (this.registrationForm.hasError('match_error')) {
-      let message = new AuthMessage.ErrorLoginMessage;
-      message.detail = 'Пароли не совпадают';
-      this.messageService.add(message);
+      addErrorMessage(this.messageService,'Пароли не совпадают')
       hasError = true;
     }
     if (hasError) {
@@ -175,9 +153,7 @@ export class RegistrationComponent implements OnInit {
         this.messageService.add(new AuthMessage.SuccessCheckEmail);
         this.emailControl.updateValueAndValidity();
       },error:err=>{
-        let message = new AuthMessage.ErrorLoginMessage;
-        message.detail = err.error.message;
-        this.messageService.add(message);
+        addErrorMessage(this.messageService,err.error.message)
         this.emailControl.setErrors({emailBusy:true});
       }
     })
@@ -192,9 +168,7 @@ export class RegistrationComponent implements OnInit {
         this.messageService.add(new AuthMessage.SuccessCheckEmail);
         this.phoneControl.updateValueAndValidity();
       },error:err=>{
-        let message = new AuthMessage.ErrorLoginMessage;
-        message.detail = err.error.message;
-        this.messageService.add(message);
+        addErrorMessage(this.messageService,err.error.message)
         this.phoneControl.setErrors({phoneBusy:true});
       }
     })

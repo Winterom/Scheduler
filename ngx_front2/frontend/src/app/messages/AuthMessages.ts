@@ -1,4 +1,4 @@
-import {Message} from "primeng/api";
+import {Message, MessageService} from "primeng/api";
 
 export namespace AuthMessage{
   export class SuccessLoginMessage implements Message{
@@ -17,6 +17,11 @@ export namespace AuthMessage{
     summary='Ошибка';
     detail=''
     life=5000;
+  }
+  export const addErrorMessage=(service:MessageService, message:string)=>{
+    const mes = new ErrorLoginMessage();
+    mes.detail = message;
+    service.add(mes);
   }
 }
 

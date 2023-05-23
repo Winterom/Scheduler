@@ -15,9 +15,7 @@ public class AppAuthorities implements GrantedAuthority {
     private String title;
     private String description;
     private EAuthorities authorities;
-
     private LocalDateTime createdAt;
-
     private LocalDateTime updatedAt;
 
     @Override

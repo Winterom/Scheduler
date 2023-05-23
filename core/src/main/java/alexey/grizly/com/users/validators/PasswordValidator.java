@@ -3,20 +3,16 @@ package alexey.grizly.com.users.validators;
 import alexey.grizly.com.properties.properties.SecurityProperties;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
-import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
-
 
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-@Setter
-@Getter
 public class PasswordValidator  implements ConstraintValidator<Password, String> {
-    private final SecurityProperties.UserPasswordStrange userPasswordStrange;
+    private  final SecurityProperties.UserPasswordStrange userPasswordStrange;
 
-    public PasswordValidator (final SecurityProperties.UserPasswordStrange userPasswordStrange){
+    public PasswordValidator(SecurityProperties.UserPasswordStrange userPasswordStrange) {
         this.userPasswordStrange = userPasswordStrange;
     }
     @Autowired

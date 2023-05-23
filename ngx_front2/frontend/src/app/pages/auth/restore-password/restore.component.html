@@ -1,11 +1,21 @@
 <div class="container">
     <div class="title">Восстановление пароля</div>
+    <div *ngIf="!resultSuccess">
     <div class="w-full text-center">Укажите email аккаунта, для которого хотите восстановить пароль.
       На почту будет отправлена инструкция по восстановлению пароля</div>
-    <form>
+    <form
+      [formGroup]="form"
+      novalidate
+      (ngSubmit)="submitFrm()"
+    >
       <div class="mt-4">
         <span class="p-float-label">
-        <input pInputText id="emailOrPhone2" class="p-inputtext-sm w-full"/>
+        <input
+          pInputText id="emailOrPhone2"
+          class="p-inputtext-sm w-full"
+          formControlName="email"
+          [ngClass]="{'ng-invalid ng-dirty':(emailControl.invalid)&&emailControl.touched}"
+        />
         <label htmlFor="emailOrPhone2">Email</label>
     </span>
       </div>
@@ -25,4 +35,18 @@
       </div>
     </form>
   </div>
+    <div *ngIf="resultSuccess">
+      <div class="mt-2 text-xl text-center">
+        <p>На указанную Вами электронную почту {{responseEmail}} отправлено
+          письмо с дальнейшими инструкциями по восстановлению пароля</p>
+      </div>
+      <div class="flex justify-content-around">
+        <p-button
+          label="Авторизация" styleClass="p-button-raised"
+          (click)="returnToLoginPage()"
+        ></p-button>
+      </div>
+    </div>
+</div>
+<p-toast></p-toast>
 

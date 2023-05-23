@@ -12,6 +12,7 @@ public class UserPasswordRestoreSendEmailEvent extends ApplicationEvent {
 
     public UserPasswordRestoreSendEmailEvent(EventParam param) {
         super(param);
+        this.param = param;
     }
 
     @Getter
