@@ -1,7 +1,7 @@
 package alexey.grizly.com.users.controllers;
 
 import alexey.grizly.com.commons.errors.AppResponseErrorDto;
-import alexey.grizly.com.commons.events.UserPasswordRestoreSendEmailEvent;
+import alexey.grizly.com.commons.events.UserPasswordChangeSendEmailEvent;
 import alexey.grizly.com.properties.properties.GlobalProperties;
 import alexey.grizly.com.properties.properties.SecurityProperties;
 import alexey.grizly.com.users.dtos.request.ChangePasswordRequestDto;
@@ -64,7 +64,7 @@ public class UsersController {
         String token = generateRestorePasswordToken();
         userAccountService.saveRestorePasswordToken(userAccount.getId(),expireTokenTime,token);
         String url =globalProperties.getHost() + "/reset?token=" + Arrays.toString(Base64.getEncoder().encode((userAccount.getEmail() + "&&" + token).getBytes()));
-        UserPasswordRestoreSendEmailEvent event = new UserPasswordRestoreSendEmailEvent(new UserPasswordRestoreSendEmailEvent.EventParam(userAccount.getEmail(),url));
+        UserPasswordChangeSendEmailEvent event = new UserPasswordChangeSendEmailEvent(new UserPasswordChangeSendEmailEvent.EventParam(userAccount.getEmail(),url));
         multicaster.multicastEvent(event);
         return ResponseEntity.ok(new UserResponseDto(userAccount.getEmail()));
     }

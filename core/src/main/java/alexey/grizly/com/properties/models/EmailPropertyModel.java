@@ -9,9 +9,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-
-public class EmailProperty {
-
+public class EmailPropertyModel {
     private Long id;
     private EEmailType type;
     private Boolean isEnabled;

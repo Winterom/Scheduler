@@ -1,7 +1,7 @@
 package alexey.grizly.com.properties.repositories;
 
 import alexey.grizly.com.properties.extractors.SimpleEmailPropertyRowMapper;
-import alexey.grizly.com.properties.models.EmailProperty;
+import alexey.grizly.com.properties.models.EmailPropertyModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -19,8 +19,13 @@ public class EmailPropertiesRepositoryImpl implements EmailPropertiesRepository{
     }
 
     @Override
-    public List<EmailProperty> getAllProperties() {
+    public List<EmailPropertyModel> getAllProperties() {
         SqlParameterSource namedParameters = new MapSqlParameterSource();
         return jdbcTemplate.query("SELECT id,email,is_enabled,type,description FROM email_properties",namedParameters,new SimpleEmailPropertyRowMapper());
+    }
+
+    @Override
+    public List<EmailPropertyModel> getEnabledEmailProperties() {
+        return null;
     }
 }

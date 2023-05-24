@@ -1,6 +1,6 @@
 package alexey.grizly.com.properties.dtos.security.responses;
 
-import alexey.grizly.com.properties.models.EmailProperty;
+import alexey.grizly.com.properties.models.EmailPropertyModel;
 import lombok.Data;
 import org.jetbrains.annotations.NotNull;
 
@@ -13,11 +13,11 @@ public class EmailPropertiesTableResponseDto {
     private String description;
     private String email;
 
-    public EmailPropertiesTableResponseDto(@NotNull EmailProperty emailProperty) {
-        this.id = emailProperty.getId();
-        this.type = emailProperty.getType().getTitle();
-        this.isEnabled = emailProperty.getIsEnabled();
-        this.description = emailProperty.getDescription();
-        this.email = emailProperty.getEmail();
+    public EmailPropertiesTableResponseDto(@NotNull EmailPropertyModel emailPropertyModel) {
+        this.id = emailPropertyModel.getId();
+        this.type = emailPropertyModel.getType().getTitle();
+        this.isEnabled = emailPropertyModel.getIsEnabled();
+        this.description = emailPropertyModel.getDescription();
+        this.email = emailPropertyModel.getEmail();
     }
 }

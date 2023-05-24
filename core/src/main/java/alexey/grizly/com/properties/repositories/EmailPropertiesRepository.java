@@ -1,6 +1,6 @@
 package alexey.grizly.com.properties.repositories;
 
-import alexey.grizly.com.properties.models.EmailProperty;
+import alexey.grizly.com.properties.models.EmailPropertyModel;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -8,5 +8,6 @@ import java.util.List;
 @Repository
 public interface EmailPropertiesRepository {
 
-    List<EmailProperty> getAllProperties();
+    List<EmailPropertyModel> getAllProperties();
+    List<EmailPropertyModel> getEnabledEmailProperties();
 }
