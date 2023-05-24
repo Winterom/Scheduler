@@ -37,11 +37,11 @@ export class LoginComponent {
       this.authForm.get(key)?.markAsTouched();
     });
     if(this.emailOrPhoneInput.hasError('required')){
-      addErrorMessage(this.messageService,'Введите телефон или email')
+      addErrorMessage(this.messageService,'Введите телефон или email', null)
 
     }
     if(this.passwordInput.hasError('required')){
-      addErrorMessage(this.messageService,'Введите пароль')
+      addErrorMessage(this.messageService,'Введите пароль', null)
     }
     if(this.emailOrPhoneInput.invalid||this.passwordInput.invalid){
       this.loading=false;
@@ -63,9 +63,10 @@ export class LoginComponent {
           this.router.navigate(['desktop']);
         }, error:err=>{
           this.loading=false;
-          let message = new AuthMessage.ErrorLoginMessage;
-          message.detail=err.error.message;
-          this.messageService.add(message);
+          const errorMessages: string [] = err.error.messages
+          errorMessages.forEach((value)=>{
+            addErrorMessage(this.messageService,value,err.error.statusCode);
+          })
           this.loading=false;
         }} )
   }

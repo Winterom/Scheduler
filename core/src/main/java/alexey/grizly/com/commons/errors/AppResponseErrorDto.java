@@ -1,17 +1,26 @@
 package alexey.grizly.com.commons.errors;
 
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatusCode;
 
+import java.util.ArrayList;
+import java.util.List;
 
-public record AppResponseErrorDto(HttpStatusCode statusCode, String message) {
-    @Override
-    public HttpStatusCode statusCode() {
-        return statusCode;
+@Data
+@NoArgsConstructor
+public class AppResponseErrorDto {
+    private HttpStatusCode statusCode;
+    private List<String> messages;
+
+    public AppResponseErrorDto (HttpStatusCode statusCode,String message){
+        this.statusCode = statusCode;
+        this.messages = new ArrayList<>(1);
+        this.messages.add(message);
     }
-
-    @Override
-    public String message() {
-        return message;
+    public AppResponseErrorDto (HttpStatusCode statusCode,List<String> message){
+        this.statusCode = statusCode;
+        this.messages = message;
     }
 }

@@ -18,7 +18,8 @@ const routes: Routes = [
   ,loadChildren:()=>import('./pages/desktop/desktop.module').then(m=>m.DesktopModule)
   ,canActivate:[desktopGuard]},
   {path:'app',component:WidgetLayoutComponent,
-  loadChildren:()=>import('./pages/widget-layout/widget.module').then(t=>t.WidgetModule)}
+  loadChildren:()=>import('./pages/widget-layout/widget.module').then(t=>t.WidgetModule)},
+  {path:'**',redirectTo:'login'}
 ];
 
 @NgModule({

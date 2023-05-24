@@ -1,15 +1,12 @@
 import {Message, MessageService} from "primeng/api";
 
 export namespace AuthMessage{
-  export class SuccessLoginMessage implements Message{
+  export class SuccessMessage implements Message{
     severity='success';
     summary='OK';
-    detail='Аутентификация выполнена'
-  }
-  export class SuccessCheckEmail extends SuccessLoginMessage{
-    constructor() {
-      super();
-      super.detail = 'email введен правильно и свободен';
+    detail=''
+    public setTitle(msg:string){
+      this.summary = this.summary+' '+msg;
     }
   }
   export class ErrorLoginMessage implements Message {
@@ -17,10 +14,25 @@ export namespace AuthMessage{
     summary='Ошибка';
     detail=''
     life=5000;
+
+    public setTitle(msg:string){
+      this.summary = this.summary+' '+msg;
+    }
   }
-  export const addErrorMessage=(service:MessageService, message:string)=>{
+  export const addErrorMessage=(service:MessageService, message:string, title:string| null)=>{
     const mes = new ErrorLoginMessage();
     mes.detail = message;
+    if(title!==null){
+      mes.setTitle(title)
+    }
+    service.add(mes);
+  }
+  export const addSuccessMMessage = (service:MessageService,message:string,title:string| null)=>{
+    const mes = new SuccessMessage();
+    mes.detail = message;
+    if(title!==null){
+      mes.setTitle(title)
+    }
     service.add(mes);
   }
 }

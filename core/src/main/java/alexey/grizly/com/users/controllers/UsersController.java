@@ -76,15 +76,15 @@ public class UsersController {
             List<String> errorMessage = new ArrayList<>(6);
             for (ConstraintViolation<ChangePasswordRequestDto> violation : violations) {
                 errorMessage.add(violation.getMessage());
-                return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
             }
+            AppResponseErrorDto errorDto = new AppResponseErrorDto(HttpStatus.BAD_REQUEST,errorMessage);
+            return new ResponseEntity<>(errorDto, HttpStatus.BAD_REQUEST);
         }
         String passwordHash = bCryptPasswordEncoder.encode(dto.getPassword());
         if(userAccountService.updatePassword(dto.getEmail(), passwordHash,dto.getToken())){
             return ResponseEntity.ok(new UserResponseDto("Пароль изменен, перейдите к авторизации"));
         }
-        String errorMessage = "Неверные учетные данные пользователя";
-        AppResponseErrorDto errorDto = new AppResponseErrorDto(HttpStatus.NOT_ACCEPTABLE,errorMessage);
+        AppResponseErrorDto errorDto = new AppResponseErrorDto(HttpStatus.NOT_ACCEPTABLE,"Неверные учетные данные пользователя");
         return new ResponseEntity<>(errorDto, HttpStatus.NOT_ACCEPTABLE);
     }
 
@@ -95,8 +95,9 @@ public class UsersController {
             List<String> errorMessage = new ArrayList<>(6);
             for (ConstraintViolation<UserRegistrationRequestDto> violation : violations) {
                 errorMessage.add(violation.getMessage());
-                return new ResponseEntity<>(errorMessage, HttpStatus.BAD_REQUEST);
             }
+            AppResponseErrorDto errorDto = new AppResponseErrorDto(HttpStatus.BAD_REQUEST,errorMessage);
+            return new ResponseEntity<>(errorDto, HttpStatus.BAD_REQUEST);
         }
         String passwordHash = bCryptPasswordEncoder.encode(dto.getPassword());
         LocalDateTime createdAt = LocalDateTime.now();
@@ -109,7 +110,8 @@ public class UsersController {
                                             EUserStatus.NEW_USER,
                                             createdAt);
         if(userId==null){
-            return new ResponseEntity<>("Не удалось создать аккаунт",
+            AppResponseErrorDto errorDto =new AppResponseErrorDto(HttpStatus.BAD_REQUEST,"Не удалось создать аккаунт");
+            return new ResponseEntity<>(errorDto,
                     HttpStatus.BAD_REQUEST);
         }
         return ResponseEntity.ok(new UserResponseDto("Аккаунт успешно создан"));
@@ -133,7 +135,7 @@ public class UsersController {
     public ResponseEntity<?> phoneBusyCheck(@PathVariable String phone){
         PhoneNumberValidator validator = new PhoneNumberValidator();
         if(!validator.isValid(phone,null)){
-            AppResponseErrorDto errorDto =new AppResponseErrorDto(HttpStatus.BAD_REQUEST,"Невалидные параметры запроса");
+            AppResponseErrorDto errorDto =new AppResponseErrorDto(HttpStatus.BAD_REQUEST,"Неверный формат телефона");
             return new ResponseEntity<>(errorDto, HttpStatus.BAD_REQUEST);
         }
         if(userAccountService.phoneBusyCheck(phone)){
@@ -147,13 +149,11 @@ public class UsersController {
         int rightLimit = 122; // letter 'z'
         int targetStringLength = this.securityProperties.getRestorePasswordTokenProperty().getRestorePasswordTokenLength();
         Random random = new SecureRandom();
-        String generatedString = random.ints(leftLimit, rightLimit + 1)
+        return random.ints(leftLimit, rightLimit + 1)
                 .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
                 .limit(targetStringLength)
                 .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
                 .toString();
-        System.out.println(generatedString);
-        return generatedString;
     }
 
 }

@@ -14,7 +14,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface PhoneNumber {
     boolean required() default true;
-    String message() default "Invalid phone number";
+    String message() default "Неверный формат номера телефона";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

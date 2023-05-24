@@ -14,7 +14,7 @@ public class PhoneNumberValidator implements ConstraintValidator<PhoneNumber, St
 
     @Override
     public boolean isValid(String contactField, ConstraintValidatorContext validatorContext) {
-        if(!required){
+        if(!required&&((contactField==null)||(contactField.isEmpty()))){
             return true;
         }
         return contactField != null

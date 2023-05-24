@@ -12,7 +12,7 @@ public class UserRegistrationRequestDto {
     @Email(regexp=".*@.*\\..*",message = "Не валидный email")
     @Size(min = 5, max = 50, message = "Не валидный email")
     private String email;
-    @Size(min = 5, max = 50,message = "Не валидный номер телефона")
+    @Size(min = 5, max = 20,message = "Не валидный номер телефона")
     @PhoneNumber(message = "Не валидный номер телефона",required = false)
     private String phone;
     @Size(min = 5,max = 50,message = "Пароль не соответствует требований")

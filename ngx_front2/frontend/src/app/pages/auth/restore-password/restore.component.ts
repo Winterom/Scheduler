@@ -35,26 +35,25 @@ export class RestoreComponent {
     this.loading = true;
     this.emailControl.markAsTouched();
     if (this.emailControl.hasError('email')) {
-      console.log("invalid")
-      addErrorMessage(this.messageService,'Введен не корректный email');
+      addErrorMessage(this.messageService,'Введен не корректный email',null);
     }
     if (this.emailControl.hasError('required')) {
-      console.log("netu")
-      addErrorMessage(this.messageService,'Email не введен')
+      addErrorMessage(this.messageService,'Email не введен',null)
     }
     if (this.emailControl.invalid) {
       this.loading = false;
       return;
     }
     this.restoreService.sendAccountEmail(this.emailControl.value).subscribe({next:data =>{
-        console.log(data);
         this.responseEmail = data.message;
         this.loading=false;
         this.resultSuccess =true;
       },error:err => {
-      console.log(err);
         this.loading=false;
-        addErrorMessage(this.messageService,err.error.message)
+        const errorMessages: string [] = err.error.messages
+        errorMessages.forEach((value)=>{
+          addErrorMessage(this.messageService,value,err.error.statusCode);
+        })
       }})
   }
 }

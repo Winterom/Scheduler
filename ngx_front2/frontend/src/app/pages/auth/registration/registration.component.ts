@@ -8,6 +8,7 @@ import {checkIfMatchingPasswords} from "../../../validators/MatchingPasswordsVal
 import {AuthMessage} from "../../../messages/AuthMessages";
 import {MessageService} from "primeng/api";
 import addErrorMessage = AuthMessage.addErrorMessage;
+import addSuccessMMessage = AuthMessage.addSuccessMMessage;
 
 
 @Component({
@@ -71,61 +72,63 @@ export class RegistrationComponent implements OnInit {
     });
     /***************************************************************************/
     if (this.emailControl.hasError('email')) {
-      addErrorMessage(this.messageService,'Введен не корректный email')
+      addErrorMessage(this.messageService,'Введен не корректный email', null)
       hasError = true;
     }
     if (this.emailControl.hasError('required')) {
-      addErrorMessage(this.messageService,'Email не введен')
+      addErrorMessage(this.messageService,'Email не введен', null)
       hasError = true;
     }
     /***************************************************************************/
     if (this.surnameControl.hasError('required')) {
-      addErrorMessage(this.messageService,'Не введена фамилия пользователя')
+      addErrorMessage(this.messageService,'Не введена фамилия пользователя', null)
       hasError = true;
     }
     if (this.surnameControl.hasError('pattern')) {
-      addErrorMessage(this.messageService,'Недопустимые символы в фамилии пользователя')
+      addErrorMessage(this.messageService,'Недопустимые символы в фамилии пользователя', null)
       hasError = true;
     }
     /***************************************************************************/
     if (this.nameControl.hasError('required')) {
-      addErrorMessage(this.messageService,'Не введено имя пользователя')
+      addErrorMessage(this.messageService,'Не введено имя пользователя', null)
       hasError = true;
     }
     if (this.nameControl.hasError('pattern')) {
-      addErrorMessage(this.messageService,'Недопустимые символы в имени пользователя')
+      addErrorMessage(this.messageService,'Недопустимые символы в имени пользователя', null)
       hasError = true;
     }
     /***************************************************************************/
     if (this.lastnameControl.hasError('pattern')) {
-      addErrorMessage(this.messageService,'Недопустимые символы в отчестве пользователя')
+      addErrorMessage(this.messageService,'Недопустимые символы в отчестве пользователя', null)
       hasError = true;
     }
     /***************************************************************************/
     if (this.passwordControl.hasError('required')) {
-      addErrorMessage(this.messageService,'Введите пароль')
+      addErrorMessage(this.messageService,'Введите пароль', null)
       hasError = true;
     }
     if (this.passwordControl.hasError('passwordStrange')) {
-      addErrorMessage(this.messageService,'Пароль не соответствует требованиям')
+      addErrorMessage(this.messageService,'Пароль не соответствует требованиям', null)
       hasError = true;
     }
     /***************************************************************************/
     if (this.confirmPasswordControl.hasError('required')) {
-      addErrorMessage(this.messageService,'Повторите пароль')
+      addErrorMessage(this.messageService,'Повторите пароль', null)
       hasError = true;
     }
     if (this.registrationForm.hasError('match_error')) {
-      addErrorMessage(this.messageService,'Пароли не совпадают')
+      addErrorMessage(this.messageService,'Пароли не совпадают', null)
       hasError = true;
     }
     if (hasError) {
       this.loading = false;
       return;
     }
+    let rawPhone: string = this.phoneControl.value.toString();
+    const phone ='+7'+ rawPhone.replaceAll('-','');
     this.regService.registration(
       this.emailControl.value,
-      '+7'+this.phoneControl.value,
+      phone,
       this.surnameControl.value,
       this.nameControl.value,
       this.lastnameControl.value,
@@ -136,9 +139,10 @@ export class RegistrationComponent implements OnInit {
         this.resultSuccess=true;
       }, error: err => {
         this.loading = false;
-        let message = new AuthMessage.ErrorLoginMessage;
-        message.detail = err.error.message;
-        this.messageService.add(message);
+        const errorMessages: string [] = err.error.messages
+        errorMessages.forEach((value)=>{
+          addErrorMessage(this.messageService,value,err.error.statusCode);
+        })
         this.resultSuccess=false;
       }
     })
@@ -150,10 +154,13 @@ export class RegistrationComponent implements OnInit {
     }
     this.regService.checkEmail(this.emailControl.value).subscribe({
       next: () => {
-        this.messageService.add(new AuthMessage.SuccessCheckEmail);
+        addSuccessMMessage(this.messageService,'email введен правильно и свободен',null);
         this.emailControl.updateValueAndValidity();
       },error:err=>{
-        addErrorMessage(this.messageService,err.error.message)
+        const errorMessages: string [] = err.error.messages
+        errorMessages.forEach((value)=>{
+          addErrorMessage(this.messageService,value,err.error.statusCode);
+        })
         this.emailControl.setErrors({emailBusy:true});
       }
     })
@@ -162,13 +169,18 @@ export class RegistrationComponent implements OnInit {
     if (this.phoneControl.errors != null||this.phoneControl.value===0) {
       return;
     }
-    console.log('phone '+this.phoneControl.value);
-    this.regService.checkPhone(this.phoneControl.value).subscribe({
+    let rawPhone: string = this.phoneControl.value.toString();
+    const phone ='+7'+ rawPhone.replaceAll('-','');
+    console.log(phone);
+    this.regService.checkPhone(phone).subscribe({
       next: () => {
-        this.messageService.add(new AuthMessage.SuccessCheckEmail);
+        addSuccessMMessage(this.messageService,'Телефон введен правильно и свободен',null)
         this.phoneControl.updateValueAndValidity();
       },error:err=>{
-        addErrorMessage(this.messageService,err.error.message)
+        const errorMessages: string [] = err.error.messages
+        errorMessages.forEach((value)=>{
+          addErrorMessage(this.messageService,value,err.error.statusCode);
+        })
         this.phoneControl.setErrors({phoneBusy:true});
       }
     })

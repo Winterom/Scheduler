@@ -52,7 +52,7 @@ public class UserAccount implements UserDetails {
     }
 
     public boolean isEnabled() {
-        return this.status.equals(EUserStatus.ACTIVE);
+        return this.status.equals(EUserStatus.ACTIVE) || this.status.equals(EUserStatus.NEW_USER);
     }
 
     @Override
