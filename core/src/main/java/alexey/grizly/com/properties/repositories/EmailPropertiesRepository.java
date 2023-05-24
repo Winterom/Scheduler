@@ -7,7 +7,5 @@ import java.util.List;
 
 @Repository
 public interface EmailPropertiesRepository {
-
-    List<EmailPropertyModel> getAllProperties();
     List<EmailPropertyModel> getEnabledEmailProperties();
 }

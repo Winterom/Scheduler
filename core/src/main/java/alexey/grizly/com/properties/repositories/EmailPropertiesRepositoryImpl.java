@@ -1,16 +1,15 @@
 package alexey.grizly.com.properties.repositories;
 
-import alexey.grizly.com.properties.extractors.SimpleEmailPropertyRowMapper;
+import alexey.grizly.com.properties.extractors.EmailPropertyRowMapper;
 import alexey.grizly.com.properties.models.EmailPropertyModel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 @Repository
 public class EmailPropertiesRepositoryImpl implements EmailPropertiesRepository{
+    private final String SELECT_ENABLED_PROP="SELECT * FROM email_properties as p WHERE is_enabled = true";
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
     @Autowired
@@ -19,13 +18,7 @@ public class EmailPropertiesRepositoryImpl implements EmailPropertiesRepository{
     }
 
     @Override
-    public List<EmailPropertyModel> getAllProperties() {
-        SqlParameterSource namedParameters = new MapSqlParameterSource();
-        return jdbcTemplate.query("SELECT id,email,is_enabled,type,description FROM email_properties",namedParameters,new SimpleEmailPropertyRowMapper());
-    }
-
-    @Override
     public List<EmailPropertyModel> getEnabledEmailProperties() {
-        return null;
+        return jdbcTemplate.getJdbcTemplate().query(SELECT_ENABLED_PROP,new EmailPropertyRowMapper());
     }
 }

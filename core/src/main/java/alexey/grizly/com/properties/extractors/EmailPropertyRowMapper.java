@@ -2,18 +2,15 @@ package alexey.grizly.com.properties.extractors;
 
 import alexey.grizly.com.properties.models.EEmailType;
 import alexey.grizly.com.properties.models.EmailPropertyModel;
-import org.springframework.dao.DataAccessException;
-import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class EmailPropertyExtractor  implements ResultSetExtractor<EmailPropertyModel> {
+public class EmailPropertyRowMapper implements RowMapper<EmailPropertyModel> {
+
     @Override
-    public EmailPropertyModel extractData(ResultSet rs) throws SQLException, DataAccessException {
-        if(!rs.next()){
-            return null;
-        }
+    public EmailPropertyModel mapRow(ResultSet rs, int rowNum) throws SQLException {
         EmailPropertyModel property = new EmailPropertyModel();
         property.setId(rs.getLong("id"));
         property.setEmail(rs.getString("email"));

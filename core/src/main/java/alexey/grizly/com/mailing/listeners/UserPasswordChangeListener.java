@@ -2,9 +2,13 @@ package alexey.grizly.com.mailing.listeners;
 
 
 import alexey.grizly.com.commons.events.UserPasswordChangeSendEmailEvent;
-import alexey.grizly.com.mailing.services.AdminMailSender;
+import alexey.grizly.com.mailing.services.EmailSenders;
+import alexey.grizly.com.properties.models.EEmailType;
+import org.jetbrains.annotations.Nullable;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
 
 
@@ -12,10 +16,12 @@ import org.springframework.stereotype.Component;
 public class UserPasswordChangeListener implements
         ApplicationListener<UserPasswordChangeSendEmailEvent> {
 
-    private final AdminMailSender adminMailSender;
+    @Nullable
+    private final JavaMailSender emailSender;
 
-    public UserPasswordChangeListener(final AdminMailSender adminMailSender) {
-        this.adminMailSender = adminMailSender;
+    @Autowired
+    public UserPasswordChangeListener(final EmailSenders emailSenders) {
+        this.emailSender = emailSenders.getMailSenders().get(EEmailType.ADMIN_SENDER);
     }
 
     @Override
@@ -24,13 +30,16 @@ public class UserPasswordChangeListener implements
     }
 
     private void eventHandler(final UserPasswordChangeSendEmailEvent event){
+        if(this.emailSender==null){
+            return;
+        }
         SimpleMailMessage message = new SimpleMailMessage();
-        String from = adminMailSender.getMailSender().getUsername();
-        message.setFrom(from);
+        /*String from = ;
+        message.setFrom(from);*/
         message.setTo(event.getParam().getEmail());
-        message.setSubject("Восстановление пароля");
-        message.setText("Для восстановления пароля  " +
+        message.setSubject("Смена пароля");
+        message.setText("Для смены пароля  " +
                         " перейдите по ссылке " + event.getParam().getChangePasswordUrl());
-        adminMailSender.getMailSender().send(message);
+        emailSender.send(message);
     }
 }
