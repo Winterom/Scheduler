@@ -12,10 +12,9 @@ public interface UserAccountRepository {
 
     UserAccount getSimpleUserAccount(final String email);
 
-    int saveRestorePasswordToken(final Long userId,
-                                 final LocalDateTime expireDate,
-                                 final String token);
-
+    int updatePassword(final Long userId,
+                       final String passwordHash,
+                       final LocalDateTime credentialExpired);
     Long registrationNewUser(final String email,
                              final String phone,
                              final String passwordHash,

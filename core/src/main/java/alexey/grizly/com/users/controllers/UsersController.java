@@ -1,7 +1,8 @@
 package alexey.grizly.com.users.controllers;
 
 import alexey.grizly.com.commons.errors.AppResponseErrorDto;
-import alexey.grizly.com.commons.events.UserPasswordChangeSendEmailEvent;
+import alexey.grizly.com.commons.events.UserPasswordChangeEvent;
+import alexey.grizly.com.commons.events.UserRegistrationEvent;
 import alexey.grizly.com.properties.properties.GlobalProperties;
 import alexey.grizly.com.properties.properties.SecurityProperties;
 import alexey.grizly.com.users.dtos.request.ChangePasswordRequestDto;
@@ -10,6 +11,7 @@ import alexey.grizly.com.users.dtos.response.UserResponseDto;
 import alexey.grizly.com.users.models.EUserStatus;
 import alexey.grizly.com.users.models.UserAccount;
 import alexey.grizly.com.users.services.UserAccountService;
+import alexey.grizly.com.users.utils.ApprovedTokenUtils;
 import alexey.grizly.com.users.validators.PhoneNumberValidator;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
@@ -22,7 +24,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.SecureRandom;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -31,7 +32,7 @@ import java.util.*;
 @RequestMapping("api/v1/users")
 public class UsersController {
     private final UserAccountService userAccountService;
-    private final ApplicationEventMulticaster multicaster;
+    private final ApplicationEventMulticaster eventMulticaster;
     private final GlobalProperties globalProperties;
     private final SecurityProperties securityProperties;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -39,12 +40,12 @@ public class UsersController {
 
     @Autowired
     public UsersController(final UserAccountService pUserAccountService,
-                           final ApplicationEventMulticaster pMulticaster,
+                           final ApplicationEventMulticaster multicaster,
                            final GlobalProperties globalProperties,
                            final SecurityProperties properties,
                            final BCryptPasswordEncoder bCryptPasswordEncoder, Validator validator) {
         this.userAccountService = pUserAccountService;
-        this.multicaster = pMulticaster;
+        this.eventMulticaster = multicaster;
         this.globalProperties = globalProperties;
         securityProperties = properties;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
@@ -53,7 +54,7 @@ public class UsersController {
 
 
     @GetMapping("password/change/{email}")
-    public ResponseEntity<?> sendTokenForResetPassword(@PathVariable @Email final String email){
+    public ResponseEntity<?> sendTokenForChangePassword(@PathVariable @Email final String email){
         UserAccount userAccount = userAccountService.getSimpleUserAccount(email);
         if(userAccount==null){
             AppResponseErrorDto dto = new AppResponseErrorDto(HttpStatus.BAD_REQUEST,"Аккаунт с email: "+email+" не существует");
@@ -61,11 +62,11 @@ public class UsersController {
         }
         LocalDateTime expireTokenTime = LocalDateTime.now().plus(securityProperties.getRestorePasswordTokenProperty().getRestorePasswordTokenLifetime(),
                 securityProperties.getRestorePasswordTokenProperty().getUnit());
-        String token = generateRestorePasswordToken();
-        userAccountService.saveRestorePasswordToken(userAccount.getId(),expireTokenTime,token);
-        String url =globalProperties.getHost() + "/reset?token=" + Arrays.toString(Base64.getEncoder().encode((userAccount.getEmail() + "&&" + token).getBytes()));
-        UserPasswordChangeSendEmailEvent event = new UserPasswordChangeSendEmailEvent(new UserPasswordChangeSendEmailEvent.EventParam(userAccount.getEmail(),url));
-        multicaster.multicastEvent(event);
+        String token = ApprovedTokenUtils.generateRestorePasswordToken(securityProperties.getRestorePasswordTokenProperty().getRestorePasswordTokenLength());
+        userAccountService.saveChangePasswordToken(userAccount.getId(),expireTokenTime,token);
+        String url =globalProperties.getHost() + "/reset?email=" +userAccount.getEmail()+"&token="+ token;
+        UserPasswordChangeEvent event = new UserPasswordChangeEvent(new UserPasswordChangeEvent.EventParam(userAccount.getEmail(),url));
+        eventMulticaster.multicastEvent(event);
         return ResponseEntity.ok(new UserResponseDto(userAccount.getEmail()));
     }
 
@@ -80,12 +81,20 @@ public class UsersController {
             AppResponseErrorDto errorDto = new AppResponseErrorDto(HttpStatus.BAD_REQUEST,errorMessage);
             return new ResponseEntity<>(errorDto, HttpStatus.BAD_REQUEST);
         }
-        String passwordHash = bCryptPasswordEncoder.encode(dto.getPassword());
-        if(userAccountService.updatePassword(dto.getEmail(), passwordHash,dto.getToken())){
-            return ResponseEntity.ok(new UserResponseDto("Пароль изменен, перейдите к авторизации"));
+        UserAccount userAccount = userAccountService.checkPasswordChangeToken(dto.getEmail(),dto.getToken());
+        if(userAccount==null){
+            AppResponseErrorDto errorDto = new AppResponseErrorDto(HttpStatus.NOT_ACCEPTABLE,"Неверные учетные данные пользователя");
+            return new ResponseEntity<>(errorDto, HttpStatus.NOT_ACCEPTABLE);
         }
-        AppResponseErrorDto errorDto = new AppResponseErrorDto(HttpStatus.NOT_ACCEPTABLE,"Неверные учетные данные пользователя");
-        return new ResponseEntity<>(errorDto, HttpStatus.NOT_ACCEPTABLE);
+        if(bCryptPasswordEncoder.matches(dto.getPassword(), userAccount.getPassword())){
+            AppResponseErrorDto errorDto = new AppResponseErrorDto(HttpStatus.NOT_ACCEPTABLE,"Новый пароль не должен совпадать со старым");
+            return new ResponseEntity<>(errorDto, HttpStatus.NOT_ACCEPTABLE);
+        }
+        String passwordHash = bCryptPasswordEncoder.encode(dto.getPassword());
+        LocalDateTime credentialExpired = LocalDateTime.now().plus(securityProperties.getPasswordProperty().getPasswordExpired(),
+                securityProperties.getPasswordProperty().getUnit());
+        userAccountService.updatePassword(userAccount, passwordHash,credentialExpired);
+        return ResponseEntity.ok(new UserResponseDto("Пароль изменен, перейдите к авторизации"));
     }
 
     @PostMapping("registration")
@@ -103,17 +112,17 @@ public class UsersController {
         LocalDateTime createdAt = LocalDateTime.now();
         LocalDateTime credentialExpired = createdAt.plus(securityProperties.getPasswordProperty().getPasswordExpired(),
                 securityProperties.getPasswordProperty().getUnit());
-        Long userId = userAccountService.createNewUserAccount(dto.getEmail(),
+        UserAccount userAccount = userAccountService.createNewUserAccount(dto.getEmail(),
                                             dto.getPhone(),
                                             passwordHash,
                                             credentialExpired,
                                             EUserStatus.NEW_USER,
                                             createdAt);
-        if(userId==null){
-            AppResponseErrorDto errorDto =new AppResponseErrorDto(HttpStatus.BAD_REQUEST,"Не удалось создать аккаунт");
-            return new ResponseEntity<>(errorDto,
-                    HttpStatus.BAD_REQUEST);
-        }
+        String token = ApprovedTokenUtils.generateRestorePasswordToken(securityProperties.getRestorePasswordTokenProperty().getRestorePasswordTokenLength());
+        userAccountService.saveApprovedEmailToken(userAccount.getId(), token);
+        String url =globalProperties.getHost() + "/approved?email="+userAccount.getEmail() +"&token="+ token;
+        UserRegistrationEvent event = new UserRegistrationEvent(new UserRegistrationEvent.EventParam(userAccount,url));
+        eventMulticaster.multicastEvent(event);
         return ResponseEntity.ok(new UserResponseDto("Аккаунт успешно создан"));
     }
 
@@ -144,16 +153,6 @@ public class UsersController {
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }
-    private String generateRestorePasswordToken(){
-        int leftLimit = 48; // numeral '0'
-        int rightLimit = 122; // letter 'z'
-        int targetStringLength = this.securityProperties.getRestorePasswordTokenProperty().getRestorePasswordTokenLength();
-        Random random = new SecureRandom();
-        return random.ints(leftLimit, rightLimit + 1)
-                .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
-                .limit(targetStringLength)
-                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
-                .toString();
-    }
+
 
 }

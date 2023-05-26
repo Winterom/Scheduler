@@ -7,10 +7,10 @@ import org.springframework.context.ApplicationEvent;
 
 @Getter
 @Setter
-public class UserPasswordChangeSendEmailEvent extends ApplicationEvent {
+public class UserPasswordChangeEvent extends ApplicationEvent {
     private EventParam param;
 
-    public UserPasswordChangeSendEmailEvent(EventParam param) {
+    public UserPasswordChangeEvent(EventParam param) {
         super(param);
         this.param = param;
     }

@@ -33,7 +33,7 @@ export class ChangePasswordComponent implements OnInit{
     this.passwordControl = new FormControl<string>('',[Validators.required]);
     this.confirmPasswordControl = new FormControl<string>('',Validators.required);
     this.emailControl = new FormControl<string>('',[Validators.required,Validators.email]);
-    this.tokenControl = new FormControl<string>('',[Validators.required,Validators.pattern('[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}')])
+    this.tokenControl = new FormControl<string>('',[Validators.required,Validators.max(100)]);
     this.changePasswordForm = new FormGroup<any>({
       "newPassword": this.passwordControl,
       "confirmPassword": this.confirmPasswordControl,

@@ -20,15 +20,13 @@ import java.time.LocalDateTime;
 
 @Repository
 public class UserAccountRepositoryImpl implements UserAccountRepository {
-    private final static String SELECT_SIMPLE_USER="SELECT * FROM users WHERE email=:email;";
-    private final static String SAVE_RESTORE_PASSWORD_TOKEN="INSERT INTO restore_psw_token(id, token, expire) VALUES (:id,:token,:expire) "+
-            "ON CONFLICT (id) DO UPDATE SET token = :token, expire = :expire;";
-    private final static String CREATE_NEW_USER="INSERT INTO users (email, phone, password, credential_expired, e_status, createdat) "+
+    private final String SELECT_SIMPLE_USER="SELECT * FROM users WHERE email=:email;";
+    private final String CREATE_NEW_USER="INSERT INTO users (email, phone, password, credential_expired, e_status, createdat) "+
             "VALUES (:email,:phone,:password,:credentialExpired, :status, :createdAt);";
-    private final static String COUNT_USAGE_EMAIL="SELECT COUNT(u.email) FROM users as u where u.email = :email;";
-
-    private final static String COUNT_USAGE_PHONE ="SELECT COUNT(u.phone) FROM users as u where u.phone = :phone;";
-    
+    private final String COUNT_USAGE_EMAIL="SELECT COUNT(u.email) FROM users as u where u.email = :email;";
+    private final String UPDATE_PASSWORD = "UPDATE users  set credential_expired =:credentialExpired," +
+            "password = :password where id=:userId";
+    private final  String COUNT_USAGE_PHONE ="SELECT COUNT(u.phone) FROM users as u where u.phone = :phone;";
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
     @Autowired
@@ -46,14 +44,14 @@ public class UserAccountRepositoryImpl implements UserAccountRepository {
             return null;
         }
     }
+
     @Override
-    @Transactional
-    public int saveRestorePasswordToken(final Long userId, final LocalDateTime expireDate, final String token){
+    public int updatePassword(Long userId, String passwordHash, LocalDateTime credentialExpired) {
         SqlParameterSource namedParameters = new MapSqlParameterSource()
-                .addValue("id", userId)
-                .addValue("expire", expireDate)
-                .addValue("token", token);
-        return jdbcTemplate.update(SAVE_RESTORE_PASSWORD_TOKEN, namedParameters);
+                .addValue("userId",userId)
+                .addValue("password",passwordHash)
+                .addValue("credentialExpired",credentialExpired);
+        return jdbcTemplate.update(UPDATE_PASSWORD,namedParameters);
     }
 
     @Override
@@ -73,6 +71,9 @@ public class UserAccountRepositoryImpl implements UserAccountRepository {
                 .addValue("status",status.toString())
                 .addValue("createdAt",createdAt);
         jdbcTemplate.update(CREATE_NEW_USER, namedParameters,keyHolder,new String[] { "id" });
+        if(keyHolder.getKey()==null){
+            return null;
+        }
         return keyHolder.getKey().longValue();
     }
 

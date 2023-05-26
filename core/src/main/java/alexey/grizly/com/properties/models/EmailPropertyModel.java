@@ -23,12 +23,10 @@ public class EmailPropertyModel {
     @Setter
     public static class OutgoingSmtpServer{
         private String host;
-        private Boolean enabledSSL;
-        private Boolean enabledTLS;
         private Boolean requireAuth;
+        private SmtpServerProtocol protocol;
         private Integer portSSL;
         private Integer portTLS;
-        private String transportProtocol;
     }
 
     @Getter
@@ -42,5 +40,9 @@ public class EmailPropertyModel {
 
     public enum IncomingServerType{
         IMAP,POP3
+    }
+
+    public enum SmtpServerProtocol{
+        SSL,TLS
     }
 }

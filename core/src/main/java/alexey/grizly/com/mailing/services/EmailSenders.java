@@ -50,14 +50,14 @@ public class EmailSenders {
             props.put("mail.smtp.auth", "false");
         }
         /*******************************************************/
-        if(propertyModel.getSmtpServer().getEnabledSSL()){
+        if(propertyModel.getSmtpServer().getProtocol().equals(EmailPropertyModel.SmtpServerProtocol.SSL)){
             props.put("mail.smtp.ssl.enable", "true");
             mailSender.setPort(propertyModel.getSmtpServer().getPortSSL());
-        }
-        if(propertyModel.getSmtpServer().getEnabledTLS()){
+        }else{
             props.put("mail.smtp.starttls.enable", "true");
             mailSender.setPort(propertyModel.getSmtpServer().getPortTLS());
         }
+
         /*******************************************************/
         /*TODO перенести в properties*/
         props.setProperty("mail.smtp.connectiontimeout", "5000");
