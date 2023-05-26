@@ -12,4 +12,6 @@ public interface ChangePasswordTokenRepository {
                                 final String token);
     UserAccount checkPasswordChangeToken(final String email,
                                          final String token);
+
+    void deleteUsedToken(Long id);
 }

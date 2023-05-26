@@ -41,6 +41,7 @@ public class AuthController {
     this.globalProperties = globalProperties;
     }
     /*Почта email1@one.ru Пароль 2012 */
+    /*TODO доделать refresh token*/
     @PostMapping
     public ResponseEntity<?> authentication(@RequestBody @Validated final AuthRequestDto authRequest, BindingResult bindingResult, HttpServletResponse response) {
         /*TODO переделать на jakarta.validation*/

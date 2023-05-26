@@ -7,7 +7,7 @@ import alexey.grizly.com.users.models.UserAccount;
 import alexey.grizly.com.users.repositories.ChangePasswordTokenRepository;
 import alexey.grizly.com.users.repositories.EmailApprovedRepository;
 import alexey.grizly.com.users.repositories.UserAccountRepository;
-import alexey.grizly.com.users.services.RoleForUserService;
+import alexey.grizly.com.users.services.RoleService;
 import alexey.grizly.com.users.services.UserAccountService;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class UserAccountServiceImpl implements UserAccountService {
     private final ChangePasswordTokenRepository changePasswordTokenRepository;
     private final EmailApprovedRepository emailApprovedRepository;
     private final UserAccountRepository userAccountRepository;
-    private final RoleForUserService roleForUserService;
+    private final RoleService roleService;
 
 
 
@@ -31,12 +31,12 @@ public class UserAccountServiceImpl implements UserAccountService {
     public UserAccountServiceImpl(final ChangePasswordTokenRepository changePasswordTokenRepository,
                                   final EmailApprovedRepository emailApprovedRepository,
                                   final UserAccountRepository userAccountRepository,
-                                  final RoleForUserService roleForUserService
+                                  final RoleService roleService
                                   ) {
         this.changePasswordTokenRepository = changePasswordTokenRepository;
         this.emailApprovedRepository = emailApprovedRepository;
         this.userAccountRepository = userAccountRepository;
-        this.roleForUserService = roleForUserService;
+        this.roleService = roleService;
 
     }
 
@@ -54,11 +54,31 @@ public class UserAccountServiceImpl implements UserAccountService {
         return userAccountRepository.getSimpleUserAccount(email);
     }
 
+    @Override
+    public UserAccount getUserAccountByApprovedEmailToken(String email, String token) {
+        return emailApprovedRepository.getUserAccountByVerifiedTokenAndEmail(email,token);
+    }
+
+    @Override
+    public int updateEmailVerifiedStatus(UserAccount userAccount) {
+        return userAccountRepository.setEmailVerifiedStatusTrue(userAccount.getId());
+    }
+
+    @Override
+    public int deleteUsedEmailApprovedToken(UserAccount userAccount) {
+        return emailApprovedRepository.deleteUsedEmailApprovedTokenByUserId(userAccount.getId());
+    }
+
 
     @Override
     public UserAccount checkPasswordChangeToken(final String email, final String token) {
         return changePasswordTokenRepository.checkPasswordChangeToken(email,token);
     }
+
+    public void deleteUsedChangePasswordTokenByUserId(Long userId){
+        changePasswordTokenRepository.deleteUsedToken(userId);
+    }
+
     @Override
     public void updatePassword(final UserAccount userAccount,
                                final String passwordHash,
@@ -80,7 +100,7 @@ public class UserAccountServiceImpl implements UserAccountService {
                                             final LocalDateTime createdAt) {
         Long userId = userAccountRepository.registrationNewUser(email,
                 phone,passwordHash,credentialExpired,status,createdAt);
-        roleForUserService.setDefaultRoleForNewUser(userId);
+        roleService.setDefaultRoleForNewUser(userId);
         UserAccount userAccount = new UserAccount();
         userAccount.setId(userId);
         userAccount.setEmail(email);

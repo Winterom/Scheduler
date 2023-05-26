@@ -14,7 +14,6 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
@@ -93,5 +92,11 @@ public class UserAccountRepositoryImpl implements UserAccountRepository {
         return jdbcTemplate
                 .queryForObject(COUNT_USAGE_PHONE,
                         namedParameters,Long.class);
+    }
+
+    @Override
+    public int setEmailVerifiedStatusTrue(Long id) {
+        /*TODO доделать*/
+        return 0;
     }
 }

@@ -12,9 +12,16 @@ public interface UserAccountService {
 
     UserAccount getSimpleUserAccount(final String email);
 
+    UserAccount getUserAccountByApprovedEmailToken(final String email,
+                                                   final String token);
+    int updateEmailVerifiedStatus(final UserAccount userAccount);
+
+    int deleteUsedEmailApprovedToken(final UserAccount userAccount);
+
     void updatePassword(final UserAccount userAccount,
                         final String passwordHash,
                         LocalDateTime credentialExpired);
+    void deleteUsedChangePasswordTokenByUserId(Long userId);
     UserAccount checkPasswordChangeToken (final String email, final String token);
     UserAccount createNewUserAccount(final String email,
                               final String phone,

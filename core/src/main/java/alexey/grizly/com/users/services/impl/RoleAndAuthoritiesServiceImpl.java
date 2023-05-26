@@ -2,12 +2,12 @@ package alexey.grizly.com.users.services.impl;
 
 import alexey.grizly.com.users.repositories.RoleRepository;
 import alexey.grizly.com.users.services.RoleAndAuthoritiesService;
-import alexey.grizly.com.users.services.RoleForUserService;
+import alexey.grizly.com.users.services.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RoleAndAuthoritiesServiceImpl implements RoleAndAuthoritiesService, RoleForUserService {
+public class RoleAndAuthoritiesServiceImpl implements RoleAndAuthoritiesService, RoleService {
     private final RoleRepository roleRepository;
     private final static Long ROLE_ID_FOR_NEW_USER=1L;
 

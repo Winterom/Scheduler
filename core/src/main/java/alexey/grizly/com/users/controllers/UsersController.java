@@ -5,6 +5,7 @@ import alexey.grizly.com.commons.events.UserPasswordChangeEvent;
 import alexey.grizly.com.commons.events.UserRegistrationEvent;
 import alexey.grizly.com.properties.properties.GlobalProperties;
 import alexey.grizly.com.properties.properties.SecurityProperties;
+import alexey.grizly.com.users.dtos.request.ApprovedEmailRequestDto;
 import alexey.grizly.com.users.dtos.request.ChangePasswordRequestDto;
 import alexey.grizly.com.users.dtos.request.UserRegistrationRequestDto;
 import alexey.grizly.com.users.dtos.response.UserResponseDto;
@@ -52,6 +53,34 @@ public class UsersController {
         this.validator = validator;
     }
 
+    @PostMapping("registration")
+    public ResponseEntity<?> registration(@RequestBody final UserRegistrationRequestDto dto){
+        Set<ConstraintViolation<UserRegistrationRequestDto>> violations = validator.validate(dto);
+        if(!violations.isEmpty()) {
+            List<String> errorMessage = new ArrayList<>(6);
+            for (ConstraintViolation<UserRegistrationRequestDto> violation : violations) {
+                errorMessage.add(violation.getMessage());
+            }
+            AppResponseErrorDto errorDto = new AppResponseErrorDto(HttpStatus.BAD_REQUEST,errorMessage);
+            return new ResponseEntity<>(errorDto, HttpStatus.BAD_REQUEST);
+        }
+        String passwordHash = bCryptPasswordEncoder.encode(dto.getPassword());
+        LocalDateTime createdAt = LocalDateTime.now();
+        LocalDateTime credentialExpired = createdAt.plus(securityProperties.getPasswordProperty().getPasswordExpired(),
+                securityProperties.getPasswordProperty().getUnit());
+        UserAccount userAccount = userAccountService.createNewUserAccount(dto.getEmail(),
+                dto.getPhone(),
+                passwordHash,
+                credentialExpired,
+                EUserStatus.NEW_USER,
+                createdAt);
+        String token = ApprovedTokenUtils.generateRestorePasswordToken(securityProperties.getRestorePasswordTokenProperty().getRestorePasswordTokenLength());
+        userAccountService.saveApprovedEmailToken(userAccount.getId(), token);
+        String url =globalProperties.getHost() + "/approved?email="+userAccount.getEmail() +"&token="+ token;
+        UserRegistrationEvent event = new UserRegistrationEvent(new UserRegistrationEvent.EventParam(userAccount,url));
+        eventMulticaster.multicastEvent(event);
+        return ResponseEntity.ok(new UserResponseDto("Аккаунт успешно создан"));
+    }
 
     @GetMapping("password/change/{email}")
     public ResponseEntity<?> sendTokenForChangePassword(@PathVariable @Email final String email){
@@ -94,36 +123,30 @@ public class UsersController {
         LocalDateTime credentialExpired = LocalDateTime.now().plus(securityProperties.getPasswordProperty().getPasswordExpired(),
                 securityProperties.getPasswordProperty().getUnit());
         userAccountService.updatePassword(userAccount, passwordHash,credentialExpired);
+        userAccountService.deleteUsedChangePasswordTokenByUserId(userAccount.getId());
         return ResponseEntity.ok(new UserResponseDto("Пароль изменен, перейдите к авторизации"));
     }
 
-    @PostMapping("registration")
-    public ResponseEntity<?> registration(@RequestBody final UserRegistrationRequestDto dto){
-        Set<ConstraintViolation<UserRegistrationRequestDto>> violations = validator.validate(dto);
+    @PutMapping("email/approved")
+    public ResponseEntity<?> approvedEmail(@RequestBody final ApprovedEmailRequestDto dto){
+        Set<ConstraintViolation<ApprovedEmailRequestDto>> violations = validator.validate(dto);
         if(!violations.isEmpty()) {
-            List<String> errorMessage = new ArrayList<>(6);
-            for (ConstraintViolation<UserRegistrationRequestDto> violation : violations) {
+            List<String> errorMessage = new ArrayList<>(4);
+            for (ConstraintViolation<ApprovedEmailRequestDto> violation : violations) {
                 errorMessage.add(violation.getMessage());
             }
             AppResponseErrorDto errorDto = new AppResponseErrorDto(HttpStatus.BAD_REQUEST,errorMessage);
             return new ResponseEntity<>(errorDto, HttpStatus.BAD_REQUEST);
         }
-        String passwordHash = bCryptPasswordEncoder.encode(dto.getPassword());
-        LocalDateTime createdAt = LocalDateTime.now();
-        LocalDateTime credentialExpired = createdAt.plus(securityProperties.getPasswordProperty().getPasswordExpired(),
-                securityProperties.getPasswordProperty().getUnit());
-        UserAccount userAccount = userAccountService.createNewUserAccount(dto.getEmail(),
-                                            dto.getPhone(),
-                                            passwordHash,
-                                            credentialExpired,
-                                            EUserStatus.NEW_USER,
-                                            createdAt);
-        String token = ApprovedTokenUtils.generateRestorePasswordToken(securityProperties.getRestorePasswordTokenProperty().getRestorePasswordTokenLength());
-        userAccountService.saveApprovedEmailToken(userAccount.getId(), token);
-        String url =globalProperties.getHost() + "/approved?email="+userAccount.getEmail() +"&token="+ token;
-        UserRegistrationEvent event = new UserRegistrationEvent(new UserRegistrationEvent.EventParam(userAccount,url));
-        eventMulticaster.multicastEvent(event);
-        return ResponseEntity.ok(new UserResponseDto("Аккаунт успешно создан"));
+        UserAccount userAccount = userAccountService
+                .getUserAccountByApprovedEmailToken(dto.getEmail(), dto.getToken());
+        if(userAccount==null){
+            AppResponseErrorDto errorDto = new AppResponseErrorDto(HttpStatus.NOT_ACCEPTABLE,"Неверные учетные данные пользователя");
+            return new ResponseEntity<>(errorDto, HttpStatus.NOT_ACCEPTABLE);
+        }
+        userAccountService.updateEmailVerifiedStatus(userAccount);
+        userAccountService.deleteUsedEmailApprovedToken(userAccount);
+        return ResponseEntity.ok(new UserResponseDto("Почта подтверждена"));
     }
 
     @GetMapping("check-email/{email}")

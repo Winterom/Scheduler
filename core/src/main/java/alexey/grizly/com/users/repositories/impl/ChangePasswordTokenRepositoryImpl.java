@@ -20,6 +20,7 @@ public class ChangePasswordTokenRepositoryImpl implements ChangePasswordTokenRep
             "ON CONFLICT (id) DO UPDATE SET token = :token, expire = :expire;";
     private final String CHECK_TOKEN = "SELECT * FROM users as u left join restore_psw_token rpt on u.id = rpt.id" +
             " where u.email=:email and rpt.token";
+    private final String DELETE_USED_TOKEN = "DELETE FROM restore_psw_token as rpt WHERE rpt.id=:id";
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
     @Autowired
@@ -49,5 +50,12 @@ public class ChangePasswordTokenRepositoryImpl implements ChangePasswordTokenRep
             return null;
         }
 
+    }
+
+    @Override
+    public void deleteUsedToken(Long id) {
+        SqlParameterSource namedParameters = new MapSqlParameterSource()
+                .addValue("id", id);
+        jdbcTemplate.update(DELETE_USED_TOKEN,namedParameters);
     }
 }
