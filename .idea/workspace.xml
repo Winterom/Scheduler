@@ -11,24 +11,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="750a344e-c061-4730-8fc1-d19a16e5fd0b" name="Changes" comment="feat: registration">
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/commons/exceptions/PSQLErrorsTranslator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/auth/approved-email/approved-email.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/auth/approved-email/approved-email.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/auth/approved-email/approved-email.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/commons/errors/AppResponseErrorDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/commons/exceptions/AppResponseErrorDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/commons/configs/JwtRequestFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/commons/configs/JwtRequestFilter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/controllers/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/controllers/AuthController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/controllers/UsersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/controllers/UsersController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/exceptions/UserErrorControllerAdvice.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/commons/exceptions/UserErrorControllerAdvice.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/repositories/UserAccountRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/repositories/UserAccountRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/repositories/impl/EmailApprovedRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/repositories/impl/EmailApprovedRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/repositories/impl/UserAccountRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/repositories/impl/UserAccountRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/services/impl/UserAccountServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/services/impl/UserAccountServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/test/java/users/auth/AuthControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/test/java/users/auth/AuthControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/repositories/impl/ChangePasswordTokenRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/repositories/impl/ChangePasswordTokenRepositoryImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/app-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/auth/approved-email/approved-email.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/auth/approved-email/approved-email.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/auth/approved-email/approved-email.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/auth/approved-email/approved-email.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/auth/approved-email/approved-email.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/auth/approved-email/approved-email.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/auth/change-password/change-password.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/auth/change-password/change-password.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/auth/login.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/auth/login.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/services/API/UsersAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/services/API/UsersAPI.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/auth/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/auth/login/login.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/main.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -144,7 +138,7 @@
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;spring.configuration.checksum&quot;: &quot;1d2dfe7cbec4cb85764de7dce500cd05&quot;,
     &quot;ts.external.directory.path&quot;: &quot;/Volumes/Работа/Scheduler/ngx_front2/frontend/node_modules/typescript/lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
@@ -198,7 +192,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="npm.Angular CLI Server (ngx_front2)">
+  <component name="RunManager" selected="Spring Boot.StartApplication">
     <configuration name="StartApplication | #2" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/StartApplication.http" index="2" requestIdentifier="#2" runType="Run single request">
       <method v="2" />
     </configuration>
@@ -309,7 +303,9 @@
       <workItem from="1684663026443" duration="9125000" />
       <workItem from="1684698332635" duration="7023000" />
       <workItem from="1685133403838" duration="2308000" />
-      <workItem from="1685179169752" duration="12355000" />
+      <workItem from="1685179169752" duration="12386000" />
+      <workItem from="1685300514360" duration="417000" />
+      <workItem from="1685300940400" duration="5669000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1678620390716</created>
@@ -423,7 +419,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685135711384</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="feat: registration">
+      <created>1685297231618</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1685297231618</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

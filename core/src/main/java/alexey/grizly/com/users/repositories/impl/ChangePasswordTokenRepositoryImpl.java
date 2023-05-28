@@ -18,8 +18,9 @@ import java.time.LocalDateTime;
 public class ChangePasswordTokenRepositoryImpl implements ChangePasswordTokenRepository {
     private final String SAVE_RESTORE_PASSWORD_TOKEN="INSERT INTO restore_psw_token(id, token, expire) VALUES (:id,:token,:expire) "+
             "ON CONFLICT (id) DO UPDATE SET token = :token, expire = :expire;";
+    /*TODO проверка истекшего токена!!!*/
     private final String CHECK_TOKEN = "SELECT * FROM users as u left join restore_psw_token rpt on u.id = rpt.id" +
-            " where u.email=:email and rpt.token";
+            " where u.email=:email and rpt.token and (CURRENT_TIMESTAMP < rpt.expire)";
     private final String DELETE_USED_TOKEN = "DELETE FROM restore_psw_token as rpt WHERE rpt.id=:id";
     private final NamedParameterJdbcTemplate jdbcTemplate;
 

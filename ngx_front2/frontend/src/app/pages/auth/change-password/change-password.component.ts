@@ -7,6 +7,7 @@ import {ChangePasswordService} from "./change-password.service";
 import {passwordStrangeValidator} from "../../../validators/PasswordStrangeValidator";
 import {MessageService} from "primeng/api";
 import {AuthMessage} from "../../../messages/AuthMessages";
+import addErrorMessage = AuthMessage.addErrorMessage;
 
 
 @Component({
@@ -50,9 +51,9 @@ export class ChangePasswordComponent implements OnInit{
     if (token) {
       this.tokenControl.setValue(token);
     }
-    const mail = this.activateRoute.snapshot.queryParams['mail'];
-    if (mail) {
-      this.emailControl.setValue(mail);
+    const email = this.activateRoute.snapshot.queryParams['email'];
+    if (email) {
+      this.emailControl.setValue(email);
     }
   }
   submitFrm() {
@@ -123,9 +124,8 @@ export class ChangePasswordComponent implements OnInit{
           this.completeMessage=data.message;
           this.state='complete';
         },error:err=>{
-          let message = new AuthMessage.ErrorLoginMessage;
-          message.detail=err.error.message;
-          this.messageService.add(message);
+        console.log(err)
+          addErrorMessage(this.messageService,err.error.messages,null)
           this.loading=false;
       }
       })

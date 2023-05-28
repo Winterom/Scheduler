@@ -1,17 +1,6 @@
-<div class="container">
-  <div *ngIf="state==='complete'">
-    <p-card header="Почта подтверждена" [style]="{'background': '#BDD9FE'}">
-      <p class="m-0">
-        Ваша электронная почта успешно подтверждена
-      </p>
-    </p-card>
-  </div>
-  <div *ngIf="state==='error'">
-    <p-card header="Почта не подтверждена" [style]="{'background': '#BDD9FE'}">
-      <p class="m-0">
-        Токен подтверждения электронной почты истек
-      </p>
-    </p-card>
-  </div>
-</div>
+<p-card header="Подтверждение почты">
+  <p class="m-0 text-center">
+    {{message}}
+  </p>
+</p-card>
 

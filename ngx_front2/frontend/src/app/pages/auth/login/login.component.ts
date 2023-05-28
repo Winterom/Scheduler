@@ -50,12 +50,9 @@ export class LoginComponent {
 
     this.loginService.login(this.emailOrPhoneInput.value,this.passwordInput.value)
       .subscribe({next:data=>{
-          console.log('response '+data.access_token);
           this.user.token=data.access_token;
           if(!this.user.isAuth){
-            let message = new AuthMessage.ErrorLoginMessage;
-            message.detail='Токен авторизации не валиден!';
-            this.messageService.add(message);
+            addErrorMessage(this.messageService,'Токен авторизации не валиден!',null)
             this.loading=false;
             return;
           }
@@ -75,7 +72,7 @@ export class LoginComponent {
     this.router.navigate(['registration']);
   }
   selectRestorePage(){
-    this.router.navigate(['restore']);
+    this.router.navigate(['password/reset']);
   }
 
 

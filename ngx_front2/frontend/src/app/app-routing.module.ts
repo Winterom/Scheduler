@@ -13,8 +13,8 @@ import {ApprovedEmailComponent} from "./pages/auth/approved-email/approved-email
 const routes: Routes = [
   {path:'login',component:LoginComponent},
   {path:'registration',component:RegistrationComponent},
-  {path:'restore',component:RestoreComponent},
-  {path:'change',component:ChangePasswordComponent},
+  {path:'password/reset',component:RestoreComponent},
+  {path:'password/restore',component:ChangePasswordComponent},
   {path:'approved',component:ApprovedEmailComponent},
   {path:'desktop',component:DesktopComponent
   ,loadChildren:()=>import('./pages/desktop/desktop.module').then(m=>m.DesktopModule)

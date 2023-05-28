@@ -76,7 +76,7 @@ public class UsersController {
                 createdAt);
         String token = ApprovedTokenUtils.generateRestorePasswordToken(securityProperties.getRestorePasswordTokenProperty().getRestorePasswordTokenLength());
         userAccountService.saveApprovedEmailToken(userAccount.getId(), token);
-        String url =globalProperties.getHost() + "/approved?email="+userAccount.getEmail() +"&token="+ token;
+        String url =globalProperties.getHost() + "approved?email="+userAccount.getEmail() +"&token="+ token;
         UserRegistrationEvent event = new UserRegistrationEvent(new UserRegistrationEvent.EventParam(userAccount,url));
         eventMulticaster.multicastEvent(event);
         return ResponseEntity.ok(new UserResponseDto("Аккаунт успешно создан"));
@@ -93,7 +93,7 @@ public class UsersController {
                 securityProperties.getRestorePasswordTokenProperty().getUnit());
         String token = ApprovedTokenUtils.generateRestorePasswordToken(securityProperties.getRestorePasswordTokenProperty().getRestorePasswordTokenLength());
         userAccountService.saveChangePasswordToken(userAccount.getId(),expireTokenTime,token);
-        String url =globalProperties.getHost() + "/reset?email=" +userAccount.getEmail()+"&token="+ token;
+        String url =globalProperties.getHost() + "password/restore?email=" +userAccount.getEmail()+"&token="+ token;
         UserPasswordChangeEvent event = new UserPasswordChangeEvent(new UserPasswordChangeEvent.EventParam(userAccount.getEmail(),url));
         eventMulticaster.multicastEvent(event);
         return ResponseEntity.ok(new UserResponseDto(userAccount.getEmail()));
@@ -127,6 +127,7 @@ public class UsersController {
         return ResponseEntity.ok(new UserResponseDto("Пароль изменен, перейдите к авторизации"));
     }
 
+    /*TODO добавить время жизни токена валидации почты*/
     @PutMapping("email/approved")
     public ResponseEntity<?> approvedEmail(@RequestBody final ApprovedEmailRequestDto dto){
         Set<ConstraintViolation<ApprovedEmailRequestDto>> violations = validator.validate(dto);
@@ -151,8 +152,8 @@ public class UsersController {
 
     @GetMapping("check-email/{email}")
     public ResponseEntity<?> emailBusyCheck(@PathVariable String email){
-        EmailValidator validator = new EmailValidator();
-        if(!validator.isValid(email,null)){
+        EmailValidator emailValidator = new EmailValidator();
+        if(!emailValidator.isValid(email,null)){
             AppResponseErrorDto errorDto =new AppResponseErrorDto(HttpStatus.BAD_REQUEST,"Невалидные параметры запроса");
             return new ResponseEntity<>(errorDto, HttpStatus.BAD_REQUEST);
         }
@@ -165,8 +166,8 @@ public class UsersController {
 
     @GetMapping("check-phone/{phone}")
     public ResponseEntity<?> phoneBusyCheck(@PathVariable String phone){
-        PhoneNumberValidator validator = new PhoneNumberValidator();
-        if(!validator.isValid(phone,null)){
+        PhoneNumberValidator phoneNumberValidator = new PhoneNumberValidator();
+        if(!phoneNumberValidator.isValid(phone,null)){
             AppResponseErrorDto errorDto =new AppResponseErrorDto(HttpStatus.BAD_REQUEST,"Неверный формат телефона");
             return new ResponseEntity<>(errorDto, HttpStatus.BAD_REQUEST);
         }
