@@ -1,6 +1,6 @@
 package alexey.grizly.com.users.controllers;
 
-import alexey.grizly.com.commons.errors.AppResponseErrorDto;
+import alexey.grizly.com.commons.exceptions.AppResponseErrorDto;
 import alexey.grizly.com.commons.events.UserPasswordChangeEvent;
 import alexey.grizly.com.commons.events.UserRegistrationEvent;
 import alexey.grizly.com.properties.properties.GlobalProperties;

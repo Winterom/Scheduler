@@ -13,6 +13,7 @@ import {MessagesModule} from "primeng/messages";
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import {InputTextareaModule} from "primeng/inputtextarea";
 import {CardModule} from "primeng/card";
+import { ApprovedEmailComponent } from './approved-email/approved-email.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import {CardModule} from "primeng/card";
     LoginComponent,
     RestoreComponent,
     RegistrationComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    ApprovedEmailComponent
   ],
     imports: [
         CommonModule,

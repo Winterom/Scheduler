@@ -61,7 +61,7 @@ public class UserAccountServiceImpl implements UserAccountService {
 
     @Override
     public int updateEmailVerifiedStatus(UserAccount userAccount) {
-        return userAccountRepository.setEmailVerifiedStatusTrue(userAccount.getId());
+        return userAccountRepository.setEmailVerifiedStatusByUserId(userAccount.getId(),true);
     }
 
     @Override

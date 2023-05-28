@@ -7,29 +7,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="BeansEndpointTabSettings">
-    <option name="showContexts" value="false" />
+    <option name="diagramMode" value="true" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="750a344e-c061-4730-8fc1-d19a16e5fd0b" name="Changes" comment="feat: registration">
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/dtos/request/ApprovedEmailRequestDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/commons/exceptions/PSQLErrorsTranslator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/auth/approved-email/approved-email.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/auth/approved-email/approved-email.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/auth/approved-email/approved-email.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/commons/configs/DatabaseConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/commons/configs/DatabaseConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/commons/errors/AppResponseErrorDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/commons/exceptions/AppResponseErrorDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/controllers/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/controllers/AuthController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/controllers/UsersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/controllers/UsersController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/dtos/request/ChangePasswordRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/dtos/request/ChangePasswordRequestDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/repositories/ChangePasswordTokenRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/repositories/ChangePasswordTokenRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/repositories/EmailApprovedRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/repositories/EmailApprovedRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/exceptions/UserErrorControllerAdvice.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/commons/exceptions/UserErrorControllerAdvice.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/repositories/UserAccountRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/repositories/UserAccountRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/repositories/impl/ChangePasswordTokenRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/repositories/impl/ChangePasswordTokenRepositoryImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/repositories/impl/EmailApprovedRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/repositories/impl/EmailApprovedRepositoryImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/repositories/impl/UserAccountRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/repositories/impl/UserAccountRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/services/RoleForUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/services/RoleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/services/UserAccountService.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/services/UserAccountService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/services/impl/RoleAndAuthoritiesServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/services/impl/RoleAndAuthoritiesServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/services/impl/UserAccountServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/services/impl/UserAccountServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/resources/db/changelog/users/create/create-email-approved-token-table.sql" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/resources/db/changelog/users/create/create-email-approved-token-table.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/resources/db/changelog/users/create/create-restore-psw-token-table.sql" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/resources/db/changelog/users/create/create-restore-psw-token-table.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/test/java/users/auth/AuthControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/test/java/users/auth/AuthControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/app-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/auth/change-password/change-password.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/auth/change-password/change-password.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/auth/login.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/auth/login.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/services/API/UsersAPI.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/services/API/UsersAPI.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,7 +109,7 @@
     <nx.json value="" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+    <option name="selectedTabId" value="ProjectErrors" />
   </component>
   <component name="ProjectId" id="2MubLmDa2bdTYCLgbGgOBDPhL9R" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -199,35 +198,14 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.StartApplication">
-    <configuration name="PasswordValidatorTest.validMinMaxLength" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/core" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;users.validators.PasswordValidatorTest.validMinMaxLength&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <ForceTestExec>true</ForceTestExec>
-      <method v="2" />
-    </configuration>
-    <configuration name="StartApplication | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/StartApplication.http" requestIdentifier="#1" runType="Run single request">
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="npm.Angular CLI Server (ngx_front2)">
     <configuration name="StartApplication | #2" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/StartApplication.http" index="2" requestIdentifier="#2" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="StartApplication | #3" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/StartApplication.http" index="3" requestIdentifier="#3" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="StartApplication | #4" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/StartApplication.http" index="4" requestIdentifier="#4" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="Angular Application (ngx_front)" type="JavascriptDebugType" uri="http://localhost:4200">
@@ -280,11 +258,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="HTTP Request.StartApplication | #4" />
+        <item itemvalue="HTTP Request.StartApplication | #3" />
+        <item itemvalue="HTTP Request.StartApplication | #2" />
         <item itemvalue="Nx.frontend:build:production" />
         <item itemvalue="npm.build" />
-        <item itemvalue="Gradle.PasswordValidatorTest.validMinMaxLength" />
-        <item itemvalue="HTTP Request.StartApplication | #2" />
-        <item itemvalue="HTTP Request.StartApplication | #1" />
       </list>
     </recent_temporary>
   </component>
@@ -330,7 +308,8 @@
       <workItem from="1684352621501" duration="13732000" />
       <workItem from="1684663026443" duration="9125000" />
       <workItem from="1684698332635" duration="7023000" />
-      <workItem from="1685133403838" duration="2107000" />
+      <workItem from="1685133403838" duration="2308000" />
+      <workItem from="1685179169752" duration="12355000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1678620390716</created>
@@ -437,7 +416,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684701872414</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="feat: registration">
+      <created>1685135711384</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1685135711384</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

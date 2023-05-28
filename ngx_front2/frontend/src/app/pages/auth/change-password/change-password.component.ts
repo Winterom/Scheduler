@@ -48,11 +48,11 @@ export class ChangePasswordComponent implements OnInit{
       }});
     const token = this.activateRoute.snapshot.queryParams['token'];
     if (token) {
-      this.tokenControl.setValue(token)
+      this.tokenControl.setValue(token);
     }
     const mail = this.activateRoute.snapshot.queryParams['mail'];
     if (mail) {
-      this.emailControl.setValue(mail)
+      this.emailControl.setValue(mail);
     }
   }
   submitFrm() {
@@ -125,7 +125,6 @@ export class ChangePasswordComponent implements OnInit{
         },error:err=>{
           let message = new AuthMessage.ErrorLoginMessage;
           message.detail=err.error.message;
-          console.log(err)
           this.messageService.add(message);
           this.loading=false;
       }

@@ -8,12 +8,14 @@ import {RegistrationComponent} from "./pages/auth/registration/registration.comp
 import {ChangePasswordComponent} from "./pages/auth/change-password/change-password.component";
 import {TitleStrategyService} from "./services/title-strategy.service";
 import {desktopGuard} from "./guards/desktop.guard";
+import {ApprovedEmailComponent} from "./pages/auth/approved-email/approved-email.component";
 
 const routes: Routes = [
   {path:'login',component:LoginComponent},
   {path:'registration',component:RegistrationComponent},
   {path:'restore',component:RestoreComponent},
   {path:'change',component:ChangePasswordComponent},
+  {path:'approved',component:ApprovedEmailComponent},
   {path:'desktop',component:DesktopComponent
   ,loadChildren:()=>import('./pages/desktop/desktop.module').then(m=>m.DesktopModule)
   ,canActivate:[desktopGuard]},

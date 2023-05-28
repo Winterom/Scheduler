@@ -26,5 +26,5 @@ public interface UserAccountRepository {
 
     Long countOfUsagePhone(String phone);
 
-    int setEmailVerifiedStatusTrue(Long id);
+    int setEmailVerifiedStatusByUserId(Long id,Boolean status);
 }

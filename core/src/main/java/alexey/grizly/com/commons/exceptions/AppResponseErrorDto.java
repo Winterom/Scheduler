@@ -1,4 +1,4 @@
-package alexey.grizly.com.commons.errors;
+package alexey.grizly.com.commons.exceptions;
 
 
 import lombok.Data;

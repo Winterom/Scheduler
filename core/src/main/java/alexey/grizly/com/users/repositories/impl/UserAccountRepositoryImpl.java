@@ -14,6 +14,7 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
@@ -25,7 +26,9 @@ public class UserAccountRepositoryImpl implements UserAccountRepository {
     private final String COUNT_USAGE_EMAIL="SELECT COUNT(u.email) FROM users as u where u.email = :email;";
     private final String UPDATE_PASSWORD = "UPDATE users  set credential_expired =:credentialExpired," +
             "password = :password where id=:userId";
-    private final  String COUNT_USAGE_PHONE ="SELECT COUNT(u.phone) FROM users as u where u.phone = :phone;";
+    private final String COUNT_USAGE_PHONE ="SELECT COUNT(u.phone) FROM users as u where u.phone = :phone;";
+
+    private final String SET_EMAIL_VERIFIED="UPDATE users set is_email_verified=:status where id=:id";
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
     @Autowired
@@ -45,6 +48,7 @@ public class UserAccountRepositoryImpl implements UserAccountRepository {
     }
 
     @Override
+    @Transactional
     public int updatePassword(Long userId, String passwordHash, LocalDateTime credentialExpired) {
         SqlParameterSource namedParameters = new MapSqlParameterSource()
                 .addValue("userId",userId)
@@ -55,6 +59,7 @@ public class UserAccountRepositoryImpl implements UserAccountRepository {
 
     @Override
     @Nullable
+    @Transactional
     public Long registrationNewUser(final String email,
                                    final String phone,
                                    final String passwordHash,
@@ -95,8 +100,12 @@ public class UserAccountRepositoryImpl implements UserAccountRepository {
     }
 
     @Override
-    public int setEmailVerifiedStatusTrue(Long id) {
-        /*TODO доделать*/
-        return 0;
+    @Transactional
+    public int setEmailVerifiedStatusByUserId(Long id, Boolean status) {
+        SqlParameterSource namedParameters = new MapSqlParameterSource()
+                .addValue("id",id)
+                .addValue("status",status);
+        return jdbcTemplate
+                .update(SET_EMAIL_VERIFIED, namedParameters);
     }
 }
