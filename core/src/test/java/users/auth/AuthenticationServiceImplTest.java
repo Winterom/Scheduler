@@ -6,7 +6,7 @@ import alexey.grizly.com.users.models.EUserStatus;
 import alexey.grizly.com.users.dtos.request.AuthRequestDto;
 import alexey.grizly.com.users.models.AppAuthorities;
 import alexey.grizly.com.users.models.UserAccount;
-import alexey.grizly.com.users.services.impl.AuthServiceImpl;
+import alexey.grizly.com.users.services.impl.AuthenticationServiceImpl;
 import alexey.grizly.com.users.services.impl.UserAccountDetailsService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -30,16 +30,16 @@ import static org.mockito.Mockito.when;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK,classes = {StartApplication.class})
 @ExtendWith({SpringExtension.class})
-public class AuthServiceImplTest {
+public class AuthenticationServiceImplTest {
     private final static AuthRequestDto authDto = new AuthRequestDto();
     private final static UserAccount userAccount = new UserAccount();
-    private final AuthServiceImpl authServiceImpl;
+    private final AuthenticationServiceImpl authServiceImpl;
     private final BCryptPasswordEncoder encoder;
     @MockBean
     private UserAccountDetailsService userAccountDetailsService;
 
     @Autowired
-    public AuthServiceImplTest(AuthServiceImpl authServiceImpl, BCryptPasswordEncoder encoder) {
+    public AuthenticationServiceImplTest(AuthenticationServiceImpl authServiceImpl, BCryptPasswordEncoder encoder) {
         this.authServiceImpl = authServiceImpl;
         this.encoder = encoder;
     }

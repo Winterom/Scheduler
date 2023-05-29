@@ -42,9 +42,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             }catch (ClaimJwtException e){
                 log.error(e.getMessage()+request);
             }
-
         }
-
         if (authToken != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(authToken, request.getRemoteHost(),
                     jwtTokenUtil.getAuthorities(jwt).stream().map(SimpleGrantedAuthority::new).toList());

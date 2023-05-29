@@ -2,7 +2,6 @@ package alexey.grizly.com.users.services.impl;
 
 
 import alexey.grizly.com.users.extractors.UserAccountWithAuthoritiesExtractor;
-import alexey.grizly.com.users.models.UserAccount;
 import alexey.grizly.com.users.validators.PhoneNumberValidator;
 import org.hibernate.validator.internal.constraintvalidators.bv.EmailValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,16 +45,14 @@ public class UserAccountDetailsService implements UserDetailsService {
 
     private UserDetails loadByEmail(String email){
         SqlParameterSource namedParameters = new MapSqlParameterSource().addValue("email", email);
-        UserAccount userAccount = jdbcTemplate.
+        return jdbcTemplate.
                 query("SELECT u.id,u.email,u.e_status,u.password,u.credential_expired, a.e_authorities FROM users as u " +
                                 "left join users_roles ur on u.id = ur.user_id " +
                                 "left join roles r on ur.role_id = r.id " +
                                 "left join roles_authorities ra on r.id = ra.role_id " +
                                 "left join authorities a on ra.authority_id = a.id " +
-                                "where u.email=:email and u.e_status not in ('BANNED','DISMISSED','DELETED')"
+                                "where u.email=:email"
                         ,namedParameters,new UserAccountWithAuthoritiesExtractor());
-        System.out.println(userAccount);
-        return userAccount;
     }
     private UserDetails loadByPhone(String phone){
         SqlParameterSource namedParameters = new MapSqlParameterSource().addValue("phone", phone);
@@ -65,7 +62,7 @@ public class UserAccountDetailsService implements UserDetailsService {
                                 "left join roles r on ur.role_id = r.id " +
                                 "left join roles_authorities ra on r.id = ra.role_id " +
                                 "left join authorities a on ra.authority_id = a.id " +
-                                "where u.phone=:phone and u.e_status not in ('BANNED','DISMISSED','DELETED')"
+                                "where u.phone=:phone"
                         ,namedParameters,new UserAccountWithAuthoritiesExtractor());
     }
 }

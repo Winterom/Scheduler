@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class RoleAndAuthoritiesServiceImpl implements RoleAndAuthoritiesService, RoleService {
     private final RoleRepository roleRepository;
-    private final static Long ROLE_ID_FOR_NEW_USER=1L;
+    private static final  Long ROLE_ID_FOR_NEW_USER=1L;
 
     @Autowired
     public RoleAndAuthoritiesServiceImpl(RoleRepository roleRepository) {

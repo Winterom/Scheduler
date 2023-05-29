@@ -7,7 +7,7 @@ import alexey.grizly.com.users.models.EUserStatus;
 import alexey.grizly.com.users.dtos.request.AuthRequestDto;
 import alexey.grizly.com.users.models.AppAuthorities;
 import alexey.grizly.com.users.models.UserAccount;
-import alexey.grizly.com.users.services.impl.AuthServiceImpl;
+import alexey.grizly.com.users.services.impl.AuthenticationServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -33,18 +33,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK,classes = {StartApplication.class})
 @ExtendWith({SpringExtension.class})
-public class AuthControllerTest {
+public class AuthenticationControllerTest {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final MockMvc mvc;
     @MockBean
-    private AuthServiceImpl authServiceImpl;
+    private AuthenticationServiceImpl authServiceImpl;
     private final static AuthRequestDto authDto = new AuthRequestDto();
     private final static UserAccount userAccount = new UserAccount();
     private final AppResponseErrorDto errorDto = new AppResponseErrorDto(HttpStatus.UNAUTHORIZED,"Неверные учетные данные пользователя");
 
 
-    public AuthControllerTest(WebApplicationContext wac) {
+    public AuthenticationControllerTest(WebApplicationContext wac) {
         this.mvc = MockMvcBuilders.webAppContextSetup(wac).build();
     }
 

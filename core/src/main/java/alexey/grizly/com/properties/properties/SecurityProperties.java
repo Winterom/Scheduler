@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.annotation.PostConstruct;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +19,7 @@ public class SecurityProperties {
     private JwtProperties jwtProperties;
     private UserPasswordStrange userPasswordStrange;
     private RestorePasswordTokenProperty restorePasswordTokenProperty;
+    private ApprovedEmailProperty approvedEmailProperty;
     private PasswordProperty passwordProperty;
     @JsonIgnore
     private PropertiesService propertiesService;
@@ -31,6 +33,8 @@ public class SecurityProperties {
         this.writeLock = lock.writeLock();
         this.jwtProperties = new JwtProperties();
         this.userPasswordStrange = new UserPasswordStrange();
+        this.passwordProperty = new PasswordProperty();
+        this.approvedEmailProperty = new ApprovedEmailProperty();
     }
 
     @Autowired
@@ -54,15 +58,16 @@ public class SecurityProperties {
             this.userPasswordStrange = newProperty.getUserPasswordStrange();
             this.restorePasswordTokenProperty = newProperty.getRestorePasswordTokenProperty();
             this.passwordProperty = newProperty.getPasswordProperty();
+            this.approvedEmailProperty = newProperty.getApprovedEmailProperty();
         }finally {
             this.writeLock.unlock();
         }
 
     }
-    public void updateUserPasswordStrange(UserPasswordStrange propertiy){
+    public void updateUserPasswordStrange(UserPasswordStrange property){
         try {
             this.writeLock.lock();
-            this.userPasswordStrange = propertiy;
+            this.userPasswordStrange = property;
         }finally {
             this.writeLock.unlock();
         }
@@ -126,6 +131,14 @@ public class SecurityProperties {
             this.readLock.unlock();
         }
     }
+    public ApprovedEmailProperty getApprovedEmailProperty() {
+        try{
+            this.readLock.lock();
+            return this.approvedEmailProperty;
+        }finally {
+            this.readLock.unlock();
+        }
+    }
     @Getter
     @Setter
     public static class JwtProperties {
@@ -136,12 +149,12 @@ public class SecurityProperties {
 
         @Override
         public String toString() {
-            return "JwtProperties{" +
-                    "secret='" + secret + '\'' +
-                    ", jwtLifetime=" + jwtLifetime +
-                    ", jwtRefreshLifetime=" + jwtRefreshLifetime +
-                    ", emailVerifyTokenLifeTime=" + emailVerifyTokenLifeTime +
-                    '}';
+            return new ToStringBuilder(this)
+                    .append("secret", secret)
+                    .append("jwtLifetime", jwtLifetime)
+                    .append("jwtRefreshLifetime", jwtRefreshLifetime)
+                    .append("emailVerifyTokenLifeTime", emailVerifyTokenLifeTime)
+                    .toString();
         }
     }
 
@@ -170,7 +183,7 @@ public class SecurityProperties {
     @Setter
     public static class RestorePasswordTokenProperty {
         private Integer restorePasswordTokenLength=40;
-        private Long restorePasswordTokenLifetime = 24L;
+        private Long restorePasswordTokenLifetime=24L;
         private ChronoUnit unit=ChronoUnit.HOURS;
 
         public void setRestorePasswordTokenLength(Integer restorePasswordTokenLength) {
@@ -183,8 +196,40 @@ public class SecurityProperties {
     }
     @Getter
     @Setter
+    public static class ApprovedEmailProperty {
+        private Integer approvedEmailTokenLength=40;
+        private Long approvedEmailTokenLifetime = 24L;
+        private ChronoUnit unit=ChronoUnit.HOURS;
+
+        public void setApprovedEmailTokenLength(Integer restorePasswordTokenLength) {
+            if(restorePasswordTokenLength>40){
+                this.approvedEmailTokenLength=40;
+                return;
+            }
+            this.approvedEmailTokenLength = restorePasswordTokenLength;
+        }
+
+        @Override
+        public String toString() {
+            return new ToStringBuilder(this)
+                    .append("approvedEmailTokenLength", approvedEmailTokenLength)
+                    .append("approvedEmailTokenLifetime", approvedEmailTokenLifetime)
+                    .append("unit", unit)
+                    .toString();
+        }
+    }
+    @Getter
+    @Setter
     public static class PasswordProperty {
         private Long passwordExpired = 6L;
         private ChronoUnit unit = ChronoUnit.MONTHS;
+
+        @Override
+        public String toString() {
+            return new ToStringBuilder(this)
+                    .append("passwordExpired", passwordExpired)
+                    .append("unit", unit)
+                    .toString();
+        }
     }
 }

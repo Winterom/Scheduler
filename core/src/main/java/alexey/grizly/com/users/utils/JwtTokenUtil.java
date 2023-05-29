@@ -42,12 +42,8 @@ public class JwtTokenUtil {
     public List<String> getAuthorities(String token) {
         return getClaimFromToken(token, (Function<Claims, List<String>>) claims -> claims.get("authorities", List.class));
     }
-    public String generateRefreshTokenFromEmail(String email,Date expires,Date issuedDate) {
-        return Jwts.builder()
-                .setSubject(email)
-                .setIssuedAt(issuedDate)
-                .setExpiration(expires).signWith(SignatureAlgorithm.HS256, getSecret())
-                .compact();
+    public String generateRefreshTokenFromEmail(String email) {
+        return UUID.nameUUIDFromBytes(email.getBytes()).toString();
     }
 
     private <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {

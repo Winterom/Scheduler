@@ -30,7 +30,6 @@ public class UserAccountWithAuthoritiesExtractor implements ResultSetExtractor<U
             authorities.setAuthorities(EAuthorities.valueOf(rs.getString("e_authorities")));
             userAccount.getAuthorities().add(authorities);
         }
-        System.out.println(userAccount);
         return userAccount;
     }
 }
