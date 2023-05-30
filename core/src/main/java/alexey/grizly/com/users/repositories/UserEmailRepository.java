@@ -1,6 +1,7 @@
 package alexey.grizly.com.users.repositories;
 
-import alexey.grizly.com.users.models.UserAccount;
+
+import alexey.grizly.com.users.models.UserAccountWithEmailApprovedToken;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
@@ -11,7 +12,11 @@ public interface UserEmailRepository {
 
     int deleteUsedEmailApprovedTokenByUserId(Long id);
 
-    UserAccount getUserAccountByVerifiedTokenAndEmail(String email, String token);
+    UserAccountWithEmailApprovedToken getUserAccountWithVerifiedToken(String email);
+
+    UserAccountWithEmailApprovedToken getUserAccountWithVerifiedToken(Long userId);
 
     int updateUserEmailStatusByUserId(Long userId, Boolean status);
+
+    Long countOfUsageEmail(String email);
 }

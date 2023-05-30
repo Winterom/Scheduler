@@ -1,8 +1,9 @@
 package alexey.grizly.com.users.repositories.impl;
 
-import alexey.grizly.com.users.extractors.UserAccountSimpleRowMapper;
-import alexey.grizly.com.users.models.UserAccount;
+import alexey.grizly.com.users.extractors.UserAccountWithEmailApprovedTokenExtractor;
+import alexey.grizly.com.users.models.UserAccountWithEmailApprovedToken;
 import alexey.grizly.com.users.repositories.UserEmailRepository;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -12,18 +13,24 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDateTime;
 
 @Repository
-@SuppressWarnings("FieldCanBeLocal")
 public class UserEmailRepositoryImpl implements UserEmailRepository {
     private static final String DELETE_USED_TOKEN = "DELETE FROM email_approved_token as eat WHERE eat.userid=:id";
     private static final  String INSERT_TOKEN="INSERT INTO email_approved_token (userid, token, expired) VALUES (:id,:token,:expired) " +
             "ON CONFLICT (userId) DO UPDATE SET token=:token, expired = :expired";
 
-    private static final String VERIFIED_TOKEN = "SELECT * FROM users as u left join email_approved_token eat on u.id = eat.userid" +
-            " where eat.token=:token and u.email=:email and eat.expired>CURRENT_TIMESTAMP and u.e_status not in ('BANNED','DISMISSED','DELETED')";
+    private static final String VERIFIED_TOKEN_BY_EMAIL = "SELECT u.id, u.e_status,u.email, u.is_email_verified, " +
+            "eat.token, eat.expired as token_expired, eat.createdat as token_created" +
+            " FROM users as u left join email_approved_token eat on u.id = eat.userid" +
+            " where u.email=:email";
+    private static final String VERIFIED_TOKEN_BY_ID = "SELECT u.id, u.e_status,u.email, u.is_email_verified, " +
+            "eat.token, eat.expired as token_expired, eat.createdat as token_created" +
+            " FROM users as u left join email_approved_token eat on u.id = eat.userid" +
+            " where u.id=:id";
     private static final String UPDATE_USER_EMAIL_STATUS = "UPDATE users set is_email_verified=:status where id=:id";
+    private static final String COUNT_USAGE_EMAIL="SELECT COUNT(u.email) FROM users as u where u.email = :email;";
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
-    public UserEmailRepositoryImpl(NamedParameterJdbcTemplate jdbcTemplate) {
+    public UserEmailRepositoryImpl(final NamedParameterJdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
@@ -37,7 +44,7 @@ public class UserEmailRepositoryImpl implements UserEmailRepository {
     }
 
     @Override
-    public int deleteUsedEmailApprovedTokenByUserId(Long id) {
+    public int deleteUsedEmailApprovedTokenByUserId(final Long id) {
         SqlParameterSource namedParameters = new MapSqlParameterSource()
                 .addValue("id", id);
         return jdbcTemplate.update(DELETE_USED_TOKEN,namedParameters);
@@ -45,19 +52,36 @@ public class UserEmailRepositoryImpl implements UserEmailRepository {
 
     @Override
     @Nullable
-    public UserAccount getUserAccountByVerifiedTokenAndEmail(String email, String token) {
+    public UserAccountWithEmailApprovedToken getUserAccountWithVerifiedToken(final String email) {
         SqlParameterSource namedParameters = new MapSqlParameterSource()
-                .addValue("email", email)
-                .addValue("token", token);
-        return jdbcTemplate.queryForObject(VERIFIED_TOKEN,namedParameters,
-                new UserAccountSimpleRowMapper());
+                .addValue("email", email);
+        return jdbcTemplate.query(VERIFIED_TOKEN_BY_EMAIL,namedParameters,
+                new UserAccountWithEmailApprovedTokenExtractor());
 
     }
+
     @Override
-    public int updateUserEmailStatusByUserId(Long userId,Boolean status){
+    public UserAccountWithEmailApprovedToken getUserAccountWithVerifiedToken(Long userId) {
+        SqlParameterSource namedParameters = new MapSqlParameterSource()
+                .addValue("id", userId);
+        return jdbcTemplate.query(VERIFIED_TOKEN_BY_ID,namedParameters,
+                new UserAccountWithEmailApprovedTokenExtractor());
+    }
+
+    @Override
+    public int updateUserEmailStatusByUserId(final Long userId, final Boolean status){
         SqlParameterSource namedParameters = new MapSqlParameterSource()
                 .addValue("id", userId)
                 .addValue("status",status);
         return jdbcTemplate.update(UPDATE_USER_EMAIL_STATUS,namedParameters);
+    }
+
+    @Override
+    public Long countOfUsageEmail(@NonNls final String email) {
+        SqlParameterSource namedParameters = new MapSqlParameterSource()
+                .addValue("email",email);
+        return jdbcTemplate
+                .queryForObject(COUNT_USAGE_EMAIL,
+                        namedParameters,Long.class);
     }
 }

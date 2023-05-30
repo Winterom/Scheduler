@@ -1,6 +1,6 @@
 package alexey.grizly.com.users.services.impl;
 
-import alexey.grizly.com.commons.events.UserRegistrationEvent;
+import alexey.grizly.com.users.events.UserRegistrationEvent;
 import alexey.grizly.com.properties.properties.SecurityProperties;
 import alexey.grizly.com.users.models.EUserStatus;
 import alexey.grizly.com.users.models.UserAccount;
@@ -58,9 +58,8 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
         userAccount.setStatus(EUserStatus.NEW_USER);
         userAccount.setCredentialExpiredTime(credentialExpired);
         userAccount.setCreatedAt(createdAt);
-        String token = userEmailService.generateVerifiedEmailToken(newUserId);
+        userEmailService.generateVerifiedEmailToken(newUserId);
         UserRegistrationEvent event = new UserRegistrationEvent(userAccount);
-        event.setToken(token);
         eventMulticaster.multicastEvent(event);
     }
 }

@@ -1,5 +1,0 @@
-CREATE TABLE restore_psw_token (
-    id BIGINT PRIMARY KEY,
-    token VARCHAR(100) UNIQUE NOT NULL ,
-    expire TIMESTAMPTZ NOT NULL
-)

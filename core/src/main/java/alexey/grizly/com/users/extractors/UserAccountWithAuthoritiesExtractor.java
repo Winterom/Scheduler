@@ -15,11 +15,11 @@ import java.util.HashSet;
 public class UserAccountWithAuthoritiesExtractor implements ResultSetExtractor<UserAccount> {
     @Override
     public UserAccount extractData(ResultSet rs) throws DataAccessException, SQLException {
+        if(!rs.next()){
+            return null;
+        }
         UserAccount userAccount = new UserAccount();
         userAccount.setAuthorities(new HashSet<>());
-        if(!rs.next()){
-           return null;
-        }
         userAccount.setEmail(rs.getString("email"));
         userAccount.setId(rs.getLong("id"));
         userAccount.setStatus(EUserStatus.valueOf(rs.getString("e_status")));

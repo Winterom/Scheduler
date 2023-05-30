@@ -11,10 +11,11 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 @Repository
+@SuppressWarnings("FieldCanBeLocal")
 public class RefreshTokenRepositoryImpl implements RefreshTokenRepository {
-    private final String SAVE_REFRESH_TOKEN="INSERT INTO refresh_tokens (id,expired,token) VALUES (:id,:expired,:token) "+
+    private static final String SAVE_REFRESH_TOKEN="INSERT INTO refresh_tokens (id,expired,token) VALUES (:id,:expired,:token) "+
             "ON CONFLICT (id) DO UPDATE set expired=:expired, token=:token";
-    private final String GET_USER_BY_REFRESH_TOKEN="SELECT u.id,u.email,u.e_status,u.credential_expired, u.password, a.e_authorities " +
+    private static final String GET_USER_BY_REFRESH_TOKEN="SELECT u.id,u.email,u.e_status,u.credential_expired, u.password, a.e_authorities " +
             "FROM refresh_tokens rf" +
             " LEFT JOIN users u on u.id = rf.id" +
             " LEFT JOIN users_roles ur on u.id = ur.user_id" +

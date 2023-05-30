@@ -12,7 +12,7 @@ databaseChangeLog:
   - include:
       file: db/changelog/users/create/create-refresh-token-table.sql
   - include:
-      file: db/changelog/users/create/create-restore-psw-token-table.sql
+      file: db/changelog/users/create/create-change-psw-token-table.sql
   - include:
       file: db/changelog/users/create/create-email-approved-token-table.sql
   - include:
@@ -22,7 +22,7 @@ databaseChangeLog:
   - include:
       file: db/changelog/users/create/add-fk-users-refresh-tokens.sql
   - include:
-      file: db/changelog/users/create/add-fk-users-restore-psw-tokens.sql
+      file: db/changelog/users/create/add-fk-users-change-psw-tokens.sql
   - include:
       file: db/changelog/users/create/add-fk-users-email-approved-token.sql
   - include:

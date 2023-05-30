@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface AuthenticationService {
-    String authentication(String emailOrPhone, String password, HttpServletResponse response);
+    String authentication(final String emailOrPhone,
+                          final String password,
+                          final HttpServletResponse response);
 
-    String authenticationByRefreshToken(Cookie cookie);
+    String authenticationByRefreshToken(final Cookie cookie);
 }

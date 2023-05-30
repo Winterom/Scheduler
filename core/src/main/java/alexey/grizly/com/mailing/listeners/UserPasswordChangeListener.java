@@ -1,7 +1,7 @@
 package alexey.grizly.com.mailing.listeners;
 
 
-import alexey.grizly.com.commons.events.UserPasswordChangeEvent;
+import alexey.grizly.com.users.events.UserPasswordChangeEvent;
 import alexey.grizly.com.mailing.services.EmailSenders;
 import alexey.grizly.com.properties.models.EEmailType;
 import org.jetbrains.annotations.Nullable;

@@ -5,7 +5,7 @@
     <file url="file://$PROJECT_DIR$/core/src/main/resources/db/changelog/properties/create/create-email-properties-table.sql" dialect="PostgreSQL" />
     <file url="file://$PROJECT_DIR$/core/src/main/resources/db/changelog/properties/create/create-properties-table.sql" dialect="PostgreSQL" />
     <file url="file://$PROJECT_DIR$/core/src/main/resources/db/changelog/users/complete/complete-authorities-table.sql" dialect="PostgreSQL" />
-    <file url="file://$PROJECT_DIR$/core/src/main/resources/db/changelog/users/create/create-restore-psw-token-table.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/core/src/main/resources/db/changelog/users/create/create-change-psw-token-table.sql" dialect="PostgreSQL" />
     <file url="file://$PROJECT_DIR$/core/src/main/resources/db/changelog/users/create/create-users-table.sql" dialect="PostgreSQL" />
   </component>
 </project>

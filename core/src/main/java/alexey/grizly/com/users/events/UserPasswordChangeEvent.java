@@ -1,4 +1,4 @@
-package alexey.grizly.com.commons.events;
+package alexey.grizly.com.users.events;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,7 +8,7 @@ import org.springframework.context.ApplicationEvent;
 @Getter
 @Setter
 public class UserPasswordChangeEvent extends ApplicationEvent {
-    private EventParam param;
+    private final EventParam param;
 
     public UserPasswordChangeEvent(EventParam param) {
         super(param);

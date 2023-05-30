@@ -11,8 +11,8 @@ export class UsersAPI extends RootHTTPApi{
     private readonly _passwordRequirements:string = 'properties/security/password/strange';
     private readonly _updatePassword: string  = 'password/change';
     private readonly _registration:string='registration';
-    private readonly _checkEmail:string='check-email';
-    private readonly _checkPhone:string='check-phone';
+    private readonly _checkEmail:string='email/check';
+    private readonly _checkPhone:string='phone/check';
     private readonly _approvedEmail:string='email/approved';
 
 

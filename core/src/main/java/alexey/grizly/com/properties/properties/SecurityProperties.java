@@ -183,6 +183,7 @@ public class SecurityProperties {
     @Setter
     public static class RestorePasswordTokenProperty {
         private Integer restorePasswordTokenLength=40;
+        private Long pauseBetweenNextTokenGenerate = 600000L;//минимально 1 минута
         private Long restorePasswordTokenLifetime=24L;
         private ChronoUnit unit=ChronoUnit.HOURS;
 
@@ -198,6 +199,7 @@ public class SecurityProperties {
     @Setter
     public static class ApprovedEmailProperty {
         private Integer approvedEmailTokenLength=40;
+        private Long pauseBetweenNextTokenGenerate = 600000L;//минимально 1 минута
         private Long approvedEmailTokenLifetime = 24L;
         private ChronoUnit unit=ChronoUnit.HOURS;
 

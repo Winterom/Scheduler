@@ -40,7 +40,11 @@ public class UserRegistrationController {
             return new ResponseEntity<>(errorDto, HttpStatus.BAD_REQUEST);
         }
         this.userRegistrationService.createNewUserAccount(dto.getEmail(),
-                dto.getPhone(), dto.getPassword(), dto.getName(), dto.getSurname(), dto.getLastname());
+                dto.getPhone(),
+                dto.getPassword(),
+                dto.getName(),
+                dto.getSurname(),
+                dto.getLastname());
         return ResponseEntity.ok(null);
     }
 }

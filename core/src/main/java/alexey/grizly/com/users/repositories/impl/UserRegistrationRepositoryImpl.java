@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 
 @Repository
 public class UserRegistrationRepositoryImpl implements UserRegistrationRepository {
-    private final String CREATE_NEW_USER="INSERT INTO users (email, phone, password, credential_expired, e_status, createdat) "+
+    private static final String CREATE_NEW_USER="INSERT INTO users (email, phone, password, credential_expired, e_status, createdat) "+
             "VALUES (:email,:phone,:password,:credentialExpired, :status, :createdAt);";
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
