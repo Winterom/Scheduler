@@ -17,7 +17,6 @@ public class PasswordValidator  implements ConstraintValidator<Password, String>
     @Autowired
     public PasswordValidator(final SecurityProperties securityProperties){
         this.userPasswordStrange = securityProperties.getUserPasswordStrange();
-        System.out.println(this.userPasswordStrange);
     }
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
@@ -25,11 +24,11 @@ public class PasswordValidator  implements ConstraintValidator<Password, String>
             return false;
         }
         if(userPasswordStrange.getPasswordMinCharacters()!=null&&
-                userPasswordStrange.getPasswordMinCharacters()!=0){
-            if (value.length()< userPasswordStrange.getPasswordMinCharacters()){
+                userPasswordStrange.getPasswordMinCharacters()!=0
+                &&(value.length()< userPasswordStrange.getPasswordMinCharacters())){
                return false;
             }
-        }
+
         StringBuilder sb = new StringBuilder();
         if(userPasswordStrange.getPasswordMinNumber()!=null&&
                 userPasswordStrange.getPasswordMinNumber()!=0){

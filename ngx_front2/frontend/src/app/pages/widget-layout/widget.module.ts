@@ -8,6 +8,7 @@ import {SidebarModule} from "primeng/sidebar";
 import {ButtonModule} from "primeng/button";
 import {TooltipModule} from "primeng/tooltip";
 import {StyleClassModule} from "primeng/styleclass";
+import {ToastModule} from "primeng/toast";
 
 const routes: Routes =[
   {path:'settings',component:GlobalSettingsComponent}
@@ -17,14 +18,15 @@ const routes: Routes =[
   declarations: [
     WidgetLayoutComponent
   ],
-  imports: [
-    CommonModule,
-    SettingsModule,
-    RouterModule.forChild(routes),
-    SidebarModule,
-    ButtonModule,
-    TooltipModule,
-    StyleClassModule,
-  ]
+    imports: [
+        CommonModule,
+        SettingsModule,
+        RouterModule.forChild(routes),
+        SidebarModule,
+        ButtonModule,
+        TooltipModule,
+        StyleClassModule,
+        ToastModule,
+    ]
 })
 export class WidgetModule { }

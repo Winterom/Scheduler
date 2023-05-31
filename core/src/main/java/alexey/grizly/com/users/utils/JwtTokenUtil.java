@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.*;
 import java.util.function.Function;
-import java.util.stream.Collectors;
+
 
 
 @Component
@@ -22,7 +22,7 @@ public class JwtTokenUtil {
         Map<String, Object> claims = new HashMap<>();
         List<String> authoritiesList = authorities.stream()
                 .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.toList());
+                .toList();
         claims.put("authorities", authoritiesList);
         claims.put("id",id);
         return

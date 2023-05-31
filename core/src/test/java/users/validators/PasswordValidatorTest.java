@@ -15,7 +15,7 @@ public class PasswordValidatorTest {
     }
 
     @Test
-    public void validMinMaxLength() {
+    void validMinMaxLength() {
         /*только длина должна быть не больше 50 и не меньше числа указанного в UserPasswordStrange.passwordMinCharacters*/
         SecurityProperties.UserPasswordStrange userPasswordStrange = new SecurityProperties.UserPasswordStrange();
         userPasswordStrange.setPasswordMinCharacters(8);
@@ -32,7 +32,7 @@ public class PasswordValidatorTest {
         Assertions.assertFalse(validator.isValid(password3, null));
     }
     @Test
-    public void validNumberCount(){
+    void validNumberCount(){
         SecurityProperties.UserPasswordStrange userPasswordStrange = new SecurityProperties.UserPasswordStrange();
         userPasswordStrange.setPasswordMinNumber(4);
         System.out.println(userPasswordStrange);
@@ -47,7 +47,7 @@ public class PasswordValidatorTest {
 
     }
     @Test
-    public void validUpperCaseCount(){
+    void validUpperCaseCount(){
         SecurityProperties.UserPasswordStrange userPasswordStrange = new SecurityProperties.UserPasswordStrange();
         userPasswordStrange.setPasswordMinUpperCase(4);
         System.out.println(userPasswordStrange);
@@ -63,7 +63,7 @@ public class PasswordValidatorTest {
         Assertions.assertFalse(validator.isValid(password,null));
     }
     @Test
-    public void validLowCaseCount(){
+    void validLowCaseCount(){
         SecurityProperties.UserPasswordStrange userPasswordStrange = new SecurityProperties.UserPasswordStrange();
         userPasswordStrange.setPasswordMinLowerCase(4);
         System.out.println(userPasswordStrange);
@@ -79,7 +79,7 @@ public class PasswordValidatorTest {
         Assertions.assertFalse(validator.isValid(password,null));
     }
     @Test
-    public void validSpecSymbolCount(){
+    void validSpecSymbolCount(){
         SecurityProperties.UserPasswordStrange userPasswordStrange = new SecurityProperties.UserPasswordStrange();
         userPasswordStrange.setPasswordMinSymbol(3);
         System.out.println(userPasswordStrange);

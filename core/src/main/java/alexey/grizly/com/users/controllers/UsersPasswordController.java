@@ -57,7 +57,11 @@ public class UsersPasswordController {
             AppResponseErrorDto errorDto = new AppResponseErrorDto(HttpStatus.BAD_REQUEST,errorMessage);
             return new ResponseEntity<>(errorDto, HttpStatus.BAD_REQUEST);
         }
-        this.userPasswordService.changePassword(dto.getEmail(), dto.getPassword(), dto.getToken());
+        List<String> errorMessages = this.userPasswordService.changePassword(dto.getEmail(), dto.getPassword(), dto.getToken());
+        if(!errorMessages.isEmpty()){
+            final AppResponseErrorDto errorDto = new AppResponseErrorDto(HttpStatus.BAD_REQUEST,errorMessages);
+            return new ResponseEntity<>(errorDto, HttpStatus.BAD_REQUEST);
+        }
         return ResponseEntity.ok(null);
     }
 

@@ -1,4 +1,4 @@
-package users.auth;
+package users.authentication;
 
 import alexey.grizly.com.StartApplication;
 import alexey.grizly.com.commons.exceptions.AppResponseErrorDto;
@@ -9,6 +9,7 @@ import alexey.grizly.com.users.models.AppAuthorities;
 import alexey.grizly.com.users.models.UserAccount;
 import alexey.grizly.com.users.services.impl.AuthenticationServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.http.HttpServletResponse;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -26,6 +27,7 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -34,7 +36,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK,classes = {StartApplication.class})
 @ExtendWith({SpringExtension.class})
 public class AuthenticationControllerTest {
-
     private final ObjectMapper objectMapper = new ObjectMapper();
     private final MockMvc mvc;
     @MockBean
@@ -49,7 +50,7 @@ public class AuthenticationControllerTest {
     }
 
     @BeforeAll
-    public static void setup() {
+    public static void init() {
         authDto.setPassword("2011");
         authDto.setEmailOrPhone("email1@one.ru");
         userAccount.setId(1L);
@@ -69,8 +70,9 @@ public class AuthenticationControllerTest {
         Assertions.assertNotNull(mvc);
     }
     @Test
-    public void authenticationValidDtoTest() throws Exception {
-        when(authServiceImpl.authentication(authDto.getEmailOrPhone(),authDto.getPassword())).thenReturn(userAccount);
+     void authenticationValidDtoTest() throws Exception {
+        HttpServletResponse response = mock(HttpServletResponse.class);
+        when(authServiceImpl.authentication(authDto.getEmailOrPhone(),authDto.getPassword(),response)).thenReturn("");
         mvc.perform(post("/api/v1/auth")
                         .content(this.objectMapper.writeValueAsString(authDto))
                         .contentType(MediaType.parseMediaType("application/json;charset=UTF-8")))
@@ -78,7 +80,7 @@ public class AuthenticationControllerTest {
     }
 
     @Test
-    public void authenticationNotValidNullTokenDtoTest() throws Exception {
+    void authenticationNotValidNullTokenDtoTest() throws Exception {
         authDto.setEmailOrPhone(null);
         mvc.perform(post("/api/v1/auth")
                         .content(this.objectMapper.writeValueAsString(authDto))
@@ -87,7 +89,7 @@ public class AuthenticationControllerTest {
                 .andExpect(content().json(objectMapper.writeValueAsString(errorDto)));
     }
     @Test
-    public void authenticationNotValidMinLengthTokenDtoTest() throws Exception {
+     void authenticationNotValidMinLengthTokenDtoTest() throws Exception {
         authDto.setEmailOrPhone("dw");
         mvc.perform(post("/api/v1/auth")
                         .content(this.objectMapper.writeValueAsString(authDto))
@@ -96,7 +98,7 @@ public class AuthenticationControllerTest {
                 .andExpect(content().json(objectMapper.writeValueAsString(errorDto)));
     }
     @Test
-    public void authenticationNotValidMaxLengthTokenDtoTest() throws Exception {
+     void authenticationNotValidMaxLengthTokenDtoTest() throws Exception {
         authDto.setEmailOrPhone("dwklagj;lkhgaekh[eb,leab,eab[p,beapkaebp,aeLength51");
         mvc.perform(post("/api/v1/auth")
                         .content(this.objectMapper.writeValueAsString(authDto))
@@ -106,7 +108,7 @@ public class AuthenticationControllerTest {
     }
 
     @Test
-    public void authenticationNotValidNullPasswordDtoTest() throws Exception {
+     void authenticationNotValidNullPasswordDtoTest() throws Exception {
         authDto.setPassword(null);
         mvc.perform(post("/api/v1/auth")
                         .content(this.objectMapper.writeValueAsString(authDto))
@@ -116,7 +118,7 @@ public class AuthenticationControllerTest {
     }
 
     @Test
-    public void authenticationNotValidMinLengthPasswordDtoTest() throws Exception {
+     void authenticationNotValidMinLengthPasswordDtoTest() throws Exception {
         authDto.setPassword("tr");
         mvc.perform(post("/api/v1/auth")
                         .content(this.objectMapper.writeValueAsString(authDto))
@@ -125,7 +127,7 @@ public class AuthenticationControllerTest {
                 .andExpect(content().json(objectMapper.writeValueAsString(errorDto)));
     }
     @Test
-    public void authenticationNotValidMaxLengthPasswordDtoTest() throws Exception {
+     void authenticationNotValidMaxLengthPasswordDtoTest() throws Exception {
         authDto.setPassword("dwklagj;lkhgaekh[eb,leab,eab[p,beapkaebp,ae,baep," +
                 "51dwklagj;lkhgaekh[eb,leab,eab[p,beapkaebp,Length101");
 

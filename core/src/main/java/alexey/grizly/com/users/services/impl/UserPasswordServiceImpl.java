@@ -1,7 +1,7 @@
 package alexey.grizly.com.users.services.impl;
 
 
-import alexey.grizly.com.users.events.UserPasswordChangeEvent;
+import alexey.grizly.com.users.events.UserPasswordChangeCreateTokenEvent;
 import alexey.grizly.com.properties.properties.GlobalProperties;
 import alexey.grizly.com.properties.properties.SecurityProperties;
 import alexey.grizly.com.users.models.EUserStatus;
@@ -59,23 +59,22 @@ public class UserPasswordServiceImpl implements UserPasswordService {
         if (!(userAccount.getStatus().equals(EUserStatus.NEW_USER)
                 ||userAccount.getStatus().equals(EUserStatus.ACTIVE))){
             errorMessage.add("Ваш аккаунт заблокирован. Обратитесь к администратору");
+            return errorMessage;
         }
         LocalDateTime pauseBetweenNextToken = LocalDateTime.now()
                 .plusSeconds(securityProperties.getRestorePasswordTokenProperty().getPauseBetweenNextTokenGenerate());
         PasswordChangeToken token = userAccount.getPasswordChangeToken();
-
         if(token!=null&&token.getCreatedAt().isBefore(pauseBetweenNextToken)){
             errorMessage.add("Слишком частые запросы");
-        }
-        if(!errorMessage.isEmpty()){
             return errorMessage;
         }
+
         LocalDateTime expireTokenTime = LocalDateTime.now().plus(securityProperties.getRestorePasswordTokenProperty().getRestorePasswordTokenLifetime(),
                 securityProperties.getRestorePasswordTokenProperty().getUnit());
         String newToken = ApprovedTokenUtils.generateApprovedToken(securityProperties.getRestorePasswordTokenProperty().getRestorePasswordTokenLength());
         changePasswordTokenRepository.saveChangePasswordToken(userAccount.getId(),expireTokenTime,newToken);
-        String url =globalProperties.getHost() + "password/restore?email=" +email+"&token="+ token;
-        UserPasswordChangeEvent event = new UserPasswordChangeEvent(new UserPasswordChangeEvent.EventParam(email,url));
+        String url =globalProperties.getHost() + "password/restore?email=" +email+"&token="+ newToken;
+        UserPasswordChangeCreateTokenEvent event = new UserPasswordChangeCreateTokenEvent(new UserPasswordChangeCreateTokenEvent.EventParam(email,url));
         eventMulticaster.multicastEvent(event);
         return errorMessage;
     }
@@ -95,11 +94,10 @@ public class UserPasswordServiceImpl implements UserPasswordService {
         }
         if(!passwordChangeToken.getToken().equals(token)){
             errorMessage.add("Токен валидации устарел");
+            return errorMessage;
         }
         if(bCryptPasswordEncoder.matches(password, userAccount.getPassword())){
             errorMessage.add("Новый пароль не должен совпадать со старым");
-        }
-        if(!errorMessage.isEmpty()){
             return errorMessage;
         }
         String passwordHash = bCryptPasswordEncoder.encode(password);

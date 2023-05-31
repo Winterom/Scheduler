@@ -3,7 +3,6 @@ package alexey.grizly.com.users.models;
 import lombok.Data;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.Serializable;
 
 @Data
 public class UserAccountWithEmailApprovedToken{

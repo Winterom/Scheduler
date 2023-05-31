@@ -1,5 +1,6 @@
 package alexey.grizly.com.users.dtos.request;
 
+import alexey.grizly.com.users.validators.TokenLength;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
@@ -10,7 +11,6 @@ public class ApprovedEmailRequestDto {
     @Email(message = "Не валидный email")
     @Size(min = 5,max = 50, message = "Не валидный email")
     private String email;
-    @NotEmpty(message = "Поле токен не может быть пустым")
-    @Size(max = 100,message = "Поле токен не соответствует требования")
+    @TokenLength(type = TokenLength.ValidatorType.EMAIL_TOKEN)
     private String token;
 }

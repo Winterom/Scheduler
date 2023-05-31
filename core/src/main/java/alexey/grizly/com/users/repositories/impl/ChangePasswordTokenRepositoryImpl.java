@@ -19,7 +19,7 @@ public class ChangePasswordTokenRepositoryImpl implements ChangePasswordTokenRep
             "ON CONFLICT (id) DO UPDATE SET token = :token, expired = :expired;";
     private static final String CHECK_TOKEN = "SELECT u.id,u.e_status, u.password, rpt.token , rpt.expired as token_expired, rpt.createdat as token_created " +
             " FROM users as u left join change_psw_token rpt on u.id = rpt.id" +
-            " where u.email=:email and rpt.token and (CURRENT_TIMESTAMP < rpt.expired)";
+            " where u.email=:email";
     private static final String DELETE_USED_TOKEN = "DELETE FROM change_psw_token as rpt WHERE rpt.id=:id";
     private final NamedParameterJdbcTemplate jdbcTemplate;
 

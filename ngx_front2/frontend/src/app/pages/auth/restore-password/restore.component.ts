@@ -44,8 +44,9 @@ export class RestoreComponent {
       this.loading = false;
       return;
     }
-    this.restoreService.sendAccountEmail(this.emailControl.value).subscribe({next:data =>{
-        this.responseEmail = data.message;
+    const email =this.emailControl.value;
+      this.restoreService.sendAccountEmail(this.emailControl.value).subscribe({next:data =>{
+        this.responseEmail = email;
         this.loading=false;
         this.resultSuccess =true;
       },error:err => {

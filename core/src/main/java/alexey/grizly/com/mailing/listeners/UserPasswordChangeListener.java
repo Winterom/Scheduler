@@ -1,9 +1,10 @@
 package alexey.grizly.com.mailing.listeners;
 
 
-import alexey.grizly.com.users.events.UserPasswordChangeEvent;
+import alexey.grizly.com.users.events.UserPasswordChangeCreateTokenEvent;
 import alexey.grizly.com.mailing.services.EmailSenders;
 import alexey.grizly.com.properties.models.EEmailType;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class UserPasswordChangeListener implements
-        ApplicationListener<UserPasswordChangeEvent> {
+        ApplicationListener<UserPasswordChangeCreateTokenEvent> {
 
     @Nullable
     private final JavaMailSender emailSender;
@@ -25,17 +26,15 @@ public class UserPasswordChangeListener implements
     }
 
     @Override
-    public void onApplicationEvent(final UserPasswordChangeEvent event) {
+    public void onApplicationEvent(final @NotNull UserPasswordChangeCreateTokenEvent event) {
         eventHandler(event);
     }
 
-    private void eventHandler(final UserPasswordChangeEvent event){
+    private void eventHandler(final UserPasswordChangeCreateTokenEvent event){
         if(this.emailSender==null){
             return;
         }
         SimpleMailMessage message = new SimpleMailMessage();
-        /*String from = ;
-        message.setFrom(from);*/
         message.setTo(event.getParam().getEmail());
         message.setSubject("Смена пароля");
         message.setText("Для смены пароля  " +

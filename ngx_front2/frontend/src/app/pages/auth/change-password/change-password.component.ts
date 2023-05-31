@@ -25,7 +25,6 @@ export class ChangePasswordComponent implements OnInit{
   tokenControl:FormControl;
   state: 'change'|'complete'= 'change';
   pswStrangeReq:PasswordStrangeRequirement= new PasswordStrangeRequirement();
-  completeMessage: string='';
   constructor(private router: Router,
               private changePasswordService:ChangePasswordService,
               private messageService: MessageService,
@@ -121,8 +120,8 @@ export class ChangePasswordComponent implements OnInit{
     this.changePasswordService.putUpdatePassword(this.emailControl.value,
       this.tokenControl.value,
       this.passwordControl.value).subscribe({next:data=>{
-          this.completeMessage=data.message;
           this.state='complete';
+          this.loading=false;
         },error:err=>{
         console.log(err)
           addErrorMessage(this.messageService,err.error.messages,null)

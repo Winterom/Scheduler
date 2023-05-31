@@ -1,6 +1,7 @@
 package alexey.grizly.com.users.dtos.request;
 
 import alexey.grizly.com.users.validators.Password;
+import alexey.grizly.com.users.validators.TokenLength;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
@@ -14,7 +15,6 @@ public class ChangePasswordRequestDto {
     @Size(min = 5,max = 50,message = "Пароль не соответствует требованиям")
     @Password(message = "Пароль не соответствует требованиям")
     private String password;
-    @NotEmpty(message = "Поле токен не может быть пустым")
-    @Size(max = 100,message = "Поле токен не соответствует требования")
+    @TokenLength(type = TokenLength.ValidatorType.PASSWORD_TOKEN)
     private String token;
 }

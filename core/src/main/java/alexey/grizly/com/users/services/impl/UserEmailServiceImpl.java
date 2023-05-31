@@ -62,6 +62,11 @@ public class UserEmailServiceImpl implements UserEmailService {
         LocalDateTime expired = LocalDateTime.now().plus(securityProperties.getApprovedEmailProperty().getApprovedEmailTokenLifetime(),
                 securityProperties.getApprovedEmailProperty().getUnit());
         userEmailRepository.saveVerifiedEmailToken(userId,token,expired);
+        EmailApprovedToken newToken = new EmailApprovedToken();
+        newToken.setToken(token);
+        newToken.setExpired(expired);
+        newToken.setUserId(userAccount.getId());
+        userAccount.setToken(newToken);
         eventMulticaster.multicastEvent(new UserEmailApprovedTokenEvent(userAccount));
         return errorMessage;
     }

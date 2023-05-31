@@ -1,7 +1,8 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {DesktopComponent} from './desktop.component';
-import {DockModule} from "primeng/dock";
+import {PanelModule} from "primeng/panel";
+
 
 
 
@@ -11,7 +12,7 @@ import {DockModule} from "primeng/dock";
   ],
   imports: [
     CommonModule,
-    DockModule
+    PanelModule,
   ]
 })
 export class DesktopModule { }
