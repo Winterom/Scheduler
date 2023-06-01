@@ -10,10 +10,9 @@
       <div class="w-25rem flex flex-column justify-content-between">
         <h4 class="text-center">Основные учетные данные</h4>
         <div class="flex justify-content-start align-items-center">
-          <div class="mr-2 text-2xl font-bold">+7</div>
           <span class="p-float-label">
           <p-inputMask
-            mask="999-999-9999"
+            mask="+7(999) 999-9999"
             id="phone"
             formControlName="phone"
             (focusout)="checkPhone()"
@@ -25,16 +24,16 @@
         <div class="mt-4 flex">
           <div class="min-w-full">
             <span class="p-float-label">
-          <input
-            pInputText
-            id="email"
-            class="p-inputtext-sm w-full"
-            formControlName="email"
-            (focusout)="checkEmail()"
-            [ngClass]="{'ng-invalid ng-dirty':(emailControl.invalid)&&emailControl.touched}"
-          />
-          <label htmlFor="email">Email</label>
-        </span>
+              <input
+                pInputText
+                id="email"
+                class="p-inputtext-sm w-full"
+                formControlName="email"
+                (focusout)="checkEmail()"
+                [ngClass]="{'ng-invalid ng-dirty':(emailControl.invalid)&&emailControl.touched}"
+              />
+              <label htmlFor="email">Email</label>
+            </span>
           </div>
           <div class="text-pink-500">*</div>
         </div>
@@ -154,7 +153,7 @@
   <div class="text-4xl text-center">Регистрация</div>
   <div class="mt-2 text-xl">
     <p style="text-indent: 2rem">Вы успешно зарегистрировались. На указанную Вами электронную почту отправлено
-  письмо с предложением подтвердить email. Полноценно аккаунт сможет функционировать после
+      письмо с предложением подтвердить email. Полноценно аккаунт сможет функционировать после
       одобрения ответственным лицом и назначения Вам прав в приложении.</p>
     <p style="text-indent: 2rem"> Сейчас Вы можете авторизоваться и подтвердить или изменить свои учетные данные.</p>
   </div>

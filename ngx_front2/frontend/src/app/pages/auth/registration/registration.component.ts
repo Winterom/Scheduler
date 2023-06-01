@@ -124,8 +124,11 @@ export class RegistrationComponent implements OnInit {
       this.loading = false;
       return;
     }
-    let rawPhone: string = this.phoneControl.value.toString();
-    const phone ='+7'+ rawPhone.replaceAll('-','');
+    const rawPhone:string = this.phoneControl.value;
+    const phone = rawPhone.replaceAll('-','')
+      .replace('(','')
+      .replace(')','')
+      .replace(' ','');
     this.regService.registration(
       this.emailControl.value,
       phone,

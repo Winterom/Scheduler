@@ -3,12 +3,13 @@ import {RouterModule, Routes, TitleStrategy} from '@angular/router';
 import {LoginComponent} from "./pages/auth/login/login.component";
 import {RestoreComponent} from "./pages/auth/restore-password/restore.component";
 import {DesktopComponent} from "./pages/desktop/desktop.component";
-import {WidgetLayoutComponent} from "./pages/widget-layout/widget-layout.component";
 import {RegistrationComponent} from "./pages/auth/registration/registration.component";
 import {ChangePasswordComponent} from "./pages/auth/change-password/change-password.component";
 import {TitleStrategyService} from "./services/title-strategy.service";
 import {desktopGuard} from "./guards/desktop.guard";
 import {ApprovedEmailComponent} from "./pages/auth/approved-email/approved-email.component";
+import {GlobalSettingsComponent} from "./pages/global-settings/global-settings.component";
+import {ProfileComponent} from "./pages/desktop/profile/profile.component";
 
 const routes: Routes = [
   {path:'login',component:LoginComponent},
@@ -16,12 +17,12 @@ const routes: Routes = [
   {path:'password/reset',component:RestoreComponent},
   {path:'password/restore',component:ChangePasswordComponent},
   {path:'approved',component:ApprovedEmailComponent},
-  {path:'desktop',component:DesktopComponent
-  ,loadChildren:()=>import('./pages/desktop/desktop.module').then(m=>m.DesktopModule)
-  ,canActivate:[desktopGuard]},
-  {path:'app',component:WidgetLayoutComponent,
-  loadChildren:()=>import('./pages/widget-layout/widget.module').then(t=>t.WidgetModule)},
-  {path:'**',redirectTo:'login'}
+  {path:'profile',component:ProfileComponent},
+  {path:'desktop',component:DesktopComponent,canActivate:[desktopGuard]},
+  {path:'settings',component:GlobalSettingsComponent,
+    loadChildren:()=>import('./pages/global-settings/settings.module').then(m=>m.SettingsModule)},
+  {path:'**',redirectTo:'login', pathMatch: 'full'}
+
 ];
 
 @NgModule({

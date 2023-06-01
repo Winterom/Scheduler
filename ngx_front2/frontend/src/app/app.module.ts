@@ -6,12 +6,15 @@ import { AppComponent } from './app.component';
 import {TranslateModule} from "@ngx-translate/core";
 import {LoginModule} from "./pages/auth/login.module";
 import {HttpClientModule} from "@angular/common/http";
+import {DesktopModule} from "./pages/desktop/desktop.module";
+
+
 
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -19,9 +22,12 @@ import {HttpClientModule} from "@angular/common/http";
     AppRoutingModule,
     LoginModule,
     HttpClientModule,
-    TranslateModule.forRoot()
+    DesktopModule,
+    TranslateModule.forRoot(),
   ],
   providers: [],
+  exports: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

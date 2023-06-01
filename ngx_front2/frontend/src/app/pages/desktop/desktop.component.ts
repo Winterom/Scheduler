@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import { MenuItem } from 'primeng/api';
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -9,7 +9,15 @@ import { MenuItem } from 'primeng/api';
 })
 export class DesktopComponent implements OnInit{
 
-
+  constructor(private router: Router) {
+  }
   ngOnInit(): void {}
 
+  goSettings() {
+    this.router.navigate(['settings'])
+  }
+
+  goProfile() {
+    this.router.navigate(['profile'])
+  }
 }
