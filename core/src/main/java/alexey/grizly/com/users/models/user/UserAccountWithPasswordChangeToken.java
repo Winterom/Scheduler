@@ -1,5 +1,7 @@
-package alexey.grizly.com.users.models;
+package alexey.grizly.com.users.models.user;
 
+import alexey.grizly.com.users.models.EUserStatus;
+import alexey.grizly.com.users.models.PasswordChangeToken;
 import lombok.Data;
 import org.jetbrains.annotations.Nullable;
 

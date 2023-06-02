@@ -14,7 +14,12 @@ export class UsersAPI extends RootHTTPApi{
     private readonly _checkEmail:string='email/check';
     private readonly _checkPhone:string='phone/check';
     private readonly _approvedEmail:string='email/approved';
+    private readonly _getProfile:string = 'profile'
 
+
+  get getProfile(): string {
+    return this.user_api+'/'+this._getProfile;
+  }
 
   get approvedEmail(): string {
     return this.user_api+'/'+this._approvedEmail;

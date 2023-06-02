@@ -5,7 +5,7 @@ import alexey.grizly.com.properties.properties.SecurityProperties;
 import alexey.grizly.com.users.events.UserEmailApprovedTokenEvent;
 import alexey.grizly.com.users.models.EUserStatus;
 import alexey.grizly.com.users.models.EmailApprovedToken;
-import alexey.grizly.com.users.models.UserAccountWithEmailApprovedToken;
+import alexey.grizly.com.users.models.user.UserAccountWithEmailApprovedToken;
 import alexey.grizly.com.users.repositories.UserEmailRepository;
 import alexey.grizly.com.users.services.UserEmailService;
 import alexey.grizly.com.users.utils.ApprovedTokenUtils;

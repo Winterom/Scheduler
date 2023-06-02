@@ -1,7 +1,7 @@
 package alexey.grizly.com.users.repositories.impl;
 
 import alexey.grizly.com.users.extractors.UserAccountWithPasswordChangeTokenExtractor;
-import alexey.grizly.com.users.models.UserAccountWithPasswordChangeToken;
+import alexey.grizly.com.users.models.user.UserAccountWithPasswordChangeToken;
 import alexey.grizly.com.users.repositories.ChangePasswordTokenRepository;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;

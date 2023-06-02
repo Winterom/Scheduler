@@ -4,62 +4,61 @@ import {Injectable} from "@angular/core";
   providedIn: 'root',
 })
 export class UserService {
-  private _id: String|null=null;
-  private _name: String|null=null;
-  private _surname: String|null=null;
-  private _lastname: String|null=null;
-  private _email: String|null=null;
-  private _token:String|null=null;
+  private _id: string|null=null;
+  private _name: string|null=null;
+  private _surname: string|null=null;
+  private _lastname: string|null=null;
+  private _email: string|null=null;
+  private _token:string|null=null;
   private _isAuth:boolean=false;
   private _authorities:Set<string>|null = null;
   private _tokenExpire:Date|null = null;
-  constructor() {
-  }
 
 
-  get id(): String | null {
+
+  get id(): string | null {
     return this._id;
   }
 
-  set id(value: String | null) {
+  set id(value: string | null) {
     this._id = value;
   }
 
-  get name(): String | null {
+  get name(): string | null {
     return this._name;
   }
 
-  set name(value: String | null) {
+  set name(value: string | null) {
     this._name = value;
   }
 
-  get surname(): String | null {
+  get surname(): string | null {
     return this._surname;
   }
 
-  set surname(value: String | null) {
+  set surname(value: string | null) {
     this._surname = value;
   }
 
-  get lastname(): String | null {
+  get lastname(): string | null {
     return this._lastname;
   }
 
-  set lastname(value: String | null) {
+  set lastname(value: string | null) {
     this._lastname = value;
   }
 
-  get email(): String | null {
+  get email(): string | null {
     return this._email;
   }
 
-  set email(value: String | null) {
+  set email(value: string | null) {
     this._email = value;
   }
 
-  get token(): String | null {
+  get token(): string | null {
     if(this._tokenExpire!==null){
-      if(this._tokenExpire?.getTime()<Date.now()){
+      if(this._tokenExpire?.getTime()>Date.now()){
         return this._token;
       }else {
         this.clear();
@@ -71,12 +70,13 @@ export class UserService {
  get isAuth():boolean{
     return this._isAuth;
  }
-  set token(value: any) {
-    this._token = value;
+  set token(value: string|null) {
+    console.log('value '+value)
     if(value===null){
       this.clear();
       return;
     }
+    this._token = value;
     try {
       const base64Url = value.split('.')[1];
       const base64 = base64Url.replace('-', '+').replace('_', '/');

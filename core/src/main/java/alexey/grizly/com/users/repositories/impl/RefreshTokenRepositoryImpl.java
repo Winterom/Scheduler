@@ -1,7 +1,7 @@
 package alexey.grizly.com.users.repositories.impl;
 
 import alexey.grizly.com.users.extractors.UserAccountWithAuthoritiesExtractor;
-import alexey.grizly.com.users.models.UserAccount;
+import alexey.grizly.com.users.models.user.UserAccount;
 import alexey.grizly.com.users.repositories.RefreshTokenRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;

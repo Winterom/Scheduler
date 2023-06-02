@@ -1,5 +1,7 @@
-package alexey.grizly.com.users.models;
+package alexey.grizly.com.users.models.user;
 
+import alexey.grizly.com.users.models.AppAuthorities;
+import alexey.grizly.com.users.models.EUserStatus;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -15,7 +17,6 @@ public class UserAccount implements UserDetails {
     private Long id;
     private String email;
     private Boolean isEmailVerified;
-    private Set<UsersRoles> usersRoles;
     private EUserStatus status;
     private String phone;
     private Boolean isPhoneVerified;
@@ -60,7 +61,6 @@ public class UserAccount implements UserDetails {
         return new ToStringBuilder(this)
                 .append("id", id)
                 .append("email", email)
-                .append("usersRoles", usersRoles)
                 .append("status", status)
                 .append("isEmailVerified", isEmailVerified)
                 .append("password", password)

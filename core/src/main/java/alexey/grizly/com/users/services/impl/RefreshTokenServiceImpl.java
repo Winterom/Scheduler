@@ -1,7 +1,7 @@
 package alexey.grizly.com.users.services.impl;
 
 import alexey.grizly.com.properties.properties.SecurityProperties;
-import alexey.grizly.com.users.models.UserAccount;
+import alexey.grizly.com.users.models.user.UserAccount;
 import alexey.grizly.com.users.repositories.RefreshTokenRepository;
 import alexey.grizly.com.users.services.RefreshTokenService;
 import alexey.grizly.com.users.utils.JwtTokenUtil;

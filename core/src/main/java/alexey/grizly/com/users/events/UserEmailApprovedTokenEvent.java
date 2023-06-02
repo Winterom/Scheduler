@@ -1,6 +1,6 @@
 package alexey.grizly.com.users.events;
 
-import alexey.grizly.com.users.models.UserAccountWithEmailApprovedToken;
+import alexey.grizly.com.users.models.user.UserAccountWithEmailApprovedToken;
 import lombok.Getter;
 import org.springframework.context.ApplicationEvent;
 @Getter

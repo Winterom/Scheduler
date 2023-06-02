@@ -3,7 +3,7 @@ package alexey.grizly.com.users.extractors;
 import alexey.grizly.com.commons.security.EAuthorities;
 import alexey.grizly.com.users.models.AppAuthorities;
 import alexey.grizly.com.users.models.EUserStatus;
-import alexey.grizly.com.users.models.UserAccount;
+import alexey.grizly.com.users.models.user.UserAccount;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
@@ -25,10 +25,13 @@ public class UserAccountWithAuthoritiesExtractor implements ResultSetExtractor<U
         userAccount.setStatus(EUserStatus.valueOf(rs.getString("e_status")));
         userAccount.setPassword(rs.getString("password"));
         userAccount.setCredentialExpiredTime(rs.getTimestamp("credential_expired").toLocalDateTime());
+        AppAuthorities authorities = new AppAuthorities();
+        authorities.setAuthorities(EAuthorities.valueOf(rs.getString("e_authorities")));
+        userAccount.getAuthorities().add(authorities);
         while (rs.next()){
-            AppAuthorities authorities = new AppAuthorities();
-            authorities.setAuthorities(EAuthorities.valueOf(rs.getString("e_authorities")));
-            userAccount.getAuthorities().add(authorities);
+            AppAuthorities auth = new AppAuthorities();
+            auth.setAuthorities(EAuthorities.valueOf(rs.getString("e_authorities")));
+            userAccount.getAuthorities().add(auth);
         }
         return userAccount;
     }

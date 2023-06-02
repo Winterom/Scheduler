@@ -3,7 +3,7 @@ package alexey.grizly.com.users.services.impl;
 import alexey.grizly.com.users.events.UserRegistrationEvent;
 import alexey.grizly.com.properties.properties.SecurityProperties;
 import alexey.grizly.com.users.models.EUserStatus;
-import alexey.grizly.com.users.models.UserAccount;
+import alexey.grizly.com.users.models.user.UserAccount;
 import alexey.grizly.com.users.repositories.UserRegistrationRepository;
 import alexey.grizly.com.users.services.RoleService;
 import alexey.grizly.com.users.services.UserEmailService;

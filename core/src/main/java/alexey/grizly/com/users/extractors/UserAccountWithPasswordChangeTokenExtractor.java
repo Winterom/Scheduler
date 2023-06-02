@@ -3,7 +3,7 @@ package alexey.grizly.com.users.extractors;
 
 import alexey.grizly.com.users.models.EUserStatus;
 import alexey.grizly.com.users.models.PasswordChangeToken;
-import alexey.grizly.com.users.models.UserAccountWithPasswordChangeToken;
+import alexey.grizly.com.users.models.user.UserAccountWithPasswordChangeToken;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 

@@ -4,6 +4,9 @@
   <p-panel [toggleable]="true">
     <ng-template pTemplate="header"> <span class="text-primary font-semibold text-xl">Основные учетные данные пользователя</span></ng-template>
     <ng-template pTemplate="content">
+      <div class="mb-2 font-bold">Аккаунт создан: <span class="font-normal">{{userProfile.createdAt.toString() | date: 'dd/MM/yyyy' }}</span></div>
+      <div class="mb-2 font-bold" >Последнее изменение:  <span class="font-normal">{{userProfile.updatedAt.toString() | date: 'dd/MM/yyyy'}} </span></div>
+      <div class="mb-4 font-bold">Статус аккаунта:  <span class="font-normal">{{userProfile.status }}</span></div>
     <form
       class="mt-1"
       [formGroup]="userForm"

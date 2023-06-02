@@ -1,6 +1,6 @@
 package alexey.grizly.com.users.events;
 
-import alexey.grizly.com.users.models.UserAccount;
+import alexey.grizly.com.users.models.user.UserAccount;
 import lombok.Getter;
 import org.springframework.context.ApplicationEvent;
 

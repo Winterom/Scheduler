@@ -1,7 +1,7 @@
 package alexey.grizly.com.users.repositories;
 
 
-import alexey.grizly.com.users.models.UserAccountWithEmailApprovedToken;
+import alexey.grizly.com.users.models.user.UserAccountWithEmailApprovedToken;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;

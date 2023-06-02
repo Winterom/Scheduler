@@ -6,7 +6,7 @@ import alexey.grizly.com.commons.security.EAuthorities;
 import alexey.grizly.com.users.models.EUserStatus;
 import alexey.grizly.com.users.dtos.request.AuthRequestDto;
 import alexey.grizly.com.users.models.AppAuthorities;
-import alexey.grizly.com.users.models.UserAccount;
+import alexey.grizly.com.users.models.user.UserAccount;
 import alexey.grizly.com.users.services.impl.AuthenticationServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletResponse;

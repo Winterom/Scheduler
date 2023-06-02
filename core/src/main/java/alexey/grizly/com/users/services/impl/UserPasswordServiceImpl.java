@@ -6,7 +6,7 @@ import alexey.grizly.com.properties.properties.GlobalProperties;
 import alexey.grizly.com.properties.properties.SecurityProperties;
 import alexey.grizly.com.users.models.EUserStatus;
 import alexey.grizly.com.users.models.PasswordChangeToken;
-import alexey.grizly.com.users.models.UserAccountWithPasswordChangeToken;
+import alexey.grizly.com.users.models.user.UserAccountWithPasswordChangeToken;
 import alexey.grizly.com.users.repositories.ChangePasswordTokenRepository;
 import alexey.grizly.com.users.repositories.UserPasswordRepository;
 import alexey.grizly.com.users.services.UserPasswordService;

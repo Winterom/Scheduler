@@ -7,6 +7,7 @@ import {TranslateModule} from "@ngx-translate/core";
 import {LoginModule} from "./pages/auth/login.module";
 import {HttpClientModule} from "@angular/common/http";
 import {DesktopModule} from "./pages/desktop/desktop.module";
+import {authInterceptorProviders} from "./intercepters/jwt-token.interceptor";
 
 
 
@@ -25,11 +26,12 @@ import {DesktopModule} from "./pages/desktop/desktop.module";
     DesktopModule,
     TranslateModule.forRoot(),
   ],
-  providers: [],
+  providers: [authInterceptorProviders],
   exports: [
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
 
 

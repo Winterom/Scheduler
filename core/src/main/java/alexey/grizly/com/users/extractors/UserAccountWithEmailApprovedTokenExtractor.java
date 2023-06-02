@@ -2,7 +2,7 @@ package alexey.grizly.com.users.extractors;
 
 import alexey.grizly.com.users.models.EUserStatus;
 import alexey.grizly.com.users.models.EmailApprovedToken;
-import alexey.grizly.com.users.models.UserAccountWithEmailApprovedToken;
+import alexey.grizly.com.users.models.user.UserAccountWithEmailApprovedToken;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 

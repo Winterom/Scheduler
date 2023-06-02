@@ -1,6 +1,6 @@
 package alexey.grizly.com.users.repositories;
 
-import alexey.grizly.com.users.models.UserAccountWithPasswordChangeToken;
+import alexey.grizly.com.users.models.user.UserAccountWithPasswordChangeToken;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
