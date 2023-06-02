@@ -51,8 +51,6 @@ export class LoginComponent {
     this.loginService.login(this.emailOrPhoneInput.value,this.passwordInput.value)
       .subscribe({next:data=>{
           this.user.token=data.access_token;
-          console.log(data)
-          console.log(this.user)
           if(!this.user.isAuth){
             addErrorMessage(this.messageService,'Токен авторизации не валиден!',null)
             this.loading=false;

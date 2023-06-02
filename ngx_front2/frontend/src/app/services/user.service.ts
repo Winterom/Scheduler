@@ -1,13 +1,15 @@
 import {Injectable} from "@angular/core";
+import {HttpClient} from "@angular/common/http";
+import {UsersAPI} from "./API/UsersAPI";
+import {Observable} from "rxjs";
+import {httpOptions} from "./API/RootHTTPApi";
+import {AuthToken} from "../types/AuthToken";
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
   private _id: string|null=null;
-  private _name: string|null=null;
-  private _surname: string|null=null;
-  private _lastname: string|null=null;
   private _email: string|null=null;
   private _token:string|null=null;
   private _isAuth:boolean=false;
@@ -15,7 +17,8 @@ export class UserService {
   private _tokenExpire:Date|null = null;
 
 
-
+  constructor(private http: HttpClient, private api:UsersAPI) {
+  }
   get id(): string | null {
     return this._id;
   }
@@ -24,29 +27,6 @@ export class UserService {
     this._id = value;
   }
 
-  get name(): string | null {
-    return this._name;
-  }
-
-  set name(value: string | null) {
-    this._name = value;
-  }
-
-  get surname(): string | null {
-    return this._surname;
-  }
-
-  set surname(value: string | null) {
-    this._surname = value;
-  }
-
-  get lastname(): string | null {
-    return this._lastname;
-  }
-
-  set lastname(value: string | null) {
-    this._lastname = value;
-  }
 
   get email(): string | null {
     return this._email;
@@ -96,13 +76,14 @@ export class UserService {
 
   private clear(){
     this._id = null;
-    this._name = null;
-    this._surname = null;
-    this._lastname = null;
     this._email = null;
     this._token = null;
   }
   private decode(rawToken:string):string{
     return atob(rawToken);
+  }
+
+  public refreshing(): Observable<AuthToken>{
+    return this.http.get<AuthToken>(this.api.refreshing,httpOptions);
   }
 }

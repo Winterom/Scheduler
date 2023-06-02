@@ -6,6 +6,7 @@ import {Injectable} from "@angular/core";
 export class UsersAPI extends RootHTTPApi{
 
     private readonly _auth_api:string = 'auth';
+    private readonly _refreshing:string ='auth';
     private readonly _user_api:string = 'users'
     private readonly _sendCodeForResetPassword:string ='password/change/';
     private readonly _passwordRequirements:string = 'properties/security/password/strange';
@@ -43,6 +44,10 @@ export class UsersAPI extends RootHTTPApi{
 
   get auth_api(): string {
     return super.getRoot()+'/'+this._auth_api;
+  }
+
+  get refreshing(): string {
+    return super.getRoot()+'/'+this._refreshing;
   }
 
   private get user_api(): string {

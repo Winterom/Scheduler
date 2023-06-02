@@ -7,6 +7,8 @@ import {SharedModule} from "../../shared/shared.module";
 import {InputTextModule} from "primeng/inputtext";
 import {ReactiveFormsModule} from "@angular/forms";
 import {InputMaskModule} from "primeng/inputmask";
+import {ButtonModule} from "primeng/button";
+import {ToastModule} from "primeng/toast";
 
 
 
@@ -22,7 +24,9 @@ import {InputMaskModule} from "primeng/inputmask";
     SharedModule,
     InputTextModule,
     ReactiveFormsModule,
-    InputMaskModule
+    InputMaskModule,
+    ButtonModule,
+    ToastModule
   ]
 })
 export class DesktopModule { }

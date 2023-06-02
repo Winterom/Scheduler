@@ -2,19 +2,28 @@ import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ProfileService} from "./profile.service";
 import {UserProfile} from "../../../types/UserProfile";
+import {RegistrationService} from "../../auth/registration/registration.service";
+import {AuthMessage} from "../../../messages/AuthMessages";
+import addSuccessMMessage = AuthMessage.addSuccessMMessage;
+import {MessageService} from "primeng/api";
+import addErrorMessage = AuthMessage.addErrorMessage;
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  styleUrls: ['./profile.component.scss'],
+  providers: [MessageService]
 })
 export class ProfileComponent implements OnInit{
   userProfile:UserProfile  = new UserProfile();
   userForm: FormGroup;
   emailControl:FormControl;
   phoneControl:FormControl;
+  changePswLoading:boolean=false;
 
-  constructor(private profileService:ProfileService) {
+  constructor(private profileService:ProfileService,
+              private registrationService:RegistrationService,
+              private messageService: MessageService) {
     this.emailControl = new FormControl<string>('', [Validators.required, Validators.email]);
     this.phoneControl = new FormControl<number>(0);
     this.userForm = new FormGroup<any>({
@@ -36,16 +45,49 @@ export class ProfileComponent implements OnInit{
   }
 
   checkPhone() {
-    const rawPhone:string = this.phoneControl.value;
+    if (this.phoneControl.errors != null||this.phoneControl.value===0) {
+      return;
+    }
+    let rawPhone: string = this.phoneControl.value.toString();
     const phone = rawPhone.replaceAll('-','')
       .replace('(','')
       .replace(')','')
       .replace(' ','');
+    console.log(phone);
+    this.registrationService.checkPhone(phone).subscribe({
+      next: () => {
+        addSuccessMMessage(this.messageService,'Телефон введен правильно и свободен',null)
+        this.phoneControl.updateValueAndValidity();
+      },error:err=>{
+        const errorMessages: string [] = err.error.messages
+        errorMessages.forEach((value)=>{
+          addErrorMessage(this.messageService,value,err.error.statusCode);
+        })
+        this.phoneControl.setErrors({phoneBusy:true});
+      }
+    })
   }
 
   checkEmail() {
-
+    if (this.emailControl.errors != null) {
+      return;
+    }
+    this.registrationService.checkEmail(this.emailControl.value).subscribe({
+      next: () => {
+        addSuccessMMessage(this.messageService,'email введен правильно и свободен',null);
+        this.emailControl.updateValueAndValidity();
+      },error:err=>{
+        const errorMessages: string [] = err.error.messages
+        errorMessages.forEach((value)=>{
+          addErrorMessage(this.messageService,value,err.error.statusCode);
+        })
+        this.emailControl.setErrors({emailBusy:true});
+      }
+    })
   }
 
 
+  sendEmailVerifyToken() {
+
+  }
 }

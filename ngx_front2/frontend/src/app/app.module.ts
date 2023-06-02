@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
@@ -8,9 +8,10 @@ import {LoginModule} from "./pages/auth/login.module";
 import {HttpClientModule} from "@angular/common/http";
 import {DesktopModule} from "./pages/desktop/desktop.module";
 import {authInterceptorProviders} from "./intercepters/jwt-token.interceptor";
+import {registerLocaleData} from "@angular/common";
+import localeRu from '@angular/common/locales/ru';
 
-
-
+registerLocaleData(localeRu, 'ru');
 
 
 @NgModule({
@@ -26,7 +27,9 @@ import {authInterceptorProviders} from "./intercepters/jwt-token.interceptor";
     DesktopModule,
     TranslateModule.forRoot(),
   ],
-  providers: [authInterceptorProviders],
+  providers: [authInterceptorProviders,
+    { provide: LOCALE_ID, useValue: 'ru' }
+  ],
   exports: [
   ],
   bootstrap: [AppComponent]

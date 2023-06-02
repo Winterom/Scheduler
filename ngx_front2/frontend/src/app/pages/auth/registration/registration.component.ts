@@ -173,7 +173,10 @@ export class RegistrationComponent implements OnInit {
       return;
     }
     let rawPhone: string = this.phoneControl.value.toString();
-    const phone ='+7'+ rawPhone.replaceAll('-','');
+    const phone = rawPhone.replaceAll('-','')
+      .replace('(','')
+      .replace(')','')
+      .replace(' ','');
     console.log(phone);
     this.regService.checkPhone(phone).subscribe({
       next: () => {

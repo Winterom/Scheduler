@@ -49,6 +49,10 @@ public class AuthenticationController {
     @GetMapping
     public ResponseEntity<?> refresh(HttpServletRequest request){
         Cookie[] cookies = request.getCookies();
+        if(cookies==null){
+            final AppResponseErrorDto errorDto = new AppResponseErrorDto(HttpStatus.UNAUTHORIZED,NOT_VALID_PARAMS);
+            return new ResponseEntity<>(errorDto, HttpStatus.UNAUTHORIZED);
+        }
         Optional<Cookie> refreshToken =Arrays.stream(cookies).filter(x-> x.getName().equals("token")).findFirst();
         if(refreshToken.isEmpty()){
             final AppResponseErrorDto errorDto = new AppResponseErrorDto(HttpStatus.UNAUTHORIZED,NOT_VALID_PARAMS);
