@@ -19,7 +19,10 @@ export class ProfileComponent implements OnInit{
   userForm: FormGroup;
   emailControl:FormControl;
   phoneControl:FormControl;
-  changePswLoading:boolean=false;
+  sendEmailVerifyTokenLoaded:boolean=false;
+  sendPhoneVerifyTokenLoaded:boolean = false;
+  userFormLoading: boolean = false;
+  userFormChanged: boolean = false;
 
   constructor(private profileService:ProfileService,
               private registrationService:RegistrationService,
@@ -32,13 +35,14 @@ export class ProfileComponent implements OnInit{
     })
   }
   ngOnInit(): void {
-    this.profileService.profile().subscribe({next:data=>{
+    this.profileService.profile().subscribe({next:data=> {
         this.userProfile = data;
-        this.userForm.setValue({
-          emailControl: this.userProfile.email,
-          phoneControl: this.userProfile.phone
-        })
+        this.emailControl.setValue(this.userProfile.email, {emitEvent: false});
+        this.phoneControl.setValue(this.userProfile.phone, {emitEvent: false});
       }})
+    this.userForm.valueChanges.subscribe(()=>
+      this.userFormChanged=true
+    )
   }
   submitUserFrm() {
 
@@ -53,7 +57,9 @@ export class ProfileComponent implements OnInit{
       .replace('(','')
       .replace(')','')
       .replace(' ','');
-    console.log(phone);
+    if(phone===this.userProfile.phone){
+      return;
+    }
     this.registrationService.checkPhone(phone).subscribe({
       next: () => {
         addSuccessMMessage(this.messageService,'Телефон введен правильно и свободен',null)
@@ -72,7 +78,11 @@ export class ProfileComponent implements OnInit{
     if (this.emailControl.errors != null) {
       return;
     }
-    this.registrationService.checkEmail(this.emailControl.value).subscribe({
+    const email:string = this.emailControl.value;
+    if(email===this.userProfile.email){
+      return;
+    }
+    this.registrationService.checkEmail(email).subscribe({
       next: () => {
         addSuccessMMessage(this.messageService,'email введен правильно и свободен',null);
         this.emailControl.updateValueAndValidity();
@@ -88,6 +98,10 @@ export class ProfileComponent implements OnInit{
 
 
   sendEmailVerifyToken() {
+
+  }
+
+  sendPhoneVerifyToken() {
 
   }
 }
