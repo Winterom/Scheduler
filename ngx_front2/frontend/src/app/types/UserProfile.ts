@@ -10,7 +10,7 @@ export class UserProfile {
   createdAt:Data = new Date();
   credentialExpiredTime:Data = new Date();
   updatedAt:Data = new Date();
-  roles:Set<Role> = new Set<Role>();
+  roles:Role[] = [];
 }
 export class Role{
   title:string = '';

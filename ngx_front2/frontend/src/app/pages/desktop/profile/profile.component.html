@@ -1,84 +1,8 @@
 <app-menu-bar></app-menu-bar>
 <div class="mt-4 flex justify-content-around">
   <div class="w-9">
-    <p-panel [toggleable]="true">
-      <ng-template pTemplate="header"><span class="text-primary font-semibold text-xl">Основные учетные данные пользователя</span>
-      </ng-template>
-      <ng-template pTemplate="content">
-        <div class="mb-2 font-bold">Аккаунт создан: <span
-          class="font-normal">{{userProfile.createdAt.toString() | date:'full':'ru' }}</span></div>
-        <div class="mb-2 font-bold">Последнее изменение: <span
-          class="font-normal">{{userProfile.updatedAt.toString() | date:'full':'ru' }} </span></div>
-        <div class="mb-4 font-bold">Статус аккаунта: <span class="font-normal">{{userProfile.status }}</span></div>
-        <form
-          class="mt-1"
-          [formGroup]="userForm"
-          novalidate
-          (ngSubmit)="submitUserFrm()">
-          <div class="flex justify-content-start align-items-center">
-        <span class="p-float-label w-20rem">
-          <input
-            pInputText
-            id="email"
-            class="p-inputtext-sm w-full"
-            formControlName="emailControl"
-            (focusout)="checkEmail()"
-            [ngClass]="{'ng-invalid ng-dirty':(emailControl.invalid)&&emailControl.touched}"
-          />
-         <label htmlFor="email">Email</label>
-        </span>
-            <span class="ml-2">
-          <span *ngIf="userProfile.isEmailVerified"
-                class="font-italic font-semibold text-green-400">Почта подтверждена</span>
-          <span *ngIf="!userProfile.isEmailVerified">
-            <p-button
-              label="Подтвердить почту"
-              styleClass="p-button-raised ml-5"
-              [loading]="sendEmailVerifyTokenLoaded"
-              (click)="sendEmailVerifyToken()"></p-button>
-          </span>
-        </span>
-          </div>
-          <div class="flex justify-content-start align-items-center">
-            <span class="p-float-label mt-4">
-              <p-inputMask
-                mask="+7(999) 999-9999"
-                id="phone"
-                formControlName="phoneControl"
-                (focusout)="checkPhone()"
-                [ngClass]="{'ng-invalid ng-dirty':(phoneControl.invalid)&&phoneControl.touched}"
-              ></p-inputMask>
-              <label htmlFor="phone">Телефон</label>
-            </span>
-            <span *ngIf="userProfile.isPhoneVerified"
-                  class="font-italic font-semibold text-green-400">Телефон подтвержден</span>
-            <span *ngIf="!userProfile.isEmailVerified">
-            <p-button
-              label="Подтвердить телефон"
-              styleClass="p-button-raised ml-5"
-              [loading]="sendPhoneVerifyTokenLoaded"
-              (click)="sendPhoneVerifyToken()"></p-button>
-          </span>
-          <span *ngIf="!phoneControl.value">
-            Введите номер Вашего телефона.
-          </span>
-          </div>
-          <p-button
-            label="Сохранить"
-            styleClass="p-button-raised mt-3"
-            [loading]="userFormLoading"
-            [disabled]="!userFormChanged"
-            (click)="submitUserFrm()"></p-button>
-          <div>
-          </div>
-
-        </form>
-      </ng-template>
-    </p-panel>
-    <p-panel [toggleable]="true" styleClass="mt-4">
-      <ng-template pTemplate="header"><span class="text-primary font-semibold text-xl">Информация о сотруднике</span>
-      </ng-template>
-    </p-panel>
+    <app-user-profile></app-user-profile>
+    <app-employer-profile></app-employer-profile>
   </div>
 </div>
-<p-toast></p-toast>
+

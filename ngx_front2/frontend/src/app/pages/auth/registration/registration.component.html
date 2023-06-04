@@ -82,12 +82,12 @@
       <div class="w-25rem flex flex-column justify-content-between">
         <div>
           <h4 class="text-center">Пароль</h4>
-          <p>Пароль должен соотвествовать следующим требованиям:</p>
+          <p>Пароль должен соответствовать следующим требованиям:</p>
           <div *ngIf="pswStrangeReq.minCharacters!=0"> - минимальная длина пароля - <span
             class="font-bold text-red-800">{{pswStrangeReq.minCharacters}}</span></div>
-          <div *ngIf="pswStrangeReq.minLowerCase!=0"> - минимально прописных симвоволов - <span
+          <div *ngIf="pswStrangeReq.minLowerCase!=0"> - минимально прописных символов - <span
             class="font-bold text-red-800">{{pswStrangeReq.minLowerCase}}</span></div>
-          <div *ngIf="pswStrangeReq.minUpperCase!=0"> - минимально заглавных симвоволов - <span
+          <div *ngIf="pswStrangeReq.minUpperCase!=0"> - минимально заглавных символов - <span
             class="font-bold text-red-800">{{pswStrangeReq.minUpperCase}}</span></div>
           <div *ngIf="pswStrangeReq.minNumber!=0"> - минимально количество цифр - <span
             class="font-bold text-red-800">{{pswStrangeReq.minNumber}}</span></div>

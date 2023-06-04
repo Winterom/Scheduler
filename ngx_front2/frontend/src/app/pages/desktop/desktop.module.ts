@@ -9,6 +9,11 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {InputMaskModule} from "primeng/inputmask";
 import {ButtonModule} from "primeng/button";
 import {ToastModule} from "primeng/toast";
+import { UserProfileComponent } from './profile/user-profile/user-profile.component';
+import { EmployerProfileComponent } from './profile/employer-profile/employer-profile.component';
+import {TableModule} from "primeng/table";
+import {DialogModule} from "primeng/dialog";
+import {PasswordModule} from "primeng/password";
 
 
 
@@ -16,7 +21,9 @@ import {ToastModule} from "primeng/toast";
 @NgModule({
   declarations: [
     DesktopComponent,
-    ProfileComponent
+    ProfileComponent,
+    UserProfileComponent,
+    EmployerProfileComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +33,10 @@ import {ToastModule} from "primeng/toast";
     ReactiveFormsModule,
     InputMaskModule,
     ButtonModule,
-    ToastModule
+    ToastModule,
+    TableModule,
+    DialogModule,
+    PasswordModule
   ]
 })
 export class DesktopModule { }
