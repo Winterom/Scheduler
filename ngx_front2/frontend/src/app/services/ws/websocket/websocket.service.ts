@@ -116,6 +116,7 @@ export class WebsocketService implements OnDestroy{
   public send(event: string, data: any = {}): void {
     if (this.websocket$) {
       this.websocket$.next(<any>JSON.stringify({ event, data }));
+      console.log('Send good!');
     } else {
       console.error('Send error!');
     }
