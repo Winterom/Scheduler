@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import {UsersAPI} from "./API/UsersAPI";
+import {HTTPUsersAPI} from "./API/HTTPUsersAPI";
 import {Observable} from "rxjs";
 import {httpOptions} from "./API/RootHTTPApi";
 import {AuthToken} from "../types/AuthToken";
@@ -17,7 +17,7 @@ export class UserService {
   private _tokenExpire:Date|null = null;
 
 
-  constructor(private http: HttpClient, private api:UsersAPI) {
+  constructor(private http: HttpClient, private api:HTTPUsersAPI) {
   }
   get id(): string | null {
     return this._id;

@@ -8,13 +8,13 @@ import {
 import { Observable, throwError } from 'rxjs';
 import { catchError} from 'rxjs/operators';
 import {UserService} from "../services/user.service";
-import {UsersAPI} from "../services/API/UsersAPI";
+import {HTTPUsersAPI} from "../services/API/HTTPUsersAPI";
 
 const TOKEN_HEADER_KEY = 'Authorization';
 @Injectable()
 export class JwtTokenInterceptor implements HttpInterceptor {
   private isRefreshing = false;
-  constructor(private user:UserService,private userApi:UsersAPI) {}
+  constructor(private user:UserService,private userApi:HTTPUsersAPI) {}
 
   intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<Object>> {
     let authReq = req;

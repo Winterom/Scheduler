@@ -3,7 +3,7 @@ import {Injectable} from "@angular/core";
 @Injectable({
   providedIn: 'root'
 })
-export class UsersAPI extends RootHTTPApi{
+export class HTTPUsersAPI extends RootHTTPApi{
 
     private readonly _auth_api:string = 'auth';
     private readonly _refreshing:string ='auth';

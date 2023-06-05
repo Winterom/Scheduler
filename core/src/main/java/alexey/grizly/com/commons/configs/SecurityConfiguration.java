@@ -1,7 +1,6 @@
 package alexey.grizly.com.commons.configs;
 
 import alexey.grizly.com.users.services.impl.UserAccountDetailsService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
@@ -27,7 +26,7 @@ public class SecurityConfiguration {
     private final JwtRequestFilter jwtRequestFilter;
 
 
-    @Autowired
+
     public SecurityConfiguration(JwtRequestFilter jwtRequestFilter) {
         this.jwtRequestFilter = jwtRequestFilter;
     }

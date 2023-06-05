@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {UsersAPI} from "../../../services/API/UsersAPI";
+import {HTTPUsersAPI} from "../../../services/API/HTTPUsersAPI";
 import {Observable} from "rxjs";
 import {httpOptions} from "../../../services/API/RootHTTPApi";
 import {UserProfile} from "../../../types/UserProfile";
@@ -10,7 +10,7 @@ import {UserProfile} from "../../../types/UserProfile";
 })
 export class ProfileService {
 
-  constructor(private http: HttpClient, private api:UsersAPI) { }
+  constructor(private http: HttpClient, private api:HTTPUsersAPI) { }
   public profile(): Observable<UserProfile> {
     return this.http.get<UserProfile>(
       this.api.getProfile,

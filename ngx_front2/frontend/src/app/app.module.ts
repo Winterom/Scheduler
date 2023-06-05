@@ -10,6 +10,7 @@ import {DesktopModule} from "./pages/desktop/desktop.module";
 import {authInterceptorProviders} from "./intercepters/jwt-token.interceptor";
 import {registerLocaleData} from "@angular/common";
 import localeRu from '@angular/common/locales/ru';
+import {WebsocketModule} from "./services/ws/websocket";
 
 registerLocaleData(localeRu, 'ru');
 
@@ -26,6 +27,9 @@ registerLocaleData(localeRu, 'ru');
     HttpClientModule,
     DesktopModule,
     TranslateModule.forRoot(),
+    WebsocketModule.config({
+      url: 'ws://localhost:8080/application/api/v1/ws/users/profile'
+    })
   ],
   providers: [authInterceptorProviders,
     { provide: LOCALE_ID, useValue: 'ru' }

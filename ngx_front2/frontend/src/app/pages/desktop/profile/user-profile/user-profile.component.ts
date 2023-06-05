@@ -11,6 +11,8 @@ import addErrorMessage = AuthMessage.addErrorMessage;
 import {PasswordStrangeRequirement} from "../../../../types/PasswordStrangeRequirement";
 import {passwordStrangeValidator} from "../../../../validators/PasswordStrangeValidator";
 import {checkIfMatchingPasswords} from "../../../../validators/MatchingPasswordsValidator";
+import {WSUserApi} from "../../../../services/API/WSUserApi";
+import {WebsocketService} from "../../../../services/ws/websocket";
 
 @Component({
   selector: 'app-user-profile',
@@ -21,6 +23,7 @@ export class UserProfileComponent implements OnInit{
   userStatusClasses:string='';
   userProfile:UserProfile  = new UserProfile();
   pswStrangeReq: PasswordStrangeRequirement = new PasswordStrangeRequirement;
+  userApi:WSUserApi = new WSUserApi();
   userForm: FormGroup;
   passwordChangeForm:FormGroup;
   emailControl:FormControl;
@@ -40,6 +43,7 @@ export class UserProfileComponent implements OnInit{
 
   constructor(private profileService:ProfileService,
               private registrationService:RegistrationService,
+              private wsService:WebsocketService,
               private messageService: MessageService) {
     this.emailControl = new FormControl<string>('', [Validators.required, Validators.email]);
     this.phoneControl = new FormControl<number>(0);
@@ -55,11 +59,15 @@ export class UserProfileComponent implements OnInit{
     },[checkIfMatchingPasswords(this.passwordControl, this.confirmPasswordControl)])
   }
   ngOnInit(): void {
-    this.profileService.profile().subscribe({next:data=> {
+    /*this.profileService.profile().subscribe({next:data=> {
         this.userProfile = data;
         this.emailControl.setValue(this.userProfile.email, {emitEvent: false});
         this.phoneControl.setValue(this.userProfile.phone, {emitEvent: false});
         this.userStatusClasses = this.statusClasses();
+      }})*/
+    this.wsService.send('get_profile','winterom@gmail.com');
+    this.wsService.on('profile').subscribe({next:data=>{
+      console.log(data);
       }})
     this.userForm.valueChanges.subscribe(()=>{
       const email:string = this.emailControl.value;
