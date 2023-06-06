@@ -1,9 +1,9 @@
 package alexey.grizly.com.users.repositories;
 
-import alexey.grizly.com.users.dtos.response.UserProfileResponseDto;
+import alexey.grizly.com.users.dtos.response.UserProfileResponse;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserProfileRepository {
-    UserProfileResponseDto getUserAccountWithRoles(String email);
+    UserProfileResponse getUserAccountWithRoles(String email);
 }

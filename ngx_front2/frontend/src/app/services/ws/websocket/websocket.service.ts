@@ -1,109 +1,104 @@
-import {Inject, Injectable, OnDestroy} from '@angular/core';
-import {WebSocketSubject, WebSocketSubjectConfig} from "rxjs/internal/observable/dom/WebSocketSubject";
-import {IWsMessage, WebSocketConfig} from "./websocket.interfaces";
+import {Injectable, OnDestroy} from '@angular/core';
+import {WebSocketSubject} from "rxjs/webSocket";
+import {IWebsocketService, IWsMessage} from "./websocket.interfaces";
 import {
   distinctUntilChanged,
   filter,
-  interval, map,
+  interval,
+  map,
   Observable,
-
+  Observer,
   share,
   Subject,
   SubscriptionLike,
   takeWhile
 } from "rxjs";
-import { config } from './websocket.config';
+import {WebSocketSubjectConfig} from "rxjs/internal/observable/dom/WebSocketSubject";
+import {UserService} from "../../user.service";
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class WebsocketService implements OnDestroy{
+export class WebsocketService implements OnDestroy,IWebsocketService{
+  private isConnected:boolean =false;
+  private wsSubject:WebSocketSubject<any>|null=null;
+  private wsMessages: Subject<IWsMessage<any>> = new Subject<IWsMessage<any>>();
   private readonly config: WebSocketSubjectConfig<IWsMessage<any>>;
-
+  private connection$: Observer<boolean>;
   private websocketSub: SubscriptionLike;
-  private statusSub: SubscriptionLike;
-
-  private reconnection$: Observable<number>|null=null;
-  private websocket$: WebSocketSubject<IWsMessage<any>>|null=null;
-
-  private wsMessages$: Subject<IWsMessage<any>>;
-
-  private reconnectInterval: number;
-  private reconnectAttempts: number;
-  private isConnected: boolean =false;
+  private reconnection$: Observable<number>|null =null;
+  private reconnectInterval: number = 5000;
+  private reconnectAttempts: number = 10;
   public status: Observable<boolean>;
-
-  constructor(@Inject(config) private wsConfig: WebSocketConfig) {
-
-    this.status = new Observable<boolean>(() => {
-    }).pipe(share(), distinctUntilChanged());
-    this.wsMessages$ = new Subject<IWsMessage<any>>();
-    this.reconnectInterval = wsConfig.reconnectInterval || 5000; // pause between connections
-    this.reconnectAttempts = wsConfig.reconnectAttempts || 10; // number of connection attempts
+  constructor(private userService:UserService) {
+    this.connection$ = {next:(value)=>{
+          this.isConnected = value;
+      },error:(err)=>{
+        console.error(err)
+      },complete:()=>{
+        console.log('подписка завершена')
+      }}
     this.config = {
-      url: wsConfig.url,
+      url : '',
       closeObserver: {
         next: () => {
-          this.websocket$ = null;
+          this.wsSubject = null;
+          this.connection$.next(false);
+          console.log('WebSocket disconnected')
         }
       },
       openObserver: {
         next: () => {
           console.log('WebSocket connected!');
+          this.connection$.next(true);
         }
       }
     };
-
-
-
-    this.statusSub = this.status
-      .subscribe((isConnected) => {
-        this.isConnected = isConnected;
-
-        if (!this.reconnection$ && !isConnected) {
-          this.reconnect();
-        }
-      });
-    this.websocketSub = this.wsMessages$.subscribe(
-      null, (error: ErrorEvent) => console.error('WebSocket error!', error)
+    this.websocketSub = this.wsMessages.subscribe(
+      {next:data => {},error:err => {
+        console.log(err)}
+      }
     );
-
-    this.connect();
+    this.status = new Observable<boolean>((observer) => {
+      this.connection$ = observer;
+    }).pipe(share(), distinctUntilChanged());
   }
-
-  private reconnect(): void {
+  public connect(url:string): void {
+    this.config.url = url + '?bearer=' + this.userService.token;
+    this.wsSubject = new WebSocketSubject(this.config); // создаем
+// если есть сообщения, шлем их в дальше,
+// если нет, ожидаем
+// реконнектимся, если получили ошибку
+    this.wsSubject.subscribe({next:message =>{
+      this.wsMessages.next(message)
+      },error:err => {
+      console.log(err)
+      this.reconect(url)
+      }});
+  }
+  reconect(url:string){
     this.reconnection$ = interval(this.reconnectInterval)
-      .pipe(takeWhile((v, index) => index < this.reconnectAttempts && !this.websocket$));
-
+      .pipe(takeWhile((v, index) => index < this.reconnectAttempts && !this.wsSubject));
     this.reconnection$.subscribe(
-      () => this.connect(),
+      () => this.connect(url),
       null,
       () => {
         // Subject complete if reconnect attemts ending
         this.reconnection$ = null;
-        if (!this.websocket$) {
-          this.wsMessages$.complete();
-        }
-      });
-  }
-  private connect(): void {
-    this.websocket$ = new WebSocketSubject(this.config);
-    this.websocket$.subscribe(
-      (message) => this.wsMessages$.next(message),
-      (error: Event) => {
-        if (!this.websocket$) {
 
-          this.reconnect();
+        if (!this.wsSubject) {
+          this.wsMessages.complete();
+          this.connection$.complete();
         }
       });
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.websocketSub.unsubscribe();
-    this.statusSub.unsubscribe();
   }
   public on<T>(event: string): Observable<T> {
-      return this.wsMessages$.pipe(
+      return this.wsMessages.pipe(
         filter((message: IWsMessage<T>) => message.event === event),
         map((message: IWsMessage<T>) => message.data)
       );
@@ -114,11 +109,10 @@ export class WebsocketService implements OnDestroy{
   * on message to server
   * */
   public send(event: string, data: any = {}): void {
-    if (this.websocket$) {
-      this.websocket$.next(<any>JSON.stringify({ event, data }));
-      console.log('Send good!');
+    if (this.wsSubject) {
+      this.wsSubject.next(JSON.stringify({ event, data }));
     } else {
-      console.error('Send error!');
+      console.error('Send error! connection is null');
     }
   }
 }

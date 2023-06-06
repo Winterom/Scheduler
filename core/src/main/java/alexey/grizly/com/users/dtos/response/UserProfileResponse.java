@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.Set;
 
 @Data
-public class UserProfileResponseDto {
+public class UserProfileResponse {
     private Long id;
     private String email;
     private Boolean isEmailVerified;

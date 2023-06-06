@@ -1,7 +1,6 @@
 package alexey.grizly.com.users.controllers;
 
 import alexey.grizly.com.commons.exceptions.AppResponseErrorDto;
-import alexey.grizly.com.users.dtos.response.UserProfileResponseDto;
 import alexey.grizly.com.users.services.UserProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

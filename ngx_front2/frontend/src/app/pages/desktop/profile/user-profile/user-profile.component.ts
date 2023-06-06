@@ -59,15 +59,17 @@ export class UserProfileComponent implements OnInit{
     },[checkIfMatchingPasswords(this.passwordControl, this.confirmPasswordControl)])
   }
   ngOnInit(): void {
-    /*this.profileService.profile().subscribe({next:data=> {
-        this.userProfile = data;
-        this.emailControl.setValue(this.userProfile.email, {emitEvent: false});
-        this.phoneControl.setValue(this.userProfile.phone, {emitEvent: false});
-        this.userStatusClasses = this.statusClasses();
-      }})*/
-    this.wsService.send('get_profile','winterom@gmail.com');
-    this.wsService.on('profile').subscribe({next:data=>{
-      console.log(data);
+    this.wsService.connect(this.userApi.getProfile);
+    this.wsService.status.subscribe({next:value => {
+        if(value){
+          this.wsService.send('get_profile','winterom@gmail.com');
+        }
+      }})
+
+    this.wsService.on<UserProfile>('profile').subscribe({next:data=>{
+      this.userProfile = data;
+      this.emailControl.setValue( this.userProfile.email);
+      this.phoneControl.setValue(this.userProfile.phone);
       }})
     this.userForm.valueChanges.subscribe(()=>{
       const email:string = this.emailControl.value;
@@ -166,7 +168,7 @@ export class UserProfileComponent implements OnInit{
     })
   }
   private formatPhoneValue(rawPhone:string):string{
-    return rawPhone.replaceAll('-', '')
+    return String(rawPhone).replaceAll('-', '')
       .replace('(', '')
       .replace(')', '')
       .replace(' ', '');

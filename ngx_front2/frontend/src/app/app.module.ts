@@ -27,9 +27,6 @@ registerLocaleData(localeRu, 'ru');
     HttpClientModule,
     DesktopModule,
     TranslateModule.forRoot(),
-    WebsocketModule.config({
-      url: 'ws://localhost:8080/application/api/v1/ws/users/profile'
-    })
   ],
   providers: [authInterceptorProviders,
     { provide: LOCALE_ID, useValue: 'ru' }

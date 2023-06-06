@@ -1,6 +1,6 @@
 package alexey.grizly.com.users.repositories.impl;
 
-import alexey.grizly.com.users.dtos.response.UserProfileResponseDto;
+import alexey.grizly.com.users.dtos.response.UserProfileResponse;
 import alexey.grizly.com.users.extractors.UserAccountWithRolesExtractor;
 import alexey.grizly.com.users.repositories.UserProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class UserProfileRepositoryImpl implements UserProfileRepository {
     }
 
     @Override
-    public UserProfileResponseDto getUserAccountWithRoles(String email){
+    public UserProfileResponse getUserAccountWithRoles(String email){
         SqlParameterSource namedParameters = new MapSqlParameterSource()
                 .addValue("email",email);
         return jdbcTemplate.query(GET_PROFILE,namedParameters,new UserAccountWithRolesExtractor());

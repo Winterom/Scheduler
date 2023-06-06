@@ -1,6 +1,6 @@
 package alexey.grizly.com.users.services.impl;
 
-import alexey.grizly.com.users.dtos.response.UserProfileResponseDto;
+import alexey.grizly.com.users.dtos.response.UserProfileResponse;
 import alexey.grizly.com.users.repositories.UserProfileRepository;
 import alexey.grizly.com.users.services.UserProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ public class UserProfileServiceImpl implements UserProfileService {
     }
 
     @Override
-    public UserProfileResponseDto getProfileByEmail(String email) {
+    public UserProfileResponse getProfileByEmail(String email) {
         return userProfileRepository.getUserAccountWithRoles(email);
     }
 }
