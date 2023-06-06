@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {RegistrationService} from "./registration.service";
-import {PasswordStrangeRequirement} from "../../../types/PasswordStrangeRequirement";
+import {PasswordStrengthRequirement} from "../../../types/PasswordStrengthRequirement";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {passwordStrangeValidator} from "../../../validators/PasswordStrangeValidator";
 import {checkIfMatchingPasswords} from "../../../validators/MatchingPasswordsValidator";
@@ -19,7 +19,7 @@ import addSuccessMMessage = AuthMessage.addSuccessMMessage;
 })
 export class RegistrationComponent implements OnInit {
   loading: boolean = false;
-  pswStrangeReq: PasswordStrangeRequirement = new PasswordStrangeRequirement;
+  pswStrangeReq: PasswordStrengthRequirement = new PasswordStrengthRequirement;
   registrationForm: FormGroup;
   passwordControl: FormControl;
   confirmPasswordControl: FormControl;

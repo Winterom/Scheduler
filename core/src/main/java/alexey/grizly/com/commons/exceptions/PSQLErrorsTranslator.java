@@ -12,18 +12,9 @@ import java.util.Map;
 public class PSQLErrorsTranslator {
     private final Map<String,String> translator = new HashMap<>();
 
-    private static final String UNDEFINED_ERROR_MESSAGE="Упс не опознанная ошибка";
     @PostConstruct
     public void init(){
         this.translator.put("23505","Объект с такими уникальными данными существует");
-    }
-
-    public String getMessage(String sqlState){
-        String message = this.translator.get(sqlState);
-        if (message==null){
-            return UNDEFINED_ERROR_MESSAGE;
-        }
-        return message;
     }
 
     public String getMessage(ServerErrorMessage errorMessage){

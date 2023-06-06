@@ -17,7 +17,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 @Component
 public class SecurityProperties {
     private JwtProperties jwtProperties;
-    private UserPasswordStrange userPasswordStrange;
+    private UserPasswordStrength userPasswordStrength;
     private RestorePasswordTokenProperty restorePasswordTokenProperty;
     private ApprovedEmailProperty approvedEmailProperty;
     private PasswordProperty passwordProperty;
@@ -32,7 +32,7 @@ public class SecurityProperties {
         this.readLock = lock.readLock();
         this.writeLock = lock.writeLock();
         this.jwtProperties = new JwtProperties();
-        this.userPasswordStrange = new UserPasswordStrange();
+        this.userPasswordStrength = new UserPasswordStrength();
         this.passwordProperty = new PasswordProperty();
         this.approvedEmailProperty = new ApprovedEmailProperty();
     }
@@ -55,7 +55,7 @@ public class SecurityProperties {
         try {
             this.writeLock.lock();
             this.jwtProperties = newProperty.jwtProperties;
-            this.userPasswordStrange = newProperty.getUserPasswordStrange();
+            this.userPasswordStrength = newProperty.getUserPasswordStrange();
             this.restorePasswordTokenProperty = newProperty.getRestorePasswordTokenProperty();
             this.passwordProperty = newProperty.getPasswordProperty();
             this.approvedEmailProperty = newProperty.getApprovedEmailProperty();
@@ -64,10 +64,10 @@ public class SecurityProperties {
         }
 
     }
-    public void updateUserPasswordStrange(UserPasswordStrange property){
+    public void updateUserPasswordStrange(UserPasswordStrength property){
         try {
             this.writeLock.lock();
-            this.userPasswordStrange = property;
+            this.userPasswordStrength = property;
         }finally {
             this.writeLock.unlock();
         }
@@ -106,10 +106,10 @@ public class SecurityProperties {
         }
     }
 
-    public UserPasswordStrange getUserPasswordStrange() {
+    public UserPasswordStrength getUserPasswordStrange() {
         try {
             this.readLock.lock();
-            return this.userPasswordStrange;
+            return this.userPasswordStrength;
         }finally {
             this.readLock.unlock();
         }
@@ -161,7 +161,7 @@ public class SecurityProperties {
     /*Если значение установлено в 0, то при валидации не используется*/
     @Getter
     @Setter
-    public static class UserPasswordStrange{
+    public static class UserPasswordStrength {
         private Integer passwordMinLowerCase=0;/*Минимальное количество прописных символов*/
         private Integer passwordMinNumber=0;/*Минимальное количество цифр*/
         private Integer passwordMinSymbol=0;/*Минимальное количество спец символов*/

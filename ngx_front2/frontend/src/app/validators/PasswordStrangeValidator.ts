@@ -1,8 +1,8 @@
 import {AbstractControl, ValidationErrors, ValidatorFn} from "@angular/forms";
-import {PasswordStrangeRequirement} from "../types/PasswordStrangeRequirement";
+import {PasswordStrengthRequirement} from "../types/PasswordStrengthRequirement";
 
 
-export function passwordStrangeValidator(passRequirement:PasswordStrangeRequirement):ValidatorFn{
+export function passwordStrangeValidator(passRequirement:PasswordStrengthRequirement):ValidatorFn{
   return (control:AbstractControl) : ValidationErrors | null => {
     const value = control.value;
     if (!value) {

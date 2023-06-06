@@ -1,6 +1,6 @@
 package alexey.grizly.com.users.extractors;
 
-import alexey.grizly.com.users.dtos.response.UserProfileResponse;
+import alexey.grizly.com.users.messages.response.UserProfileResponse;
 import alexey.grizly.com.users.models.EUserStatus;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;

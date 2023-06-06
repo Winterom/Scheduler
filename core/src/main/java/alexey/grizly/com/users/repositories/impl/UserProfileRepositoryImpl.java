@@ -1,6 +1,6 @@
 package alexey.grizly.com.users.repositories.impl;
 
-import alexey.grizly.com.users.dtos.response.UserProfileResponse;
+import alexey.grizly.com.users.messages.response.UserProfileResponse;
 import alexey.grizly.com.users.extractors.UserAccountWithRolesExtractor;
 import alexey.grizly.com.users.repositories.UserProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;

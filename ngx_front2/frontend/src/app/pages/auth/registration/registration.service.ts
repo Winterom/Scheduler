@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HTTPUsersAPI} from "../../../services/API/HTTPUsersAPI";
 import {HttpClient} from "@angular/common/http";
 import {Observable, shareReplay} from "rxjs";
-import {PasswordStrangeRequirement} from "../../../types/PasswordStrangeRequirement";
+import {PasswordStrengthRequirement} from "../../../types/PasswordStrengthRequirement";
 import {httpOptions} from "../../../services/API/RootHTTPApi";
 
 @Injectable({
@@ -12,8 +12,8 @@ export class RegistrationService {
 
   constructor(private http: HttpClient,private api:HTTPUsersAPI) { }
 
-  public getPasswordRequirements(): Observable<PasswordStrangeRequirement> {
-    return this.http.get<PasswordStrangeRequirement>(
+  public getPasswordRequirements(): Observable<PasswordStrengthRequirement> {
+    return this.http.get<PasswordStrengthRequirement>(
       this.api.passwordRequirements,
       httpOptions
     );

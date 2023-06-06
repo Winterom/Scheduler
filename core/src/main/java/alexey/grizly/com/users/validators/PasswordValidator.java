@@ -9,53 +9,53 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PasswordValidator  implements ConstraintValidator<Password, String> {
-    private  final SecurityProperties.UserPasswordStrange userPasswordStrange;
+    private  final SecurityProperties.UserPasswordStrength userPasswordStrength;
 
-    public PasswordValidator(SecurityProperties.UserPasswordStrange userPasswordStrange) {
-        this.userPasswordStrange = userPasswordStrange;
+    public PasswordValidator(SecurityProperties.UserPasswordStrength userPasswordStrength) {
+        this.userPasswordStrength = userPasswordStrength;
     }
     @Autowired
     public PasswordValidator(final SecurityProperties securityProperties){
-        this.userPasswordStrange = securityProperties.getUserPasswordStrange();
+        this.userPasswordStrength = securityProperties.getUserPasswordStrange();
     }
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
         if(value==null||value.trim().isEmpty()||value.length()>=50){
             return false;
         }
-        if(userPasswordStrange.getPasswordMinCharacters()!=null&&
-                userPasswordStrange.getPasswordMinCharacters()!=0
-                &&(value.length()< userPasswordStrange.getPasswordMinCharacters())){
+        if(userPasswordStrength.getPasswordMinCharacters()!=null&&
+                userPasswordStrength.getPasswordMinCharacters()!=0
+                &&(value.length()< userPasswordStrength.getPasswordMinCharacters())){
                return false;
             }
 
         StringBuilder sb = new StringBuilder();
-        if(userPasswordStrange.getPasswordMinNumber()!=null&&
-                userPasswordStrange.getPasswordMinNumber()!=0){
+        if(userPasswordStrength.getPasswordMinNumber()!=null&&
+                userPasswordStrength.getPasswordMinNumber()!=0){
             sb.append("(?=([^0-9]*[0-9])")
                     .append("{")
-                    .append(userPasswordStrange.getPasswordMinNumber())
+                    .append(userPasswordStrength.getPasswordMinNumber())
                     .append(",})");
         }
-        if(userPasswordStrange.getPasswordMinSymbol()!=null&&
-                userPasswordStrange.getPasswordMinSymbol()!=0){
+        if(userPasswordStrength.getPasswordMinSymbol()!=null&&
+                userPasswordStrength.getPasswordMinSymbol()!=0){
             sb.append("(?=(.*[$@$!%*?&])")
                     .append("{")
-                    .append(userPasswordStrange.getPasswordMinSymbol())
+                    .append(userPasswordStrength.getPasswordMinSymbol())
                     .append(",})");
         }
-        if(userPasswordStrange.getPasswordMinLowerCase()!=null&&
-                userPasswordStrange.getPasswordMinLowerCase()!=0){
+        if(userPasswordStrength.getPasswordMinLowerCase()!=null&&
+                userPasswordStrength.getPasswordMinLowerCase()!=0){
             sb.append("(?=([^a-z]*[a-z])")
                     .append("{")
-                    .append(userPasswordStrange.getPasswordMinLowerCase())
+                    .append(userPasswordStrength.getPasswordMinLowerCase())
                     .append(",})");
         }
-        if(userPasswordStrange.getPasswordMinUpperCase()!=null&&
-                userPasswordStrange.getPasswordMinUpperCase()!=0){
+        if(userPasswordStrength.getPasswordMinUpperCase()!=null&&
+                userPasswordStrength.getPasswordMinUpperCase()!=0){
             sb.append("(?=([^A-Z]*[A-Z])")
                     .append("{")
-                    .append(userPasswordStrange.getPasswordMinUpperCase())
+                    .append(userPasswordStrength.getPasswordMinUpperCase())
                     .append(",})");
         }
         if(sb.isEmpty()){

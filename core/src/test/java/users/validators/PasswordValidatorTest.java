@@ -17,11 +17,11 @@ public class PasswordValidatorTest {
     @Test
     void validMinMaxLength() {
         /*только длина должна быть не больше 50 и не меньше числа указанного в UserPasswordStrange.passwordMinCharacters*/
-        SecurityProperties.UserPasswordStrange userPasswordStrange = new SecurityProperties.UserPasswordStrange();
-        userPasswordStrange.setPasswordMinCharacters(8);
-        System.out.println(userPasswordStrange);
+        SecurityProperties.UserPasswordStrength userPasswordStrength = new SecurityProperties.UserPasswordStrength();
+        userPasswordStrength.setPasswordMinCharacters(8);
+        System.out.println(userPasswordStrength);
         password = generatingRandomStringBounded(8,65,122);
-        PasswordValidator validator = new PasswordValidator(userPasswordStrange);
+        PasswordValidator validator = new PasswordValidator(userPasswordStrength);
         System.out.println("Длина пароля: 8 пароль: "+password);
         Assertions.assertTrue(validator.isValid(password, null));
         String password2 = generatingRandomStringBounded(3,97,122);
@@ -33,10 +33,10 @@ public class PasswordValidatorTest {
     }
     @Test
     void validNumberCount(){
-        SecurityProperties.UserPasswordStrange userPasswordStrange = new SecurityProperties.UserPasswordStrange();
-        userPasswordStrange.setPasswordMinNumber(4);
-        System.out.println(userPasswordStrange);
-        PasswordValidator validator = new PasswordValidator(userPasswordStrange);
+        SecurityProperties.UserPasswordStrength userPasswordStrength = new SecurityProperties.UserPasswordStrength();
+        userPasswordStrength.setPasswordMinNumber(4);
+        System.out.println(userPasswordStrength);
+        PasswordValidator validator = new PasswordValidator(userPasswordStrength);
         String badPassword = password+generatingRandomStringBounded(3,48,57);
         System.out.println("Количество цифр 3 Длина пароля:"+badPassword.length()+ " пароль: "+badPassword);
         Assertions.assertFalse(validator.isValid(badPassword,null));
@@ -48,11 +48,11 @@ public class PasswordValidatorTest {
     }
     @Test
     void validUpperCaseCount(){
-        SecurityProperties.UserPasswordStrange userPasswordStrange = new SecurityProperties.UserPasswordStrange();
-        userPasswordStrange.setPasswordMinUpperCase(4);
-        System.out.println(userPasswordStrange);
+        SecurityProperties.UserPasswordStrength userPasswordStrength = new SecurityProperties.UserPasswordStrength();
+        userPasswordStrength.setPasswordMinUpperCase(4);
+        System.out.println(userPasswordStrength);
         password =password+ generatingRandomStringBounded(4,65,90);
-        PasswordValidator validator = new PasswordValidator(userPasswordStrange);
+        PasswordValidator validator = new PasswordValidator(userPasswordStrength);
         System.out.println("Длина пароля: 4 пароль: "+password);
         Assertions.assertTrue(validator.isValid(password, null));
         password = generatingRandomStringBounded(10,97,122);
@@ -64,11 +64,11 @@ public class PasswordValidatorTest {
     }
     @Test
     void validLowCaseCount(){
-        SecurityProperties.UserPasswordStrange userPasswordStrange = new SecurityProperties.UserPasswordStrange();
-        userPasswordStrange.setPasswordMinLowerCase(4);
-        System.out.println(userPasswordStrange);
+        SecurityProperties.UserPasswordStrength userPasswordStrength = new SecurityProperties.UserPasswordStrength();
+        userPasswordStrength.setPasswordMinLowerCase(4);
+        System.out.println(userPasswordStrength);
         password = generatingRandomStringBounded(4,97,122);
-        PasswordValidator validator = new PasswordValidator(userPasswordStrange);
+        PasswordValidator validator = new PasswordValidator(userPasswordStrength);
         System.out.println("Длина пароля: 4 пароль: "+password);
         Assertions.assertTrue(validator.isValid(password, null));
         password = generatingRandomStringBounded(4,65,90);
@@ -80,11 +80,11 @@ public class PasswordValidatorTest {
     }
     @Test
     void validSpecSymbolCount(){
-        SecurityProperties.UserPasswordStrange userPasswordStrange = new SecurityProperties.UserPasswordStrange();
-        userPasswordStrange.setPasswordMinSymbol(3);
-        System.out.println(userPasswordStrange);
+        SecurityProperties.UserPasswordStrength userPasswordStrength = new SecurityProperties.UserPasswordStrength();
+        userPasswordStrength.setPasswordMinSymbol(3);
+        System.out.println(userPasswordStrength);
         password ="afgfwtt$@!";
-        PasswordValidator validator = new PasswordValidator(userPasswordStrange);
+        PasswordValidator validator = new PasswordValidator(userPasswordStrength);
         System.out.println("Пароль: "+password);
         Assertions.assertTrue(validator.isValid(password, null));
         password = "afgfwtt@!";

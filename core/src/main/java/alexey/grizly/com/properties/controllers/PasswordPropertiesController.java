@@ -1,6 +1,6 @@
 package alexey.grizly.com.properties.controllers;
 
-import alexey.grizly.com.properties.dtos.security.responses.PasswordStrangeResponseDto;
+import alexey.grizly.com.properties.dtos.security.responses.PasswordStrengthResponseDto;
 import alexey.grizly.com.properties.properties.SecurityProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +19,7 @@ public class PasswordPropertiesController {
     }
 
     @GetMapping("/password/strange")
-    public PasswordStrangeResponseDto getPasswordStrangeContract(){
-        return new PasswordStrangeResponseDto(this.securityProperties.getUserPasswordStrange());
+    public PasswordStrengthResponseDto getPasswordStrangeContract(){
+        return new PasswordStrengthResponseDto(this.securityProperties.getUserPasswordStrange());
     }
 }

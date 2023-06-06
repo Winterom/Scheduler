@@ -1,4 +1,4 @@
-package alexey.grizly.com.users.dtos.response;
+package alexey.grizly.com.users.messages.response;
 
 import alexey.grizly.com.users.models.EUserStatus;
 import lombok.Data;

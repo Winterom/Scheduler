@@ -4,14 +4,14 @@ import alexey.grizly.com.properties.properties.SecurityProperties;
 import lombok.Data;
 
 @Data
-public class PasswordStrangeResponseDto {
+public class PasswordStrengthResponseDto {
     private Integer minLowerCase;/*Минимальное количество прописных символов*/
     private Integer minNumber;/*Минимальное количество цифр*/
     private Integer minSymbol;/*Минимальное количество спец символов*/
     private Integer minUpperCase;/*Минимальное количество заглавных символов*/
     private Integer minCharacters;/*Минимальная длина пароля*/
 
-    public PasswordStrangeResponseDto(SecurityProperties.UserPasswordStrange model){
+    public PasswordStrengthResponseDto(SecurityProperties.UserPasswordStrength model){
         this.minLowerCase = model.getPasswordMinLowerCase();
         this.minNumber = model.getPasswordMinNumber();
         this.minSymbol = model.getPasswordMinSymbol();

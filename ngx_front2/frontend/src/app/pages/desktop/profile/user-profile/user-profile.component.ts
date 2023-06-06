@@ -8,7 +8,7 @@ import {AuthMessage} from "../../../../messages/AuthMessages";
 import {EUserStatus} from "../../../../types/EUserStatus";
 import addSuccessMMessage = AuthMessage.addSuccessMMessage;
 import addErrorMessage = AuthMessage.addErrorMessage;
-import {PasswordStrangeRequirement} from "../../../../types/PasswordStrangeRequirement";
+import {PasswordStrengthRequirement} from "../../../../types/PasswordStrengthRequirement";
 import {passwordStrangeValidator} from "../../../../validators/PasswordStrangeValidator";
 import {checkIfMatchingPasswords} from "../../../../validators/MatchingPasswordsValidator";
 import {WSUserApi} from "../../../../services/API/WSUserApi";
@@ -22,7 +22,7 @@ import {WebsocketService} from "../../../../services/ws/websocket";
 export class UserProfileComponent implements OnInit{
   userStatusClasses:string='';
   userProfile:UserProfile  = new UserProfile();
-  pswStrangeReq: PasswordStrangeRequirement = new PasswordStrangeRequirement;
+  pswStrangeReq: PasswordStrengthRequirement = new PasswordStrengthRequirement;
   userApi:WSUserApi = new WSUserApi();
   userForm: FormGroup;
   passwordChangeForm:FormGroup;

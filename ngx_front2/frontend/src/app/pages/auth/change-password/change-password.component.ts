@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {PasswordStrangeRequirement} from "../../../types/PasswordStrangeRequirement";
+import {PasswordStrengthRequirement} from "../../../types/PasswordStrengthRequirement";
 import {checkIfMatchingPasswords} from "../../../validators/MatchingPasswordsValidator";
 import {ChangePasswordService} from "./change-password.service";
 import {passwordStrangeValidator} from "../../../validators/PasswordStrangeValidator";
@@ -24,7 +24,7 @@ export class ChangePasswordComponent implements OnInit{
   emailControl:FormControl;
   tokenControl:FormControl;
   state: 'change'|'complete'= 'change';
-  pswStrangeReq:PasswordStrangeRequirement= new PasswordStrangeRequirement();
+  pswStrangeReq:PasswordStrengthRequirement= new PasswordStrengthRequirement();
   constructor(private router: Router,
               private changePasswordService:ChangePasswordService,
               private messageService: MessageService,
