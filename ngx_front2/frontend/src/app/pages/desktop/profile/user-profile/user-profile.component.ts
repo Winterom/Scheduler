@@ -62,15 +62,20 @@ export class UserProfileComponent implements OnInit{
     this.wsService.connect(this.userApi.getProfile);
     this.wsService.status.subscribe({next:value => {
         if(value){
-          this.wsService.send('get_profile','winterom@gmail.com');
+          this.wsService.send('GET_PROFILE','');
+          this.wsService.send('PASSWORD_STRENGTH','');
         }
       }})
 
-    this.wsService.on<UserProfile>('profile').subscribe({next:data=>{
+    this.wsService.on<UserProfile>('PROFILE').subscribe({next:data=>{
       this.userProfile = data;
       this.emailControl.setValue( this.userProfile.email);
       this.phoneControl.setValue(this.userProfile.phone);
       }})
+    this.wsService.on<PasswordStrengthRequirement>("PASSWORD_STRENGTH")
+      .subscribe({next:data=>{
+        this.pswStrangeReq=data;
+        }})
     this.userForm.valueChanges.subscribe(()=>{
       const email:string = this.emailControl.value;
       const phone:string = this.formatPhoneValue(this.phoneControl.value);

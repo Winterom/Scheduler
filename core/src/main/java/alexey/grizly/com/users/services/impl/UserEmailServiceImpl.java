@@ -98,6 +98,7 @@ public class UserEmailServiceImpl implements UserEmailService {
         return errorMessage;
     }
 
+    
     @Override
     public boolean emailBusyCheck(final String email) {
         return userEmailRepository.countOfUsageEmail(email) > 0;

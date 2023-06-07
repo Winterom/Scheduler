@@ -11,6 +11,7 @@ import alexey.grizly.com.users.repositories.ChangePasswordTokenRepository;
 import alexey.grizly.com.users.repositories.UserPasswordRepository;
 import alexey.grizly.com.users.services.UserPasswordService;
 import alexey.grizly.com.users.utils.ApprovedTokenUtils;
+import alexey.grizly.com.users.validators.PasswordValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ApplicationEventMulticaster;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -101,11 +102,22 @@ public class UserPasswordServiceImpl implements UserPasswordService {
             return errorMessage;
         }
         String passwordHash = bCryptPasswordEncoder.encode(password);
-        LocalDateTime credentialExpired = LocalDateTime.now().plus(securityProperties.getPasswordProperty().getPasswordExpired(),
-                securityProperties.getPasswordProperty().getUnit());
+        LocalDateTime credentialExpired = LocalDateTime.now().plus(securityProperties.getUserPasswordStrength().getPasswordExpired(),
+                securityProperties.getUserPasswordStrength().getUnit());
         userPasswordRepository.updatePassword(userAccount.getId(),passwordHash,credentialExpired);
         changePasswordTokenRepository.deleteUsedToken(userAccount.getId());
         return errorMessage;
     }
 
+    @Override
+    public boolean changePassword(String email, String notValidationPassword){
+        PasswordValidator passwordValidator = new PasswordValidator(securityProperties);
+        if(!passwordValidator.isValid(notValidationPassword,null)){
+            return false;
+        }
+        LocalDateTime credentialExpired = LocalDateTime.now().plus(securityProperties.getUserPasswordStrength().getPasswordExpired(),
+                securityProperties.getUserPasswordStrength().getUnit());
+        userPasswordRepository.updatePassword(email,notValidationPassword,credentialExpired);
+        return true;
+    }
 }

@@ -47,8 +47,8 @@ public class UserRegistrationServiceImpl implements UserRegistrationService {
                                      final String lastname) {
         String passwordHash = bCryptPasswordEncoder.encode(password);
         LocalDateTime createdAt = LocalDateTime.now();
-        LocalDateTime credentialExpired = createdAt.plus(securityProperties.getPasswordProperty().getPasswordExpired(),
-                securityProperties.getPasswordProperty().getUnit());
+        LocalDateTime credentialExpired = createdAt.plus(securityProperties.getUserPasswordStrength().getPasswordExpired(),
+                securityProperties.getUserPasswordStrength().getUnit());
         Long newUserId = userRegistrationRepository.saveNewUser(email,phone,passwordHash,credentialExpired, EUserStatus.NEW_USER,createdAt);
         roleService.setDefaultRoleForNewUser(newUserId);
         UserAccount userAccount = new UserAccount();

@@ -12,8 +12,10 @@ import java.time.LocalDateTime;
 
 @Repository
 public class UserPasswordRepositoryImpl implements UserPasswordRepository {
-    private static final String UPDATE_PASSWORD = "UPDATE users  set credential_expired =:credentialExpired," +
+    private static final String UPDATE_PASSWORD_BY_ID = "UPDATE users  set credential_expired =:credentialExpired," +
             "password = :password where id=:userId";
+    private static final String UPDATE_PASSWORD_BY_EMAIL = "UPDATE users  set credential_expired =:credentialExpired," +
+            "password = :password where email=:email";
 
 
     private final NamedParameterJdbcTemplate jdbcTemplate;
@@ -31,8 +33,16 @@ public class UserPasswordRepositoryImpl implements UserPasswordRepository {
                 .addValue("userId",userId)
                 .addValue("password",passwordHash)
                 .addValue("credentialExpired",credentialExpired);
-        return jdbcTemplate.update(UPDATE_PASSWORD,namedParameters);
+        return jdbcTemplate.update(UPDATE_PASSWORD_BY_ID,namedParameters);
     }
-
+    @Override
+    @Transactional
+    public int updatePassword(String email, String passwordHash, LocalDateTime credentialExpired) {
+        SqlParameterSource namedParameters = new MapSqlParameterSource()
+                .addValue("email",email)
+                .addValue("password",passwordHash)
+                .addValue("credentialExpired",credentialExpired);
+        return jdbcTemplate.update(UPDATE_PASSWORD_BY_EMAIL,namedParameters);
+    }
 
 }

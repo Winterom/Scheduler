@@ -20,7 +20,7 @@ public class SecurityProperties {
     private UserPasswordStrength userPasswordStrength;
     private RestorePasswordTokenProperty restorePasswordTokenProperty;
     private ApprovedEmailProperty approvedEmailProperty;
-    private PasswordProperty passwordProperty;
+
     @JsonIgnore
     private PropertiesService propertiesService;
     @JsonIgnore
@@ -33,7 +33,6 @@ public class SecurityProperties {
         this.writeLock = lock.writeLock();
         this.jwtProperties = new JwtProperties();
         this.userPasswordStrength = new UserPasswordStrength();
-        this.passwordProperty = new PasswordProperty();
         this.approvedEmailProperty = new ApprovedEmailProperty();
     }
 
@@ -55,9 +54,8 @@ public class SecurityProperties {
         try {
             this.writeLock.lock();
             this.jwtProperties = newProperty.jwtProperties;
-            this.userPasswordStrength = newProperty.getUserPasswordStrange();
+            this.userPasswordStrength = newProperty.getUserPasswordStrength();
             this.restorePasswordTokenProperty = newProperty.getRestorePasswordTokenProperty();
-            this.passwordProperty = newProperty.getPasswordProperty();
             this.approvedEmailProperty = newProperty.getApprovedEmailProperty();
         }finally {
             this.writeLock.unlock();
@@ -89,14 +87,6 @@ public class SecurityProperties {
             this.writeLock.unlock();
         }
     }
-    public void updatePasswordProperty(PasswordProperty property){
-        try {
-            this.writeLock.lock();
-            this.passwordProperty = property;
-        }finally {
-            this.writeLock.unlock();
-        }
-    }
     public JwtProperties getJwtProperties() {
         try {
             this.readLock.lock();
@@ -106,7 +96,7 @@ public class SecurityProperties {
         }
     }
 
-    public UserPasswordStrength getUserPasswordStrange() {
+    public UserPasswordStrength getUserPasswordStrength() {
         try {
             this.readLock.lock();
             return this.userPasswordStrength;
@@ -119,14 +109,6 @@ public class SecurityProperties {
         try{
             this.readLock.lock();
             return this.restorePasswordTokenProperty;
-        }finally {
-            this.readLock.unlock();
-        }
-    }
-    public PasswordProperty getPasswordProperty() {
-        try{
-            this.readLock.lock();
-            return this.passwordProperty;
         }finally {
             this.readLock.unlock();
         }
@@ -162,28 +144,20 @@ public class SecurityProperties {
     @Getter
     @Setter
     public static class UserPasswordStrength {
+        private Long passwordExpired = 6L;
+        private ChronoUnit unit = ChronoUnit.MONTHS;
         private Integer passwordMinLowerCase=0;/*Минимальное количество прописных символов*/
         private Integer passwordMinNumber=0;/*Минимальное количество цифр*/
         private Integer passwordMinSymbol=0;/*Минимальное количество спец символов*/
         private Integer passwordMinUpperCase=0;/*Минимальное количество заглавных символов*/
         private Integer passwordMinCharacters=0;/*Минимальная длина пароля*/
 
-        @Override
-        public String toString() {
-            return "UserPasswordStrange{" +
-                    "passwordMinLowerCase=" + passwordMinLowerCase +
-                    ", passwordMinNumber=" + passwordMinNumber +
-                    ", passwordMinSymbol=" + passwordMinSymbol +
-                    ", passwordMinUpperCase=" + passwordMinUpperCase +
-                    ", passwordMinCharacters=" + passwordMinCharacters +
-                    '}';
-        }
     }
     @Getter
     @Setter
     public static class RestorePasswordTokenProperty {
         private Integer restorePasswordTokenLength=40;
-        private Long pauseBetweenNextTokenGenerate = 600000L;//минимально 1 минута
+        private Long pauseBetweenNextTokenGenerate = 600000L;// в секундах минимально 1 минута
         private Long restorePasswordTokenLifetime=24L;
         private ChronoUnit unit=ChronoUnit.HOURS;
 
@@ -220,18 +194,5 @@ public class SecurityProperties {
                     .toString();
         }
     }
-    @Getter
-    @Setter
-    public static class PasswordProperty {
-        private Long passwordExpired = 6L;
-        private ChronoUnit unit = ChronoUnit.MONTHS;
 
-        @Override
-        public String toString() {
-            return new ToStringBuilder(this)
-                    .append("passwordExpired", passwordExpired)
-                    .append("unit", unit)
-                    .toString();
-        }
-    }
 }

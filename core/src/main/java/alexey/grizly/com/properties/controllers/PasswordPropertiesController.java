@@ -20,6 +20,6 @@ public class PasswordPropertiesController {
 
     @GetMapping("/password/strange")
     public PasswordStrengthResponseDto getPasswordStrangeContract(){
-        return new PasswordStrengthResponseDto(this.securityProperties.getUserPasswordStrange());
+        return new PasswordStrengthResponseDto(this.securityProperties.getUserPasswordStrength());
     }
 }

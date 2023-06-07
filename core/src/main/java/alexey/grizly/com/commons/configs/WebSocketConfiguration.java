@@ -29,4 +29,5 @@ public class WebSocketConfiguration implements WebSocketConfigurer {
                 .setAllowedOrigins(ALLOWED_ORIGIN).setHandshakeHandler(jwtHandshakeHandler);
     }
 
+
 }

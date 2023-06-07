@@ -1,7 +1,6 @@
 package alexey.grizly.com.commons.configs;
 
 import alexey.grizly.com.users.utils.JwtTokenUtil;
-import io.jsonwebtoken.ClaimJwtException;
 import io.jsonwebtoken.JwtException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.server.ServletServerHttpRequest;
@@ -15,6 +14,9 @@ import org.springframework.web.socket.server.support.DefaultHandshakeHandler;
 
 import java.security.Principal;
 import java.util.Map;
+
+
+
 @Component
 public class JwtHandshakeHandler extends DefaultHandshakeHandler {
     private final JwtTokenUtil jwtTokenUtil;

@@ -9,4 +9,6 @@ public interface UserPasswordService {
     List<String> createChangePasswordToken(final String email);
 
     List<String> changePassword(String email, String password, String token);
+
+    boolean changePassword(String email, String notValidationPassword);
 }

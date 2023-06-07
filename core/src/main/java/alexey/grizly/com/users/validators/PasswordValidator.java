@@ -16,7 +16,7 @@ public class PasswordValidator  implements ConstraintValidator<Password, String>
     }
     @Autowired
     public PasswordValidator(final SecurityProperties securityProperties){
-        this.userPasswordStrength = securityProperties.getUserPasswordStrange();
+        this.userPasswordStrength = securityProperties.getUserPasswordStrength();
     }
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {

@@ -1,6 +1,7 @@
 package alexey.grizly.com.users.repositories;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
@@ -12,4 +13,6 @@ public interface UserPasswordRepository {
                        final String passwordHash,
                        final LocalDateTime credentialExpired);
 
+    @Transactional
+    int updatePassword(String email, String passwordHash, LocalDateTime credentialExpired);
 }
