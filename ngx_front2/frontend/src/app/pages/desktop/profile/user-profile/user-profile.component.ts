@@ -1,15 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {UserProfile} from "../../../../types/UserProfile";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {ProfileService} from "../profile.service";
-import {RegistrationService} from "../../../auth/registration/registration.service";
 import {MessageService} from "primeng/api";
 import {AuthMessage} from "../../../../messages/AuthMessages";
 import {EUserStatus} from "../../../../types/EUserStatus";
-import addSuccessMMessage = AuthMessage.addSuccessMMessage;
 import addErrorMessage = AuthMessage.addErrorMessage;
 import {PasswordStrengthRequirement} from "../../../../types/PasswordStrengthRequirement";
-import {passwordStrangeValidator} from "../../../../validators/PasswordStrangeValidator";
 import {checkIfMatchingPasswords} from "../../../../validators/MatchingPasswordsValidator";
 import {WSUserApi} from "../../../../services/API/WSUserApi";
 import {WebsocketService} from "../../../../services/ws/websocket";
@@ -41,8 +37,8 @@ export class UserProfileComponent implements OnInit{
   position: string="top";
 
 
-  constructor(private profileService:ProfileService,
-              private registrationService:RegistrationService,
+  constructor(
+
               private wsService:WebsocketService,
               private messageService: MessageService) {
     this.emailControl = new FormControl<string>('', [Validators.required, Validators.email]);
@@ -67,7 +63,7 @@ export class UserProfileComponent implements OnInit{
         }
       }})
 
-    this.wsService.on<UserProfile>('PROFILE').subscribe({next:data=>{
+    this.wsService.on<UserProfile>('UPDATE_PROFILE').subscribe({next:data=>{
       this.userProfile = data.data;
       this.emailControl.setValue( this.userProfile.email);
       this.phoneControl.setValue(this.userProfile.phone);
@@ -75,6 +71,8 @@ export class UserProfileComponent implements OnInit{
     this.wsService.on<PasswordStrengthRequirement>("PASSWORD_STRENGTH")
       .subscribe({next:data=>{
         this.pswStrangeReq=data.data;
+        console.log('Требования')
+        console.log(this.pswStrangeReq)
         }})
     this.userForm.valueChanges.subscribe(()=>{
       const email:string = this.emailControl.value;
@@ -117,18 +115,7 @@ export class UserProfileComponent implements OnInit{
       return;
     }
     this.phoneControlChanged=true;
-    this.registrationService.checkPhone(phone).subscribe({
-      next: () => {
-        addSuccessMMessage(this.messageService,'Телефон введен правильно и свободен',null)
-        this.phoneControl.updateValueAndValidity();
-      },error:err=>{
-        const errorMessages: string [] = err.error.messages
-        errorMessages.forEach((value)=>{
-          addErrorMessage(this.messageService,value,err.error.statusCode);
-        })
-        this.phoneControl.setErrors({phoneBusy:true});
-      }
-    })
+
   }
 
   checkEmail() {
@@ -141,18 +128,6 @@ export class UserProfileComponent implements OnInit{
       return;
     }
     this.emailControlChanged=true;
-    this.registrationService.checkEmail(email).subscribe({
-      next: () => {
-        addSuccessMMessage(this.messageService,'email введен правильно и свободен',null);
-        this.emailControl.updateValueAndValidity();
-      },error:err=>{
-        const errorMessages: string [] = err.error.messages
-        errorMessages.forEach((value)=>{
-          addErrorMessage(this.messageService,value,err.error.statusCode);
-        })
-        this.emailControl.setErrors({emailBusy:true});
-      }
-    })
   }
 
 
@@ -165,12 +140,7 @@ export class UserProfileComponent implements OnInit{
   }
   changePassword() {
     this.visibleChangePswForm=true;
-    this.registrationService.getPasswordRequirements().subscribe({
-      next: data => {
-        this.pswStrangeReq = data;
-        this.passwordControl.addValidators(passwordStrangeValidator(this.pswStrangeReq))
-      }
-    })
+
   }
   private formatPhoneValue(rawPhone:string):string{
     return String(rawPhone).replaceAll('-', '')

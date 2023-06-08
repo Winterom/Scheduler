@@ -31,7 +31,7 @@ public class UserProfileServiceImpl implements UserProfileService {
     public ResponseMessage<UserProfileResponse> getProfileByEmail(String email) {
         UserProfileResponse account = userProfileRepository.getUserAccountWithRoles(email);
         ResponseMessage<UserProfileResponse> responseMessage = new ResponseMessage<>();
-        responseMessage.setEvent(WSResponseEvents.PROFILE);
+        responseMessage.setEvent(WSResponseEvents.UPDATE_PROFILE);
         ResponseMessage.MessagePayload<UserProfileResponse> payload = new ResponseMessage.MessagePayload<>();
         if(account==null){
             payload.setErrorMessage(List.of("Пользователь с "+email+" не найден"));
@@ -51,6 +51,7 @@ public class UserProfileServiceImpl implements UserProfileService {
                 new ResponseMessage<>();
         ResponseMessage.MessagePayload<SecurityProperties.UserPasswordStrength> payload =
                 new ResponseMessage.MessagePayload<>();
+        responseMessage.setEvent(WSResponseEvents.PASSWORD_STRENGTH);
         if(passwordStrength==null){
             payload.setErrorMessage(List.of("Данные не доступны"));
             payload.setResponseStatus(ResponseMessage.ResponseStatus.ERROR);

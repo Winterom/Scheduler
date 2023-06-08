@@ -82,6 +82,8 @@ public class ProfileWebsocketHandler extends TextWebSocketHandler {
                 this.userProfileService.getPasswordStrength();
         TextMessage response = new TextMessage(objectMapper.writeValueAsBytes(responseMessage));
         session.sendMessage(response);
+        System.out.println("Отправили требования к паролю");
+        System.out.println(responseMessage);
     }
 
     private void updatePassword(WebSocketSession session,RequestMessage requestMessage){
