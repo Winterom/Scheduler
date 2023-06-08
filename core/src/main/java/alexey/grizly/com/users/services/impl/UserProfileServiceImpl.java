@@ -10,6 +10,8 @@ import alexey.grizly.com.users.ws_handlers.WSResponseEvents;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserProfileServiceImpl implements UserProfileService {
     private final UserPasswordService userPasswordService;
@@ -27,20 +29,36 @@ public class UserProfileServiceImpl implements UserProfileService {
 
     @Override
     public ResponseMessage<UserProfileResponse> getProfileByEmail(String email) {
-        UserProfileResponse response = userProfileRepository.getUserAccountWithRoles(email);
+        UserProfileResponse account = userProfileRepository.getUserAccountWithRoles(email);
         ResponseMessage<UserProfileResponse> responseMessage = new ResponseMessage<>();
         responseMessage.setEvent(WSResponseEvents.PROFILE);
-        responseMessage.setData(response);
+        ResponseMessage.MessagePayload<UserProfileResponse> payload = new ResponseMessage.MessagePayload<>();
+        if(account==null){
+            payload.setErrorMessage(List.of("Пользователь с "+email+" не найден"));
+            payload.setResponseStatus(ResponseMessage.ResponseStatus.ERROR);
+        }else {
+            payload.setResponseStatus(ResponseMessage.ResponseStatus.OK);
+            payload.setData(account);
+        }
+        responseMessage.setPayload(payload);
         return responseMessage;
     }
 
     @Override
     public ResponseMessage<SecurityProperties.UserPasswordStrength> getPasswordStrength() {
-        SecurityProperties.UserPasswordStrength response = securityProperties.getUserPasswordStrength();
+        SecurityProperties.UserPasswordStrength passwordStrength = securityProperties.getUserPasswordStrength();
         ResponseMessage<SecurityProperties.UserPasswordStrength> responseMessage =
                 new ResponseMessage<>();
-        responseMessage.setData(response);
-        responseMessage.setEvent(WSResponseEvents.PASSWORD_STRENGTH);
+        ResponseMessage.MessagePayload<SecurityProperties.UserPasswordStrength> payload =
+                new ResponseMessage.MessagePayload<>();
+        if(passwordStrength==null){
+            payload.setErrorMessage(List.of("Данные не доступны"));
+            payload.setResponseStatus(ResponseMessage.ResponseStatus.ERROR);
+        }else {
+            payload.setResponseStatus(ResponseMessage.ResponseStatus.OK);
+            payload.setData(passwordStrength);
+        }
+        responseMessage.setPayload(payload);
         return responseMessage;
     }
 

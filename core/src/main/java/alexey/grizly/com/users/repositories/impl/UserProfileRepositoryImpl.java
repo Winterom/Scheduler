@@ -3,6 +3,7 @@ package alexey.grizly.com.users.repositories.impl;
 import alexey.grizly.com.users.messages.response.UserProfileResponse;
 import alexey.grizly.com.users.extractors.UserAccountWithRolesExtractor;
 import alexey.grizly.com.users.repositories.UserProfileRepository;
+import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -23,6 +24,7 @@ public class UserProfileRepositoryImpl implements UserProfileRepository {
     }
 
     @Override
+    @Nullable
     public UserProfileResponse getUserAccountWithRoles(String email){
         SqlParameterSource namedParameters = new MapSqlParameterSource()
                 .addValue("email",email);

@@ -68,13 +68,13 @@ export class UserProfileComponent implements OnInit{
       }})
 
     this.wsService.on<UserProfile>('PROFILE').subscribe({next:data=>{
-      this.userProfile = data;
+      this.userProfile = data.data;
       this.emailControl.setValue( this.userProfile.email);
       this.phoneControl.setValue(this.userProfile.phone);
       }})
     this.wsService.on<PasswordStrengthRequirement>("PASSWORD_STRENGTH")
       .subscribe({next:data=>{
-        this.pswStrangeReq=data;
+        this.pswStrangeReq=data.data;
         }})
     this.userForm.valueChanges.subscribe(()=>{
       const email:string = this.emailControl.value;

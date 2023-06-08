@@ -1,13 +1,18 @@
-import {Observable} from "rxjs";
 
-export interface IWebsocketService {
-  on<T>(event: string): Observable<T>;
-  send(event: string, data: any): void;
-  status: Observable<boolean>;
+
+
+
+export interface IWsMessage<R> {
+  event: string;
+  payload: IWsMessageBody<R>
 }
 
+export enum ResponseStatus{
+  OK,ERROR
+}
 
-export interface IWsMessage<T> {
-  event: string;
-  data: T;
+export interface IWsMessageBody<R>{
+  data: R;
+  responseStatus:ResponseStatus;
+  errorMessages:string[];
 }

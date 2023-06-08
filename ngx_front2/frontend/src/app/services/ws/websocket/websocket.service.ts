@@ -1,6 +1,6 @@
 import {Injectable, OnDestroy} from '@angular/core';
 import {WebSocketSubject} from "rxjs/webSocket";
-import {IWebsocketService, IWsMessage} from "./websocket.interfaces";
+import { IWsMessage, IWsMessageBody} from "./websocket.interfaces";
 import {
   distinctUntilChanged,
   filter,
@@ -20,7 +20,7 @@ import {UserService} from "../../user.service";
 @Injectable({
   providedIn: 'root'
 })
-export class WebsocketService implements OnDestroy,IWebsocketService{
+export class WebsocketService implements OnDestroy{
   private isConnected:boolean =false;
   private wsSubject:WebSocketSubject<any>|null=null;
   private wsMessages: Subject<IWsMessage<any>> = new Subject<IWsMessage<any>>();
@@ -74,33 +74,28 @@ export class WebsocketService implements OnDestroy,IWebsocketService{
       this.wsMessages.next(message)
       },error:err => {
       console.log(err)
-      this.reconect(url)
+      this.reconnect(url)
       }});
   }
-  reconect(url:string){
+  reconnect(url:string) {
     this.reconnection$ = interval(this.reconnectInterval)
       .pipe(takeWhile((v, index) => index < this.reconnectAttempts && !this.wsSubject));
     this.reconnection$.subscribe(
-      () => this.connect(url),
-      null,
-      () => {
-        // Subject complete if reconnect attemts ending
-        this.reconnection$ = null;
-
-        if (!this.wsSubject) {
-          this.wsMessages.complete();
-          this.connection$.complete();
-        }
-      });
+      {next:value => {this.connect(url)},
+    error:err => {},complete:() =>{
+      this.reconnection$ = null;
+      if (!this.wsSubject) {
+        this.wsMessages.complete();
+        this.connection$.complete();
+      }}});
   }
-
   ngOnDestroy(): void {
     this.websocketSub.unsubscribe();
   }
-  public on<T>(event: string): Observable<T> {
+  public on<T>(event: string): Observable<IWsMessageBody<T>> {
       return this.wsMessages.pipe(
         filter((message: IWsMessage<T>) => message.event === event),
-        map((message: IWsMessage<T>) => message.data)
+        map((message: IWsMessage<T>) => message.payload)
       );
   }
 
