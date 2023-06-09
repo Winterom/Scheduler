@@ -24,7 +24,7 @@ export class ChangePasswordComponent implements OnInit{
   emailControl:FormControl;
   tokenControl:FormControl;
   state: 'change'|'complete'= 'change';
-  pswStrangeReq:PasswordStrengthRequirement= new PasswordStrengthRequirement();
+  pswStrangeReq:PasswordStrengthRequirement|undefined;
   constructor(private router: Router,
               private changePasswordService:ChangePasswordService,
               private messageService: MessageService,

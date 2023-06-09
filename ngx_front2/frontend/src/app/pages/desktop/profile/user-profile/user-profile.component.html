@@ -63,14 +63,14 @@
           </span>
       </div>
       <div class="mt-4">
-        <p>Каждые {{pswStrangeReq.passwordExpired}} месяцев, в соответствии с настройками установленными Администратором, необходимо менять пароль.</p>
+        <p>В соответствии с настройками установленными Администратором, необходимо менять пароль.</p>
         <p>Текущий Ваш пароль можно использовать для входа в приложение до <span class="font-bold">{{userProfile.credentialExpiredTime.toString() | date:'short':'ru'}}.</span></p>
         <p>По истечению этого времени войти в приложение с этим паролем будет невозможно.</p>
       </div>
       <p-button
         label="Сменить пароль"
         styleClass="p-button-raised mt-3"
-        (click)="changePassword()"></p-button>
+        (click)="changePasswordFormShow()"></p-button>
       <div class="mt-4">
         <span class="font-bold">Вам назначены следующие роли:</span>
         <p-table [value]="userProfile.roles" [tableStyle]="{ 'width': '100%','margin-top':'1rem' }">
@@ -97,65 +97,4 @@
     </form>
   </ng-template>
 </p-panel>
-<p-dialog header="Изменить пароль"
-          [(visible)]="visibleChangePswForm"
-          [modal]="true"
-          [style]="{ width: '34rem' }"
-          [position]="position"
-          [draggable]="true"
-          [resizable]="false">
-  <div>
-    <p>Пароль должен соответствовать следующим требованиям:</p>
-    <div *ngIf="pswStrangeReq.minCharacters!=0"> - минимальная длина пароля - <span
-      class="font-bold text-red-800">{{pswStrangeReq.minCharacters}}</span></div>
-    <div *ngIf="pswStrangeReq.minLowerCase!=0"> - минимально прописных символов - <span
-      class="font-bold text-red-800">{{pswStrangeReq.minLowerCase}}</span></div>
-    <div *ngIf="pswStrangeReq.minUpperCase!=0"> - минимально заглавных символов - <span
-      class="font-bold text-red-800">{{pswStrangeReq.minUpperCase}}</span></div>
-    <div *ngIf="pswStrangeReq.minNumber!=0"> - минимально количество цифр - <span
-      class="font-bold text-red-800">{{pswStrangeReq.minNumber}}</span></div>
-    <div *ngIf="pswStrangeReq.minSymbol!=0"> - минимально количество спецсимволов($@!%*?&) - <span
-      class="font-bold text-red-800">{{pswStrangeReq.minSymbol}}</span></div>
-  </div>
-  <form class="mt-4"
-        [formGroup]="passwordChangeForm"
-        novalidate
-        (ngSubmit)="submitPasswordFrm()">
-        <span class="p-float-label">
-          <p-password
-            id="newPassword"
-            class="w-full" [feedback]="false"
-            styleClass="p-password p-component p-inputwrapper p-input-icon-right"
-            [style]="{'width':'100%'}"
-            [inputStyle]="{'width':'100%'}"
-            [toggleMask]="true"
-            formControlName="passwordControl"
-            [ngClass]="{'ng-invalid ng-dirty':(passwordControl.hasError('required')||passwordControl.hasError('passwordStrange'))&&passwordControl.touched}"
-          ></p-password>
-          <label htmlFor="newPassword">Пароль</label>
-        </span>
-        <span class="p-float-label mt-4">
-          <p-password
-            id="repeatPassword"
-            class="w-full"
-            [feedback]="false"
-            styleClass="p-password p-component p-inputwrapper p-input-icon-right"
-            [style]="{'width':'100%'}"
-            [inputStyle]="{'width':'100%'}"
-            [toggleMask]="true"
-            formControlName="confirmPasswordControl"
-            [ngClass]="{'ng-invalid ng-dirty':(confirmPasswordControl.hasError('required')||passwordChangeForm.hasError('match_error'))&&confirmPasswordControl.touched}"
-          ></p-password>
-          <label htmlFor="repeatPassword">Повторите пароль</label>
-        </span>
-    <div class="mt-4 flex justify-content-center">
-    <p-button
-      label="Сменить пароль"
-      styleClass="p-button-raised "
-      [loading]="loadingPasswordChangeForm"
-      [disabled]="loadingPasswordChangeForm"
-      (click)="submitPasswordFrm()"></p-button>
-    </div>
-  </form>
-</p-dialog>
 <p-toast></p-toast>

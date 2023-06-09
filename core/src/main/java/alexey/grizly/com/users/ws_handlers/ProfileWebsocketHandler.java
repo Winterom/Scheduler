@@ -1,7 +1,7 @@
 package alexey.grizly.com.users.ws_handlers;
 
 import alexey.grizly.com.commons.configs.ConnectionList;
-import alexey.grizly.com.properties.properties.SecurityProperties;
+import alexey.grizly.com.properties.dtos.security.responses.PasswordStrengthResponseDto;
 import alexey.grizly.com.users.messages.response.UserProfileResponse;
 import alexey.grizly.com.users.messages.request.RequestMessage;
 import alexey.grizly.com.users.messages.response.ResponseMessage;
@@ -19,6 +19,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 import java.io.IOException;
 import java.security.Principal;
 
+
 @Component
 public class ProfileWebsocketHandler extends TextWebSocketHandler {
     private final UserProfileService userProfileService;
@@ -28,14 +29,16 @@ public class ProfileWebsocketHandler extends TextWebSocketHandler {
 
 
     @Autowired
-    public ProfileWebsocketHandler(UserProfileService userProfileService, ObjectMapper objectMapper, ConnectionList connection) {
+    public ProfileWebsocketHandler(final UserProfileService userProfileService,
+                                   final ObjectMapper objectMapper,
+                                   final ConnectionList connection) {
         super();
         this.userProfileService = userProfileService;
         this.objectMapper = objectMapper;
         this.connection = connection;
     }
     @Override
-    public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+    public void afterConnectionClosed(@NotNull WebSocketSession session, @NotNull CloseStatus status) throws Exception {
         super.afterConnectionClosed(session, status);
         Principal principal = session.getPrincipal();
         if(principal==null){
@@ -54,7 +57,7 @@ public class ProfileWebsocketHandler extends TextWebSocketHandler {
     }
 
     @Override
-    protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
+    protected void handleTextMessage(@NotNull WebSocketSession session, @NotNull TextMessage message) throws Exception {
         super.handleTextMessage(session, message);
         Principal principal = session.getPrincipal();
         if (principal==null){
@@ -78,17 +81,17 @@ public class ProfileWebsocketHandler extends TextWebSocketHandler {
     }
 
     private void getPasswordStrength(WebSocketSession session) throws IOException {
-        ResponseMessage<SecurityProperties.UserPasswordStrength> responseMessage =
+        ResponseMessage<PasswordStrengthResponseDto> responseMessage =
                 this.userProfileService.getPasswordStrength();
         TextMessage response = new TextMessage(objectMapper.writeValueAsBytes(responseMessage));
         session.sendMessage(response);
-        System.out.println("Отправили требования к паролю");
-        System.out.println(responseMessage);
     }
 
-    private void updatePassword(WebSocketSession session,RequestMessage requestMessage){
+    private void updatePassword(WebSocketSession session,RequestMessage requestMessage) throws IOException {
         String password = requestMessage.getData();
-        this.userProfileService.updatePassword(session.getPrincipal().getName(),password);
+        ResponseMessage<UserProfileResponse> responseMessage =this.userProfileService.updatePassword(session.getPrincipal().getName(),password);
+        TextMessage response = new TextMessage(objectMapper.writeValueAsBytes(responseMessage));
+        session.sendMessage(response);
     }
 
 }

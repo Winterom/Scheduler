@@ -8,7 +8,7 @@ import {checkIfMatchingPasswords} from "../../../validators/MatchingPasswordsVal
 import {AuthMessage} from "../../../messages/AuthMessages";
 import {MessageService} from "primeng/api";
 import addErrorMessage = AuthMessage.addErrorMessage;
-import addSuccessMMessage = AuthMessage.addSuccessMMessage;
+import addSuccessMMessage = AuthMessage.addSuccessMessage;
 
 
 @Component({
@@ -19,7 +19,7 @@ import addSuccessMMessage = AuthMessage.addSuccessMMessage;
 })
 export class RegistrationComponent implements OnInit {
   loading: boolean = false;
-  pswStrangeReq: PasswordStrengthRequirement = new PasswordStrengthRequirement;
+  pswStrangeReq: PasswordStrengthRequirement|undefined;
   registrationForm: FormGroup;
   passwordControl: FormControl;
   confirmPasswordControl: FormControl;

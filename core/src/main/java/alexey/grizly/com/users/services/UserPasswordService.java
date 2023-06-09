@@ -10,5 +10,5 @@ public interface UserPasswordService {
 
     List<String> changePassword(String email, String password, String token);
 
-    boolean changePassword(String email, String notValidationPassword);
+    List<String> changePassword(String email, String notValidationPassword);
 }

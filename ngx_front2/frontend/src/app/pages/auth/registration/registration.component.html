@@ -83,16 +83,16 @@
         <div>
           <h4 class="text-center">Пароль</h4>
           <p>Пароль должен соответствовать следующим требованиям:</p>
-          <div *ngIf="pswStrangeReq.minCharacters!=0"> - минимальная длина пароля - <span
-            class="font-bold text-red-800">{{pswStrangeReq.minCharacters}}</span></div>
-          <div *ngIf="pswStrangeReq.minLowerCase!=0"> - минимально прописных символов - <span
-            class="font-bold text-red-800">{{pswStrangeReq.minLowerCase}}</span></div>
-          <div *ngIf="pswStrangeReq.minUpperCase!=0"> - минимально заглавных символов - <span
-            class="font-bold text-red-800">{{pswStrangeReq.minUpperCase}}</span></div>
-          <div *ngIf="pswStrangeReq.minNumber!=0"> - минимально количество цифр - <span
-            class="font-bold text-red-800">{{pswStrangeReq.minNumber}}</span></div>
-          <div *ngIf="pswStrangeReq.minSymbol!=0"> - минимально количество спецсимволов($@!%*?&) - <span
-            class="font-bold text-red-800">{{pswStrangeReq.minSymbol}}</span></div>
+          <div *ngIf="pswStrangeReq?.minCharacters!=0"> - минимальная длина пароля - <span
+            class="font-bold text-red-800">{{pswStrangeReq?.minCharacters}}</span></div>
+          <div *ngIf="pswStrangeReq?.minLowerCase!=0"> - минимально прописных символов - <span
+            class="font-bold text-red-800">{{pswStrangeReq?.minLowerCase}}</span></div>
+          <div *ngIf="pswStrangeReq?.minUpperCase!=0"> - минимально заглавных символов - <span
+            class="font-bold text-red-800">{{pswStrangeReq?.minUpperCase}}</span></div>
+          <div *ngIf="pswStrangeReq?.minNumber!=0"> - минимально количество цифр - <span
+            class="font-bold text-red-800">{{pswStrangeReq?.minNumber}}</span></div>
+          <div *ngIf="pswStrangeReq?.minSymbol!=0"> - минимально количество спецсимволов($@!%*?&) - <span
+            class="font-bold text-red-800">{{pswStrangeReq?.minSymbol}}</span></div>
         </div>
         <div class="mt-4 flex">
           <div class="min-w-full">

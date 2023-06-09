@@ -110,14 +110,19 @@ public class UserPasswordServiceImpl implements UserPasswordService {
     }
 
     @Override
-    public boolean changePassword(String email, String notValidationPassword){
+    public List<String> changePassword(String email, String notValidationPassword){
         PasswordValidator passwordValidator = new PasswordValidator(securityProperties);
+        List<String> errorMessage = new ArrayList<>();
         if(!passwordValidator.isValid(notValidationPassword,null)){
-            return false;
+            errorMessage.add("Пароль не валиден");
+            return errorMessage;
         }
         LocalDateTime credentialExpired = LocalDateTime.now().plus(securityProperties.getUserPasswordStrength().getPasswordExpired(),
                 securityProperties.getUserPasswordStrength().getUnit());
-        userPasswordRepository.updatePassword(email,notValidationPassword,credentialExpired);
-        return true;
+        int updated = userPasswordRepository.updatePassword(email,notValidationPassword,credentialExpired);
+        if(updated!=1){
+            errorMessage.add("Не удалось обновить пароль");
+        }
+        return errorMessage;
     }
 }

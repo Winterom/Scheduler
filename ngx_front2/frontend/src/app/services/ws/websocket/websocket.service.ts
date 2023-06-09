@@ -15,6 +15,8 @@ import {
 } from "rxjs";
 import {WebSocketSubjectConfig} from "rxjs/internal/observable/dom/WebSocketSubject";
 import {UserService} from "../../user.service";
+import {WSRequestEvents} from "../../../types/WSRequestEvents";
+import {WSResponseEvents} from "../../../types/WSResponseEvents";
 
 
 @Injectable({
@@ -22,7 +24,7 @@ import {UserService} from "../../user.service";
 })
 export class WebsocketService implements OnDestroy{
   private isConnected:boolean =false;
-  private wsSubject:WebSocketSubject<any>|null=null;
+  public wsSubject:WebSocketSubject<any>|null=null;
   private wsMessages: Subject<IWsMessage<any>> = new Subject<IWsMessage<any>>();
   private readonly config: WebSocketSubjectConfig<IWsMessage<any>>;
   private connection$: Observer<boolean>;
@@ -92,7 +94,7 @@ export class WebsocketService implements OnDestroy{
   ngOnDestroy(): void {
     this.websocketSub.unsubscribe();
   }
-  public on<T>(event: string): Observable<IWsMessageBody<T>> {
+  public on<T>(event: WSResponseEvents): Observable<IWsMessageBody<T>> {
       return this.wsMessages.pipe(
         filter((message: IWsMessage<T>) => message.event === event),
         map((message: IWsMessage<T>) => message.payload)
@@ -103,9 +105,9 @@ export class WebsocketService implements OnDestroy{
   /*
   * on message to server
   * */
-  public send(event: string, data: any = {}): void {
+  public send(event: WSRequestEvents, data: any = {}): void {
     if (this.wsSubject) {
-      this.wsSubject.next(JSON.stringify({ event, data }));
+      this.wsSubject.next(JSON.stringify({ event:event.toString(), data:data }));
     } else {
       console.error('Send error! connection is null');
     }

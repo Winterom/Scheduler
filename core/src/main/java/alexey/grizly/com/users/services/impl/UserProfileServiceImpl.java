@@ -1,5 +1,6 @@
 package alexey.grizly.com.users.services.impl;
 
+import alexey.grizly.com.properties.dtos.security.responses.PasswordStrengthResponseDto;
 import alexey.grizly.com.properties.properties.SecurityProperties;
 import alexey.grizly.com.users.messages.response.ResponseMessage;
 import alexey.grizly.com.users.messages.response.UserProfileResponse;
@@ -45,11 +46,11 @@ public class UserProfileServiceImpl implements UserProfileService {
     }
 
     @Override
-    public ResponseMessage<SecurityProperties.UserPasswordStrength> getPasswordStrength() {
+    public ResponseMessage<PasswordStrengthResponseDto> getPasswordStrength() {
         SecurityProperties.UserPasswordStrength passwordStrength = securityProperties.getUserPasswordStrength();
-        ResponseMessage<SecurityProperties.UserPasswordStrength> responseMessage =
+        ResponseMessage<PasswordStrengthResponseDto> responseMessage =
                 new ResponseMessage<>();
-        ResponseMessage.MessagePayload<SecurityProperties.UserPasswordStrength> payload =
+        ResponseMessage.MessagePayload<PasswordStrengthResponseDto> payload =
                 new ResponseMessage.MessagePayload<>();
         responseMessage.setEvent(WSResponseEvents.PASSWORD_STRENGTH);
         if(passwordStrength==null){
@@ -57,14 +58,24 @@ public class UserProfileServiceImpl implements UserProfileService {
             payload.setResponseStatus(ResponseMessage.ResponseStatus.ERROR);
         }else {
             payload.setResponseStatus(ResponseMessage.ResponseStatus.OK);
-            payload.setData(passwordStrength);
+            payload.setData(new PasswordStrengthResponseDto(passwordStrength));
         }
         responseMessage.setPayload(payload);
         return responseMessage;
     }
 
     @Override
-    public boolean updatePassword(String email, String password) {
-        return userPasswordService.changePassword(email,password);
+    public ResponseMessage<UserProfileResponse> updatePassword(String email, String password) {
+        List<String> errorMessage = userPasswordService.changePassword(email,password);
+        if(!errorMessage.isEmpty()){
+            ResponseMessage<UserProfileResponse> responseMessage = new ResponseMessage<>();
+            ResponseMessage.MessagePayload<UserProfileResponse> payload = new ResponseMessage.MessagePayload<>();
+            responseMessage.setEvent(WSResponseEvents.UPDATE_PROFILE);
+            payload.setErrorMessage(errorMessage);
+            payload.setResponseStatus(ResponseMessage.ResponseStatus.ERROR);
+            responseMessage.setPayload(payload);
+            return responseMessage;
+        }
+       return this.getProfileByEmail(email);
     }
 }

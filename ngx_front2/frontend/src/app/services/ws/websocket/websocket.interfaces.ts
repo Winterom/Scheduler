@@ -1,9 +1,8 @@
-
-
+import {WSResponseEvents} from "../../../types/WSResponseEvents";
 
 
 export interface IWsMessage<R> {
-  event: string;
+  event: WSResponseEvents;
   payload: IWsMessageBody<R>
 }
 

@@ -1,0 +1,58 @@
+
+  <div>
+    <p>Пароль должен соответствовать следующим требованиям:</p>
+    <div *ngIf="pswStrangeReq?.minCharacters!=0 "> - минимальная длина пароля - <span
+      class="font-bold text-red-800">{{pswStrangeReq?.minCharacters}}</span></div>
+    <div *ngIf="pswStrangeReq?.minLowerCase!=0"> - минимально прописных символов - <span
+      class="font-bold text-red-800">{{pswStrangeReq?.minLowerCase}}</span></div>
+    <div *ngIf="pswStrangeReq?.minUpperCase!=0"> - минимально заглавных символов - <span
+      class="font-bold text-red-800">{{pswStrangeReq?.minUpperCase}}</span></div>
+    <div *ngIf="pswStrangeReq?.minNumber!=0"> - минимально количество цифр - <span
+      class="font-bold text-red-800">{{pswStrangeReq?.minNumber}}</span></div>
+    <div *ngIf="pswStrangeReq?.minSymbol!=0"> - минимально количество спецсимволов($@!%*?&) - <span
+      class="font-bold text-red-800">{{pswStrangeReq?.minSymbol}}</span></div>
+  </div>
+  <form class="mt-4"
+        [formGroup]="passwordChangeForm"
+        novalidate
+        (ngSubmit)="submitPasswordFrm()">
+
+    <span class="p-float-label">
+          <p-password
+            id="newPassword"
+            class="w-full" [feedback]="false"
+            styleClass="p-password p-component p-inputwrapper p-input-icon-right"
+            [style]="{'width':'100%'}"
+            [inputStyle]="{'width':'100%'}"
+            [toggleMask]="true"
+            formControlName="passwordControl"
+            [ngClass]="{'ng-invalid ng-dirty':(passwordControl.hasError('required')||passwordControl.hasError('passwordStrange'))&&passwordControl.touched}"
+          ></p-password>
+          <label htmlFor="newPassword">Пароль</label>
+        </span>
+    <span class="p-float-label mt-4">
+          <p-password
+            id="repeatPassword"
+            class="w-full"
+            [feedback]="false"
+            styleClass="p-password p-component p-inputwrapper p-input-icon-right"
+            [style]="{'width':'100%'}"
+            [inputStyle]="{'width':'100%'}"
+            [toggleMask]="true"
+            formControlName="confirmPasswordControl"
+            [ngClass]="{'ng-invalid ng-dirty':(confirmPasswordControl.hasError('required')||passwordChangeForm.hasError('match_error'))&&confirmPasswordControl.touched}"
+          ></p-password>
+          <label htmlFor="repeatPassword">Повторите пароль</label>
+        </span>
+    <div class="mt-4 flex justify-content-center">
+      <p-button
+        label="Сменить пароль"
+        styleClass="p-button-raised "
+        [loading]="loadingPasswordChangeForm"
+        [disabled]="loadingPasswordChangeForm"
+        (click)="submitPasswordFrm()"></p-button>
+    </div>
+  </form>
+<p-toast></p-toast>
+
+

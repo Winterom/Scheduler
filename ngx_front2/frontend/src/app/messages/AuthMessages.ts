@@ -19,21 +19,25 @@ export namespace AuthMessage{
       this.summary = this.summary+' '+msg;
     }
   }
-  export const addErrorMessage=(service:MessageService, message:string, title:string| null)=>{
-    const mes = new ErrorLoginMessage();
-    mes.detail = message;
-    if(title!==null){
-      mes.setTitle(title)
+  export const addErrorMessage=(service:MessageService|null, message:string, title:string| null)=>{
+    if(service){
+      const mes = new ErrorLoginMessage();
+      mes.detail = message;
+      if(title!==null){
+        mes.setTitle(title)
+      }
+      service.add(mes);
     }
-    service.add(mes);
   }
-  export const addSuccessMMessage = (service:MessageService,message:string,title:string| null)=>{
-    const mes = new SuccessMessage();
-    mes.detail = message;
-    if(title!==null){
-      mes.setTitle(title)
+  export const addSuccessMessage = (service:MessageService|null, message:string, title:string| null)=>{
+    if(service){
+      const mes = new SuccessMessage();
+      mes.detail = message;
+      if(title!==null){
+        mes.setTitle(title)
+      }
+      service.add(mes);
     }
-    service.add(mes);
   }
 }
 

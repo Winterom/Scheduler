@@ -14,6 +14,8 @@ import { EmployerProfileComponent } from './profile/employer-profile/employer-pr
 import {TableModule} from "primeng/table";
 import {DialogModule} from "primeng/dialog";
 import {PasswordModule} from "primeng/password";
+import { ChangePswComponent } from './profile/user-profile/change-psw/change-psw.component';
+
 
 
 
@@ -23,7 +25,8 @@ import {PasswordModule} from "primeng/password";
     DesktopComponent,
     ProfileComponent,
     UserProfileComponent,
-    EmployerProfileComponent
+    EmployerProfileComponent,
+    ChangePswComponent
   ],
   imports: [
     CommonModule,
@@ -37,6 +40,6 @@ import {PasswordModule} from "primeng/password";
     TableModule,
     DialogModule,
     PasswordModule
-  ]
+  ],
 })
 export class DesktopModule { }
