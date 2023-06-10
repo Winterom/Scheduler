@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HTTPUsersAPI} from "../../../services/API/HTTPUsersAPI";
 import {HttpClient} from "@angular/common/http";
 import {Observable, shareReplay} from "rxjs";

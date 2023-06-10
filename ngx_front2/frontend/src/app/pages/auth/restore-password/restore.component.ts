@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {Router} from "@angular/router";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {AuthMessage} from "../../../messages/AuthMessages";
+import {CustomMessage} from "../../../shared/messages/CustomMessages";
 import {MessageService} from "primeng/api";
 import {RestoreService} from "./restore.service";
-import addErrorMessage = AuthMessage.addErrorMessage;
+import addErrorMessage = CustomMessage.addErrorMessage;
 
 @Component({
   selector: 'app-reset',

@@ -5,10 +5,10 @@ import {PasswordStrengthRequirement} from "../../../types/PasswordStrengthRequir
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {passwordStrangeValidator} from "../../../validators/PasswordStrangeValidator";
 import {checkIfMatchingPasswords} from "../../../validators/MatchingPasswordsValidator";
-import {AuthMessage} from "../../../messages/AuthMessages";
+import {CustomMessage} from "../../../shared/messages/CustomMessages";
 import {MessageService} from "primeng/api";
-import addErrorMessage = AuthMessage.addErrorMessage;
-import addSuccessMMessage = AuthMessage.addSuccessMessage;
+import addErrorMessage = CustomMessage.addErrorMessage;
+import addSuccessMMessage = CustomMessage.addSuccessMessage;
 
 
 @Component({

@@ -1,6 +1,6 @@
 import {Message, MessageService} from "primeng/api";
 
-export namespace AuthMessage{
+export namespace CustomMessage{
   export class SuccessMessage implements Message{
     severity='success';
     summary='OK';
@@ -9,7 +9,7 @@ export namespace AuthMessage{
       this.summary = this.summary+' '+msg;
     }
   }
-  export class ErrorLoginMessage implements Message {
+  export class ErrorMessage implements Message {
     severity='error';
     summary='Ошибка';
     detail=''
@@ -21,7 +21,7 @@ export namespace AuthMessage{
   }
   export const addErrorMessage=(service:MessageService|null, message:string, title:string| null)=>{
     if(service){
-      const mes = new ErrorLoginMessage();
+      const mes = new ErrorMessage();
       mes.detail = message;
       if(title!==null){
         mes.setTitle(title)

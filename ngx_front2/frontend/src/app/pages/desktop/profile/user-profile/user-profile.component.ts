@@ -7,10 +7,12 @@ import {PasswordStrengthRequirement} from "../../../../types/PasswordStrengthReq
 import {WebsocketService} from "../../../../services/ws/websocket";
 import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
 import {ChangePswComponent} from "./change-psw/change-psw.component";
-import {WSResponseEvents} from "../../../../types/WSResponseEvents";
-import {AuthMessage} from "../../../../messages/AuthMessages";
-import addErrorMessage = AuthMessage.addErrorMessage;
-import addSuccessMessage = AuthMessage.addSuccessMessage;
+import {WSResponseEvents} from "../../../../services/ws/websocket/WSResponseEvents";
+import {CustomMessage} from "../../../../shared/messages/CustomMessages";
+import {ChronosUtils} from "../../../../shared/ChronosUtils";
+import addErrorMessage = CustomMessage.addErrorMessage;
+import addSuccessMessage = CustomMessage.addSuccessMessage;
+
 
 @Component({
   selector: 'app-user-profile',
@@ -32,6 +34,7 @@ export class UserProfileComponent implements OnInit{
   pswFormRef: DynamicDialogRef|null=null;
   pswStrangeReq:PasswordStrengthRequirement|undefined;
   onError:EventEmitter<string>=new EventEmitter<string>();
+  chronos:string=''
 
   constructor(public dialogService: DialogService,
               private wsService:WebsocketService,
@@ -48,6 +51,7 @@ export class UserProfileComponent implements OnInit{
     this.wsService.on<PasswordStrengthRequirement>(WSResponseEvents.PASSWORD_STRENGTH)
       .subscribe({next:data=>{
           this.pswStrangeReq=data.data;
+          this.chronos = this.passwordExpiredToString();
         }})
     this.wsService.on<UserProfile>(WSResponseEvents.UPDATE_PROFILE).subscribe({next:data=>{
       this.userProfile = data.data;
@@ -79,11 +83,7 @@ export class UserProfileComponent implements OnInit{
       }
       this.phoneControlChanged=true;
     })
-    this.pswFormRef?.onClose.subscribe((message:string)=>{
-      if (message){
-        addSuccessMessage(this.messageService,message,'Изменение пароля')
-      }
-    })
+
     this.onError.subscribe({next:(value:string)=>{
       addErrorMessage(this.messageService,value,null);
       }})
@@ -136,7 +136,11 @@ export class UserProfileComponent implements OnInit{
       resizable:false,
       data:{psw:this.pswStrangeReq,onError:this.onError}
     })
-
+    this.pswFormRef.onClose.subscribe((message:string)=>{
+      if (message){
+        addSuccessMessage(this.messageService,message,'Изменение пароля')
+      }
+    })
   }
   private formatPhoneValue(rawPhone:string):string{
     return String(rawPhone).replaceAll('-', '')
@@ -159,6 +163,17 @@ export class UserProfileComponent implements OnInit{
     }
   }
 
+  passwordExpiredToString():string{
+    if(this.pswStrangeReq){
+      const result = ChronosUtils.chronosToString(this.pswStrangeReq.unit,this.pswStrangeReq.passwordExpired);
+      console.log(this.pswStrangeReq)
+      if(result){
+        return result;
+      }
+    }
+    console.log('null')
+    return '';
+  }
 
 
 }

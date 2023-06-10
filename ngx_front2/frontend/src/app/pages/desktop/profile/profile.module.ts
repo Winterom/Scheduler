@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {ProfileComponent} from "./profile.component";
 import {UserProfileComponent} from "./user-profile/user-profile.component";
 import {EmployerProfileComponent} from "./employer-profile/employer-profile.component";
@@ -14,7 +14,6 @@ import {ToastModule} from "primeng/toast";
 import {TableModule} from "primeng/table";
 import {DialogModule} from "primeng/dialog";
 import {PasswordModule} from "primeng/password";
-
 
 
 @NgModule({

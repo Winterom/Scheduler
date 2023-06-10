@@ -1,4 +1,4 @@
-import {WSResponseEvents} from "../../../types/WSResponseEvents";
+import {WSResponseEvents} from "./WSResponseEvents";
 
 
 export interface IWsMessage<R> {
@@ -7,7 +7,7 @@ export interface IWsMessage<R> {
 }
 
 export enum ResponseStatus{
-  OK,ERROR
+  OK='OK',ERROR='ERROR'
 }
 
 export interface IWsMessageBody<R>{

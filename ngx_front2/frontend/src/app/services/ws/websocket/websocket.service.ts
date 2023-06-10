@@ -1,6 +1,6 @@
 import {Injectable, OnDestroy} from '@angular/core';
 import {WebSocketSubject} from "rxjs/webSocket";
-import { IWsMessage, IWsMessageBody} from "./websocket.interfaces";
+import {IWsMessage, IWsMessageBody} from "./websocket.interfaces";
 import {
   distinctUntilChanged,
   filter,
@@ -15,8 +15,8 @@ import {
 } from "rxjs";
 import {WebSocketSubjectConfig} from "rxjs/internal/observable/dom/WebSocketSubject";
 import {UserService} from "../../user.service";
-import {WSRequestEvents} from "../../../types/WSRequestEvents";
-import {WSResponseEvents} from "../../../types/WSResponseEvents";
+import {WSRequestEvents} from "./WSRequestEvents";
+import {WSResponseEvents} from "./WSResponseEvents";
 
 
 @Injectable({

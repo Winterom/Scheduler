@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {WSRequestEvents} from "../../../types/WSRequestEvents";
+import {WSRequestEvents} from "../../../services/ws/websocket/WSRequestEvents";
 import {WebsocketService} from "../../../services/ws/websocket";
 import {WSUserApi} from "../../../services/API/WSUserApi";
 

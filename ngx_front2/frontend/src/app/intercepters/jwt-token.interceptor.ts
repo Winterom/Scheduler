@@ -1,12 +1,14 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {
-  HttpRequest,
-  HttpHandler,
+  HTTP_INTERCEPTORS,
+  HttpErrorResponse,
   HttpEvent,
-  HttpInterceptor, HTTP_INTERCEPTORS, HttpErrorResponse
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest
 } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError} from 'rxjs/operators';
+import {Observable, throwError} from 'rxjs';
+import {catchError} from 'rxjs/operators';
 import {UserService} from "../services/user.service";
 import {HTTPUsersAPI} from "../services/API/HTTPUsersAPI";
 

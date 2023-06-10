@@ -4,9 +4,9 @@ import {checkIfMatchingPasswords} from "../../../../../validators/MatchingPasswo
 import {PasswordStrengthRequirement} from "../../../../../types/PasswordStrengthRequirement";
 import {ResponseStatus, WebsocketService} from "../../../../../services/ws/websocket";
 import {DynamicDialogConfig, DynamicDialogRef} from "primeng/dynamicdialog";
-import {WSResponseEvents} from "../../../../../types/WSResponseEvents";
-import {WSRequestEvents} from "../../../../../types/WSRequestEvents";
-import {UserProfile} from "../../../../../types/UserProfile";
+import {WSResponseEvents} from "../../../../../services/ws/websocket/WSResponseEvents";
+import {WSRequestEvents} from "../../../../../services/ws/websocket/WSRequestEvents";
+
 
 @Component({
   selector: 'app-change-psw',
@@ -30,10 +30,11 @@ export class ChangePswComponent implements OnInit{
       confirmPasswordControl: this.confirmPasswordControl
     },[checkIfMatchingPasswords(this.passwordControl, this.confirmPasswordControl)])
   }
+
   ngOnInit(): void {
     this.pswStrangeReq = this.config.data.psw;
     this.onError = this.config.data.onError;
-    this.wsService.on<UserProfile>(WSResponseEvents.UPDATE_PASSWORD).subscribe({next:value=>{
+    this.wsService.on<any>(WSResponseEvents.UPDATE_PASSWORD).subscribe({next:value=>{
         if(value.responseStatus===ResponseStatus.ERROR&&value.errorMessages!=null){
           value.errorMessages.forEach(x=>{this.onError?.emit(x)})
           this.loadingPasswordChangeForm = false;
@@ -75,6 +76,7 @@ export class ChangePswComponent implements OnInit{
     const password:string = this.passwordControl.value;
     this.wsService.send(WSRequestEvents.UPDATE_PASSWORD,password);
   }
+
 
 
 }

@@ -1,5 +1,4 @@
-
-import { WebSocketSubjectConfig} from "rxjs/internal/observable/dom/WebSocketSubject";
+import {WebSocketSubjectConfig} from "rxjs/internal/observable/dom/WebSocketSubject";
 
 import {IWsMessage} from "./websocket.interfaces";
 

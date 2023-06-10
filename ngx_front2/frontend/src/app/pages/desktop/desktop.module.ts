@@ -4,10 +4,6 @@ import {DesktopComponent} from './desktop.component';
 import {PanelModule} from "primeng/panel";
 
 
-
-
-
-
 @NgModule({
   declarations: [
     DesktopComponent,

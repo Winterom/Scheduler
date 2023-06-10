@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {Router} from "@angular/router";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {LoginService} from "./login.service";
 import {MessageService} from "primeng/api";
-import {AuthMessage} from "../../../messages/AuthMessages";
+import {CustomMessage} from "../../../shared/messages/CustomMessages";
 import {UserService} from "../../../services/user.service";
-import addErrorMessage = AuthMessage.addErrorMessage;
+import addErrorMessage = CustomMessage.addErrorMessage;
 
 
 @Component({

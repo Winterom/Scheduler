@@ -1,3 +1,5 @@
+import {ChronosUtils} from "../shared/ChronosUtils";
+import Chronos = ChronosUtils.Chronos;
 
 export interface PasswordStrengthRequirement {
   minLowerCase:number;
@@ -6,5 +8,5 @@ export interface PasswordStrengthRequirement {
   minUpperCase: number ;
   minCharacters: number;
   passwordExpired: number;
-  unit: string;
+  unit: Chronos;
 }
