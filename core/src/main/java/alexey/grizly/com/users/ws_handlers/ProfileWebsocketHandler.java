@@ -88,10 +88,15 @@ public class ProfileWebsocketHandler extends TextWebSocketHandler {
     }
 
     private void updatePassword(WebSocketSession session,RequestMessage requestMessage) throws IOException {
+        String email = session.getPrincipal().getName();
         String password = requestMessage.getData();
-        ResponseMessage<UserProfileResponse> responseMessage =this.userProfileService.updatePassword(session.getPrincipal().getName(),password);
+        ResponseMessage<UserProfileResponse> responseMessage =this.userProfileService.updatePassword(email,password);
+        if(responseMessage.getPayload().getResponseStatus().equals(ResponseMessage.ResponseStatus.OK)){
+            this.getProfile(session,email);
+        }
         TextMessage response = new TextMessage(objectMapper.writeValueAsBytes(responseMessage));
         session.sendMessage(response);
+        System.out.println("Отправили "+responseMessage);
     }
 
 }

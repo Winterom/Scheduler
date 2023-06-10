@@ -67,15 +67,16 @@ public class UserProfileServiceImpl implements UserProfileService {
     @Override
     public ResponseMessage<UserProfileResponse> updatePassword(String email, String password) {
         List<String> errorMessage = userPasswordService.changePassword(email,password);
-        if(!errorMessage.isEmpty()){
-            ResponseMessage<UserProfileResponse> responseMessage = new ResponseMessage<>();
-            ResponseMessage.MessagePayload<UserProfileResponse> payload = new ResponseMessage.MessagePayload<>();
-            responseMessage.setEvent(WSResponseEvents.UPDATE_PROFILE);
-            payload.setErrorMessage(errorMessage);
+        ResponseMessage<UserProfileResponse> responseMessage = new ResponseMessage<>();
+        ResponseMessage.MessagePayload<UserProfileResponse> payload = new ResponseMessage.MessagePayload<>();
+        responseMessage.setEvent(WSResponseEvents.UPDATE_PASSWORD);
+        if(errorMessage.isEmpty()){
+            payload.setResponseStatus(ResponseMessage.ResponseStatus.OK);
+        }else {
             payload.setResponseStatus(ResponseMessage.ResponseStatus.ERROR);
-            responseMessage.setPayload(payload);
-            return responseMessage;
+            payload.setErrorMessage(errorMessage);
         }
-       return this.getProfileByEmail(email);
+        responseMessage.setPayload(payload);
+        return responseMessage;
     }
 }

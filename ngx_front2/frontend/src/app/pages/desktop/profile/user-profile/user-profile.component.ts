@@ -1,15 +1,16 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit} from '@angular/core';
 import {UserProfile} from "../../../../types/UserProfile";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MessageService} from "primeng/api";
 import {EUserStatus} from "../../../../types/EUserStatus";
 import {PasswordStrengthRequirement} from "../../../../types/PasswordStrengthRequirement";
-import {WSUserApi} from "../../../../services/API/WSUserApi";
 import {WebsocketService} from "../../../../services/ws/websocket";
 import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
 import {ChangePswComponent} from "./change-psw/change-psw.component";
-import {WSRequestEvents} from "../../../../types/WSRequestEvents";
 import {WSResponseEvents} from "../../../../types/WSResponseEvents";
+import {AuthMessage} from "../../../../messages/AuthMessages";
+import addErrorMessage = AuthMessage.addErrorMessage;
+import addSuccessMessage = AuthMessage.addSuccessMessage;
 
 @Component({
   selector: 'app-user-profile',
@@ -19,7 +20,6 @@ import {WSResponseEvents} from "../../../../types/WSResponseEvents";
 export class UserProfileComponent implements OnInit{
   userStatusClasses:string='';
   userProfile:UserProfile  = new UserProfile();
-  userApi:WSUserApi = new WSUserApi();
   userForm: FormGroup;
   emailControl:FormControl;
   phoneControl:FormControl;
@@ -31,6 +31,7 @@ export class UserProfileComponent implements OnInit{
   phoneControlChanged:boolean=false;
   pswFormRef: DynamicDialogRef|null=null;
   pswStrangeReq:PasswordStrengthRequirement|undefined;
+  onError:EventEmitter<string>=new EventEmitter<string>();
 
   constructor(public dialogService: DialogService,
               private wsService:WebsocketService,
@@ -44,13 +45,6 @@ export class UserProfileComponent implements OnInit{
 
   }
   ngOnInit(): void {
-    this.wsService.connect(this.userApi.getProfile);
-    this.wsService.status.subscribe({next:value => {
-        if(value){
-          this.wsService.send(WSRequestEvents.GET_PROFILE,'');
-          this.wsService.send(WSRequestEvents.PASSWORD_STRENGTH,'');
-        }
-      }})
     this.wsService.on<PasswordStrengthRequirement>(WSResponseEvents.PASSWORD_STRENGTH)
       .subscribe({next:data=>{
           this.pswStrangeReq=data.data;
@@ -85,12 +79,14 @@ export class UserProfileComponent implements OnInit{
       }
       this.phoneControlChanged=true;
     })
-    this.pswFormRef?.onClose.subscribe((password:string)=>{
-      console.log(password)
-      if(password){
-        this.wsService.send(WSRequestEvents.UPDATE_PASSWORD,password);
+    this.pswFormRef?.onClose.subscribe((message:string)=>{
+      if (message){
+        addSuccessMessage(this.messageService,message,'Изменение пароля')
       }
     })
+    this.onError.subscribe({next:(value:string)=>{
+      addErrorMessage(this.messageService,value,null);
+      }})
   }
   submitUserFrm() {
 
@@ -138,7 +134,7 @@ export class UserProfileComponent implements OnInit{
       position:"top",
       draggable:true,
       resizable:false,
-      data:{psw:this.pswStrangeReq,messageService:this.messageService}
+      data:{psw:this.pswStrangeReq,onError:this.onError}
     })
 
   }

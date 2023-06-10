@@ -6,7 +6,7 @@ import {DesktopComponent} from "./pages/desktop/desktop.component";
 import {RegistrationComponent} from "./pages/auth/registration/registration.component";
 import {ChangePasswordComponent} from "./pages/auth/change-password/change-password.component";
 import {TitleStrategyService} from "./services/title-strategy.service";
-import {desktopGuard} from "./guards/desktop.guard";
+import {isAuthentication} from "./guards/isAuthentication";
 import {ApprovedEmailComponent} from "./pages/auth/approved-email/approved-email.component";
 import {GlobalSettingsComponent} from "./pages/global-settings/global-settings.component";
 import {ProfileComponent} from "./pages/desktop/profile/profile.component";
@@ -17,8 +17,10 @@ const routes: Routes = [
   {path:'password/reset',component:RestoreComponent},
   {path:'password/restore',component:ChangePasswordComponent},
   {path:'approved',component:ApprovedEmailComponent},
-  {path:'profile',component:ProfileComponent},
-  {path:'desktop',component:DesktopComponent,canActivate:[desktopGuard]},
+  {path:'profile',component:ProfileComponent,loadChildren:()=>
+      import('./pages/desktop/profile/profile.module').then(m=>m.ProfileModule),
+      canActivate:[isAuthentication]},
+  {path:'desktop',component:DesktopComponent,canActivate:[isAuthentication]},
   {path:'settings',component:GlobalSettingsComponent,
     loadChildren:()=>import('./pages/global-settings/settings.module').then(m=>m.SettingsModule)},
   {path:'**',redirectTo:'login', pathMatch: 'full'}

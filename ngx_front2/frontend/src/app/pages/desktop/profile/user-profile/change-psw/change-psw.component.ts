@@ -1,12 +1,12 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {checkIfMatchingPasswords} from "../../../../../validators/MatchingPasswordsValidator";
-import {AuthMessage} from "../../../../../messages/AuthMessages";
-import addErrorMessage = AuthMessage.addErrorMessage;
-import {MessageService} from "primeng/api";
 import {PasswordStrengthRequirement} from "../../../../../types/PasswordStrengthRequirement";
-import {WebsocketService} from "../../../../../services/ws/websocket";
+import {ResponseStatus, WebsocketService} from "../../../../../services/ws/websocket";
 import {DynamicDialogConfig, DynamicDialogRef} from "primeng/dynamicdialog";
+import {WSResponseEvents} from "../../../../../types/WSResponseEvents";
+import {WSRequestEvents} from "../../../../../types/WSRequestEvents";
+import {UserProfile} from "../../../../../types/UserProfile";
 
 @Component({
   selector: 'app-change-psw',
@@ -18,11 +18,11 @@ export class ChangePswComponent implements OnInit{
   passwordChangeForm:FormGroup;
   loadingPasswordChangeForm: boolean=false;
   pswStrangeReq:PasswordStrengthRequirement|undefined;
-  messageService:MessageService|null = null;
+  onError:EventEmitter<string>|undefined;
   constructor(
               private wsService:WebsocketService,
               private config:DynamicDialogConfig,
-              private ref: DynamicDialogRef) {
+              private pswFormRef: DynamicDialogRef) {
     this.passwordControl = new FormControl<string>('', [Validators.required]);
     this.confirmPasswordControl = new FormControl<string>('', Validators.required);
     this.passwordChangeForm = new FormGroup<any>({
@@ -31,8 +31,19 @@ export class ChangePswComponent implements OnInit{
     },[checkIfMatchingPasswords(this.passwordControl, this.confirmPasswordControl)])
   }
   ngOnInit(): void {
-    this.messageService = this.config.data.messageService;
     this.pswStrangeReq = this.config.data.psw;
+    this.onError = this.config.data.onError;
+    this.wsService.on<UserProfile>(WSResponseEvents.UPDATE_PASSWORD).subscribe({next:value=>{
+        if(value.responseStatus===ResponseStatus.ERROR&&value.errorMessages!=null){
+          value.errorMessages.forEach(x=>{this.onError?.emit(x)})
+          this.loadingPasswordChangeForm = false;
+          return;
+        }
+        if(value.responseStatus===ResponseStatus.OK){
+          this.pswFormRef.close('Пароль успешно изменен')
+          this.loadingPasswordChangeForm = false;
+        }
+      }});
   }
   submitPasswordFrm() {
     this.loadingPasswordChangeForm = true;
@@ -41,20 +52,20 @@ export class ChangePswComponent implements OnInit{
       this.passwordChangeForm.get(key)?.markAsTouched();
     });
     if (this.passwordControl.hasError('required')) {
-      addErrorMessage(this.messageService,'Введите пароль', null)
+      this.onError?.emit('Введите пароль');
       hasError = true;
     }
     if (this.passwordControl.hasError('passwordStrange')) {
-      addErrorMessage(this.messageService,'Пароль не соответствует требованиям', null)
+      this.onError?.emit('Пароль не соответствует требованиям');
       hasError = true;
     }
     /***************************************************************************/
     if (this.confirmPasswordControl.hasError('required')) {
-      addErrorMessage(this.messageService,'Повторите пароль', null)
+      this.onError?.emit('Повторите пароль');
       hasError = true;
     }
     if (this.passwordChangeForm.hasError('match_error')) {
-      addErrorMessage(this.messageService,'Пароли не совпадают', null)
+      this.onError?.emit('Пароли не совпадают');
       hasError = true;
     }
     if (hasError) {
@@ -62,7 +73,7 @@ export class ChangePswComponent implements OnInit{
       return;
     }
     const password:string = this.passwordControl.value;
-    this.ref.close(password);
+    this.wsService.send(WSRequestEvents.UPDATE_PASSWORD,password);
   }
 
 

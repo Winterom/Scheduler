@@ -10,6 +10,7 @@ import {DesktopModule} from "./pages/desktop/desktop.module";
 import {authInterceptorProviders} from "./intercepters/jwt-token.interceptor";
 import {registerLocaleData} from "@angular/common";
 import localeRu from '@angular/common/locales/ru';
+import {ProfileModule} from "./pages/desktop/profile/profile.module";
 
 
 registerLocaleData(localeRu, 'ru');
@@ -26,6 +27,7 @@ registerLocaleData(localeRu, 'ru');
     LoginModule,
     HttpClientModule,
     DesktopModule,
+    ProfileModule,
     TranslateModule.forRoot(),
   ],
   providers: [authInterceptorProviders,

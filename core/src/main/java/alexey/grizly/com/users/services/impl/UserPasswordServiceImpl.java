@@ -119,7 +119,8 @@ public class UserPasswordServiceImpl implements UserPasswordService {
         }
         LocalDateTime credentialExpired = LocalDateTime.now().plus(securityProperties.getUserPasswordStrength().getPasswordExpired(),
                 securityProperties.getUserPasswordStrength().getUnit());
-        int updated = userPasswordRepository.updatePassword(email,notValidationPassword,credentialExpired);
+        String passwordHash = bCryptPasswordEncoder.encode(notValidationPassword);
+        int updated = userPasswordRepository.updatePassword(email,passwordHash,credentialExpired);
         if(updated!=1){
             errorMessage.add("Не удалось обновить пароль");
         }

@@ -3,6 +3,6 @@ import {inject} from "@angular/core";
 import {PermissionsService} from "../services/permissions.service";
 
 
-export const desktopGuard: CanActivateFn = (route, state) => {
+export const isAuthentication: CanActivateFn = (route, state) => {
   return inject(PermissionsService).canActivateDesktop();
 };
