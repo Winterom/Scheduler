@@ -2,7 +2,9 @@ package alexey.grizly.com.users.ws_handlers;
 
 import alexey.grizly.com.commons.configs.ConnectionList;
 import alexey.grizly.com.properties.dtos.security.responses.PasswordStrengthResponseDto;
+import alexey.grizly.com.users.messages.request.SimpleRequestMessage;
 import alexey.grizly.com.users.messages.request.UpdateProfileRequestMessage;
+import alexey.grizly.com.users.messages.response.CheckBusyPhoneOrEmail;
 import alexey.grizly.com.users.messages.response.UserProfileResponse;
 import alexey.grizly.com.users.messages.request.RequestMessage;
 import alexey.grizly.com.users.messages.response.ResponseMessage;
@@ -77,6 +79,7 @@ public class ProfileWebsocketHandler extends TextWebSocketHandler {
             case UPDATE_PROFILE -> updateProfile(session,requestMessage);
             case CHECK_EMAIL_BUSY -> checkEmailBusy(session,requestMessage);
             case CHECK_PHONE_BUSY -> checkPhoneBusy(session,requestMessage);
+            case SEND_EMAIL_VERIFY_TOKEN -> sendEmailVerifyToken(session);
             default -> unknownEvent(session);
         }
     }
@@ -96,7 +99,7 @@ public class ProfileWebsocketHandler extends TextWebSocketHandler {
 
     private void updatePassword(final WebSocketSession session,final RequestMessage requestMessage) throws IOException {
         String email = session.getPrincipal().getName();
-        String password = requestMessage.getData();
+        String password = objectMapper.readValue(requestMessage.getData(), SimpleRequestMessage.class).getParam();
         ResponseMessage<UserProfileResponse> responseMessage =this.userProfileService.updatePassword(email,password);
         if(responseMessage.getPayload().getResponseStatus().equals(ResponseMessage.ResponseStatus.OK)){
             this.getProfile(session,email);
@@ -132,15 +135,26 @@ public class ProfileWebsocketHandler extends TextWebSocketHandler {
         session.close();
     }
 
-    private void checkEmailBusy(final WebSocketSession session,final RequestMessage requestMessage){
+    private void checkEmailBusy(final WebSocketSession session,final RequestMessage requestMessage) throws IOException {
         String oldEmail = session.getPrincipal().getName();
-        String newEmail = requestMessage.getData();
-        if(oldEmail.equals(newEmail)){
-
+        String newEmail = objectMapper.readValue(requestMessage.getData(), SimpleRequestMessage.class).getParam();
+        if (oldEmail.equals(newEmail)) {
+            return;
         }
+        ResponseMessage<CheckBusyPhoneOrEmail> responseMessage =userProfileService.checkEmail(newEmail);
+        TextMessage response = new TextMessage(objectMapper.writeValueAsBytes(responseMessage));
+        session.sendMessage(response);
     }
 
-    private void checkPhoneBusy(final WebSocketSession session,final RequestMessage requestMessage){
+    private void checkPhoneBusy(final WebSocketSession session,final RequestMessage requestMessage) throws IOException {
+        String phone = objectMapper.readValue(requestMessage.getData(), SimpleRequestMessage.class).getParam();
+        ResponseMessage<CheckBusyPhoneOrEmail> responseMessage =userProfileService.checkPhone(phone);
+        TextMessage response = new TextMessage(objectMapper.writeValueAsBytes(responseMessage));
+        session.sendMessage(response);
+    }
 
+    private void sendEmailVerifyToken(final WebSocketSession session){
+        String email = session.getPrincipal().getName();
+        ResponseMessage<String> message = userProfileService.sendEmailVerifyToken(email);
     }
 }

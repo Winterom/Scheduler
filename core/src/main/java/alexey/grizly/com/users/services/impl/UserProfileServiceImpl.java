@@ -3,10 +3,13 @@ package alexey.grizly.com.users.services.impl;
 import alexey.grizly.com.commons.exceptions.PSQLErrorsTranslator;
 import alexey.grizly.com.properties.dtos.security.responses.PasswordStrengthResponseDto;
 import alexey.grizly.com.properties.properties.SecurityProperties;
+import alexey.grizly.com.users.messages.response.CheckBusyPhoneOrEmail;
 import alexey.grizly.com.users.messages.response.ResponseMessage;
 import alexey.grizly.com.users.messages.response.UserProfileResponse;
 import alexey.grizly.com.users.repositories.UserProfileRepository;
+import alexey.grizly.com.users.services.UserEmailService;
 import alexey.grizly.com.users.services.UserPasswordService;
+import alexey.grizly.com.users.services.UserPhoneNumberService;
 import alexey.grizly.com.users.services.UserProfileService;
 import alexey.grizly.com.users.utils.DBExceptionUtils;
 import alexey.grizly.com.users.validators.PhoneNumberValidator;
@@ -26,18 +29,25 @@ import java.util.List;
 @Slf4j
 public class UserProfileServiceImpl implements UserProfileService {
     private final UserPasswordService userPasswordService;
+    private final UserEmailService userEmailService;
     private final UserProfileRepository userProfileRepository;
     private final SecurityProperties securityProperties;
     private final PSQLErrorsTranslator psqlErrorsTranslator;
+    private final UserPhoneNumberService userPhoneNumberService;
 
     @Autowired
     public UserProfileServiceImpl(final UserPasswordService userPasswordService,
+                                  final UserEmailService userEmailService,
                                   final UserProfileRepository userProfileRepository,
-                                  final SecurityProperties securityProperties, PSQLErrorsTranslator psqlErrorsTranslator) {
+                                  final SecurityProperties securityProperties,
+                                  final PSQLErrorsTranslator psqlErrorsTranslator,
+                                  final UserPhoneNumberService userPhoneNumberService) {
         this.userPasswordService = userPasswordService;
+        this.userEmailService = userEmailService;
         this.userProfileRepository = userProfileRepository;
         this.securityProperties = securityProperties;
         this.psqlErrorsTranslator = psqlErrorsTranslator;
+        this.userPhoneNumberService = userPhoneNumberService;
     }
 
     @Override
@@ -124,6 +134,41 @@ public class UserProfileServiceImpl implements UserProfileService {
             return this.updateEmail(responseMessage,newEmail,updatedAt);
         }
         return responseMessage;
+    }
+
+    @Override
+    public ResponseMessage<CheckBusyPhoneOrEmail> checkEmail(String email) {
+        EmailValidator emailValidator = new EmailValidator();
+        boolean resultCheck;
+        if(emailValidator.isValid(email,null)){
+           resultCheck = userEmailService.emailBusyCheck(email);
+        }else {
+            resultCheck = true;
+        }
+        CheckBusyPhoneOrEmail checkBusy = new CheckBusyPhoneOrEmail();
+        checkBusy.setIsBusy(resultCheck);
+        checkBusy.setParam(email);
+        return new ResponseMessage<>(EWebsocketEvents.CHECK_EMAIL_BUSY, checkBusy, ResponseMessage.ResponseStatus.OK);
+    }
+
+    @Override
+    public ResponseMessage<CheckBusyPhoneOrEmail> checkPhone(String phone) {
+        PhoneNumberValidator phoneNumberValidator = new PhoneNumberValidator();
+        boolean resultCheck;
+        if(phoneNumberValidator.isValid(phone,null)){
+           resultCheck = userPhoneNumberService.phoneBusyCheck(phone);
+        }else {
+            resultCheck = true;
+        }
+        CheckBusyPhoneOrEmail checkBusy = new CheckBusyPhoneOrEmail();
+        checkBusy.setIsBusy(resultCheck);
+        checkBusy.setParam(phone);
+        return new ResponseMessage<>(EWebsocketEvents.CHECK_PHONE_BUSY, checkBusy, ResponseMessage.ResponseStatus.OK);
+    }
+
+    @Override
+    public ResponseMessage<String> sendEmailVerifyToken(String email) {
+        return null;
     }
 
     private ResponseMessage<UserProfileResponse> updateEmailAndPhone(ResponseMessage<UserProfileResponse> responseMessage,

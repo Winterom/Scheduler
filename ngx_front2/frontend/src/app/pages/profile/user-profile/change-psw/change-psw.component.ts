@@ -74,7 +74,9 @@ export class ChangePswComponent implements OnInit{
       return;
     }
     const password:string = this.passwordControl.value;
-    this.wsService.send(EWebsocketEvents.UPDATE_PASSWORD,password);
+    console.log('password')
+    console.log(password)
+    this.wsService.send(EWebsocketEvents.UPDATE_PASSWORD,{param:password});
   }
 
 

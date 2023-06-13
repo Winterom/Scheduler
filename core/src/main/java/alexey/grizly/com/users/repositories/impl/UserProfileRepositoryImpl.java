@@ -18,12 +18,12 @@ public class UserProfileRepositoryImpl implements UserProfileRepository {
             " u.is_phone_verified, u.credential_expired, u.createdat, u.updatedat, r.title, r.description" +
             " FROM users as u LEFT JOIN users_roles ur on u.id = ur.user_id " +
             " LEFT JOIN roles r on ur.role_id = r.id where u.email =:email";
-    private static final String UPDATE_PROFILE ="UPDATE users as u SET u.email=:email, u.phone=:phon," +
-            " u.updatedat=:updateAt, u.is_email_verified=false,u.is_phone_verified=false WHERE u.id=:id";
-    private static final String UPDATE_EMAIL = "UPDATE users as u SET u.email=:email," +
-            "  u.updatedat=:updateAt, u.is_email_verified=false WHERE u.id =:id";
-    private static final String UPDATE_PHONE = "UPDATE users as u SET u.phone=:phone," +
-            " u.updatedat=:updateAt, u.is_phone_verified=false WHERE u.id=:id";
+    private static final String UPDATE_PROFILE ="UPDATE users as u SET email=:email,phone=:phone," +
+            " updatedat=:updateAt, is_email_verified=false, is_phone_verified=false WHERE id=:id";
+    private static final String UPDATE_EMAIL = "UPDATE users as u SET email=:email," +
+            "  updatedat=:updateAt, is_email_verified=false WHERE u.id =:id";
+    private static final String UPDATE_PHONE = "UPDATE users as u SET phone=:phone," +
+            " updatedat=:updateAt, is_phone_verified=false WHERE u.id=:id";
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
     @Autowired
