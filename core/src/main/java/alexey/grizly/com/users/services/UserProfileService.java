@@ -12,5 +12,6 @@ public interface UserProfileService {
 
     ResponseMessage<UserProfileResponse> getProfileByEmail(final String email);
     ResponseMessage<PasswordStrengthResponseDto> getPasswordStrength();
-    ResponseMessage<UserProfileResponse> updatePassword(String email, String password);
+    ResponseMessage<UserProfileResponse> updatePassword(final String email, final String password);
+    ResponseMessage<UserProfileResponse> updateProfile(final String oldEmail, final String email,final String phone);
 }

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {RegistrationService} from "./registration.service";
-import {PasswordStrengthRequirement} from "../../../types/PasswordStrengthRequirement";
+import {PasswordStrengthRequirement} from "../../../types/auth/PasswordStrengthRequirement";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {passwordStrangeValidator} from "../../../validators/PasswordStrangeValidator";
 import {checkIfMatchingPasswords} from "../../../validators/MatchingPasswordsValidator";

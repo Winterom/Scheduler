@@ -1,5 +1,6 @@
 package alexey.grizly.com.commons.exceptions;
 
+import jakarta.annotation.Nullable;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.postgresql.util.ServerErrorMessage;
@@ -17,14 +18,14 @@ public class PSQLErrorsTranslator {
         this.translator.put("23505","Объект с такими уникальными данными существует");
     }
 
+
     public String getMessage(ServerErrorMessage errorMessage){
         String sqlState = errorMessage.getSQLState();
-        String messages;
         String message = this.translator.get(sqlState);
-        if (message==null){
-            return errorMessage.getDetail();
+        if(message==null){
+            log.error("Не найдено описание для sqlState: "+sqlState+" errorMessage: "+errorMessage.getMessage());
+            return errorMessage.getMessage();
         }
-        messages = message+ " " + errorMessage.getDetail();
-        return messages;
+        return message;
     }
 }

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {PasswordStrengthRequirement} from "../../../types/PasswordStrengthRequirement";
+import {PasswordStrengthRequirement} from "../../../types/auth/PasswordStrengthRequirement";
 import {httpOptions} from "../../../services/API/RootHTTPApi";
 import {HTTPUsersAPI} from "../../../services/API/HTTPUsersAPI";
 

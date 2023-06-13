@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HTTPUsersAPI} from "../../../services/API/HTTPUsersAPI";
 import {HttpClient} from "@angular/common/http";
 import {Observable, shareReplay} from "rxjs";
-import {PasswordStrengthRequirement} from "../../../types/PasswordStrengthRequirement";
+import {PasswordStrengthRequirement} from "../../../types/auth/PasswordStrengthRequirement";
 import {httpOptions} from "../../../services/API/RootHTTPApi";
 
 @Injectable({

@@ -11,8 +11,14 @@ public interface UserPasswordRepository {
 
     int updatePassword(final Long userId,
                        final String passwordHash,
-                       final LocalDateTime credentialExpired);
+                       final LocalDateTime credentialExpired,
+                       final LocalDateTime updatedAt);
 
-    @Transactional
-    int updatePassword(String email, String passwordHash, LocalDateTime credentialExpired);
+
+    int updatePassword(final String email,
+                       final String passwordHash,
+                       final LocalDateTime credentialExpired,
+                       final LocalDateTime updatedAt);
+
+    String getPasswordByEmail(final String email);
 }

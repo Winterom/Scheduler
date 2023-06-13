@@ -6,7 +6,7 @@
       class="font-normal">{{userProfile.createdAt.toString() | date:'full':'ru' }}</span></div>
     <div class="mb-2 font-bold">Последнее изменение: <span
       class="font-normal">{{userProfile.updatedAt.toString() | date:'full':'ru' }} </span></div>
-    <div class="mb-4 font-bold">Статус аккаунта: <span [ngClass]="userStatusClasses" class="font-normal font-italic">{{userStatus() }}</span></div>
+    <div class="mb-4 font-bold">Статус аккаунта: <span [ngClass]="[statusClasses()]" class="font-normal font-italic">{{userStatus() }}</span></div>
     <form
       class="mt-1"
       [formGroup]="userForm"

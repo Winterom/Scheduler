@@ -5,7 +5,7 @@ import {UserProfileComponent} from "./user-profile/user-profile.component";
 import {EmployerProfileComponent} from "./employer-profile/employer-profile.component";
 import {ChangePswComponent} from "./user-profile/change-psw/change-psw.component";
 import {PanelModule} from "primeng/panel";
-import {SharedModule} from "../../../shared/shared.module";
+import {SharedModule} from "../../shared/shared.module";
 import {InputTextModule} from "primeng/inputtext";
 import {ReactiveFormsModule} from "@angular/forms";
 import {InputMaskModule} from "primeng/inputmask";

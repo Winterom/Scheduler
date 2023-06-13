@@ -29,7 +29,7 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
     @Transactional
     public void generateRefreshToken(final UserAccount userAccount, final Date issuedDate, final HttpServletResponse response){
         Date refreshExpire = new Date(issuedDate.getTime() + properties.getJwtProperties().getJwtRefreshLifetime());
-        String refreshToken = jwtUtil.generateRefreshTokenFromEmail(userAccount.getEmail());
+        String refreshToken = jwtUtil.generateRefreshTokenFromEmail();
         refreshTokenRepository.saveRefreshToken(userAccount.getId(), refreshExpire, refreshToken);
         response.addCookie(createRefreshTokenCookie(refreshToken));
     }

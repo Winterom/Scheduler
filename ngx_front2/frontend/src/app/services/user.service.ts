@@ -2,8 +2,7 @@ import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {HTTPUsersAPI} from "./API/HTTPUsersAPI";
 import {Observable} from "rxjs";
-import {httpOptions} from "./API/RootHTTPApi";
-import {AuthToken} from "../types/AuthToken";
+import {AuthToken} from "../types/auth/AuthToken";
 
 @Injectable({
   providedIn: 'root',
@@ -84,6 +83,6 @@ export class UserService {
   }
 
   public refreshing(): Observable<AuthToken>{
-    return this.http.get<AuthToken>(this.api.refreshing,httpOptions);
+    return this.http.get<AuthToken>(this.api.refreshing,{withCredentials: true });
   }
 }

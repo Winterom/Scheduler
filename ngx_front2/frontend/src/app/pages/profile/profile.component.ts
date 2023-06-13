@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {WSRequestEvents} from "../../../services/ws/websocket/WSRequestEvents";
-import {WebsocketService} from "../../../services/ws/websocket";
-import {WSUserApi} from "../../../services/API/WSUserApi";
+import {EWebsocketEvents} from "../../services/ws/websocket/EWebsocketEvents";
+import {WebsocketService} from "../../services/ws/websocket";
+import {WSUserApi} from "../../services/API/WSUserApi";
 
 
 @Component({
@@ -17,8 +17,8 @@ export class ProfileComponent implements OnInit{
     this.wsService.connect(this.userApi.getProfile);
     this.wsService.status.subscribe({next:value => {
         if(value){
-          this.wsService.send(WSRequestEvents.GET_PROFILE,'');
-          this.wsService.send(WSRequestEvents.PASSWORD_STRENGTH,'');
+          this.wsService.send(EWebsocketEvents.GET_PROFILE,'');
+          this.wsService.send(EWebsocketEvents.PASSWORD_STRENGTH,'');
         }
       }})
   }

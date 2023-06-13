@@ -9,7 +9,7 @@ import {TitleStrategyService} from "./services/title-strategy.service";
 import {isAuthentication} from "./guards/isAuthentication";
 import {ApprovedEmailComponent} from "./pages/auth/approved-email/approved-email.component";
 import {GlobalSettingsComponent} from "./pages/global-settings/global-settings.component";
-import {ProfileComponent} from "./pages/desktop/profile/profile.component";
+import {ProfileComponent} from "./pages/profile/profile.component";
 
 const routes: Routes = [
   {path:'login',component:LoginComponent},
@@ -18,7 +18,7 @@ const routes: Routes = [
   {path:'password/restore',component:ChangePasswordComponent},
   {path:'approved',component:ApprovedEmailComponent},
   {path:'profile',component:ProfileComponent,loadChildren:()=>
-      import('./pages/desktop/profile/profile.module').then(m=>m.ProfileModule),
+      import('./pages/profile/profile.module').then(m=>m.ProfileModule),
       canActivate:[isAuthentication]},
   {path:'desktop',component:DesktopComponent,canActivate:[isAuthentication]},
   {path:'settings',component:GlobalSettingsComponent,

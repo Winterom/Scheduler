@@ -24,7 +24,11 @@ export class AppComponent implements OnInit{
         this.user.token=data.access_token;
         if(this.user.isAuth){
           this.router.navigate(['desktop']);
+        }else {
+          this.router.navigate(['login']);
         }
+      },error:()=>{
+        this.router.navigate(['login']);
       }})
   }
   translate(lang: string) {

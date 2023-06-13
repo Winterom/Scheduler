@@ -1,8 +1,8 @@
-import {WSResponseEvents} from "./WSResponseEvents";
+import {EWebsocketEvents} from "./EWebsocketEvents";
 
 
 export interface IWsMessage<R> {
-  event: WSResponseEvents;
+  event: EWebsocketEvents;
   payload: IWsMessageBody<R>
 }
 

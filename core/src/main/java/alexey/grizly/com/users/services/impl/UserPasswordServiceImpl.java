@@ -104,7 +104,7 @@ public class UserPasswordServiceImpl implements UserPasswordService {
         String passwordHash = bCryptPasswordEncoder.encode(password);
         LocalDateTime credentialExpired = LocalDateTime.now().plus(securityProperties.getUserPasswordStrength().getPasswordExpired(),
                 securityProperties.getUserPasswordStrength().getUnit());
-        userPasswordRepository.updatePassword(userAccount.getId(),passwordHash,credentialExpired);
+        userPasswordRepository.updatePassword(userAccount.getId(),passwordHash,credentialExpired,LocalDateTime.now());
         changePasswordTokenRepository.deleteUsedToken(userAccount.getId());
         return errorMessage;
     }
@@ -115,15 +115,18 @@ public class UserPasswordServiceImpl implements UserPasswordService {
         List<String> errorMessage = new ArrayList<>();
         if(!passwordValidator.isValid(notValidationPassword,null)){
             errorMessage.add("Пароль не валиден");
+        }
+        String oldPasswordHash = userPasswordRepository.getPasswordByEmail(email);
+        if(bCryptPasswordEncoder.matches(notValidationPassword, oldPasswordHash)){
+            errorMessage.add("Новый пароль не должен совпадать со старым");
+        }
+        if(!errorMessage.isEmpty()){
             return errorMessage;
         }
         LocalDateTime credentialExpired = LocalDateTime.now().plus(securityProperties.getUserPasswordStrength().getPasswordExpired(),
                 securityProperties.getUserPasswordStrength().getUnit());
         String passwordHash = bCryptPasswordEncoder.encode(notValidationPassword);
-        int updated = userPasswordRepository.updatePassword(email,passwordHash,credentialExpired);
-        if(updated!=1){
-            errorMessage.add("Не удалось обновить пароль");
-        }
+        userPasswordRepository.updatePassword(email,passwordHash,credentialExpired,LocalDateTime.now());
         return errorMessage;
     }
 }

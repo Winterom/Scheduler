@@ -1,5 +1,6 @@
 package alexey.grizly.com.users.services.impl;
 
+import alexey.grizly.com.commons.exceptions.PSQLErrorsTranslator;
 import alexey.grizly.com.properties.dtos.security.responses.PasswordStrengthResponseDto;
 import alexey.grizly.com.properties.properties.SecurityProperties;
 import alexey.grizly.com.users.messages.response.ResponseMessage;
@@ -7,35 +8,47 @@ import alexey.grizly.com.users.messages.response.UserProfileResponse;
 import alexey.grizly.com.users.repositories.UserProfileRepository;
 import alexey.grizly.com.users.services.UserPasswordService;
 import alexey.grizly.com.users.services.UserProfileService;
-import alexey.grizly.com.users.ws_handlers.WSResponseEvents;
+import alexey.grizly.com.users.utils.DBExceptionUtils;
+import alexey.grizly.com.users.validators.PhoneNumberValidator;
+import alexey.grizly.com.users.ws_handlers.EWebsocketEvents;
+import lombok.extern.slf4j.Slf4j;
+import org.hibernate.validator.internal.constraintvalidators.hv.EmailValidator;
+import org.postgresql.util.PSQLException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Slf4j
 public class UserProfileServiceImpl implements UserProfileService {
     private final UserPasswordService userPasswordService;
     private final UserProfileRepository userProfileRepository;
     private final SecurityProperties securityProperties;
+    private final PSQLErrorsTranslator psqlErrorsTranslator;
 
     @Autowired
     public UserProfileServiceImpl(final UserPasswordService userPasswordService,
                                   final UserProfileRepository userProfileRepository,
-                                  final SecurityProperties securityProperties) {
+                                  final SecurityProperties securityProperties, PSQLErrorsTranslator psqlErrorsTranslator) {
         this.userPasswordService = userPasswordService;
         this.userProfileRepository = userProfileRepository;
         this.securityProperties = securityProperties;
+        this.psqlErrorsTranslator = psqlErrorsTranslator;
     }
 
     @Override
-    public ResponseMessage<UserProfileResponse> getProfileByEmail(String email) {
+    @Transactional
+    public ResponseMessage<UserProfileResponse> getProfileByEmail(final String email) {
         UserProfileResponse account = userProfileRepository.getUserAccountWithRoles(email);
         ResponseMessage<UserProfileResponse> responseMessage = new ResponseMessage<>();
-        responseMessage.setEvent(WSResponseEvents.UPDATE_PROFILE);
+        responseMessage.setEvent(EWebsocketEvents.UPDATE_PROFILE);
         ResponseMessage.MessagePayload<UserProfileResponse> payload = new ResponseMessage.MessagePayload<>();
         if(account==null){
-            payload.setErrorMessage(List.of("Пользователь с "+email+" не найден"));
+            payload.setErrorMessages(List.of("Пользователь с "+email+" не найден"));
             payload.setResponseStatus(ResponseMessage.ResponseStatus.ERROR);
         }else {
             payload.setResponseStatus(ResponseMessage.ResponseStatus.OK);
@@ -52,9 +65,9 @@ public class UserProfileServiceImpl implements UserProfileService {
                 new ResponseMessage<>();
         ResponseMessage.MessagePayload<PasswordStrengthResponseDto> payload =
                 new ResponseMessage.MessagePayload<>();
-        responseMessage.setEvent(WSResponseEvents.PASSWORD_STRENGTH);
+        responseMessage.setEvent(EWebsocketEvents.PASSWORD_STRENGTH);
         if(passwordStrength==null){
-            payload.setErrorMessage(List.of("Данные не доступны"));
+            payload.setErrorMessages(List.of("Данные не доступны"));
             payload.setResponseStatus(ResponseMessage.ResponseStatus.ERROR);
         }else {
             payload.setResponseStatus(ResponseMessage.ResponseStatus.OK);
@@ -65,18 +78,124 @@ public class UserProfileServiceImpl implements UserProfileService {
     }
 
     @Override
-    public ResponseMessage<UserProfileResponse> updatePassword(String email, String password) {
+    @Transactional
+    public ResponseMessage<UserProfileResponse> updatePassword(final String email, final String password) {
         List<String> errorMessage = userPasswordService.changePassword(email,password);
         ResponseMessage<UserProfileResponse> responseMessage = new ResponseMessage<>();
         ResponseMessage.MessagePayload<UserProfileResponse> payload = new ResponseMessage.MessagePayload<>();
-        responseMessage.setEvent(WSResponseEvents.UPDATE_PASSWORD);
+        responseMessage.setEvent(EWebsocketEvents.UPDATE_PASSWORD);
         if(errorMessage.isEmpty()){
             payload.setResponseStatus(ResponseMessage.ResponseStatus.OK);
         }else {
             payload.setResponseStatus(ResponseMessage.ResponseStatus.ERROR);
-            payload.setErrorMessage(errorMessage);
+            payload.setErrorMessages(errorMessage);
         }
         responseMessage.setPayload(payload);
         return responseMessage;
+    }
+
+
+    @Override
+    @Transactional
+    public ResponseMessage<UserProfileResponse> updateProfile(final String oldEmail, final String newEmail, final String phone) {
+        List<String> errorMessage = new ArrayList<>();
+        PhoneNumberValidator phoneNumberValidator =new PhoneNumberValidator();
+        if(!phoneNumberValidator.isValid(phone,null)){
+            errorMessage.add("Неверный формат телефона");
+        }
+        EmailValidator emailValidator = new EmailValidator();
+        if (!oldEmail.equals(newEmail) && !emailValidator.isValid(newEmail, null)) {
+            errorMessage.add("Не валидный email");
+        }
+        if(!errorMessage.isEmpty()){
+            return this.createErrorResponseMessage(errorMessage);
+        }
+        ResponseMessage<UserProfileResponse> responseMessage = this.getProfileByEmail(oldEmail);
+        LocalDateTime updatedAt = LocalDateTime.now();
+        if(!oldEmail.equals(newEmail)
+                &&!phone.equals(responseMessage.getPayload().getData().getPhone())){
+            return this.updateEmailAndPhone(responseMessage,newEmail,phone,updatedAt);
+        }
+        if(oldEmail.equals(newEmail)
+                &&!phone.equals(responseMessage.getPayload().getData().getPhone())){
+            return this.updatePhone(responseMessage,phone,updatedAt);
+        }
+        if(!oldEmail.equals(newEmail)){
+            return this.updateEmail(responseMessage,newEmail,updatedAt);
+        }
+        return responseMessage;
+    }
+
+    private ResponseMessage<UserProfileResponse> updateEmailAndPhone(ResponseMessage<UserProfileResponse> responseMessage,
+                                                                     String email, String phone,LocalDateTime updateAt){
+        try {
+            userProfileRepository.updateUserProfile(responseMessage.getPayload().getData().getId()
+                    , email,phone,updateAt);
+        }catch (RuntimeException exception) {
+           return catchPsqlException(exception);
+        }
+        UserProfileResponse userProfile = responseMessage.getPayload().getData();
+        userProfile.setEmail(email);
+        userProfile.setPhone(phone);
+        userProfile.setIsEmailVerified(false);
+        userProfile.setIsPhoneVerified(false);
+        userProfile.setUpdatedAt(updateAt);
+        return responseMessage;
+    }
+
+    private ResponseMessage<UserProfileResponse> updatePhone(ResponseMessage<UserProfileResponse> responseMessage,
+                                                                    String phone,LocalDateTime updateAt){
+        try {
+            userProfileRepository.updatePhone(responseMessage.getPayload().getData().getId(),
+                    phone,updateAt);
+        }catch (RuntimeException exception){
+            return catchPsqlException(exception);
+        }
+        UserProfileResponse userProfile = responseMessage.getPayload().getData();
+        userProfile.setPhone(phone);
+        userProfile.setIsPhoneVerified(false);
+        userProfile.setUpdatedAt(updateAt);
+        return responseMessage;
+    }
+
+    private ResponseMessage<UserProfileResponse> updateEmail(ResponseMessage<UserProfileResponse> responseMessage,
+                                                             String email,LocalDateTime updateAt){
+        try {
+            userProfileRepository.updateEmail(responseMessage.getPayload().getData().getId(),
+                    email,updateAt);
+        }catch (RuntimeException exception){
+            return catchPsqlException(exception);
+        }
+        UserProfileResponse userProfile = responseMessage.getPayload().getData();
+        userProfile.setEmail(email);
+        userProfile.setIsEmailVerified(false);
+        userProfile.setUpdatedAt(updateAt);
+        return responseMessage;
+
+    }
+
+    private ResponseMessage<UserProfileResponse> createErrorResponseMessage(List<String> errorMessages){
+        ResponseMessage<UserProfileResponse> responseErrorMessage = new ResponseMessage<>();
+        ResponseMessage.MessagePayload<UserProfileResponse> errorPayload = new ResponseMessage.MessagePayload<>();
+        responseErrorMessage.setEvent(EWebsocketEvents.UPDATE_PROFILE);
+        errorPayload.setErrorMessages(errorMessages);
+        errorPayload.setResponseStatus(ResponseMessage.ResponseStatus.ERROR);
+        responseErrorMessage.setPayload(errorPayload);
+        return responseErrorMessage;
+    }
+
+    private ResponseMessage<UserProfileResponse> catchPsqlException(RuntimeException exception){
+        PSQLException psqlException = DBExceptionUtils.unwrapCause(PSQLException.class, exception);
+        if (psqlException != null) {
+            if (psqlException.getServerErrorMessage() != null) {
+                String error = psqlErrorsTranslator.getMessage(psqlException.getServerErrorMessage());
+                return createErrorResponseMessage(List.of(error));
+            }else {
+                log.error("");
+                return createErrorResponseMessage(List.of(psqlException.getMessage()));
+            }
+        }else {
+            throw exception;
+        }
     }
 }

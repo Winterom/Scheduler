@@ -1,4 +1,4 @@
-import {ChronosUtils} from "../shared/ChronosUtils";
+import {ChronosUtils} from "../../shared/ChronosUtils";
 import Chronos = ChronosUtils.Chronos;
 
 export interface PasswordStrengthRequirement {
