@@ -70,4 +70,6 @@ public class UserProfileRepositoryImpl implements UserProfileRepository {
                 .addValue("updateAt",updateAt);
         return jdbcTemplate.update(UPDATE_PHONE,namedParameters);
     }
+
+
 }

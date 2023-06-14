@@ -14,6 +14,7 @@ import {ToastModule} from "primeng/toast";
 import {TableModule} from "primeng/table";
 import {DialogModule} from "primeng/dialog";
 import {PasswordModule} from "primeng/password";
+import { CountDownComponent } from './count-down/count-down.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import {PasswordModule} from "primeng/password";
     ProfileComponent,
     UserProfileComponent,
     EmployerProfileComponent,
-    ChangePswComponent
+    ChangePswComponent,
+    CountDownComponent
   ],
   imports: [
     CommonModule,

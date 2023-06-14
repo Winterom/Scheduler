@@ -5,6 +5,7 @@ import alexey.grizly.com.properties.dtos.security.responses.PasswordStrengthResp
 import alexey.grizly.com.users.messages.request.SimpleRequestMessage;
 import alexey.grizly.com.users.messages.request.UpdateProfileRequestMessage;
 import alexey.grizly.com.users.messages.response.CheckBusyPhoneOrEmail;
+import alexey.grizly.com.users.messages.response.SendVerifyToken;
 import alexey.grizly.com.users.messages.response.UserProfileResponse;
 import alexey.grizly.com.users.messages.request.RequestMessage;
 import alexey.grizly.com.users.messages.response.ResponseMessage;
@@ -153,8 +154,10 @@ public class ProfileWebsocketHandler extends TextWebSocketHandler {
         session.sendMessage(response);
     }
 
-    private void sendEmailVerifyToken(final WebSocketSession session){
+    private void sendEmailVerifyToken(final WebSocketSession session) throws IOException {
         String email = session.getPrincipal().getName();
-        ResponseMessage<String> message = userProfileService.sendEmailVerifyToken(email);
+        ResponseMessage<SendVerifyToken> responseMessage = userProfileService.sendEmailVerifyToken(email);
+        TextMessage response = new TextMessage(objectMapper.writeValueAsBytes(responseMessage));
+        session.sendMessage(response);
     }
 }

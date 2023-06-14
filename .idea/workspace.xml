@@ -12,19 +12,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="750a344e-c061-4730-8fc1-d19a16e5fd0b" name="Changes" comment="feat: Authentication">
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/messages/request/RequestMessagePayloadDeserializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/messages/request/SimpleRequestMessage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/messages/response/SendVerifyToken.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/profile/count-down/count-down.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/profile/count-down/count-down.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/profile/count-down/count-down.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/types/user/UserWSInterface.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/commons/configs/DatabaseConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/commons/configs/DatabaseConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/messages/request/RequestMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/messages/request/RequestMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/properties/properties/SecurityProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/properties/properties/SecurityProperties.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/messages/response/ResponseMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/messages/response/ResponseMessage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/repositories/impl/UserProfileRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/repositories/impl/UserProfileRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/services/UserEmailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/services/UserEmailService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/services/UserProfileService.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/services/UserProfileService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/services/impl/UserEmailServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/services/impl/UserEmailServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/services/impl/UserProfileServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/services/impl/UserProfileServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/ws_handlers/ProfileWebsocketHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/ws_handlers/ProfileWebsocketHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/profile/user-profile/change-psw/change-psw.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/profile/user-profile/change-psw/change-psw.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/profile/profile.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/profile/profile.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/profile/user-profile/user-profile.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/profile/user-profile/user-profile.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/profile/user-profile/user-profile.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/profile/user-profile/user-profile.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/services/ws/websocket/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/services/ws/websocket/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/services/ws/websocket/websocket.config.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/shared/ChronosUtils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/shared/ChronosUtils.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/types/user/CheckEmailOrPhoneWSResponse.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/types/user/EUserStatus.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/types/user/UserProfile.ts" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,8 +94,8 @@
         <option value="SCSS File" />
         <option value="package-info" />
         <option value="Interface" />
-        <option value="TypeScript File" />
         <option value="Class" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -409,6 +419,8 @@
       <workItem from="1686290923598" duration="4804000" />
       <workItem from="1686295746526" duration="19365000" />
       <workItem from="1686376550890" duration="8227000" />
+      <workItem from="1686722060162" duration="9000" />
+      <workItem from="1686733547016" duration="18994000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1678620390716</created>
@@ -676,7 +688,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686315724869</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="feat: Authentication">
+      <created>1686668710362</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1686668710362</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

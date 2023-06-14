@@ -37,6 +37,16 @@ public class UserEmailServiceImpl implements UserEmailService {
     @Transactional
     public List<String> generateVerifiedEmailToken(final Long userId) {
         UserAccountWithEmailApprovedToken userAccount = userEmailRepository.getUserAccountWithVerifiedToken(userId);
+        return generateVerifiedToken(userAccount);
+    }
+
+    @Override
+    public List<String> generateVerifiedEmailToken(String email) {
+        UserAccountWithEmailApprovedToken userAccount = userEmailRepository.getUserAccountWithVerifiedToken(email);
+        return generateVerifiedToken(userAccount);
+    }
+
+    private List<String> generateVerifiedToken(UserAccountWithEmailApprovedToken userAccount){
         List<String> errorMessage = new ArrayList<>();
         if (userAccount==null){
             errorMessage.add("Неверные учетные данные");
@@ -61,7 +71,11 @@ public class UserEmailServiceImpl implements UserEmailService {
         String token = ApprovedTokenUtils.generateApprovedToken(securityProperties.getApprovedEmailProperty().getApprovedEmailTokenLength());
         LocalDateTime expired = LocalDateTime.now().plus(securityProperties.getApprovedEmailProperty().getApprovedEmailTokenLifetime(),
                 securityProperties.getApprovedEmailProperty().getUnit());
-        userEmailRepository.saveVerifiedEmailToken(userId,token,expired);
+        try {
+            userEmailRepository.saveVerifiedEmailToken(userAccount.getId(),token,expired);
+        }catch (RuntimeException exception){
+
+        }
         EmailApprovedToken newToken = new EmailApprovedToken();
         newToken.setToken(token);
         newToken.setExpired(expired);

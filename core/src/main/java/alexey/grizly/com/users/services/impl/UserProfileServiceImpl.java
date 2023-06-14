@@ -5,6 +5,7 @@ import alexey.grizly.com.properties.dtos.security.responses.PasswordStrengthResp
 import alexey.grizly.com.properties.properties.SecurityProperties;
 import alexey.grizly.com.users.messages.response.CheckBusyPhoneOrEmail;
 import alexey.grizly.com.users.messages.response.ResponseMessage;
+import alexey.grizly.com.users.messages.response.SendVerifyToken;
 import alexey.grizly.com.users.messages.response.UserProfileResponse;
 import alexey.grizly.com.users.repositories.UserProfileRepository;
 import alexey.grizly.com.users.services.UserEmailService;
@@ -28,12 +29,13 @@ import java.util.List;
 @Service
 @Slf4j
 public class UserProfileServiceImpl implements UserProfileService {
+    private final UserProfileRepository userProfileRepository;
     private final UserPasswordService userPasswordService;
     private final UserEmailService userEmailService;
-    private final UserProfileRepository userProfileRepository;
     private final SecurityProperties securityProperties;
     private final PSQLErrorsTranslator psqlErrorsTranslator;
     private final UserPhoneNumberService userPhoneNumberService;
+
 
     @Autowired
     public UserProfileServiceImpl(final UserPasswordService userPasswordService,
@@ -53,6 +55,11 @@ public class UserProfileServiceImpl implements UserProfileService {
     @Override
     @Transactional
     public ResponseMessage<UserProfileResponse> getProfileByEmail(final String email) {
+        EmailValidator emailValidator = new EmailValidator();
+        if(!emailValidator.isValid(email,null)){
+            return new ResponseMessage<>(EWebsocketEvents.SEND_EMAIL_VERIFY_TOKEN,
+                    List.of("Невалидный email"));
+        }
         UserProfileResponse account = userProfileRepository.getUserAccountWithRoles(email);
         ResponseMessage<UserProfileResponse> responseMessage = new ResponseMessage<>();
         responseMessage.setEvent(EWebsocketEvents.UPDATE_PROFILE);
@@ -167,8 +174,18 @@ public class UserProfileServiceImpl implements UserProfileService {
     }
 
     @Override
-    public ResponseMessage<String> sendEmailVerifyToken(String email) {
-        return null;
+    @Transactional
+    public ResponseMessage<SendVerifyToken> sendEmailVerifyToken(String email) {
+        List<String> errorMessages = userEmailService.generateVerifiedEmailToken(email);
+        if(!errorMessages.isEmpty()){
+            return new ResponseMessage<>(EWebsocketEvents.SEND_EMAIL_VERIFY_TOKEN,
+                    errorMessages);
+        }
+        SendVerifyToken sendVerifyToken = new SendVerifyToken();
+        sendVerifyToken.setNextTokenAfter(securityProperties.getApprovedEmailProperty().getPauseBetweenNextTokenGenerate());
+        sendVerifyToken.setUnit(securityProperties.getUserPasswordStrength().getUnit());
+        return new ResponseMessage<>(EWebsocketEvents.SEND_EMAIL_VERIFY_TOKEN,sendVerifyToken, ResponseMessage.ResponseStatus.OK);
+
     }
 
     private ResponseMessage<UserProfileResponse> updateEmailAndPhone(ResponseMessage<UserProfileResponse> responseMessage,

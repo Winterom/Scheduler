@@ -8,5 +8,6 @@ import java.util.List;
 public interface UserEmailService {
     List<String> approvedUserEmail(final String email, final String token);
     List<String> generateVerifiedEmailToken(final Long userId);
+    List<String> generateVerifiedEmailToken(final String email);
     boolean emailBusyCheck(final String email);
 }

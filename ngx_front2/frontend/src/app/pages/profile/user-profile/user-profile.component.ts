@@ -1,19 +1,21 @@
 import {Component, EventEmitter, OnInit} from '@angular/core';
-import {UserProfile} from "../../../types/user/UserProfile";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MessageService} from "primeng/api";
-import {EUserStatus} from "../../../types/user/EUserStatus";
 import {PasswordStrengthRequirement} from "../../../types/auth/PasswordStrengthRequirement";
-import {WebsocketService} from "../../../services/ws/websocket";
+import {ResponseStatus, WebsocketService} from "../../../services/ws/websocket";
 import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
 import {ChangePswComponent} from "./change-psw/change-psw.component";
 import {CustomMessage} from "../../../shared/messages/CustomMessages";
 import {ChronosUtils} from "../../../shared/ChronosUtils";
 import {EWebsocketEvents} from "../../../services/ws/websocket/EWebsocketEvents";
-import {CheckEmailOrPhoneWSResponse} from "../../../types/user/CheckEmailOrPhoneWSResponse";
 import {UserService} from "../../../services/user.service";
 import addErrorMessage = CustomMessage.addErrorMessage;
 import addSuccessMessage = CustomMessage.addSuccessMessage;
+import {UserWSInterface} from "../../../types/user/UserWSInterface";
+import UserProfile = UserWSInterface.UserProfile;
+import CheckEmailOrPhoneWSResponse = UserWSInterface.CheckEmailOrPhoneWSResponse;
+import SendVerifyToken = UserWSInterface.SendVerifyToken;
+import EUserStatus = UserWSInterface.EUserStatus;
 
 
 @Component({
@@ -35,7 +37,8 @@ export class UserProfileComponent implements OnInit{
   pswFormRef: DynamicDialogRef|null=null;
   pswStrangeReq:PasswordStrengthRequirement|undefined;
   onError:EventEmitter<string>=new EventEmitter<string>();
-  chronos:string=''
+  passwordExpired:string=''
+  isCounterShow:boolean=false;
 
   constructor(public dialogService: DialogService,
               private wsService:WebsocketService,
@@ -53,7 +56,7 @@ export class UserProfileComponent implements OnInit{
     this.wsService.on<PasswordStrengthRequirement>(EWebsocketEvents.PASSWORD_STRENGTH)
       .subscribe({next:data=>{
           this.pswStrangeReq=data.data;
-          this.chronos = this.passwordExpiredToString();
+          this.passwordExpired = this.passwordExpiredToString();
         }})
     this.wsService.on<UserProfile>(EWebsocketEvents.UPDATE_PROFILE).subscribe({next:data=>{
       this.userProfile = data.data;
@@ -83,6 +86,11 @@ export class UserProfileComponent implements OnInit{
         if(!response.data.isBusy&&response.data.param===this.emailControl.value){
           this.emailControl.updateValueAndValidity();
           addSuccessMessage(this.messageService,'Email введен правильно и свободен','Проверка email')
+        }
+      }})
+    this.wsService.on<SendVerifyToken>(EWebsocketEvents.SEND_EMAIL_VERIFY_TOKEN).subscribe({next: data=>{
+        if(data.responseStatus===ResponseStatus.OK){
+
         }
       }})
     this.userForm.valueChanges.subscribe(()=>{

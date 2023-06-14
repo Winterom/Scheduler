@@ -43,4 +43,17 @@ export namespace ChronosUtils{
     return entity[1];
   }
 
+  export function chronosToMilli(chronos:Chronos):number{
+    switch (chronos){
+      case ChronosUtils.Chronos.YEARS: return 365*24*60*60*1000
+      case ChronosUtils.Chronos.MONTHS:return 30*24*60*60*1000
+      case ChronosUtils.Chronos.WEEKS: return 7*24*60*60*1000;
+      case ChronosUtils.Chronos.DAYS: return 24*60*60*1000;
+      case ChronosUtils.Chronos.HOURS: return 60*60*1000;
+      case ChronosUtils.Chronos.MINUTES: return 60*1000;
+      case ChronosUtils.Chronos.SECONDS: return 1000;
+      case Chronos.MILLIS: return 1;
+
+    }
+  }
 }

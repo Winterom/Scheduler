@@ -25,9 +25,14 @@
          <label htmlFor="email">Email</label>
         </span>
         <span class="ml-2">
-          <span *ngIf="userProfile.isEmailVerified&&!emailControlChanged"
-                class="font-italic font-semibold text-green-400">Почта подтверждена</span>
-          <span *ngIf="!userProfile.isEmailVerified&&!emailControlChanged">
+          <span *ngIf="userProfile.isEmailVerified&&!emailControlChanged&&!isCounterShow"
+                class="font-italic font-semibold text-green-400">
+            Почта подтверждена
+          </span>
+          <span *ngIf="isCounterShow">
+            <app-count-down [time]="" [chronos]=""></app-count-down>
+          </span>
+          <span *ngIf="!userProfile.isEmailVerified&&!emailControlChanged&&!isCounterShow">
             <p-button
               label="Подтвердить почту"
               styleClass="p-button-raised ml-5"
@@ -63,7 +68,7 @@
           </span>
       </div>
       <div class="mt-4">
-        <p>В соответствии с настройками установленными Администратором,каждые {{pswStrangeReq?.passwordExpired}} {{chronos}} необходимо менять пароль.</p>
+        <p>В соответствии с настройками установленными Администратором,каждые {{pswStrangeReq?.passwordExpired}} {{passwordExpired}} необходимо менять пароль.</p>
         <p>Текущий Ваш пароль можно использовать для входа в приложение до <span class="font-bold">{{userProfile.credentialExpiredTime.toString() | date:'short':'ru'}}.</span></p>
         <p>По истечению этого времени войти в приложение с этим паролем будет невозможно.</p>
       </div>

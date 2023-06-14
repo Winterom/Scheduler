@@ -4,6 +4,7 @@ import alexey.grizly.com.properties.dtos.security.responses.PasswordStrengthResp
 
 import alexey.grizly.com.users.messages.response.CheckBusyPhoneOrEmail;
 import alexey.grizly.com.users.messages.response.ResponseMessage;
+import alexey.grizly.com.users.messages.response.SendVerifyToken;
 import alexey.grizly.com.users.messages.response.UserProfileResponse;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +18,5 @@ public interface UserProfileService {
     ResponseMessage<UserProfileResponse> updateProfile(final String oldEmail, final String email,final String phone);
     ResponseMessage<CheckBusyPhoneOrEmail> checkEmail(String email);
     ResponseMessage<CheckBusyPhoneOrEmail> checkPhone(String phone);
-
-    ResponseMessage<String> sendEmailVerifyToken(String email);
+    ResponseMessage<SendVerifyToken> sendEmailVerifyToken(String email);
 }
