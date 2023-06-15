@@ -30,7 +30,8 @@
             Почта подтверждена
           </span>
           <span *ngIf="isCounterShow">
-            <app-count-down [time]="" [chronos]=""></app-count-down>
+            <app-count-down [time]="userProfile.emailVerifyToken.nextTokenAfter"
+                            [chronos]="userProfile.emailVerifyToken.unit"></app-count-down>
           </span>
           <span *ngIf="!userProfile.isEmailVerified&&!emailControlChanged&&!isCounterShow">
             <p-button

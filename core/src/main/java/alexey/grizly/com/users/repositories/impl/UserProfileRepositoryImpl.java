@@ -2,6 +2,7 @@ package alexey.grizly.com.users.repositories.impl;
 
 import alexey.grizly.com.users.messages.response.UserProfileResponse;
 import alexey.grizly.com.users.extractors.UserAccountWithRolesExtractor;
+import alexey.grizly.com.users.models.user.UserProfileWithRolesAndTokens;
 import alexey.grizly.com.users.repositories.UserProfileRepository;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +16,10 @@ import java.time.LocalDateTime;
 @Repository
 public class UserProfileRepositoryImpl implements UserProfileRepository {
     private static final String GET_PROFILE = "SELECT u.id, u.email, u.is_email_verified, u.e_status, u.phone," +
-            " u.is_phone_verified, u.credential_expired, u.createdat, u.updatedat, r.title, r.description" +
+            " u.is_phone_verified, u.credential_expired, u.createdat, u.updatedat, r.title, r.description, eat.createdat as email_token_create" +
             " FROM users as u LEFT JOIN users_roles ur on u.id = ur.user_id " +
-            " LEFT JOIN roles r on ur.role_id = r.id where u.email =:email";
+            " LEFT JOIN roles r on ur.role_id = r.id " +
+            " LEFT JOIN email_approved_token eat on u.id = eat.userid where u.email =:email";
     private static final String UPDATE_PROFILE ="UPDATE users as u SET email=:email,phone=:phone," +
             " updatedat=:updateAt, is_email_verified=false, is_phone_verified=false WHERE id=:id";
     private static final String UPDATE_EMAIL = "UPDATE users as u SET email=:email," +
@@ -33,7 +35,7 @@ public class UserProfileRepositoryImpl implements UserProfileRepository {
 
     @Override
     @Nullable
-    public UserProfileResponse getUserAccountWithRoles(final String email){
+    public UserProfileWithRolesAndTokens getUserAccountWithRoles(final String email){
         SqlParameterSource namedParameters = new MapSqlParameterSource()
                 .addValue("email",email);
         return jdbcTemplate.query(GET_PROFILE,namedParameters,new UserAccountWithRolesExtractor());

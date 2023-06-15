@@ -7,6 +7,7 @@ import alexey.grizly.com.users.messages.response.CheckBusyPhoneOrEmail;
 import alexey.grizly.com.users.messages.response.ResponseMessage;
 import alexey.grizly.com.users.messages.response.SendVerifyToken;
 import alexey.grizly.com.users.messages.response.UserProfileResponse;
+import alexey.grizly.com.users.models.user.UserProfileWithRolesAndTokens;
 import alexey.grizly.com.users.repositories.UserProfileRepository;
 import alexey.grizly.com.users.services.UserEmailService;
 import alexey.grizly.com.users.services.UserPasswordService;
@@ -60,55 +61,39 @@ public class UserProfileServiceImpl implements UserProfileService {
             return new ResponseMessage<>(EWebsocketEvents.SEND_EMAIL_VERIFY_TOKEN,
                     List.of("Невалидный email"));
         }
-        UserProfileResponse account = userProfileRepository.getUserAccountWithRoles(email);
-        ResponseMessage<UserProfileResponse> responseMessage = new ResponseMessage<>();
-        responseMessage.setEvent(EWebsocketEvents.UPDATE_PROFILE);
-        ResponseMessage.MessagePayload<UserProfileResponse> payload = new ResponseMessage.MessagePayload<>();
-        if(account==null){
-            payload.setErrorMessages(List.of("Пользователь с "+email+" не найден"));
-            payload.setResponseStatus(ResponseMessage.ResponseStatus.ERROR);
-        }else {
-            payload.setResponseStatus(ResponseMessage.ResponseStatus.OK);
-            payload.setData(account);
+        UserProfileWithRolesAndTokens userProfile = userProfileRepository.getUserAccountWithRoles(email);
+        if(userProfile==null){
+            return new ResponseMessage<>(EWebsocketEvents.UPDATE_PROFILE,List.of("Пользователь с "+email+" не найден"));
         }
-        responseMessage.setPayload(payload);
-        return responseMessage;
+        UserProfileResponse userAccount = new UserProfileResponse(userProfile);
+        if(userProfile.getCreateAtEmailToken()==null){
+            return new ResponseMessage<>(EWebsocketEvents.UPDATE_PROFILE,userAccount, ResponseMessage.ResponseStatus.OK);
+        }
+        SendVerifyToken sendVerifyToken = new SendVerifyToken();
+        sendVerifyToken.setNextTokenAfter(securityProperties.getApprovedEmailProperty().getPauseBetweenNextTokenGenerate());
+        sendVerifyToken.setUnit(securityProperties.getUserPasswordStrength().getUnit());
+        userAccount.setEmailVerifyToken(sendVerifyToken);
+        return new ResponseMessage<>(EWebsocketEvents.UPDATE_PROFILE,userAccount, ResponseMessage.ResponseStatus.OK);
     }
 
     @Override
     public ResponseMessage<PasswordStrengthResponseDto> getPasswordStrength() {
         SecurityProperties.UserPasswordStrength passwordStrength = securityProperties.getUserPasswordStrength();
-        ResponseMessage<PasswordStrengthResponseDto> responseMessage =
-                new ResponseMessage<>();
-        ResponseMessage.MessagePayload<PasswordStrengthResponseDto> payload =
-                new ResponseMessage.MessagePayload<>();
-        responseMessage.setEvent(EWebsocketEvents.PASSWORD_STRENGTH);
         if(passwordStrength==null){
-            payload.setErrorMessages(List.of("Данные не доступны"));
-            payload.setResponseStatus(ResponseMessage.ResponseStatus.ERROR);
-        }else {
-            payload.setResponseStatus(ResponseMessage.ResponseStatus.OK);
-            payload.setData(new PasswordStrengthResponseDto(passwordStrength));
+            return new ResponseMessage<>(EWebsocketEvents.PASSWORD_STRENGTH,List.of("Данные не доступны"));
         }
-        responseMessage.setPayload(payload);
-        return responseMessage;
+        return new ResponseMessage<>(EWebsocketEvents.PASSWORD_STRENGTH,
+                new PasswordStrengthResponseDto(passwordStrength), ResponseMessage.ResponseStatus.OK);
     }
 
     @Override
     @Transactional
     public ResponseMessage<UserProfileResponse> updatePassword(final String email, final String password) {
         List<String> errorMessage = userPasswordService.changePassword(email,password);
-        ResponseMessage<UserProfileResponse> responseMessage = new ResponseMessage<>();
-        ResponseMessage.MessagePayload<UserProfileResponse> payload = new ResponseMessage.MessagePayload<>();
-        responseMessage.setEvent(EWebsocketEvents.UPDATE_PASSWORD);
         if(errorMessage.isEmpty()){
-            payload.setResponseStatus(ResponseMessage.ResponseStatus.OK);
-        }else {
-            payload.setResponseStatus(ResponseMessage.ResponseStatus.ERROR);
-            payload.setErrorMessages(errorMessage);
+            return new ResponseMessage<>(EWebsocketEvents.UPDATE_PASSWORD,null, ResponseMessage.ResponseStatus.OK);
         }
-        responseMessage.setPayload(payload);
-        return responseMessage;
+        return new ResponseMessage<>(EWebsocketEvents.UPDATE_PASSWORD,errorMessage);
     }
 
 
@@ -185,7 +170,6 @@ public class UserProfileServiceImpl implements UserProfileService {
         sendVerifyToken.setNextTokenAfter(securityProperties.getApprovedEmailProperty().getPauseBetweenNextTokenGenerate());
         sendVerifyToken.setUnit(securityProperties.getUserPasswordStrength().getUnit());
         return new ResponseMessage<>(EWebsocketEvents.SEND_EMAIL_VERIFY_TOKEN,sendVerifyToken, ResponseMessage.ResponseStatus.OK);
-
     }
 
     private ResponseMessage<UserProfileResponse> updateEmailAndPhone(ResponseMessage<UserProfileResponse> responseMessage,

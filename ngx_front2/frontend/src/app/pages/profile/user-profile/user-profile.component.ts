@@ -9,13 +9,14 @@ import {CustomMessage} from "../../../shared/messages/CustomMessages";
 import {ChronosUtils} from "../../../shared/ChronosUtils";
 import {EWebsocketEvents} from "../../../services/ws/websocket/EWebsocketEvents";
 import {UserService} from "../../../services/user.service";
+import {UserWSInterface} from "../../../types/user/UserWSInterface";
 import addErrorMessage = CustomMessage.addErrorMessage;
 import addSuccessMessage = CustomMessage.addSuccessMessage;
-import {UserWSInterface} from "../../../types/user/UserWSInterface";
 import UserProfile = UserWSInterface.UserProfile;
 import CheckEmailOrPhoneWSResponse = UserWSInterface.CheckEmailOrPhoneWSResponse;
 import SendVerifyToken = UserWSInterface.SendVerifyToken;
 import EUserStatus = UserWSInterface.EUserStatus;
+import Chronos = ChronosUtils.Chronos;
 
 
 @Component({
@@ -63,6 +64,9 @@ export class UserProfileComponent implements OnInit{
       this.emailControl.setValue( this.userProfile.email);
       this.phoneControl.setValue(this.userProfile.phone);
       this.userFormLoading = false;
+      if(this.userProfile.emailVerifyToken!==null){
+        this.isCounterShow=true;
+      }
       }})
     this.wsService.on<CheckEmailOrPhoneWSResponse>(EWebsocketEvents.CHECK_PHONE_BUSY).subscribe({next:response=>{
         let rawPhone: string = this.phoneControl.value.toString();
@@ -89,9 +93,12 @@ export class UserProfileComponent implements OnInit{
         }
       }})
     this.wsService.on<SendVerifyToken>(EWebsocketEvents.SEND_EMAIL_VERIFY_TOKEN).subscribe({next: data=>{
-        if(data.responseStatus===ResponseStatus.OK){
-
-        }
+       console.log(data);
+      if(data.responseStatus===ResponseStatus.OK){
+          this.userProfile.emailVerifyToken = data.data;
+      }else {
+        data.errorMessages.forEach(x=>addErrorMessage(this.messageService,x,null));
+      }
       }})
     this.userForm.valueChanges.subscribe(()=>{
       const email:string = this.emailControl.value;

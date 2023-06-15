@@ -1,7 +1,8 @@
 import {Data} from "@angular/router";
 import {ChronosUtils} from "../../shared/ChronosUtils";
 
-export namespace UserWSInterface{
+
+export namespace UserWSInterface {
 
   import Chronos = ChronosUtils.Chronos;
 
@@ -16,6 +17,7 @@ export namespace UserWSInterface{
     credentialExpiredTime:Data = new Date();
     updatedAt:Data = new Date();
     roles:Role[] = [];
+    emailVerifyToken:SendVerifyToken={nextTokenAfter:0,unit:Chronos.MILLIS}
   }
   export class Role{
     title:string = '';

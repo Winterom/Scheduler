@@ -21,9 +21,10 @@ public class ResponseMessage <T>{
     }
     public ResponseMessage(EWebsocketEvents event,List<String> errorMessages){
         this.event = event;
-        MessagePayload<String> messagePayload = new MessagePayload<>();
+        MessagePayload  messagePayload = new MessagePayload<>();
         messagePayload.setErrorMessages(errorMessages);
         messagePayload.setResponseStatus(ResponseStatus.ERROR);
+        this.payload = messagePayload;
     }
     public enum ResponseStatus{
         OK,
