@@ -15,8 +15,8 @@ import java.time.LocalDateTime;
 @Repository
 public class UserEmailRepositoryImpl implements UserEmailRepository {
     private static final String DELETE_USED_TOKEN = "DELETE FROM email_approved_token as eat WHERE eat.userid=:id";
-    private static final  String INSERT_TOKEN="INSERT INTO email_approved_token (userid, token, expired) VALUES (:id,:token,:expired) " +
-            "ON CONFLICT (userId) DO UPDATE SET token=:token, expired = :expired";
+    private static final  String INSERT_TOKEN="INSERT INTO email_approved_token (userid, token, expired, createdat) VALUES (:id,:token,:expired,:create) " +
+            "ON CONFLICT (userId) DO UPDATE SET token=:token, expired = :expired, createdat =:create";
 
     private static final String VERIFIED_TOKEN_BY_EMAIL = "SELECT u.id, u.e_status,u.email, u.is_email_verified, " +
             "eat.token, eat.expired as token_expired, eat.createdat as token_created" +
@@ -37,6 +37,7 @@ public class UserEmailRepositoryImpl implements UserEmailRepository {
     @Override
     public int saveVerifiedEmailToken(final Long userId, final String token, LocalDateTime expired) {
         SqlParameterSource namedParameters = new MapSqlParameterSource()
+                .addValue("create",LocalDateTime.now())
                 .addValue("id", userId)
                 .addValue("token", token)
                 .addValue("expired", expired);

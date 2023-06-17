@@ -35,7 +35,7 @@ public class UserProfileRepositoryImpl implements UserProfileRepository {
 
     @Override
     @Nullable
-    public UserProfileWithRolesAndTokens getUserAccountWithRoles(final String email){
+    public UserProfileWithRolesAndTokens getUserAccountWithRolesAndTokens(final String email){
         SqlParameterSource namedParameters = new MapSqlParameterSource()
                 .addValue("email",email);
         return jdbcTemplate.query(GET_PROFILE,namedParameters,new UserAccountWithRolesExtractor());

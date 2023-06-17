@@ -173,7 +173,7 @@ public class SecurityProperties {
     @Setter
     public static class ApprovedEmailProperty {
         private Integer approvedEmailTokenLength=40;
-        private Long pauseBetweenNextTokenGenerate = 5L;//минимально 1 минута
+        private Long pauseBetweenNextTokenGenerate = 1L;//минимально 1 минута
         private Long approvedEmailTokenLifetime = 24*60L;
         private ChronoUnit unit=ChronoUnit.MINUTES;
 

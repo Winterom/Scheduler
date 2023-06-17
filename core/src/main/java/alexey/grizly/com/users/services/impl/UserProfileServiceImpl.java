@@ -24,6 +24,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,7 +62,7 @@ public class UserProfileServiceImpl implements UserProfileService {
             return new ResponseMessage<>(EWebsocketEvents.SEND_EMAIL_VERIFY_TOKEN,
                     List.of("Невалидный email"));
         }
-        UserProfileWithRolesAndTokens userProfile = userProfileRepository.getUserAccountWithRoles(email);
+        UserProfileWithRolesAndTokens userProfile = userProfileRepository.getUserAccountWithRolesAndTokens(email);
         if(userProfile==null){
             return new ResponseMessage<>(EWebsocketEvents.UPDATE_PROFILE,List.of("Пользователь с "+email+" не найден"));
         }
@@ -70,8 +71,11 @@ public class UserProfileServiceImpl implements UserProfileService {
             return new ResponseMessage<>(EWebsocketEvents.UPDATE_PROFILE,userAccount, ResponseMessage.ResponseStatus.OK);
         }
         SendVerifyToken sendVerifyToken = new SendVerifyToken();
-        sendVerifyToken.setNextTokenAfter(securityProperties.getApprovedEmailProperty().getPauseBetweenNextTokenGenerate());
-        sendVerifyToken.setUnit(securityProperties.getUserPasswordStrength().getUnit());
+        LocalDateTime nextTokenTime = userProfile.getCreateAtEmailToken().plus(securityProperties.getApprovedEmailProperty().getPauseBetweenNextTokenGenerate()
+                ,securityProperties.getApprovedEmailProperty().getUnit());
+        System.out.println("nextTokenTime: "+nextTokenTime.toString());
+        System.out.println("createdAt: "+userProfile.getCreateAtEmailToken().toString());
+        sendVerifyToken.setNextTokenAfter(nextTokenTime.toInstant(ZonedDateTime.now().getOffset()).toEpochMilli());
         userAccount.setEmailVerifyToken(sendVerifyToken);
         return new ResponseMessage<>(EWebsocketEvents.UPDATE_PROFILE,userAccount, ResponseMessage.ResponseStatus.OK);
     }
@@ -167,8 +171,11 @@ public class UserProfileServiceImpl implements UserProfileService {
                     errorMessages);
         }
         SendVerifyToken sendVerifyToken = new SendVerifyToken();
-        sendVerifyToken.setNextTokenAfter(securityProperties.getApprovedEmailProperty().getPauseBetweenNextTokenGenerate());
-        sendVerifyToken.setUnit(securityProperties.getUserPasswordStrength().getUnit());
+        LocalDateTime nextTokenTime = LocalDateTime.now().plus(securityProperties.getApprovedEmailProperty().getPauseBetweenNextTokenGenerate(),
+                securityProperties.getApprovedEmailProperty().getUnit());
+        System.out.println("nextTokenTime2: "+nextTokenTime.toString());
+        System.out.println("createdAt2: "+LocalDateTime.now().toString());
+        sendVerifyToken.setNextTokenAfter(nextTokenTime.toInstant(ZonedDateTime.now().getOffset()).toEpochMilli());
         return new ResponseMessage<>(EWebsocketEvents.SEND_EMAIL_VERIFY_TOKEN,sendVerifyToken, ResponseMessage.ResponseStatus.OK);
     }
 

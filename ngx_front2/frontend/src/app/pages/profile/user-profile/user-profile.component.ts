@@ -16,7 +16,7 @@ import UserProfile = UserWSInterface.UserProfile;
 import CheckEmailOrPhoneWSResponse = UserWSInterface.CheckEmailOrPhoneWSResponse;
 import SendVerifyToken = UserWSInterface.SendVerifyToken;
 import EUserStatus = UserWSInterface.EUserStatus;
-import Chronos = ChronosUtils.Chronos;
+
 
 
 @Component({
@@ -61,11 +61,18 @@ export class UserProfileComponent implements OnInit{
         }})
     this.wsService.on<UserProfile>(EWebsocketEvents.UPDATE_PROFILE).subscribe({next:data=>{
       this.userProfile = data.data;
+      console.log(this.userProfile);
       this.emailControl.setValue( this.userProfile.email);
       this.phoneControl.setValue(this.userProfile.phone);
       this.userFormLoading = false;
       if(this.userProfile.emailVerifyToken!==null){
-        this.isCounterShow=true;
+        let finishDate = new Date(this.userProfile.emailVerifyToken.nextTokenAfter);
+        if((finishDate.getTime()-Date.now())>0){
+          this.isCounterShow=true;
+          return;
+        }else {
+          this.isCounterShow=false;
+        }
       }
       }})
     this.wsService.on<CheckEmailOrPhoneWSResponse>(EWebsocketEvents.CHECK_PHONE_BUSY).subscribe({next:response=>{
@@ -93,9 +100,17 @@ export class UserProfileComponent implements OnInit{
         }
       }})
     this.wsService.on<SendVerifyToken>(EWebsocketEvents.SEND_EMAIL_VERIFY_TOKEN).subscribe({next: data=>{
-       console.log(data);
       if(data.responseStatus===ResponseStatus.OK){
           this.userProfile.emailVerifyToken = data.data;
+          if(this.userProfile.emailVerifyToken!==null){
+            let finishDate = new Date(this.userProfile.emailVerifyToken.nextTokenAfter);
+            if((finishDate.getTime()-Date.now())>0){
+              this.isCounterShow=true;
+              return;
+            }else {
+              this.isCounterShow=false;
+            }
+          }
       }else {
         data.errorMessages.forEach(x=>addErrorMessage(this.messageService,x,null));
       }
@@ -235,10 +250,11 @@ export class UserProfileComponent implements OnInit{
         return result;
       }
     }
-    console.log('null')
     return '';
   }
-
+  onCounterIsFinished(value:boolean){
+    this.isCounterShow = false;
+  }
 
 }
 

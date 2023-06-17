@@ -5,3 +5,8 @@
   color: #6FC6FF;
   transition: 0.3s;
 }
+.sticky{
+  z-index: 950;
+  position: sticky;
+  top: 0.75rem;
+}

@@ -30,7 +30,7 @@ public class JwtHandshakeHandler extends DefaultHandshakeHandler {
     protected Principal determineUser(ServerHttpRequest req, WebSocketHandler wsHandler, Map<String, Object> attributes) {
         ServletServerHttpRequest request = (ServletServerHttpRequest) req;
         String query = request.getURI().getQuery();
-        if(!query.startsWith("bearer=")){
+        if(query==null||!query.startsWith("bearer=")){
             return super.determineUser(req, wsHandler, attributes);
         }
         String jwt = query.substring(7);

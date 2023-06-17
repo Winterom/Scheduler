@@ -17,7 +17,7 @@ export namespace UserWSInterface {
     credentialExpiredTime:Data = new Date();
     updatedAt:Data = new Date();
     roles:Role[] = [];
-    emailVerifyToken:SendVerifyToken={nextTokenAfter:0,unit:Chronos.MILLIS}
+    emailVerifyToken:SendVerifyToken={nextTokenAfter:0}
   }
   export class Role{
     title:string = '';
@@ -25,7 +25,6 @@ export namespace UserWSInterface {
   }
   export interface SendVerifyToken {
     nextTokenAfter:number;
-    unit:Chronos;
   }
   export interface CheckEmailOrPhoneWSResponse{
     isBusy:boolean;

@@ -59,11 +59,13 @@ public class UserEmailServiceImpl implements UserEmailService {
                 ||userAccount.getStatus().equals(EUserStatus.ACTIVE))){
             errorMessage.add("Ваш аккаунт заблокирован. Обратитесь к администратору");
         }
-        LocalDateTime pauseBetweenNextToken = LocalDateTime.now()
-                .plusSeconds(securityProperties.getApprovedEmailProperty().getPauseBetweenNextTokenGenerate());
         EmailApprovedToken emailApprovedToken  = userAccount.getToken();
-        if(emailApprovedToken!=null&&emailApprovedToken.getCreatedAt().isBefore(pauseBetweenNextToken)){
-            errorMessage.add("Слишком частые запросы");
+        if(emailApprovedToken!=null){
+            LocalDateTime nextTokenTime = emailApprovedToken.getCreatedAt().plus(securityProperties.getApprovedEmailProperty().getPauseBetweenNextTokenGenerate(),
+                    securityProperties.getApprovedEmailProperty().getUnit());
+            if(nextTokenTime.isAfter(LocalDateTime.now())){
+                errorMessage.add("Слишком частые запросы");
+            }
         }
         if (!errorMessage.isEmpty()){
             return errorMessage;

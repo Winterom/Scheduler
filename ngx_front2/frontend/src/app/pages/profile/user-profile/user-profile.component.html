@@ -7,6 +7,7 @@
     <div class="mb-2 font-bold">Последнее изменение: <span
       class="font-normal">{{userProfile.updatedAt.toString() | date:'full':'ru' }} </span></div>
     <div class="mb-4 font-bold">Статус аккаунта: <span [ngClass]="[statusClasses()]" class="font-normal font-italic">{{userStatus() }}</span></div>
+    <div class="border-round-lg border-solid border-blue-300 p-3 pt-5">
     <form
       class="mt-1"
       [formGroup]="userForm"
@@ -25,13 +26,13 @@
          <label htmlFor="email">Email</label>
         </span>
         <span class="ml-2">
-          <span *ngIf="userProfile.isEmailVerified&&!emailControlChanged&&!isCounterShow"
+          <span *ngIf="userProfile.isEmailVerified&&!emailControlChanged"
                 class="font-italic font-semibold text-green-400">
             Почта подтверждена
           </span>
-          <span *ngIf="isCounterShow">
+          <span *ngIf="!userProfile.isEmailVerified&&!emailControlChanged&&isCounterShow">
             <app-count-down [time]="userProfile.emailVerifyToken.nextTokenAfter"
-                            [chronos]="userProfile.emailVerifyToken.unit"></app-count-down>
+                            (onFinish)="onCounterIsFinished($event)"></app-count-down>
           </span>
           <span *ngIf="!userProfile.isEmailVerified&&!emailControlChanged&&!isCounterShow">
             <p-button
@@ -68,7 +69,16 @@
             Введите номер Вашего телефона.
           </span>
       </div>
-      <div class="mt-4">
+      <p-button
+        label="Сохранить изменения"
+        styleClass="p-button-raised mt-3"
+        [loading]="userFormLoading"
+        [disabled]="!userFormChanged"
+        (click)="submitUserFrm()"></p-button>
+    </form>
+    </div>
+    <div class="border-round-lg border-solid border-blue-300 p-3 mt-2">
+      <div >
         <p>В соответствии с настройками установленными Администратором,каждые {{pswStrangeReq?.passwordExpired}} {{passwordExpired}} необходимо менять пароль.</p>
         <p>Текущий Ваш пароль можно использовать для входа в приложение до <span class="font-bold">{{userProfile.credentialExpiredTime.toString() | date:'short':'ru'}}.</span></p>
         <p>По истечению этого времени войти в приложение с этим паролем будет невозможно.</p>
@@ -76,8 +86,11 @@
       <p-button
         label="Сменить пароль"
         styleClass="p-button-raised mt-3"
-        (click)="changePasswordFormShow()"></p-button>
-      <div class="mt-4">
+        (click)="changePasswordFormShow()">
+      </p-button>
+    </div>
+    <div class="border-round-lg border-solid border-blue-300 p-3 mt-2">
+      <div >
         <span class="font-bold">Вам назначены следующие роли:</span>
         <p-table [value]="userProfile.roles" [tableStyle]="{ 'width': '100%','margin-top':'1rem' }">
           <ng-template pTemplate="header">
@@ -94,13 +107,7 @@
           </ng-template>
         </p-table>
       </div>
-      <p-button
-        label="Сохранить изменения"
-        styleClass="p-button-raised mt-3"
-        [loading]="userFormLoading"
-        [disabled]="!userFormChanged"
-        (click)="submitUserFrm()"></p-button>
-    </form>
+    </div>
   </ng-template>
 </p-panel>
 <p-toast></p-toast>
