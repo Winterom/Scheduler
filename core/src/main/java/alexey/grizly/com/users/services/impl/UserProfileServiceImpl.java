@@ -24,6 +24,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -175,7 +176,8 @@ public class UserProfileServiceImpl implements UserProfileService {
                 securityProperties.getApprovedEmailProperty().getUnit());
         System.out.println("nextTokenTime2: "+nextTokenTime.toString());
         System.out.println("createdAt2: "+LocalDateTime.now().toString());
-        sendVerifyToken.setNextTokenAfter(nextTokenTime.toInstant(ZonedDateTime.now().getOffset()).toEpochMilli());
+        ZoneId zoneId = ZoneId.systemDefault();
+        sendVerifyToken.setNextTokenAfter(nextTokenTime.atZone(zoneId).toInstant().toEpochMilli());
         return new ResponseMessage<>(EWebsocketEvents.SEND_EMAIL_VERIFY_TOKEN,sendVerifyToken, ResponseMessage.ResponseStatus.OK);
     }
 

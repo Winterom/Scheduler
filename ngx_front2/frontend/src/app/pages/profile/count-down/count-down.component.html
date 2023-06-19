@@ -1,7 +1,15 @@
 <span class="timer">
   <span>Следующее подтверждение можно отправить через: </span>
-  <span *ngIf="daysToDday!==0" id="days"> {{daysToDday}} </span>Day(s)
-  <span *ngIf="hoursToDday!==0" id="hours"> {{hoursToDday}} </span>Hrs
-  <span id="minutes"> {{minutesToDday}} </span>Min
-  <span id="seconds"> {{secondsToDday}} </span>S
+    <span *ngIf="daysToDday!==0">
+      <span  id="days"> {{daysToDday}}</span> Дней
+    </span>
+    <span *ngIf="hoursToDday!==0">
+      <span  id="hours"> {{hoursToDday}} </span> Часов
+    </span>
+    <span *ngIf="minutesToDday!==0">
+      <span id="minutes"> {{minutesToDday}} </span> Минут
+    </span>
+    <span *ngIf="secondsToDday!==0">
+      <span id="seconds"> {{secondsToDday}} </span>Секунд
+    </span>
 </span>

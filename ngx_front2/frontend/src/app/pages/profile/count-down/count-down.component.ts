@@ -1,9 +1,8 @@
 import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {interval, Subscription, take, takeUntil} from "rxjs";
-import {ChronosUtils} from "../../../shared/ChronosUtils";
-import Chronos = ChronosUtils.Chronos;
+import {interval, Observable, Subscription, takeUntil, timer} from "rxjs";
 
-import chronosToMilli = ChronosUtils.chronosToMilli;
+
+
 
 @Component({
   selector: 'app-count-down',
@@ -21,6 +20,7 @@ export class CountDownComponent implements OnInit,OnDestroy{
   public hoursToDday:number=0;
   public daysToDday:number=0;
   public timeDifference:number=0;
+  timer$:Observable<number>|null=null;
 
 
 
@@ -35,6 +35,7 @@ export class CountDownComponent implements OnInit,OnDestroy{
       this.minutesToDday = Math.floor((timeDifference) / (this.milliSecondsInASecond * 60) % 60);
       this.hoursToDday = Math.floor((timeDifference) / (this.milliSecondsInASecond * 60 * 60) % 24);
       this.daysToDday = Math.floor((timeDifference) / (this.milliSecondsInASecond * 60 * 60 * 24));
+
     }
   ngOnDestroy() {
     if(this.subscription!==null){
@@ -45,15 +46,13 @@ export class CountDownComponent implements OnInit,OnDestroy{
   ngOnInit(): void {
     let finishDate = new Date(this.time);
     this.timeDifference = finishDate.getTime()-Date.now();
-    console.log(this.time);
-    console.log('finishdate: '+finishDate);
-    console.log('difference: '+this.timeDifference/1000)
     if(this.timeDifference<0){
       this.onFinish.emit(true);
       return;
     }
-    this.subscription = interval(1000).pipe(take(this.timeDifference/1000))
-      .subscribe({next:t=>{
+    this.timer$ = timer(this.timeDifference);
+    this.subscription = interval(1000).pipe(takeUntil(this.timer$))
+      .subscribe({next:()=>{
           this.getTimeDifference();
         },complete:()=>{
         this.onFinish.emit(true);

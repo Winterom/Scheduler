@@ -26,7 +26,7 @@ public class UserEmailRepositoryImpl implements UserEmailRepository {
             "eat.token, eat.expired as token_expired, eat.createdat as token_created" +
             " FROM users as u left join email_approved_token eat on u.id = eat.userid" +
             " where u.id=:id";
-    private static final String UPDATE_USER_EMAIL_STATUS = "UPDATE users set is_email_verified=:status where id=:id";
+    private static final String UPDATE_USER_EMAIL_STATUS = "UPDATE users set is_email_verified=:status, updatedat=CURRENT_TIMESTAMP where id=:id";
     private static final String COUNT_USAGE_EMAIL="SELECT COUNT(u.email) FROM users as u where u.email = :email;";
     private final NamedParameterJdbcTemplate jdbcTemplate;
 

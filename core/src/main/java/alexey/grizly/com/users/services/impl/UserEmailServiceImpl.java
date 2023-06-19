@@ -3,6 +3,7 @@ package alexey.grizly.com.users.services.impl;
 
 import alexey.grizly.com.properties.properties.SecurityProperties;
 import alexey.grizly.com.users.events.UserEmailApprovedTokenEvent;
+import alexey.grizly.com.users.events.UserAccountChangeEvent;
 import alexey.grizly.com.users.models.EUserStatus;
 import alexey.grizly.com.users.models.EmailApprovedToken;
 import alexey.grizly.com.users.models.user.UserAccountWithEmailApprovedToken;
@@ -111,6 +112,7 @@ public class UserEmailServiceImpl implements UserEmailService {
         }
         userEmailRepository.updateUserEmailStatusByUserId(userAccount.getId(),true);
         userEmailRepository.deleteUsedEmailApprovedTokenByUserId(userAccount.getId());
+        eventMulticaster.multicastEvent(new UserAccountChangeEvent(email));
         return errorMessage;
     }
 

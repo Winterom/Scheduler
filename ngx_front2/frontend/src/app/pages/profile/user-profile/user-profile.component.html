@@ -62,6 +62,7 @@
             <p-button
               label="Подтвердить телефон"
               styleClass="p-button-raised ml-5"
+              [disabled]="true"
               [loading]="sendPhoneVerifyTokenLoaded"
               (click)="sendPhoneVerifyToken()"></p-button>
           </span>

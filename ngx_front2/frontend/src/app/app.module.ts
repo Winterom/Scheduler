@@ -11,6 +11,9 @@ import {authInterceptorProviders} from "./intercepters/jwt-token.interceptor";
 import {registerLocaleData} from "@angular/common";
 import localeRu from '@angular/common/locales/ru';
 import {ProfileModule} from "./pages/profile/profile.module";
+import { RolesAndAuthoritiesComponent } from './pages/roles-and-authorities/roles-and-authorities.component';
+import {SharedModule} from "./shared/shared.module";
+import {RolesAndAuthoritiesModule} from "./pages/roles-and-authorities/roles-and-authorities.module";
 
 
 registerLocaleData(localeRu, 'ru');
@@ -20,16 +23,18 @@ registerLocaleData(localeRu, 'ru');
   declarations: [
     AppComponent,
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    LoginModule,
-    HttpClientModule,
-    DesktopModule,
-    ProfileModule,
-    TranslateModule.forRoot(),
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        AppRoutingModule,
+        LoginModule,
+        HttpClientModule,
+        DesktopModule,
+        ProfileModule,
+        RolesAndAuthoritiesModule,
+        TranslateModule.forRoot(),
+        SharedModule,
+    ],
   providers: [authInterceptorProviders,
     { provide: LOCALE_ID, useValue: 'ru' }
   ],

@@ -11,8 +11,9 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-@Component
+@Service
 public class UserEmailChangeListener implements ApplicationListener<UserEmailApprovedTokenEvent> {
     @Nullable
     private final JavaMailSender emailSender;

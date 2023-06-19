@@ -10,6 +10,7 @@ import {isAuthentication} from "./guards/isAuthentication";
 import {ApprovedEmailComponent} from "./pages/auth/approved-email/approved-email.component";
 import {GlobalSettingsComponent} from "./pages/global-settings/global-settings.component";
 import {ProfileComponent} from "./pages/profile/profile.component";
+import {RolesAndAuthoritiesComponent} from "./pages/roles-and-authorities/roles-and-authorities.component";
 
 const routes: Routes = [
   {path:'login',component:LoginComponent},
@@ -21,6 +22,8 @@ const routes: Routes = [
       import('./pages/profile/profile.module').then(m=>m.ProfileModule),
       canActivate:[isAuthentication]},
   {path:'desktop',component:DesktopComponent,canActivate:[isAuthentication]},
+  {path:'roles-and-authorities', component:RolesAndAuthoritiesComponent,loadChildren:()=>
+    import('./pages/roles-and-authorities/roles-and-authorities.module').then(m=>m.RolesAndAuthoritiesModule)},
   {path:'settings',component:GlobalSettingsComponent,
     loadChildren:()=>import('./pages/global-settings/settings.module').then(m=>m.SettingsModule)},
   {path:'**',redirectTo:'login', pathMatch: 'full'}
