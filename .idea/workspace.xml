@@ -11,24 +11,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="750a344e-c061-4730-8fc1-d19a16e5fd0b" name="Changes" comment="feat: registration">
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/listeners/UserAccountChangeListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/roles-and-authorities/roles-and-authorities.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/roles-and-authorities/roles-and-authorities.component.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/roles-and-authorities/roles-and-authorities.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/roles-and-authorities/roles-and-authorities.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/users-list/users-list.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/users-list/users-list.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/users-list/users-list.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/users-list/users-list.module.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/assets/images/preloader.gif" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/mailing/listeners/UserEmailChangeListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/mailing/listeners/UserEmailChangeListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/mailing/listeners/UserPasswordChangeListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/mailing/listeners/UserPasswordChangeListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/events/UserProfileChangeEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/events/UserAccountChangeEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/repositories/impl/UserEmailRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/repositories/impl/UserEmailRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/services/impl/UserEmailServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/services/impl/UserEmailServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/services/impl/UserProfileServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/services/impl/UserProfileServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/listeners/UserAccountChangeListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/listeners/UserAccountChangeListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/app-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/app.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/desktop/desktop.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/desktop/desktop.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/desktop/desktop.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/desktop/desktop.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/global-settings/settings.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/global-settings/settings.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/profile/count-down/count-down.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/profile/count-down/count-down.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/profile/count-down/count-down.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/profile/count-down/count-down.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/profile/profile.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/profile/profile.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/profile/user-profile/user-profile.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/profile/user-profile/user-profile.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/profile/user-profile/user-profile.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/profile/user-profile/user-profile.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/roles-and-authorities/roles-and-authorities.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/roles-and-authorities/roles-and-authorities.module.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -174,11 +174,11 @@
       <recent name="" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/users-list" />
       <recent name="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/roles-and-authorities" />
       <recent name="$PROJECT_DIR$/ngx_front2/frontend/src/app/types/user" />
       <recent name="$PROJECT_DIR$/ngx_front2/frontend/src/app/types/auth" />
       <recent name="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages" />
-      <recent name="$PROJECT_DIR$/ngx_front2/frontend/src/app/shared" />
     </key>
     <key name="ExtractSuperBase.RECENT_KEYS">
       <recent name="alexey.grizly.com.properties.services.impl" />
@@ -199,7 +199,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.StartApplication">
+  <component name="RunManager" selected="npm.Angular CLI Server (ngx_front2)">
     <configuration name="StartApplication | #2" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/StartApplication.http" index="2" requestIdentifier="#2" runType="Run single request">
       <method v="2" />
     </configuration>
@@ -318,7 +318,8 @@
       <workItem from="1685786462089" duration="640000" />
       <workItem from="1685787381567" duration="82000" />
       <workItem from="1685787932417" duration="16192000" />
-      <workItem from="1687080310652" duration="7845000" />
+      <workItem from="1687080310652" duration="7944000" />
+      <workItem from="1687173900833" duration="7403000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1678620390716</created>
@@ -460,7 +461,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687002725179</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="feat: registration">
+      <created>1687162309529</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1687162309530</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

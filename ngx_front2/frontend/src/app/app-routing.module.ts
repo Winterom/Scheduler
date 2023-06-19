@@ -11,6 +11,7 @@ import {ApprovedEmailComponent} from "./pages/auth/approved-email/approved-email
 import {GlobalSettingsComponent} from "./pages/global-settings/global-settings.component";
 import {ProfileComponent} from "./pages/profile/profile.component";
 import {RolesAndAuthoritiesComponent} from "./pages/roles-and-authorities/roles-and-authorities.component";
+import {UsersListComponent} from "./pages/users-list/users-list.component";
 
 const routes: Routes = [
   {path:'login',component:LoginComponent},
@@ -18,13 +19,15 @@ const routes: Routes = [
   {path:'password/reset',component:RestoreComponent},
   {path:'password/restore',component:ChangePasswordComponent},
   {path:'approved',component:ApprovedEmailComponent},
-  {path:'profile',component:ProfileComponent,loadChildren:()=>
+  {path:'profile',loadChildren:()=>
       import('./pages/profile/profile.module').then(m=>m.ProfileModule),
       canActivate:[isAuthentication]},
   {path:'desktop',component:DesktopComponent,canActivate:[isAuthentication]},
-  {path:'roles-and-authorities', component:RolesAndAuthoritiesComponent,loadChildren:()=>
+  {path:'roles-and-authorities',loadChildren:()=>
     import('./pages/roles-and-authorities/roles-and-authorities.module').then(m=>m.RolesAndAuthoritiesModule)},
-  {path:'settings',component:GlobalSettingsComponent,
+  {path:'users',loadChildren:()=>import('./pages/users-list/users-list.module')
+      .then(m=>m.UsersListModule)},
+  {path:'settings',
     loadChildren:()=>import('./pages/global-settings/settings.module').then(m=>m.SettingsModule)},
   {path:'**',redirectTo:'login', pathMatch: 'full'}
 

@@ -62,6 +62,7 @@
             <p-button
               label="Подтвердить телефон"
               styleClass="p-button-raised ml-5"
+              pTooltip="В настоящий момент не реализовано"
               [disabled]="true"
               [loading]="sendPhoneVerifyTokenLoaded"
               (click)="sendPhoneVerifyToken()"></p-button>
@@ -96,8 +97,8 @@
         <p-table [value]="userProfile.roles" [tableStyle]="{ 'width': '100%','margin-top':'1rem' }">
           <ng-template pTemplate="header">
             <tr>
-              <th>Название </th>
-              <th>Описание роли</th>
+              <th id="h1">Название </th>
+              <th id="h2">Описание роли</th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body">

@@ -20,4 +20,12 @@ export class DesktopComponent implements OnInit{
   goProfile() {
     this.router.navigate(['profile'])
   }
+
+  goRolesAndAuthorities() {
+    this.router.navigate(['roles-and-authorities'])
+  }
+
+  goUserList() {
+    this.router.navigate(['users'])
+  }
 }

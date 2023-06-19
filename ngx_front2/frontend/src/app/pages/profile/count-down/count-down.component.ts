@@ -18,14 +18,12 @@ export class CountDownComponent implements OnInit,OnDestroy{
   public secondsToDday:number=0;
   public minutesToDday:number=0;
   public hoursToDday:number=0;
-  public daysToDday:number=0;
   public timeDifference:number=0;
   timer$:Observable<number>|null=null;
 
 
 
   private getTimeDifference () {
-    console.log(this.timeDifference)
       this.timeDifference = this.timeDifference-1000;
       this.allocateTimeUnits(this.timeDifference);
     }
@@ -34,8 +32,6 @@ export class CountDownComponent implements OnInit,OnDestroy{
       this.secondsToDday = Math.floor((timeDifference) / (this.milliSecondsInASecond) % 60);
       this.minutesToDday = Math.floor((timeDifference) / (this.milliSecondsInASecond * 60) % 60);
       this.hoursToDday = Math.floor((timeDifference) / (this.milliSecondsInASecond * 60 * 60) % 24);
-      this.daysToDday = Math.floor((timeDifference) / (this.milliSecondsInASecond * 60 * 60 * 24));
-
     }
   ngOnDestroy() {
     if(this.subscription!==null){

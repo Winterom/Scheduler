@@ -14,6 +14,8 @@ import {ProfileModule} from "./pages/profile/profile.module";
 import { RolesAndAuthoritiesComponent } from './pages/roles-and-authorities/roles-and-authorities.component';
 import {SharedModule} from "./shared/shared.module";
 import {RolesAndAuthoritiesModule} from "./pages/roles-and-authorities/roles-and-authorities.module";
+import { UsersListComponent } from './pages/users-list/users-list.component';
+import {UsersListModule} from "./pages/users-list/users-list.module";
 
 
 registerLocaleData(localeRu, 'ru');
@@ -21,7 +23,7 @@ registerLocaleData(localeRu, 'ru');
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
     imports: [
         BrowserModule,
@@ -30,8 +32,6 @@ registerLocaleData(localeRu, 'ru');
         LoginModule,
         HttpClientModule,
         DesktopModule,
-        ProfileModule,
-        RolesAndAuthoritiesModule,
         TranslateModule.forRoot(),
         SharedModule,
     ],

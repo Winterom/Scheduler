@@ -15,8 +15,16 @@ import {TableModule} from "primeng/table";
 import {DialogModule} from "primeng/dialog";
 import {PasswordModule} from "primeng/password";
 import { CountDownComponent } from './count-down/count-down.component';
+import {RouterModule, Routes} from "@angular/router";
+import {TooltipModule} from "primeng/tooltip";
 
 
+const routes: Routes = [
+  {
+    path: '',
+    component: ProfileComponent
+  }
+];
 @NgModule({
   declarations: [
     ProfileComponent,
@@ -25,6 +33,7 @@ import { CountDownComponent } from './count-down/count-down.component';
     ChangePswComponent,
     CountDownComponent
   ],
+  exports:[RouterModule],
   imports: [
     CommonModule,
     PanelModule,
@@ -36,7 +45,9 @@ import { CountDownComponent } from './count-down/count-down.component';
     ToastModule,
     TableModule,
     DialogModule,
-    PasswordModule
+    PasswordModule,
+    RouterModule.forChild(routes),
+    TooltipModule
   ]
 })
 export class ProfileModule { }

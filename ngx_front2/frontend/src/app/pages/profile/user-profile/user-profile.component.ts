@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MessageService} from "primeng/api";
 import {PasswordStrengthRequirement} from "../../../types/auth/PasswordStrengthRequirement";
@@ -16,6 +16,7 @@ import UserProfile = UserWSInterface.UserProfile;
 import CheckEmailOrPhoneWSResponse = UserWSInterface.CheckEmailOrPhoneWSResponse;
 import SendVerifyToken = UserWSInterface.SendVerifyToken;
 import EUserStatus = UserWSInterface.EUserStatus;
+import {interval, Observable, Subscription, takeUntil, timer} from "rxjs";
 
 
 
@@ -40,6 +41,7 @@ export class UserProfileComponent implements OnInit{
   onError:EventEmitter<string>=new EventEmitter<string>();
   passwordExpired:string=''
   isCounterShow:boolean=false;
+
 
   constructor(public dialogService: DialogService,
               private wsService:WebsocketService,
@@ -252,9 +254,9 @@ export class UserProfileComponent implements OnInit{
     }
     return '';
   }
-  onCounterIsFinished(value:boolean){
-    this.isCounterShow = false;
-  }
 
+  onCounterIsFinished($event: boolean) {
+    this.isCounterShow=false;
+  }
 }
 
