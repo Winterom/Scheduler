@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {EWebsocketEvents} from "../../services/ws/websocket/EWebsocketEvents";
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {EProfileWebsocketEvents} from "./EProfileWebsocketEvents";
 import {WebsocketService} from "../../services/ws/websocket";
 import {WSUserApi} from "../../services/API/WSUserApi";
 
@@ -9,7 +9,7 @@ import {WSUserApi} from "../../services/API/WSUserApi";
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
 })
-export class ProfileComponent implements OnInit{
+export class ProfileComponent implements OnInit,OnDestroy{
   userApi:WSUserApi = new WSUserApi();
   constructor(private wsService:WebsocketService,) {
   }
@@ -17,10 +17,13 @@ export class ProfileComponent implements OnInit{
     this.wsService.connect(this.userApi.getProfile);
     this.wsService.status.subscribe({next:value => {
         if(value){
-          this.wsService.send(EWebsocketEvents.GET_PROFILE,'');
-          this.wsService.send(EWebsocketEvents.PASSWORD_STRENGTH,'');
+          this.wsService.send(EProfileWebsocketEvents.GET_PROFILE,'');
+          this.wsService.send(EProfileWebsocketEvents.PASSWORD_STRENGTH,'');
         }
       }})
+  }
+  ngOnDestroy(): void {
+    this.wsService.wsSubject?.unsubscribe();
   }
 
 }

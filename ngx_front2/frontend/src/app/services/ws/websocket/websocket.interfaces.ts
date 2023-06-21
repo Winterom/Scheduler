@@ -1,8 +1,6 @@
-import {EWebsocketEvents} from "./EWebsocketEvents";
-
 
 export interface IWsMessage<R> {
-  event: EWebsocketEvents;
+  event: string;
   payload: IWsMessageBody<R>
 }
 

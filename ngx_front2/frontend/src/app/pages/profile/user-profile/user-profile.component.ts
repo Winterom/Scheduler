@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MessageService} from "primeng/api";
 import {PasswordStrengthRequirement} from "../../../types/auth/PasswordStrengthRequirement";
@@ -7,15 +7,15 @@ import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
 import {ChangePswComponent} from "./change-psw/change-psw.component";
 import {CustomMessage} from "../../../shared/messages/CustomMessages";
 import {ChronosUtils} from "../../../shared/ChronosUtils";
-import {EWebsocketEvents} from "../../../services/ws/websocket/EWebsocketEvents";
+import {EProfileWebsocketEvents} from "../EProfileWebsocketEvents";
 import {UserService} from "../../../services/user.service";
-import {UserWSInterface} from "../../../types/user/UserWSInterface";
+import {UserInterfaces} from "../../../types/user/UserInterfaces";
 import addErrorMessage = CustomMessage.addErrorMessage;
 import addSuccessMessage = CustomMessage.addSuccessMessage;
-import UserProfile = UserWSInterface.UserProfile;
-import CheckEmailOrPhoneWSResponse = UserWSInterface.CheckEmailOrPhoneWSResponse;
-import SendVerifyToken = UserWSInterface.SendVerifyToken;
-import EUserStatus = UserWSInterface.EUserStatus;
+import UserProfile = UserInterfaces.UserProfile;
+import CheckEmailOrPhoneWSResponse = UserInterfaces.CheckEmailOrPhoneWSResponse;
+import SendVerifyToken = UserInterfaces.SendVerifyToken;
+import EUserStatus = UserInterfaces.EUserStatus;
 import {interval, Observable, Subscription, takeUntil, timer} from "rxjs";
 
 
@@ -56,14 +56,13 @@ export class UserProfileComponent implements OnInit{
 
   }
   ngOnInit(): void {
-    this.wsService.on<PasswordStrengthRequirement>(EWebsocketEvents.PASSWORD_STRENGTH)
+    this.wsService.on<PasswordStrengthRequirement>(EProfileWebsocketEvents.PASSWORD_STRENGTH)
       .subscribe({next:data=>{
           this.pswStrangeReq=data.data;
           this.passwordExpired = this.passwordExpiredToString();
         }})
-    this.wsService.on<UserProfile>(EWebsocketEvents.UPDATE_PROFILE).subscribe({next:data=>{
+    this.wsService.on<UserProfile>(EProfileWebsocketEvents.UPDATE_PROFILE).subscribe({next: data=>{
       this.userProfile = data.data;
-      console.log(this.userProfile);
       this.emailControl.setValue( this.userProfile.email);
       this.phoneControl.setValue(this.userProfile.phone);
       this.userFormLoading = false;
@@ -77,7 +76,7 @@ export class UserProfileComponent implements OnInit{
         }
       }
       }})
-    this.wsService.on<CheckEmailOrPhoneWSResponse>(EWebsocketEvents.CHECK_PHONE_BUSY).subscribe({next:response=>{
+    this.wsService.on<CheckEmailOrPhoneWSResponse>(EProfileWebsocketEvents.CHECK_PHONE_BUSY).subscribe({next: response=>{
         let rawPhone: string = this.phoneControl.value.toString();
         const phone = this.formatPhoneValue(rawPhone)
       if(response.data.isBusy&&response.data.param===phone){
@@ -90,7 +89,7 @@ export class UserProfileComponent implements OnInit{
           addSuccessMessage(this.messageService,'Телефон введен правильно и свободен','Проверка телефона')
         }
       }})
-    this.wsService.on<CheckEmailOrPhoneWSResponse>(EWebsocketEvents.CHECK_EMAIL_BUSY).subscribe({next:response=>{
+    this.wsService.on<CheckEmailOrPhoneWSResponse>(EProfileWebsocketEvents.CHECK_EMAIL_BUSY).subscribe({next: response=>{
         if(response.data.isBusy&&response.data.param===this.emailControl.value){
           this.emailControl.setErrors({emailBusy:true});
           addErrorMessage(this.messageService,'Email: '+response.data.param+' занят другим аккаунтом','Проверка email')
@@ -101,7 +100,7 @@ export class UserProfileComponent implements OnInit{
           addSuccessMessage(this.messageService,'Email введен правильно и свободен','Проверка email')
         }
       }})
-    this.wsService.on<SendVerifyToken>(EWebsocketEvents.SEND_EMAIL_VERIFY_TOKEN).subscribe({next: data=>{
+    this.wsService.on<SendVerifyToken>(EProfileWebsocketEvents.SEND_EMAIL_VERIFY_TOKEN).subscribe({next: data=>{
       if(data.responseStatus===ResponseStatus.OK){
           this.userProfile.emailVerifyToken = data.data;
           if(this.userProfile.emailVerifyToken!==null){
@@ -168,7 +167,7 @@ export class UserProfileComponent implements OnInit{
     }
     let rawPhone: string = this.phoneControl.value.toString();
     const phone = this.formatPhoneValue(rawPhone);
-    this.wsService.send(EWebsocketEvents.UPDATE_PROFILE,
+    this.wsService.send(EProfileWebsocketEvents.UPDATE_PROFILE,
       {id:this.userService.id,phone:phone,email:this.emailControl.value})
   }
 
@@ -183,7 +182,7 @@ export class UserProfileComponent implements OnInit{
       return;
     }
     this.phoneControlChanged=true;
-    this.wsService.send(EWebsocketEvents.CHECK_PHONE_BUSY,{param:phone});
+    this.wsService.send(EProfileWebsocketEvents.CHECK_PHONE_BUSY,{param:phone});
   }
 
   checkEmail() {
@@ -196,12 +195,12 @@ export class UserProfileComponent implements OnInit{
       return;
     }
     this.emailControlChanged=true;
-    this.wsService.send(EWebsocketEvents.CHECK_EMAIL_BUSY,{param:email});
+    this.wsService.send(EProfileWebsocketEvents.CHECK_EMAIL_BUSY,{param:email});
   }
 
 
   sendEmailVerifyToken() {
-    this.wsService.send(EWebsocketEvents.SEND_EMAIL_VERIFY_TOKEN,{param:null})
+    this.wsService.send(EProfileWebsocketEvents.SEND_EMAIL_VERIFY_TOKEN,{param:null})
   }
 
   sendPhoneVerifyToken() {
@@ -258,5 +257,7 @@ export class UserProfileComponent implements OnInit{
   onCounterIsFinished($event: boolean) {
     this.isCounterShow=false;
   }
+
+
 }
 

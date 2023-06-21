@@ -2,9 +2,7 @@ import {Data} from "@angular/router";
 import {ChronosUtils} from "../../shared/ChronosUtils";
 
 
-export namespace UserWSInterface {
-
-  import Chronos = ChronosUtils.Chronos;
+export namespace UserInterfaces {
 
   export class UserProfile {
     id: string ='';

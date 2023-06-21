@@ -1,6 +1,6 @@
 package alexey.grizly.com.users.repositories;
 
-import alexey.grizly.com.users.messages.roles.response.RolesByGroups;
+import alexey.grizly.com.users.messages.roles.response.RoleByGroups;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -9,5 +9,5 @@ import java.util.List;
 public interface RoleRepository {
     int setRole(Long userId, Long roleId);
 
-    List<RolesByGroups> getAllRoles();
+    List<RoleByGroups> getAllRoles();
 }

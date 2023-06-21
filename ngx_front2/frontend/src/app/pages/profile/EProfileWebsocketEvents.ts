@@ -1,4 +1,4 @@
-export enum EWebsocketEvents {
+export enum EProfileWebsocketEvents {
   GET_PROFILE = 'GET_PROFILE',
   PASSWORD_STRENGTH = 'PASSWORD_STRENGTH',
   UPDATE_PROFILE='UPDATE_PROFILE',

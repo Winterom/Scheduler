@@ -2,13 +2,16 @@ package alexey.grizly.com.users.ws_handlers;
 
 import alexey.grizly.com.commons.configs.ConnectionList;
 import alexey.grizly.com.users.messages.RequestMessage;
+import alexey.grizly.com.users.messages.profile.response.ResponseMessage;
 import alexey.grizly.com.users.messages.roles.RolesRequestMessage;
-import alexey.grizly.com.users.messages.roles.request.AllRolesAndAuthoritiesMessage;
+import alexey.grizly.com.users.messages.roles.request.AllRolesMessage;
+import alexey.grizly.com.users.messages.roles.response.RoleByGroups;
 import alexey.grizly.com.users.services.RolesAndAuthoritiesService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.text.StringEscapeUtils;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
@@ -17,13 +20,19 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.util.Collection;
+import java.util.List;
+
 @Component
 public class RolesAndAuthoritiesWebsocketHandler extends TextWebSocketHandler {
     private final ObjectMapper objectMapper;
     private final ConnectionList connection;
     private final RolesAndAuthoritiesService rolesAndAuthoritiesService;
 
-    public RolesAndAuthoritiesWebsocketHandler(ObjectMapper objectMapper, ConnectionList connection, RolesAndAuthoritiesService rolesAndAuthoritiesService) {
+    @Autowired
+    public RolesAndAuthoritiesWebsocketHandler(final ObjectMapper objectMapper,
+                                               final ConnectionList connection,
+                                               final RolesAndAuthoritiesService rolesAndAuthoritiesService) {
         this.objectMapper = objectMapper;
         this.connection = connection;
         this.rolesAndAuthoritiesService = rolesAndAuthoritiesService;
@@ -58,7 +67,7 @@ public class RolesAndAuthoritiesWebsocketHandler extends TextWebSocketHandler {
         String request=String.copyValueOf(request1.toCharArray(),1,request1.length()-2);
         RequestMessage requestMessage = objectMapper.readValue(request, RolesRequestMessage.class);
         switch (requestMessage.getEvent()){
-            case "ALL_ROLES_WITH_AUTHORITIES"-> getAllRolesWithAuthoritiesPage(session,requestMessage);
+            case "ALL_ROLES"-> getAllRolesWithAuthoritiesPage(session,requestMessage);
             default -> unknownEvent(session);
         }
     }
@@ -67,9 +76,12 @@ public class RolesAndAuthoritiesWebsocketHandler extends TextWebSocketHandler {
         session.close();
     }
 
-    public void getAllRolesWithAuthoritiesPage(WebSocketSession session,RequestMessage requestMessage) throws JsonProcessingException {
-        AllRolesAndAuthoritiesMessage request = objectMapper.readValue(requestMessage.getData(), AllRolesAndAuthoritiesMessage.class);
-
+    public void getAllRolesWithAuthoritiesPage(WebSocketSession session,RequestMessage requestMessage) throws IOException {
+        /*AllRolesMessage request = objectMapper.readValue(requestMessage.getData(), AllRolesMessage.class);*/
+        ResponseMessage<Collection<RoleByGroups>> responseMessage = rolesAndAuthoritiesService.getAllRoles(null);
+        System.out.println(responseMessage);
+        TextMessage response = new TextMessage(objectMapper.writeValueAsBytes(responseMessage));
+        session.sendMessage(response);
     }
 
 

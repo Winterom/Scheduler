@@ -15,7 +15,6 @@ import {
 } from "rxjs";
 import {WebSocketSubjectConfig} from "rxjs/internal/observable/dom/WebSocketSubject";
 import {UserService} from "../../user.service";
-import {EWebsocketEvents} from "./EWebsocketEvents";
 
 
 
@@ -94,7 +93,7 @@ export class WebsocketService implements OnDestroy{
   ngOnDestroy(): void {
     this.websocketSub.unsubscribe();
   }
-  public on<T>(event: EWebsocketEvents): Observable<IWsMessageBody<T>> {
+  public on<T>(event: string): Observable<IWsMessageBody<T>> {
       return this.wsMessages.pipe(
         filter((message: IWsMessage<T>) => message.event === event),
         map((message: IWsMessage<T>) => message.payload)
@@ -105,7 +104,7 @@ export class WebsocketService implements OnDestroy{
   /*
   * on message to server
   * */
-  public send(event: EWebsocketEvents, data: any = {}): void {
+  public send(event: string, data: any = {}): void {
     if (this.wsSubject) {
       this.wsSubject.next(JSON.stringify({ event:event.toString(), data:data }));
     } else {

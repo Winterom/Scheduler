@@ -26,7 +26,9 @@ public class UserAccountWithAuthoritiesExtractor implements ResultSetExtractor<U
         userAccount.setPassword(rs.getString("password"));
         userAccount.setCredentialExpiredTime(rs.getTimestamp("credential_expired").toLocalDateTime());
         AppAuthorities authorities = new AppAuthorities();
-        authorities.setAuthorities(EAuthorities.valueOf(rs.getString("e_authorities")));
+        String auth2 = rs.getString("e_authorities");
+        System.out.println(auth2);
+        authorities.setAuthorities(EAuthorities.valueOf(auth2));
         userAccount.getAuthorities().add(authorities);
         while (rs.next()){
             AppAuthorities auth = new AppAuthorities();

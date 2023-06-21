@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import {RolesAndAuthoritiesComponent} from "./roles-and-authorities.component";
 import {SharedModule} from "../../shared/shared.module";
 import {RouterModule, Routes} from "@angular/router";
+import {TreeModule} from "primeng/tree";
+import { RolesComponent } from './roles/roles.component';
 
 const routes: Routes = [
   {
@@ -13,13 +15,15 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    RolesAndAuthoritiesComponent
+    RolesAndAuthoritiesComponent,
+    RolesComponent
   ],
   exports:[RouterModule],
-  imports: [
-    CommonModule,
-    SharedModule,
-    RouterModule.forChild(routes)
-  ]
+    imports: [
+        CommonModule,
+        SharedModule,
+        RouterModule.forChild(routes),
+        TreeModule
+    ]
 })
 export class RolesAndAuthoritiesModule { }

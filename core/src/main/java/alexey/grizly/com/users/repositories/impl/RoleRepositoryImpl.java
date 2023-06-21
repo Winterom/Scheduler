@@ -1,7 +1,7 @@
 package alexey.grizly.com.users.repositories.impl;
 
 import alexey.grizly.com.users.extractors.roles.AllRolesRowMapper;
-import alexey.grizly.com.users.messages.roles.response.RolesByGroups;
+import alexey.grizly.com.users.messages.roles.response.RoleByGroups;
 import alexey.grizly.com.users.repositories.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -15,7 +15,8 @@ import java.util.List;
 @Repository
 public class RoleRepositoryImpl implements RoleRepository {
     private static final String SET_ROLE = "INSERT INTO users_roles (role_id,user_id) VALUES (:roleId,:userId)";
-    private static final String ALL_ROLES = "SELECT * FROM roles";
+    private static final String ALL_ROLES = "SELECT r.id, r.is_catalog, r.catalog, r.title, r.description," +
+            " r.createdat, r.updatedat, u.email FROM roles as r left join users as u on r.modifyby=u.id";
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
     @Autowired
@@ -32,7 +33,7 @@ public class RoleRepositoryImpl implements RoleRepository {
     }
 
     @Override
-    public List<RolesByGroups> getAllRoles() {
+    public List<RoleByGroups> getAllRoles() {
         return jdbcTemplate.getJdbcTemplate().query(ALL_ROLES,new AllRolesRowMapper());
     }
 }

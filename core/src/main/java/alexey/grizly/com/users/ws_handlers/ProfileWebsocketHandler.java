@@ -118,7 +118,7 @@ public class ProfileWebsocketHandler extends TextWebSocketHandler {
             message = objectMapper.readValue(data, UpdateProfileRequestMessage.class);
         }catch (JsonProcessingException exception){
            ResponseMessage<UserProfileResponse> responseMessage = new ResponseMessage<>();
-           responseMessage.setEvent(EProfileWSEvents.UPDATE_PROFILE);
+           responseMessage.setEvent(EProfileWSEvents.UPDATE_PROFILE.name());
            ResponseMessage.MessagePayload<UserProfileResponse> payload = new ResponseMessage.MessagePayload<>();
            payload.setResponseStatus(ResponseMessage.ResponseStatus.ERROR);
            payload.setErrorMessages(List.of(exception.getMessage()));
