@@ -2,13 +2,14 @@ package alexey.grizly.com.users.ws_handlers;
 
 import alexey.grizly.com.commons.configs.ConnectionList;
 import alexey.grizly.com.properties.dtos.security.responses.PasswordStrengthResponseDto;
-import alexey.grizly.com.users.messages.request.SimpleRequestMessage;
-import alexey.grizly.com.users.messages.request.UpdateProfileRequestMessage;
-import alexey.grizly.com.users.messages.response.CheckBusyPhoneOrEmail;
-import alexey.grizly.com.users.messages.response.SendVerifyToken;
-import alexey.grizly.com.users.messages.response.UserProfileResponse;
-import alexey.grizly.com.users.messages.request.RequestMessage;
-import alexey.grizly.com.users.messages.response.ResponseMessage;
+import alexey.grizly.com.users.messages.RequestMessage;
+import alexey.grizly.com.users.messages.profile.request.SimpleRequestMessage;
+import alexey.grizly.com.users.messages.profile.request.UpdateProfileRequestMessage;
+import alexey.grizly.com.users.messages.profile.response.CheckBusyPhoneOrEmail;
+import alexey.grizly.com.users.messages.profile.response.SendVerifyToken;
+import alexey.grizly.com.users.messages.profile.response.UserProfileResponse;
+import alexey.grizly.com.users.messages.profile.ProfileRequestMessage;
+import alexey.grizly.com.users.messages.profile.response.ResponseMessage;
 import alexey.grizly.com.users.services.UserProfileService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -72,15 +73,15 @@ public class ProfileWebsocketHandler extends TextWebSocketHandler {
         }
         String request1 = StringEscapeUtils.unescapeJson(message.getPayload());
         String request=String.copyValueOf(request1.toCharArray(),1,request1.length()-2);
-        RequestMessage requestMessage = objectMapper.readValue(request, RequestMessage.class);
+        RequestMessage requestMessage = objectMapper.readValue(request, ProfileRequestMessage.class);
         switch (requestMessage.getEvent()){
-            case GET_PROFILE ->getProfile(session, principal.getName());
-            case PASSWORD_STRENGTH -> getPasswordStrength(session);
-            case UPDATE_PASSWORD -> updatePassword(session,requestMessage);
-            case UPDATE_PROFILE -> updateProfile(session,requestMessage);
-            case CHECK_EMAIL_BUSY -> checkEmailBusy(session,requestMessage);
-            case CHECK_PHONE_BUSY -> checkPhoneBusy(session,requestMessage);
-            case SEND_EMAIL_VERIFY_TOKEN -> sendEmailVerifyToken(session);
+            case "GET_PROFILE" ->getProfile(session, principal.getName());
+            case "PASSWORD_STRENGTH" -> getPasswordStrength(session);
+            case "UPDATE_PASSWORD" -> updatePassword(session, requestMessage);
+            case "UPDATE_PROFILE" -> updateProfile(session, requestMessage);
+            case "CHECK_EMAIL_BUSY" -> checkEmailBusy(session, requestMessage);
+            case "CHECK_PHONE_BUSY" -> checkPhoneBusy(session, requestMessage);
+            case "SEND_EMAIL_VERIFY_TOKEN" -> sendEmailVerifyToken(session);
             default -> unknownEvent(session);
         }
     }
@@ -117,7 +118,7 @@ public class ProfileWebsocketHandler extends TextWebSocketHandler {
             message = objectMapper.readValue(data, UpdateProfileRequestMessage.class);
         }catch (JsonProcessingException exception){
            ResponseMessage<UserProfileResponse> responseMessage = new ResponseMessage<>();
-           responseMessage.setEvent(EWebsocketEvents.UPDATE_PROFILE);
+           responseMessage.setEvent(EProfileWSEvents.UPDATE_PROFILE);
            ResponseMessage.MessagePayload<UserProfileResponse> payload = new ResponseMessage.MessagePayload<>();
            payload.setResponseStatus(ResponseMessage.ResponseStatus.ERROR);
            payload.setErrorMessages(List.of(exception.getMessage()));

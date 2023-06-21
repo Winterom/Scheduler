@@ -2,8 +2,8 @@ package alexey.grizly.com.users.listeners;
 
 import alexey.grizly.com.commons.configs.ConnectionList;
 import alexey.grizly.com.users.events.UserAccountChangeEvent;
-import alexey.grizly.com.users.messages.response.ResponseMessage;
-import alexey.grizly.com.users.messages.response.UserProfileResponse;
+import alexey.grizly.com.users.messages.profile.response.ResponseMessage;
+import alexey.grizly.com.users.messages.profile.response.UserProfileResponse;
 import alexey.grizly.com.users.services.UserProfileService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;

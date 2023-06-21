@@ -1,5 +1,7 @@
 INSERT INTO users (email, createdat,e_status,is_email_verified,password,credential_expired)
-VALUES ('email1@one.ru', current_timestamp,'ACTIVE',false,'$2y$10$a.noPu6zMv/193LPJJluOeXPf7Vtf5W50FNfGTrsR/8O3hmLFtmk2',current_timestamp+'3 months'),
+VALUES
+       ('SYSTEM',current_timestamp,'ACTIVE',false,' ',current_timestamp),
+       ('email1@one.ru', current_timestamp,'ACTIVE',false,'$2y$10$a.noPu6zMv/193LPJJluOeXPf7Vtf5W50FNfGTrsR/8O3hmLFtmk2',current_timestamp+'3 months'),
        ('email2@one.ru', current_timestamp,'ACTIVE',false,'$2y$10$a.noPu6zMv/193LPJJluOeXPf7Vtf5W50FNfGTrsR/8O3hmLFtmk2',current_timestamp+'3 months'),
        ('email3@one.ru', current_timestamp,'ACTIVE',false,'$2y$10$a.noPu6zMv/193LPJJluOeXPf7Vtf5W50FNfGTrsR/8O3hmLFtmk2',current_timestamp+'3 months'),
        ('email4@one.ru', current_timestamp,'ACTIVE',false,'$2y$10$a.noPu6zMv/193LPJJluOeXPf7Vtf5W50FNfGTrsR/8O3hmLFtmk2',current_timestamp+'3 months'),

@@ -3,10 +3,10 @@ package alexey.grizly.com.users.services.impl;
 import alexey.grizly.com.commons.exceptions.PSQLErrorsTranslator;
 import alexey.grizly.com.properties.dtos.security.responses.PasswordStrengthResponseDto;
 import alexey.grizly.com.properties.properties.SecurityProperties;
-import alexey.grizly.com.users.messages.response.CheckBusyPhoneOrEmail;
-import alexey.grizly.com.users.messages.response.ResponseMessage;
-import alexey.grizly.com.users.messages.response.SendVerifyToken;
-import alexey.grizly.com.users.messages.response.UserProfileResponse;
+import alexey.grizly.com.users.messages.profile.response.CheckBusyPhoneOrEmail;
+import alexey.grizly.com.users.messages.profile.response.ResponseMessage;
+import alexey.grizly.com.users.messages.profile.response.SendVerifyToken;
+import alexey.grizly.com.users.messages.profile.response.UserProfileResponse;
 import alexey.grizly.com.users.models.user.UserProfileWithRolesAndTokens;
 import alexey.grizly.com.users.repositories.UserProfileRepository;
 import alexey.grizly.com.users.services.UserEmailService;
@@ -15,7 +15,7 @@ import alexey.grizly.com.users.services.UserPhoneNumberService;
 import alexey.grizly.com.users.services.UserProfileService;
 import alexey.grizly.com.users.utils.DBExceptionUtils;
 import alexey.grizly.com.users.validators.PhoneNumberValidator;
-import alexey.grizly.com.users.ws_handlers.EWebsocketEvents;
+import alexey.grizly.com.users.ws_handlers.EProfileWSEvents;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.validator.internal.constraintvalidators.hv.EmailValidator;
 import org.postgresql.util.PSQLException;
@@ -60,16 +60,16 @@ public class UserProfileServiceImpl implements UserProfileService {
     public ResponseMessage<UserProfileResponse> getProfileByEmail(final String email) {
         EmailValidator emailValidator = new EmailValidator();
         if(!emailValidator.isValid(email,null)){
-            return new ResponseMessage<>(EWebsocketEvents.SEND_EMAIL_VERIFY_TOKEN,
+            return new ResponseMessage<>(EProfileWSEvents.SEND_EMAIL_VERIFY_TOKEN,
                     List.of("Невалидный email"));
         }
         UserProfileWithRolesAndTokens userProfile = userProfileRepository.getUserAccountWithRolesAndTokens(email);
         if(userProfile==null){
-            return new ResponseMessage<>(EWebsocketEvents.UPDATE_PROFILE,List.of("Пользователь с "+email+" не найден"));
+            return new ResponseMessage<>(EProfileWSEvents.UPDATE_PROFILE,List.of("Пользователь с "+email+" не найден"));
         }
         UserProfileResponse userAccount = new UserProfileResponse(userProfile);
         if(userProfile.getCreateAtEmailToken()==null){
-            return new ResponseMessage<>(EWebsocketEvents.UPDATE_PROFILE,userAccount, ResponseMessage.ResponseStatus.OK);
+            return new ResponseMessage<>(EProfileWSEvents.UPDATE_PROFILE,userAccount, ResponseMessage.ResponseStatus.OK);
         }
         SendVerifyToken sendVerifyToken = new SendVerifyToken();
         LocalDateTime nextTokenTime = userProfile.getCreateAtEmailToken().plus(securityProperties.getApprovedEmailProperty().getPauseBetweenNextTokenGenerate()
@@ -78,16 +78,16 @@ public class UserProfileServiceImpl implements UserProfileService {
         System.out.println("createdAt: "+userProfile.getCreateAtEmailToken().toString());
         sendVerifyToken.setNextTokenAfter(nextTokenTime.toInstant(ZonedDateTime.now().getOffset()).toEpochMilli());
         userAccount.setEmailVerifyToken(sendVerifyToken);
-        return new ResponseMessage<>(EWebsocketEvents.UPDATE_PROFILE,userAccount, ResponseMessage.ResponseStatus.OK);
+        return new ResponseMessage<>(EProfileWSEvents.UPDATE_PROFILE,userAccount, ResponseMessage.ResponseStatus.OK);
     }
 
     @Override
     public ResponseMessage<PasswordStrengthResponseDto> getPasswordStrength() {
         SecurityProperties.UserPasswordStrength passwordStrength = securityProperties.getUserPasswordStrength();
         if(passwordStrength==null){
-            return new ResponseMessage<>(EWebsocketEvents.PASSWORD_STRENGTH,List.of("Данные не доступны"));
+            return new ResponseMessage<>(EProfileWSEvents.PASSWORD_STRENGTH,List.of("Данные не доступны"));
         }
-        return new ResponseMessage<>(EWebsocketEvents.PASSWORD_STRENGTH,
+        return new ResponseMessage<>(EProfileWSEvents.PASSWORD_STRENGTH,
                 new PasswordStrengthResponseDto(passwordStrength), ResponseMessage.ResponseStatus.OK);
     }
 
@@ -96,9 +96,9 @@ public class UserProfileServiceImpl implements UserProfileService {
     public ResponseMessage<UserProfileResponse> updatePassword(final String email, final String password) {
         List<String> errorMessage = userPasswordService.changePassword(email,password);
         if(errorMessage.isEmpty()){
-            return new ResponseMessage<>(EWebsocketEvents.UPDATE_PASSWORD,null, ResponseMessage.ResponseStatus.OK);
+            return new ResponseMessage<>(EProfileWSEvents.UPDATE_PASSWORD,null, ResponseMessage.ResponseStatus.OK);
         }
-        return new ResponseMessage<>(EWebsocketEvents.UPDATE_PASSWORD,errorMessage);
+        return new ResponseMessage<>(EProfileWSEvents.UPDATE_PASSWORD,errorMessage);
     }
 
 
@@ -145,7 +145,7 @@ public class UserProfileServiceImpl implements UserProfileService {
         CheckBusyPhoneOrEmail checkBusy = new CheckBusyPhoneOrEmail();
         checkBusy.setIsBusy(resultCheck);
         checkBusy.setParam(email);
-        return new ResponseMessage<>(EWebsocketEvents.CHECK_EMAIL_BUSY, checkBusy, ResponseMessage.ResponseStatus.OK);
+        return new ResponseMessage<>(EProfileWSEvents.CHECK_EMAIL_BUSY, checkBusy, ResponseMessage.ResponseStatus.OK);
     }
 
     @Override
@@ -160,7 +160,7 @@ public class UserProfileServiceImpl implements UserProfileService {
         CheckBusyPhoneOrEmail checkBusy = new CheckBusyPhoneOrEmail();
         checkBusy.setIsBusy(resultCheck);
         checkBusy.setParam(phone);
-        return new ResponseMessage<>(EWebsocketEvents.CHECK_PHONE_BUSY, checkBusy, ResponseMessage.ResponseStatus.OK);
+        return new ResponseMessage<>(EProfileWSEvents.CHECK_PHONE_BUSY, checkBusy, ResponseMessage.ResponseStatus.OK);
     }
 
     @Override
@@ -168,7 +168,7 @@ public class UserProfileServiceImpl implements UserProfileService {
     public ResponseMessage<SendVerifyToken> sendEmailVerifyToken(String email) {
         List<String> errorMessages = userEmailService.generateVerifiedEmailToken(email);
         if(!errorMessages.isEmpty()){
-            return new ResponseMessage<>(EWebsocketEvents.SEND_EMAIL_VERIFY_TOKEN,
+            return new ResponseMessage<>(EProfileWSEvents.SEND_EMAIL_VERIFY_TOKEN,
                     errorMessages);
         }
         SendVerifyToken sendVerifyToken = new SendVerifyToken();
@@ -178,7 +178,7 @@ public class UserProfileServiceImpl implements UserProfileService {
         System.out.println("createdAt2: "+LocalDateTime.now().toString());
         ZoneId zoneId = ZoneId.systemDefault();
         sendVerifyToken.setNextTokenAfter(nextTokenTime.atZone(zoneId).toInstant().toEpochMilli());
-        return new ResponseMessage<>(EWebsocketEvents.SEND_EMAIL_VERIFY_TOKEN,sendVerifyToken, ResponseMessage.ResponseStatus.OK);
+        return new ResponseMessage<>(EProfileWSEvents.SEND_EMAIL_VERIFY_TOKEN,sendVerifyToken, ResponseMessage.ResponseStatus.OK);
     }
 
     private ResponseMessage<UserProfileResponse> updateEmailAndPhone(ResponseMessage<UserProfileResponse> responseMessage,
@@ -232,7 +232,7 @@ public class UserProfileServiceImpl implements UserProfileService {
     private ResponseMessage<UserProfileResponse> createErrorResponseMessage(List<String> errorMessages){
         ResponseMessage<UserProfileResponse> responseErrorMessage = new ResponseMessage<>();
         ResponseMessage.MessagePayload<UserProfileResponse> errorPayload = new ResponseMessage.MessagePayload<>();
-        responseErrorMessage.setEvent(EWebsocketEvents.UPDATE_PROFILE);
+        responseErrorMessage.setEvent(EProfileWSEvents.UPDATE_PROFILE);
         errorPayload.setErrorMessages(errorMessages);
         errorPayload.setResponseStatus(ResponseMessage.ResponseStatus.ERROR);
         responseErrorMessage.setPayload(errorPayload);

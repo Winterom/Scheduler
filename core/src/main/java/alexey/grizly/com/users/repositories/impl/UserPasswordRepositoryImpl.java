@@ -1,6 +1,6 @@
 package alexey.grizly.com.users.repositories.impl;
 
-import alexey.grizly.com.users.extractors.UserPasswordExtractor;
+import alexey.grizly.com.users.extractors.profile.UserPasswordExtractor;
 import alexey.grizly.com.users.repositories.UserPasswordRepository;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;

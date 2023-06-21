@@ -2,10 +2,10 @@ package alexey.grizly.com.users.services;
 
 import alexey.grizly.com.properties.dtos.security.responses.PasswordStrengthResponseDto;
 
-import alexey.grizly.com.users.messages.response.CheckBusyPhoneOrEmail;
-import alexey.grizly.com.users.messages.response.ResponseMessage;
-import alexey.grizly.com.users.messages.response.SendVerifyToken;
-import alexey.grizly.com.users.messages.response.UserProfileResponse;
+import alexey.grizly.com.users.messages.profile.response.CheckBusyPhoneOrEmail;
+import alexey.grizly.com.users.messages.profile.response.ResponseMessage;
+import alexey.grizly.com.users.messages.profile.response.SendVerifyToken;
+import alexey.grizly.com.users.messages.profile.response.UserProfileResponse;
 import org.springframework.stereotype.Service;
 
 

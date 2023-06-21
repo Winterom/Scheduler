@@ -1,15 +1,21 @@
 package alexey.grizly.com.users.repositories.impl;
 
+import alexey.grizly.com.users.extractors.roles.AllRolesRowMapper;
+import alexey.grizly.com.users.messages.roles.response.RolesByGroups;
 import alexey.grizly.com.users.repositories.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
 @SuppressWarnings("FieldCanBeLocal")
 @Repository
 public class RoleRepositoryImpl implements RoleRepository {
     private static final String SET_ROLE = "INSERT INTO users_roles (role_id,user_id) VALUES (:roleId,:userId)";
+    private static final String ALL_ROLES = "SELECT * FROM roles";
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
     @Autowired
@@ -23,5 +29,10 @@ public class RoleRepositoryImpl implements RoleRepository {
                 .addValue("userId", userId)
                 .addValue("roleId",roleId);
         return jdbcTemplate.update(SET_ROLE,namedParameters);
+    }
+
+    @Override
+    public List<RolesByGroups> getAllRoles() {
+        return jdbcTemplate.getJdbcTemplate().query(ALL_ROLES,new AllRolesRowMapper());
     }
 }

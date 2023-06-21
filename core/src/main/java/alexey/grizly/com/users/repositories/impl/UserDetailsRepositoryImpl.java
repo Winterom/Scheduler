@@ -1,6 +1,6 @@
 package alexey.grizly.com.users.repositories.impl;
 
-import alexey.grizly.com.users.extractors.UserAccountWithAuthoritiesExtractor;
+import alexey.grizly.com.users.extractors.auth.UserAccountWithAuthoritiesExtractor;
 import alexey.grizly.com.users.repositories.UserDetailsRepository;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;

@@ -1,7 +1,6 @@
 package alexey.grizly.com.users.repositories.impl;
 
-import alexey.grizly.com.users.messages.response.UserProfileResponse;
-import alexey.grizly.com.users.extractors.UserAccountWithRolesExtractor;
+import alexey.grizly.com.users.extractors.profile.UserAccountWithRolesExtractor;
 import alexey.grizly.com.users.models.user.UserProfileWithRolesAndTokens;
 import alexey.grizly.com.users.repositories.UserProfileRepository;
 import org.jetbrains.annotations.Nullable;

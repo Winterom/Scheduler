@@ -1,6 +1,6 @@
 package alexey.grizly.com.users.repositories.impl;
 
-import alexey.grizly.com.users.extractors.UserAccountWithEmailApprovedTokenExtractor;
+import alexey.grizly.com.users.extractors.profile.UserAccountWithEmailApprovedTokenExtractor;
 import alexey.grizly.com.users.models.user.UserAccountWithEmailApprovedToken;
 import alexey.grizly.com.users.repositories.UserEmailRepository;
 import org.jetbrains.annotations.NonNls;
