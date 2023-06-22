@@ -30,9 +30,9 @@ public class WebSocketConfiguration implements WebSocketConfigurer {
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
         registry.addHandler(profileWebsocketHandler,BASE_URL+USERS_PROFILE_URL)
-                .setAllowedOrigins(ALLOWED_ORIGIN).setHandshakeHandler(jwtHandshakeHandler);
-        registry.addHandler(rolesAndAuthoritiesWebsocketHandler,BASE_URL+ROLES_AUTHORITIES_URL)
-                .setAllowedOrigins(ALLOWED_ORIGIN).setHandshakeHandler(jwtHandshakeHandler);
+                .addHandler(rolesAndAuthoritiesWebsocketHandler,BASE_URL+ROLES_AUTHORITIES_URL)
+                .setAllowedOrigins(ALLOWED_ORIGIN)
+                .setHandshakeHandler(jwtHandshakeHandler);
     }
 
 

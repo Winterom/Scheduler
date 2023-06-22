@@ -33,7 +33,7 @@ public class RoleRepositoryImpl implements RoleRepository {
     }
 
     @Override
-    public List<RoleByGroups> getAllRoles() {
+    public List<RoleByGroups.Role> getAllRoles() {
         return jdbcTemplate.getJdbcTemplate().query(ALL_ROLES,new AllRolesRowMapper());
     }
 }

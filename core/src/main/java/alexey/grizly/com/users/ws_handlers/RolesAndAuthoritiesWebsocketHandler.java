@@ -4,10 +4,8 @@ import alexey.grizly.com.commons.configs.ConnectionList;
 import alexey.grizly.com.users.messages.RequestMessage;
 import alexey.grizly.com.users.messages.profile.response.ResponseMessage;
 import alexey.grizly.com.users.messages.roles.RolesRequestMessage;
-import alexey.grizly.com.users.messages.roles.request.AllRolesMessage;
 import alexey.grizly.com.users.messages.roles.response.RoleByGroups;
 import alexey.grizly.com.users.services.RolesAndAuthoritiesService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.text.StringEscapeUtils;
 import org.jetbrains.annotations.NotNull;
@@ -20,8 +18,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import java.io.IOException;
 import java.security.Principal;
-import java.util.Collection;
-import java.util.List;
+
 
 @Component
 public class RolesAndAuthoritiesWebsocketHandler extends TextWebSocketHandler {
@@ -78,7 +75,7 @@ public class RolesAndAuthoritiesWebsocketHandler extends TextWebSocketHandler {
 
     public void getAllRolesWithAuthoritiesPage(WebSocketSession session,RequestMessage requestMessage) throws IOException {
         /*AllRolesMessage request = objectMapper.readValue(requestMessage.getData(), AllRolesMessage.class);*/
-        ResponseMessage<Collection<RoleByGroups>> responseMessage = rolesAndAuthoritiesService.getAllRoles(null);
+        ResponseMessage<RoleByGroups> responseMessage = rolesAndAuthoritiesService.getAllRoles(null);
         System.out.println(responseMessage);
         TextMessage response = new TextMessage(objectMapper.writeValueAsBytes(responseMessage));
         session.sendMessage(response);

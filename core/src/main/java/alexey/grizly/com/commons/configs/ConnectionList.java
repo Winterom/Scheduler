@@ -5,12 +5,14 @@ import org.jetbrains.annotations.Nullable;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.WebSocketSession;
+import org.springframework.web.socket.handler.ConcurrentWebSocketSessionDecorator;
 
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 @Data
 @Component
 public class ConnectionList {
-    private final ConcurrentHashMap<String, WebSocketSession> clients = new ConcurrentHashMap<>();
+    private final Map<String, ConcurrentWebSocketSessionDecorator> clients = new ConcurrentHashMap<>();
     @Nullable
     public WebSocketSession getSession(@NonNull String email){
         WebSocketSession session = this.clients.get(email);
@@ -25,7 +27,7 @@ public class ConnectionList {
     }
 
     public void putSession(@NonNull String email,@NonNull WebSocketSession session){
-        this.clients.put(email,session);
+        this.clients.put(email,new ConcurrentWebSocketSessionDecorator(session,2000, 4096));
     }
 
     public void deleteSession(@NonNull String email){

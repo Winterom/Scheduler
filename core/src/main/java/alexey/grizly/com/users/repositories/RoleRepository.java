@@ -9,5 +9,5 @@ import java.util.List;
 public interface RoleRepository {
     int setRole(Long userId, Long roleId);
 
-    List<RoleByGroups> getAllRoles();
+    List<RoleByGroups.Role> getAllRoles();
 }

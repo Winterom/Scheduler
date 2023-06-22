@@ -6,10 +6,10 @@ import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class AllRolesRowMapper implements RowMapper<RoleByGroups> {
+public class AllRolesRowMapper implements RowMapper<RoleByGroups.Role> {
     @Override
-    public RoleByGroups mapRow(ResultSet rs, int rowNum) throws SQLException {
-       RoleByGroups role = new RoleByGroups();
+    public RoleByGroups.Role mapRow(ResultSet rs, int rowNum) throws SQLException {
+       RoleByGroups.Role role = new RoleByGroups.Role();
        role.setId(rs.getLong("id"));
        role.setIsCatalog(rs.getBoolean("is_catalog"));
        role.setParentId(rs.getLong("catalog"));

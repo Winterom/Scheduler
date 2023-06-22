@@ -32,9 +32,9 @@ public class RolesAndAuthoritiesServiceImpl implements RolesAndAuthoritiesServic
     }
 
     @Override
-    public ResponseMessage<Collection<RoleByGroups>> getAllRoles(AllRolesMessage message) {
-        List<RoleByGroups> rawList = this.roleRepository.getAllRoles();
-        Map<Long,RoleByGroups> resultMap = new HashMap<>();
+    public ResponseMessage<RoleByGroups> getAllRoles(AllRolesMessage message) {
+        List<RoleByGroups.Role> rawList = this.roleRepository.getAllRoles();
+        Map<Long,RoleByGroups.Role> resultMap = new HashMap<>();
         rawList.forEach(x->{
             if (Boolean.TRUE.equals(x.getIsCatalog())){
                 resultMap.put(x.getId(),x);
@@ -48,8 +48,10 @@ public class RolesAndAuthoritiesServiceImpl implements RolesAndAuthoritiesServic
                         .add(x);
             }
         });
-        return new ResponseMessage<>(ERolesAuthoritiesWSEvents.ALL_ROLES.name()
-                , resultMap.values()
-                , ResponseMessage.ResponseStatus.OK);
+        RoleByGroups roles = new RoleByGroups();
+        roles.setRoles(resultMap.values());
+        return new ResponseMessage<>(ERolesAuthoritiesWSEvents.ALL_ROLES.name(),
+                roles,
+                ResponseMessage.ResponseStatus.OK);
     }
 }

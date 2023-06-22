@@ -10,5 +10,5 @@ import java.util.Collection;
 
 @Service
 public interface RolesAndAuthoritiesService {
-    ResponseMessage<Collection<RoleByGroups>> getAllRoles(final AllRolesMessage message);
+    ResponseMessage<RoleByGroups> getAllRoles(final AllRolesMessage message);
 }
