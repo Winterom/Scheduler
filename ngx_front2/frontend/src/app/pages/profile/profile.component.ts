@@ -9,7 +9,7 @@ import {WSUserApi} from "../../services/API/WSUserApi";
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
 })
-export class ProfileComponent implements OnInit,OnDestroy{
+export class ProfileComponent implements OnInit{
   userApi:WSUserApi = new WSUserApi();
   constructor(private wsService:WebsocketService,) {
   }
@@ -22,8 +22,4 @@ export class ProfileComponent implements OnInit,OnDestroy{
         }
       }})
   }
-  ngOnDestroy(): void {
-    this.wsService.wsSubject?.unsubscribe();
-  }
-
 }
