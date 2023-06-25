@@ -1,16 +1,15 @@
+import {TreeNode} from "primeng/api";
+
 export namespace RolesAuthoritiesInterfaces {
   export interface RolesGroup{
-    roles:Roles[];
+    roles:Role[];
   }
-  export interface Roles{
-    id: number;
-    isCatalog: boolean;
-    parentId: number;
-    title: string;
-    description: string;
-    createdAt: string;
-    updatedAt: string;
-    modifyBy: string; //email редактора
-    roles:Roles[]|null;
+  export interface Role extends TreeNode{
+    isCatalog:boolean;
+    parentId:number;
+    description:string;
+    createdAt:string;
+    updatedAt:string;
+    modifyBy:string;
   }
 }

@@ -5,6 +5,7 @@ import {SharedModule} from "../../shared/shared.module";
 import {RouterModule, Routes} from "@angular/router";
 import {TreeModule} from "primeng/tree";
 import { RolesComponent } from './roles/roles.component';
+import { CurrentRoleComponent } from './current-role/current-role.component';
 
 const routes: Routes = [
   {
@@ -16,7 +17,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     RolesAndAuthoritiesComponent,
-    RolesComponent
+    RolesComponent,
+    CurrentRoleComponent
   ],
   exports:[RouterModule],
     imports: [

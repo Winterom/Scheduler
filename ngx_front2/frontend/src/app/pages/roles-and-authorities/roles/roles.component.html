@@ -1,1 +1,6 @@
-<p-tree class="w-full md:w-30rem" [value]="roles" [draggableNodes]="true" [droppableNodes]="true" draggableScope="self" droppableScope="self"></p-tree>
+
+  <div class="flex flex-column md:w-30rem">
+    <div class="mb-2 text-center text-2xl">Роли</div>
+    <p-tree class="h-full w-full " [value]="roles" (onNodeSelect)="nodeSelect($event)"></p-tree>
+  </div>
+

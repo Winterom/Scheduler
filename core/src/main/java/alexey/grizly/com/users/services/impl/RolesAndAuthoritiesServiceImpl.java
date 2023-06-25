@@ -37,14 +37,14 @@ public class RolesAndAuthoritiesServiceImpl implements RolesAndAuthoritiesServic
         Map<Long,RoleByGroups.Role> resultMap = new HashMap<>();
         rawList.forEach(x->{
             if (Boolean.TRUE.equals(x.getIsCatalog())){
-                resultMap.put(x.getId(),x);
-                x.setRoles(new ArrayList<>());
+                resultMap.put(x.getKey(),x);
+                x.setChildren(new ArrayList<>());
             }
         });
         rawList.forEach(x->{
             if(Boolean.FALSE.equals(x.getIsCatalog())){
                 resultMap.get(x.getParentId())
-                        .getRoles()
+                        .getChildren()
                         .add(x);
             }
         });

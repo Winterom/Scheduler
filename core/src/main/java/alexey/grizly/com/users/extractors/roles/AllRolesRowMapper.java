@@ -10,10 +10,10 @@ public class AllRolesRowMapper implements RowMapper<RoleByGroups.Role> {
     @Override
     public RoleByGroups.Role mapRow(ResultSet rs, int rowNum) throws SQLException {
        RoleByGroups.Role role = new RoleByGroups.Role();
-       role.setId(rs.getLong("id"));
+       role.setKey(rs.getLong("id"));
        role.setIsCatalog(rs.getBoolean("is_catalog"));
        role.setParentId(rs.getLong("catalog"));
-       role.setTitle(rs.getString("title"));
+       role.setLabel(rs.getString("title"));
        role.setDescription(rs.getString("description"));
        role.setCreatedAt(rs.getTimestamp("createdat").toLocalDateTime());
        role.setUpdatedAt(rs.getTimestamp("updatedat").toLocalDateTime());

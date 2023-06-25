@@ -11,13 +11,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="750a344e-c061-4730-8fc1-d19a16e5fd0b" name="Changes" comment="feat: registration">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/roles-and-authorities/current-role/current-role.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/roles-and-authorities/current-role/current-role.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/roles-and-authorities/current-role/current-role.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules/core.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/core.main.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/commons/configs/DatabaseConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/commons/configs/DatabaseConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/roles-and-authorities/roles-and-authorities.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/roles-and-authorities/roles-and-authorities.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/extractors/roles/AllRolesRowMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/extractors/roles/AllRolesRowMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/messages/roles/response/RoleByGroups.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/messages/roles/response/RoleByGroups.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/services/impl/RolesAndAuthoritiesServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/services/impl/RolesAndAuthoritiesServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/angular.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/roles-and-authorities/roles-and-authorities.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/roles-and-authorities/roles-and-authorities.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/roles-and-authorities/roles-and-authorities.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/roles-and-authorities/roles-and-authorities.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/roles-and-authorities/roles/roles.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/roles-and-authorities/roles/roles.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/roles-and-authorities/roles/roles.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/roles-and-authorities/roles/roles.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/roles-and-authorities/roles/roles.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/roles-and-authorities/roles/roles.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/types/roles/RolesAuthoritiesInterfaces.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/types/roles/RolesAuthoritiesInterfaces.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/assets/images/roles.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/assets/images/settings_tools.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/assets/images/users.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/styles.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +52,29 @@
         </task>
         <projects_view>
           <tree_state>
-            <expand />
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="core" type="f1a62948:ProjectNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="core" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="core" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="application" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="core" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+            </expand>
             <select />
           </tree_state>
         </projects_view>
@@ -49,8 +86,8 @@
       <list>
         <option value="JUnit5 Test Class" />
         <option value="package-info" />
-        <option value="Enum" />
         <option value="Interface" />
+        <option value="Enum" />
         <option value="Class" />
         <option value="TypeScript File" />
       </list>
@@ -100,9 +137,8 @@
     &quot;com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers&quot;: &quot;true&quot;,
     &quot;create.test.in.the.same.root&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-19&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/winte/IdeaProjects/Scheduler/core&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Volumes/Работа/Scheduler/core/src/main/resources/db/changelog&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -115,7 +151,7 @@
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;,
     &quot;spring.configuration.checksum&quot;: &quot;1d2dfe7cbec4cb85764de7dce500cd05&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\winte\\IdeaProjects\\Scheduler\\ngx_front2\\frontend\\node_modules\\typescript\\lib&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Volumes/Работа/Scheduler/ngx_front2/frontend/node_modules/typescript/lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -132,24 +168,23 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\winte\IdeaProjects\Scheduler\core\src\main\resources\db\changelog\users\create" />
       <recent name="$PROJECT_DIR$/core/src/main/resources/db/changelog" />
       <recent name="$PROJECT_DIR$/ngx_front2/frontend/src/app/types" />
       <recent name="$PROJECT_DIR$/ngx_front2/frontend/src/app/services" />
       <recent name="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/login/login" />
+      <recent name="$PROJECT_DIR$/ngx_front2/frontend/src/assets" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\winte\IdeaProjects\Scheduler\ngx_front2\frontend\src\app\pages\profile" />
-      <recent name="C:\Users\winte\IdeaProjects\Scheduler\ngx_front2\frontend\src\app\pages\profile\user-profile" />
+      <recent name="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/users-list" />
+      <recent name="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/roles-and-authorities" />
       <recent name="$PROJECT_DIR$/ngx_front2/frontend/src/app/types/user" />
       <recent name="$PROJECT_DIR$/ngx_front2/frontend/src/app/types/auth" />
       <recent name="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages" />
     </key>
     <key name="ExtractSuperBase.RECENT_KEYS">
-      <recent name="alexey.grizly.com.users.messages.request" />
       <recent name="alexey.grizly.com.properties.services.impl" />
       <recent name="alexey.grizly.com.properties.models" />
     </key>
@@ -157,8 +192,6 @@
       <recent name="alexey.grizly.com.users.controllers" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="alexey.grizly.com.commons.helpers" />
-      <recent name="alexey.grizly.com.users.messages.roles" />
       <recent name="alexey.grizly.com.users.controllers" />
       <recent name="alexey.grizly.com.users.utils" />
     </key>
@@ -175,18 +208,10 @@
       <method v="2" />
     </configuration>
     <configuration name="StartApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <option name="ALTERNATIVE_JRE_PATH" value="openjdk-19" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <module name="core.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="alexey.grizly.com.StartApplication" />
-      <extension name="net.ashald.envfile">
-        <option name="IS_ENABLED" value="false" />
-        <option name="IS_SUBST" value="false" />
-        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
-        <option name="IS_IGNORE_MISSING_FILES" value="false" />
-        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
-        <ENTRIES>
-          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
-        </ENTRIES>
-      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -212,8 +237,14 @@
     <list>
       <item itemvalue="JavaScript Debug.Angular Application (ngx_front)" />
       <item itemvalue="npm.Angular CLI Server (ngx_front2)" />
+      <item itemvalue="Nx.frontend:build:production" />
       <item itemvalue="Spring Boot.StartApplication" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Nx.frontend:build:production" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -266,12 +297,9 @@
       <workItem from="1685786462089" duration="640000" />
       <workItem from="1685787381567" duration="82000" />
       <workItem from="1685787932417" duration="16192000" />
-      <workItem from="1687336495670" duration="22148000" />
-      <workItem from="1687359681473" duration="61000" />
-      <workItem from="1687426045974" duration="5035000" />
-      <workItem from="1687515789783" duration="4000" />
-      <workItem from="1687526061294" duration="491000" />
-      <workItem from="1687526565990" duration="3385000" />
+      <workItem from="1687080310652" duration="7944000" />
+      <workItem from="1687173900833" duration="7403000" />
+      <workItem from="1687606436954" duration="11902000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1678620390716</created>
@@ -407,19 +435,18 @@
       <updated>1686631436751</updated>
     </task>
     <task id="LOCAL-00020" summary="feat: registration">
-      <created>1687336539387</created>
+      <created>1687002725179</created>
       <option name="number" value="00020" />
       <option name="presentableId" value="LOCAL-00020" />
       <option name="project" value="LOCAL" />
-      <updated>1687336539387</updated>
+      <updated>1687002725179</updated>
     </task>
     <task id="LOCAL-00021" summary="feat: registration">
-      <option name="closed" value="true" />
-      <created>1687359734675</created>
+      <created>1687162309529</created>
       <option name="number" value="00021" />
       <option name="presentableId" value="LOCAL-00021" />
       <option name="project" value="LOCAL" />
-      <updated>1687359734675</updated>
+      <updated>1687162309530</updated>
     </task>
     <option name="localTasksCounter" value="22" />
     <servers />
@@ -462,16 +489,6 @@
           <properties class="java.lang.NullPointerException" package="java.lang" />
           <option name="timeStamp" value="1" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/services/impl/UserAccountDetailsService.java</url>
-          <line>27</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/extractors/auth/UserAccountWithAuthoritiesExtractor.java</url>
-          <line>30</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
