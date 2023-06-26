@@ -8,8 +8,15 @@ export namespace RolesAuthoritiesInterfaces {
     isCatalog:boolean;
     parentId:number;
     description:string;
+    status:RoleStatus;
     createdAt:string;
     updatedAt:string;
     modifyBy:string;
+  }
+
+  export enum RoleStatus{
+    ACTIVE = 'ACTIVE',
+    DELETE = 'DELETE',
+    PASSED = 'PASSED'
   }
 }

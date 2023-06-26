@@ -6,6 +6,9 @@ import {RouterModule, Routes} from "@angular/router";
 import {TreeModule} from "primeng/tree";
 import { RolesComponent } from './roles/roles.component';
 import { CurrentRoleComponent } from './current-role/current-role.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {InputTextModule} from "primeng/inputtext";
+import {InputTextareaModule} from "primeng/inputtextarea";
 
 const routes: Routes = [
   {
@@ -21,11 +24,15 @@ const routes: Routes = [
     CurrentRoleComponent
   ],
   exports:[RouterModule],
-    imports: [
-        CommonModule,
-        SharedModule,
-        RouterModule.forChild(routes),
-        TreeModule
-    ]
+  imports: [
+    CommonModule,
+    SharedModule,
+    RouterModule.forChild(routes),
+    TreeModule,
+    FormsModule,
+    InputTextModule,
+    ReactiveFormsModule,
+    InputTextareaModule
+  ]
 })
 export class RolesAndAuthoritiesModule { }

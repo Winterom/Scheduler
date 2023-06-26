@@ -6,6 +6,8 @@ import {ERolesWebsocketEvents} from "../ERolesWebsocketEvents";
 import {RolesAuthoritiesInterfaces} from "../../../types/roles/RolesAuthoritiesInterfaces";
 import RolesGroup = RolesAuthoritiesInterfaces.RolesGroup;
 import Role = RolesAuthoritiesInterfaces.Role;
+import {EventBusService} from "../../../services/eventBus/event-bus.service";
+import {RolesEvents} from "../RolesEvents";
 
 
 @Component({
@@ -16,7 +18,8 @@ import Role = RolesAuthoritiesInterfaces.Role;
 export class RolesComponent implements OnInit{
   roles: TreeNode[]=[];
 
-  constructor(private wsService:WebsocketService) {
+  constructor(private wsService:WebsocketService,
+              private eventBus:EventBusService) {
   }
   ngOnInit(): void {
     this.wsService.on<RolesGroup>(ERolesWebsocketEvents.ALL_ROLES).subscribe({
@@ -52,7 +55,7 @@ export class RolesComponent implements OnInit{
   }
 
   nodeSelect($event: any) {
-
+    this.eventBus.emit({name:RolesEvents.ROLE_SELECT.toString(), value:$event});
   }
 }
 

@@ -1,8 +1,5 @@
 export interface EventData{
-  name:AppEvents;
+  name:string;
   value:any
 }
 
-export enum AppEvents{
-  CHANGE_VISIBLE_SIDEBAR,
-}

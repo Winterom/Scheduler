@@ -1,5 +1,6 @@
 package alexey.grizly.com.users.messages.roles.response;
 
+import alexey.grizly.com.users.models.ERoleStatus;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -16,6 +17,7 @@ public class RoleByGroups {
         private Long parentId;
         private String label;
         private String description;
+        private ERoleStatus status;
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
         private String modifyBy; //email редактора

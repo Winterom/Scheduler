@@ -1,6 +1,7 @@
 package alexey.grizly.com.users.extractors.roles;
 
 import alexey.grizly.com.users.messages.roles.response.RoleByGroups;
+import alexey.grizly.com.users.models.ERoleStatus;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
@@ -14,6 +15,7 @@ public class AllRolesRowMapper implements RowMapper<RoleByGroups.Role> {
        role.setIsCatalog(rs.getBoolean("is_catalog"));
        role.setParentId(rs.getLong("catalog"));
        role.setLabel(rs.getString("title"));
+       role.setStatus(ERoleStatus.valueOf(rs.getString("status")));
        role.setDescription(rs.getString("description"));
        role.setCreatedAt(rs.getTimestamp("createdat").toLocalDateTime());
        role.setUpdatedAt(rs.getTimestamp("updatedat").toLocalDateTime());

@@ -1,1 +1,85 @@
 
+  <div *ngIf="role">
+    <div class="mb-2 text-2xl font-bold text-center">
+      <span *ngIf="role.isCatalog">Каталог ролей: </span>
+      <span *ngIf="!role.isCatalog">Роль: </span>
+      {{role.label}}
+    </div>
+    <div class="mb-2 font-bold">
+      <span *ngIf="!role.isCatalog">Роль создана: </span>
+      <span *ngIf="role.isCatalog">Каталог создан: </span>
+      <span
+        class="font-normal">{{role.createdAt.toString() | date:'full':'ru' }}
+    </span>
+    </div>
+    <div class="mb-2 font-bold">
+      Последнее изменение:
+      <span
+        class="font-normal">{{role.updatedAt.toString() | date:'full':'ru' }}
+    </span>
+    </div>
+    <div class="mb-2 font-bold">
+      Автор изменений:
+      <span
+        class="font-normal">{{role.modifyBy}}
+    </span>
+    </div>
+    <div class="mb-4 font-bold">
+      <span *ngIf="!role.isCatalog">Статус роли: </span>
+      <span *ngIf="role.isCatalog">Статус каталога: </span>
+      <span [ngClass]="[statusClasses()]" class="font-normal font-italic">
+      {{roleStatus}}
+    </span>
+    </div>
+    <form class="mt-1"
+          [formGroup]="roleForm"
+          novalidate
+          (ngSubmit)="submitRoleFrm()">
+        <span class="p-float-label w-20rem">
+          <input
+            pInputText
+            id="label"
+            class="p-inputtext-sm w-full"
+            formControlName="labelControl"
+            [ngClass]="{'ng-invalid ng-dirty':( labelControl.invalid)&& labelControl.touched}"
+          />
+         <label htmlFor="label">Название роли</label>
+        </span>
+        <div class="mt-4">
+        <span class="p-float-label">
+          <textarea id="float-input"
+                    rows="5"
+                    pInputTextarea
+                    [autoResize]="true"
+                    formControlName="descriptionControl"
+                    class="w-full"
+                    [ngClass]="{'ng-invalid ng-dirty':( descriptionControl.invalid)&& descriptionControl.touched}"
+          >
+          </textarea>
+          <label for="float-input">Описание роли</label>
+        </span>
+        </div>
+    </form>
+  </div>
+  <div *ngIf="!role">
+    <div class=" mb-2 text-2xl font-bold text-center">
+      Основные принципы организации управления доступом:
+    </div>
+    <ul class="text-2xl font-normal font-italic">
+      <li>Для доступа к определенным разделам программы каждому Пользователю назначаются одна или несколько ролей</li>
+      <li>Каждому Пользователю при регистрации автоматически назначается роль 'Новый сотрудник'. С этой ролью
+        пользователь может просматривать и редактировать свой профиль.
+      </li>
+      <li>Роли можно группировать в каталоги. Так же возможно перемещать роли из одного каталога в другой, для этого
+        необходимо просто захватить роль левой кнопкой мыши и перетащить в необходимый каталог
+      </li>
+      <li>Каждая роль может иметь один из трех статусов: АКТИВНЫЙ, 'Роль (Каталог) удалена', 'Действие роли (каталога
+        ролей) приостановлено'
+      </li>
+      <li>Каждая роль является контейнером для набора прав</li>
+      <li>Роль не может быть с пустым набором прав</li>
+      <li>При изменении набора прав Роли у конкретных пользователей которым назначена эта Роль изменения наступят после
+        обновления токена авторизации
+      </li>
+    </ul>
+  </div>

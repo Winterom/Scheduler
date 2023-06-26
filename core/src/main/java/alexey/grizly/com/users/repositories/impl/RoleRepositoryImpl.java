@@ -16,7 +16,7 @@ import java.util.List;
 public class RoleRepositoryImpl implements RoleRepository {
     private static final String SET_ROLE = "INSERT INTO users_roles (role_id,user_id) VALUES (:roleId,:userId)";
     private static final String ALL_ROLES = "SELECT r.id, r.is_catalog, r.catalog, r.title, r.description," +
-            " r.createdat, r.updatedat, u.email FROM roles as r left join users as u on r.modifyby=u.id";
+            " r.createdat, r.updatedat,r.status, u.email FROM roles as r left join users as u on r.modifyby=u.id";
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
     @Autowired

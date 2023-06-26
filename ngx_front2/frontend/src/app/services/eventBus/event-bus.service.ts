@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {filter, map, Subject} from "rxjs";
-import {AppEvents, EventData} from "./EventData";
+import {EventData} from "./EventData";
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class EventBusService {
     this.subject$.next(event);
   }
 
-  on(eventName:AppEvents,action:any){
+  on(eventName:string,action:any){
     return this.subject$.pipe(
       filter<any>((e:EventData)=>e.name===eventName),
       map((e:EventData)=>e.value)).subscribe(action);

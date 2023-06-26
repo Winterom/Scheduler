@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {EProfileWebsocketEvents} from "./EProfileWebsocketEvents";
 import {WebsocketService} from "../../services/ws/websocket";
 import {WSUserApi} from "../../services/API/WSUserApi";
