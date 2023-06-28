@@ -19,4 +19,15 @@ export namespace RolesAuthoritiesInterfaces {
     DELETE = 'DELETE',
     PASSED = 'PASSED'
   }
+
+  export interface SelectedStatus{
+    name: string;
+    code: RoleStatus|null;
+  }
+
+  export interface Authority{
+    id: string;
+    title: string;
+    description: string;
+  }
 }

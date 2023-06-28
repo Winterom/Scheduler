@@ -1,6 +1,26 @@
 
   <div class="flex flex-column">
     <div class="mb-2 text-center text-2xl">Роли</div>
+    <div class="border-solid border-400 border-round-lg border-1 p-2 mb-2 flex justify-content-start">
+      <p-button
+        icon="fa fa-plus"
+        pTooltip="Добавить роль или каталог"
+        styleClass="p-button-raised p-button-text p-button-success mr-2">
+      </p-button>
+      <p-button
+        icon="fa fa-trash"
+        pTooltip="Удалить роль или каталог"
+        styleClass="p-button-raised p-button-text p-button-danger mr-2">
+      </p-button>
+      <form [formGroup]="filterForm">
+        <p-dropdown
+          pTooltip="Фильтрация по статусу"
+          styleClass="w-14rem"
+          formControlName="statusControl"
+          [options]="selStatus" optionLabel="name">
+        </p-dropdown>
+      </form>
+    </div>
     <p-tree class="h-full w-full " selectionMode="single" [value]="roles" (onNodeSelect)="nodeSelect($event)"></p-tree>
   </div>
 

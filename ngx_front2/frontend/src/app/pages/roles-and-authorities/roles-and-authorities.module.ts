@@ -9,6 +9,10 @@ import { CurrentRoleComponent } from './current-role/current-role.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {InputTextModule} from "primeng/inputtext";
 import {InputTextareaModule} from "primeng/inputtextarea";
+import {ButtonModule} from "primeng/button";
+import {TooltipModule} from "primeng/tooltip";
+import {DropdownModule} from "primeng/dropdown";
+import {TableModule} from "primeng/table";
 
 const routes: Routes = [
   {
@@ -32,7 +36,11 @@ const routes: Routes = [
     FormsModule,
     InputTextModule,
     ReactiveFormsModule,
-    InputTextareaModule
+    InputTextareaModule,
+    ButtonModule,
+    TooltipModule,
+    DropdownModule,
+    TableModule
   ]
 })
 export class RolesAndAuthoritiesModule { }

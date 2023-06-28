@@ -4,10 +4,13 @@ import {TreeNode} from "primeng/api";
 import {WebsocketService} from "../../../services/ws/websocket";
 import {ERolesWebsocketEvents} from "../ERolesWebsocketEvents";
 import {RolesAuthoritiesInterfaces} from "../../../types/roles/RolesAuthoritiesInterfaces";
-import RolesGroup = RolesAuthoritiesInterfaces.RolesGroup;
-import Role = RolesAuthoritiesInterfaces.Role;
 import {EventBusService} from "../../../services/eventBus/event-bus.service";
 import {RolesEvents} from "../RolesEvents";
+import {FormControl, FormGroup} from "@angular/forms";
+import RolesGroup = RolesAuthoritiesInterfaces.RolesGroup;
+import Role = RolesAuthoritiesInterfaces.Role;
+import SelectedStatus = RolesAuthoritiesInterfaces.SelectedStatus;
+import RoleStatus = RolesAuthoritiesInterfaces.RoleStatus;
 
 
 @Component({
@@ -17,9 +20,21 @@ import {RolesEvents} from "../RolesEvents";
 })
 export class RolesComponent implements OnInit{
   roles: TreeNode[]=[];
+  filterForm: FormGroup;
+  statusControl:FormControl;
+  selStatus: SelectedStatus[] = [
+    {name: 'Любые', code:null},
+    {name: 'Активные', code: RoleStatus.ACTIVE},
+    {name: 'Удаленные', code: RoleStatus.DELETE},
+    {name: 'Приостановлено', code: RoleStatus.PASSED}
+  ];
 
   constructor(private wsService:WebsocketService,
               private eventBus:EventBusService) {
+    this.statusControl = new FormControl<any>('')
+    this.filterForm = new FormGroup<any>({
+      statusControl: this.statusControl,
+    })
   }
   ngOnInit(): void {
     this.wsService.on<RolesGroup>(ERolesWebsocketEvents.ALL_ROLES).subscribe({

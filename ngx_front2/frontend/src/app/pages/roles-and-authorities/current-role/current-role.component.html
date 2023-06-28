@@ -43,7 +43,7 @@
             formControlName="labelControl"
             [ngClass]="{'ng-invalid ng-dirty':( labelControl.invalid)&& labelControl.touched}"
           />
-         <label htmlFor="label">Название роли</label>
+         <label htmlFor="label">{{titleLabel}}</label>
         </span>
         <div class="mt-4">
         <span class="p-float-label">
@@ -56,8 +56,34 @@
                     [ngClass]="{'ng-invalid ng-dirty':( descriptionControl.invalid)&& descriptionControl.touched}"
           >
           </textarea>
-          <label for="float-input">Описание роли</label>
+          <label for="float-input">{{descriptionLabel}}</label>
         </span>
+        </div>
+        <div class="mt-2" *ngIf="!role.isCatalog">
+          <div class="mb-2 text-2xl font-bold text-center">
+            Права входящие в состав роли
+          </div>
+          <p-table [value]="authorities"
+                   [tableStyle]="{ 'width': '100%','margin-top':'1rem' }"
+                   styleClass="p-datatable-gridlines"
+                   [scrollable]="true" scrollHeight="20rem"
+          >
+            <ng-template pTemplate="header">
+              <tr>
+                <th id="h1">Название </th>
+                <th id="h2">Описание роли</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body">
+              <tr *ngIf="authorities.length==0">
+                <td colspan="2">Права отсутствуют</td>
+              </tr>
+              <tr *ngFor="let row of authorities">
+                <td>{{row.title}}</td>
+                <td>{{row.description}}</td>
+              </tr>
+            </ng-template>
+          </p-table>
         </div>
     </form>
   </div>

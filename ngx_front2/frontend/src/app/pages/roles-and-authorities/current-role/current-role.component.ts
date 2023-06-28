@@ -5,6 +5,7 @@ import {RolesEvents} from "../RolesEvents";
 import Role = RolesAuthoritiesInterfaces.Role;
 import RoleStatus = RolesAuthoritiesInterfaces.RoleStatus;
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import Authority = RolesAuthoritiesInterfaces.Authority;
 
 @Component({
   selector: 'app-current-role',
@@ -17,6 +18,10 @@ export class CurrentRoleComponent implements OnInit{
   labelControl:FormControl;
   descriptionControl:FormControl;
   roleForm: FormGroup;
+  authorities: Authority[]=[];
+  titleLabel:string = '';
+  descriptionLabel:string = '';
+
   constructor(private eventBus:EventBusService) {
     this.labelControl = new FormControl<string>('', [Validators.required]);
     this.descriptionControl = new FormControl<string>('',[Validators.required]);
@@ -30,6 +35,14 @@ export class CurrentRoleComponent implements OnInit{
       this.role = value.node;
       this.labelControl.setValue(this.role?.label);
       this.descriptionControl.setValue(this.role?.description);
+      if(this.role?.isCatalog){
+        this.titleLabel = 'Название каталога';
+        this.descriptionLabel = 'Описание каталога';
+      }else {
+        this.titleLabel = 'Название роли';
+        this.descriptionLabel = 'Описание роли';
+      }
+
       switch (this.role?.status){
         case RoleStatus.ACTIVE: this.roleStatus='АКТИВНЫЙ'; return;
         case RoleStatus.DELETE: this.roleStatus = 'Роль (Каталог) удалена'; return;
