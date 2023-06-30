@@ -31,6 +31,7 @@ export class CurrentRoleComponent implements OnInit{
     })
   }
   ngOnInit(): void {
+
     this.eventBus.on(RolesEvents.ROLE_SELECT.toString(),(value:any)=>{
       this.role = value.node;
       this.labelControl.setValue(this.role?.label);
@@ -42,7 +43,7 @@ export class CurrentRoleComponent implements OnInit{
         this.titleLabel = 'Название роли';
         this.descriptionLabel = 'Описание роли';
       }
-
+      console.log(this.authorities.length);
       switch (this.role?.status){
         case RoleStatus.ACTIVE: this.roleStatus='АКТИВНЫЙ'; return;
         case RoleStatus.DELETE: this.roleStatus = 'Роль (Каталог) удалена'; return;

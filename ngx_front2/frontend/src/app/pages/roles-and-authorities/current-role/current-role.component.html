@@ -59,31 +59,41 @@
           <label for="float-input">{{descriptionLabel}}</label>
         </span>
         </div>
-        <div class="mt-2" *ngIf="!role.isCatalog">
+        <div class="mt-2 flex  flex-column justify-content-center" *ngIf="!role.isCatalog">
           <div class="mb-2 text-2xl font-bold text-center">
             Права входящие в состав роли
           </div>
+
           <p-table [value]="authorities"
                    [tableStyle]="{ 'width': '100%','margin-top':'1rem' }"
-                   styleClass="p-datatable-gridlines"
+                   styleClass="p-datatable-gridlines p-datatable-sm"
                    [scrollable]="true" scrollHeight="20rem"
           >
             <ng-template pTemplate="header">
               <tr>
+                <th id="h3">ID</th>
                 <th id="h1">Название </th>
                 <th id="h2">Описание роли</th>
               </tr>
-            </ng-template>
-            <ng-template pTemplate="body">
-              <tr *ngIf="authorities.length==0">
-                <td colspan="2">Права отсутствуют</td>
+              <tr *ngIf="authorities.length===0" class="text-center">
+                <td colspan="3">В эту роль права не добавлены</td>
               </tr>
-              <tr *ngFor="let row of authorities">
-                <td>{{row.title}}</td>
-                <td>{{row.description}}</td>
+            </ng-template>
+            <ng-template pTemplate="body" let-auth>
+              <tr>
+                <td>{{auth.id}}</td>
+                <td>{{auth.title}}</td>
+                <td>{{auth.description}}</td>
               </tr>
             </ng-template>
           </p-table>
+          <div class="flex justify-content-center">
+            <p-button
+              label="Редактировать состав прав"
+              pTooltip="Редактировать состав прав"
+              styleClass="p-button-raised p-button-text p-button-success mt-4">
+            </p-button>
+          </div>
         </div>
     </form>
   </div>

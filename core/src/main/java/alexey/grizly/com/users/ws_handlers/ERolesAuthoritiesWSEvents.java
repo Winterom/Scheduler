@@ -1,5 +1,5 @@
 package alexey.grizly.com.users.ws_handlers;
 
 public enum ERolesAuthoritiesWSEvents {
-    ALL_ROLES
+    ALL_ROLES, ALL_AUTHORITIES
 }

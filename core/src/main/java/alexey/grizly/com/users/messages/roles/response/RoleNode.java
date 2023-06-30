@@ -8,10 +8,10 @@ import java.util.Collection;
 import java.util.List;
 
 @Data
-public class RoleByGroups {
+public class RoleNode {
     Collection<Role> roles;
     @Data
-    public static class Role{
+    public static class Role implements MessageTreeNode<Role>{
         private Long key;
         private Boolean isCatalog;
         private Long parentId;
@@ -22,6 +22,16 @@ public class RoleByGroups {
         private LocalDateTime updatedAt;
         private String modifyBy; //email редактора
         private List<Role> children;
+
+        @Override
+        public Long getParent() {
+            return this.parentId;
+        }
+
+        @Override
+        public Collection<Role> getChild() {
+            return this.children;
+        }
     }
 }
 

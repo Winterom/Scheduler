@@ -1,7 +1,7 @@
 package alexey.grizly.com.users.repositories.impl;
 
 import alexey.grizly.com.users.extractors.roles.AllRolesRowMapper;
-import alexey.grizly.com.users.messages.roles.response.RoleByGroups;
+import alexey.grizly.com.users.messages.roles.response.RoleNode;
 import alexey.grizly.com.users.repositories.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -33,7 +33,7 @@ public class RoleRepositoryImpl implements RoleRepository {
     }
 
     @Override
-    public List<RoleByGroups.Role> getAllRoles() {
+    public List<RoleNode.Role> getAllRoles() {
         return jdbcTemplate.getJdbcTemplate().query(ALL_ROLES,new AllRolesRowMapper());
     }
 }

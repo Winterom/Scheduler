@@ -14,11 +14,11 @@ export class RolesAndAuthoritiesComponent implements OnInit{
   constructor(private wsService:WebsocketService,) {
   }
   ngOnInit(): void {
-    this.wsService.wsSubject
     this.wsService.connect(this.userApi.getRoles);
     this.wsService.status.subscribe({next:value => {
         if(value){
           this.wsService.send(ERolesWebsocketEvents.ALL_ROLES,'');
+
         }
       }})
   }

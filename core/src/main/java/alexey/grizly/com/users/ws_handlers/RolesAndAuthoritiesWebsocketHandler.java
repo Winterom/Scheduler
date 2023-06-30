@@ -4,7 +4,7 @@ import alexey.grizly.com.commons.configs.ConnectionList;
 import alexey.grizly.com.users.messages.RequestMessage;
 import alexey.grizly.com.users.messages.profile.response.ResponseMessage;
 import alexey.grizly.com.users.messages.roles.RolesRequestMessage;
-import alexey.grizly.com.users.messages.roles.response.RoleByGroups;
+import alexey.grizly.com.users.messages.roles.response.RoleNode;
 import alexey.grizly.com.users.services.RolesAndAuthoritiesService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.text.StringEscapeUtils;
@@ -65,9 +65,12 @@ public class RolesAndAuthoritiesWebsocketHandler extends TextWebSocketHandler {
         RequestMessage requestMessage = objectMapper.readValue(request, RolesRequestMessage.class);
         switch (requestMessage.getEvent()){
             case "ALL_ROLES"-> getAllRolesWithAuthoritiesPage(session,requestMessage);
+            case "ALL_AUTHORITIES"-> getAllAuthorities(session,requestMessage);
             default -> unknownEvent(session);
         }
     }
+
+
 
     public void unknownEvent(final WebSocketSession session) throws IOException {
         session.close();
@@ -75,11 +78,13 @@ public class RolesAndAuthoritiesWebsocketHandler extends TextWebSocketHandler {
 
     public void getAllRolesWithAuthoritiesPage(WebSocketSession session,RequestMessage requestMessage) throws IOException {
         /*AllRolesMessage request = objectMapper.readValue(requestMessage.getData(), AllRolesMessage.class);*/
-        ResponseMessage<RoleByGroups> responseMessage = rolesAndAuthoritiesService.getAllRoles(null);
+        ResponseMessage<RoleNode> responseMessage = rolesAndAuthoritiesService.getAllRoles(null);
         System.out.println(responseMessage);
         TextMessage response = new TextMessage(objectMapper.writeValueAsBytes(responseMessage));
         session.sendMessage(response);
     }
+    private void getAllAuthorities(WebSocketSession session, RequestMessage requestMessage) {
 
+    }
 
 }
