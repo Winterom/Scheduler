@@ -13,6 +13,8 @@ import {ButtonModule} from "primeng/button";
 import {TooltipModule} from "primeng/tooltip";
 import {DropdownModule} from "primeng/dropdown";
 import {TableModule} from "primeng/table";
+import { AuthoritiesTableComponent } from './current-role/authorities-table/authorities-table.component';
+import {TreeTableModule} from "primeng/treetable";
 
 const routes: Routes = [
   {
@@ -25,22 +27,24 @@ const routes: Routes = [
   declarations: [
     RolesAndAuthoritiesComponent,
     RolesComponent,
-    CurrentRoleComponent
+    CurrentRoleComponent,
+    AuthoritiesTableComponent
   ],
   exports:[RouterModule],
-  imports: [
-    CommonModule,
-    SharedModule,
-    RouterModule.forChild(routes),
-    TreeModule,
-    FormsModule,
-    InputTextModule,
-    ReactiveFormsModule,
-    InputTextareaModule,
-    ButtonModule,
-    TooltipModule,
-    DropdownModule,
-    TableModule
-  ]
+    imports: [
+        CommonModule,
+        SharedModule,
+        RouterModule.forChild(routes),
+        TreeModule,
+        FormsModule,
+        InputTextModule,
+        ReactiveFormsModule,
+        InputTextareaModule,
+        ButtonModule,
+        TooltipModule,
+        DropdownModule,
+        TableModule,
+        TreeTableModule
+    ]
 })
 export class RolesAndAuthoritiesModule { }

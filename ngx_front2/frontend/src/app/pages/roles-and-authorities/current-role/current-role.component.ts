@@ -1,28 +1,41 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {RolesAuthoritiesInterfaces} from "../../../types/roles/RolesAuthoritiesInterfaces";
 import {EventBusService} from "../../../services/eventBus/event-bus.service";
 import {RolesEvents} from "../RolesEvents";
 import Role = RolesAuthoritiesInterfaces.Role;
 import RoleStatus = RolesAuthoritiesInterfaces.RoleStatus;
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import Authority = RolesAuthoritiesInterfaces.Authority;
+import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
+import {AuthoritiesTableComponent} from "./authorities-table/authorities-table.component";
+import AuthorityNode = RolesAuthoritiesInterfaces.AuthorityNode;
+import {WebsocketService} from "../../../services/ws/websocket";
+import {ERolesWebsocketEvents} from "../ERolesWebsocketEvents";
+import {MessageService} from "primeng/api";
+import {CustomMessage} from "../../../shared/messages/CustomMessages";
+import addErrorMessage = CustomMessage.addErrorMessage;
+import Authorities = RolesAuthoritiesInterfaces.Authorities;
 
 @Component({
   selector: 'app-current-role',
   templateUrl: './current-role.component.html',
-  styleUrls: ['./current-role.component.scss']
+  styleUrls: ['./current-role.component.scss'],
+  providers: [DialogService,MessageService]
 })
-export class CurrentRoleComponent implements OnInit{
+export class CurrentRoleComponent implements OnInit, OnDestroy{
   role:Role|undefined = undefined;
   roleStatus: string='';
   labelControl:FormControl;
   descriptionControl:FormControl;
   roleForm: FormGroup;
-  authorities: Authority[]=[];
+  authorities: AuthorityNode[]=[];
   titleLabel:string = '';
   descriptionLabel:string = '';
+  authoritiesFrmRef: DynamicDialogRef | undefined;
 
-  constructor(private eventBus:EventBusService) {
+  constructor(private eventBus:EventBusService,
+              public dialogService: DialogService,
+              private wsService:WebsocketService,
+              private messageService:MessageService) {
     this.labelControl = new FormControl<string>('', [Validators.required]);
     this.descriptionControl = new FormControl<string>('',[Validators.required]);
     this.roleForm = new FormGroup<any>({
@@ -32,8 +45,15 @@ export class CurrentRoleComponent implements OnInit{
   }
   ngOnInit(): void {
 
-    this.eventBus.on(RolesEvents.ROLE_SELECT.toString(),(value:any)=>{
+    this.eventBus.on(RolesEvents.ROLE_SELECT,(value:any)=>{
+      if(this.role?.key===value.node.key){
+        console.log('уже было')
+        return;
+      }
       this.role = value.node;
+      if(!this.role?.isCatalog){
+        this.wsService.send(ERolesWebsocketEvents.AUTHORITIES_BY_ROLE_ID,{roleId: this.role?.key});
+      }
       this.labelControl.setValue(this.role?.label);
       this.descriptionControl.setValue(this.role?.description);
       if(this.role?.isCatalog){
@@ -43,7 +63,16 @@ export class CurrentRoleComponent implements OnInit{
         this.titleLabel = 'Название роли';
         this.descriptionLabel = 'Описание роли';
       }
-      console.log(this.authorities.length);
+      this.wsService.on<Authorities>(ERolesWebsocketEvents.AUTHORITIES_BY_ROLE_ID)
+        .subscribe({next:data=>{
+          if (data.responseStatus==='OK'){
+            this.authorities = data.data.authorities;
+          }else{
+            data.errorMessages.forEach(x=>{
+              addErrorMessage(this.messageService,x,null)
+            })
+          }
+          }})
       switch (this.role?.status){
         case RoleStatus.ACTIVE: this.roleStatus='АКТИВНЫЙ'; return;
         case RoleStatus.DELETE: this.roleStatus = 'Роль (Каталог) удалена'; return;
@@ -62,5 +91,27 @@ export class CurrentRoleComponent implements OnInit{
 
   submitRoleFrm() {
 
+  }
+
+  openAuthoritiesFrm() {
+    this.authoritiesFrmRef = this.dialogService.open(AuthoritiesTableComponent,{
+      data: this.authorities,
+      draggable: true,
+      resizable: false,
+      modal: true,
+      position: 'center',
+      header: 'Выберите права для роли: '+this.role?.label
+    })
+    this.authoritiesFrmRef.onClose.subscribe({next: auth =>{
+      if(auth!=null){
+        this.authorities=auth;
+      }
+      }})
+  }
+
+  ngOnDestroy(): void {
+    if(this.authoritiesFrmRef){
+      this.authoritiesFrmRef.close();
+    }
   }
 }

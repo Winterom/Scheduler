@@ -4,6 +4,8 @@ import alexey.grizly.com.commons.configs.ConnectionList;
 import alexey.grizly.com.users.messages.RequestMessage;
 import alexey.grizly.com.users.messages.profile.response.ResponseMessage;
 import alexey.grizly.com.users.messages.roles.RolesRequestMessage;
+import alexey.grizly.com.users.messages.roles.request.AuthoritiesByRoleId;
+import alexey.grizly.com.users.messages.roles.response.AuthoritiesNode;
 import alexey.grizly.com.users.messages.roles.response.RoleNode;
 import alexey.grizly.com.users.services.RolesAndAuthoritiesService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,6 +20,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import java.io.IOException;
 import java.security.Principal;
+
 
 
 @Component
@@ -64,8 +67,9 @@ public class RolesAndAuthoritiesWebsocketHandler extends TextWebSocketHandler {
         String request=String.copyValueOf(request1.toCharArray(),1,request1.length()-2);
         RequestMessage requestMessage = objectMapper.readValue(request, RolesRequestMessage.class);
         switch (requestMessage.getEvent()){
-            case "ALL_ROLES"-> getAllRolesWithAuthoritiesPage(session,requestMessage);
-            case "ALL_AUTHORITIES"-> getAllAuthorities(session,requestMessage);
+            case "ALL_ROLES"-> getAllRolesWithAuthoritiesPage(session);
+            case "ALL_AUTHORITIES"-> getAllAuthorities(session);
+            case "AUTHORITIES_BY_ROLE_ID"-> getAuthoritiesByRoleId(session,requestMessage);
             default -> unknownEvent(session);
         }
     }
@@ -76,15 +80,22 @@ public class RolesAndAuthoritiesWebsocketHandler extends TextWebSocketHandler {
         session.close();
     }
 
-    public void getAllRolesWithAuthoritiesPage(WebSocketSession session,RequestMessage requestMessage) throws IOException {
-        /*AllRolesMessage request = objectMapper.readValue(requestMessage.getData(), AllRolesMessage.class);*/
-        ResponseMessage<RoleNode> responseMessage = rolesAndAuthoritiesService.getAllRoles(null);
-        System.out.println(responseMessage);
+    public void getAllRolesWithAuthoritiesPage(WebSocketSession session) throws IOException {
+        ResponseMessage<RoleNode> responseMessage = rolesAndAuthoritiesService.getAllRoles();
         TextMessage response = new TextMessage(objectMapper.writeValueAsBytes(responseMessage));
         session.sendMessage(response);
     }
-    private void getAllAuthorities(WebSocketSession session, RequestMessage requestMessage) {
+    private void getAllAuthorities(WebSocketSession session) throws IOException {
+        ResponseMessage<AuthoritiesNode> responseMessage = rolesAndAuthoritiesService.getAllAuthorities();
+        TextMessage response = new TextMessage(objectMapper.writeValueAsBytes(responseMessage));
+        session.sendMessage(response);
+    }
 
+    private void getAuthoritiesByRoleId(WebSocketSession session, RequestMessage requestMessage) throws IOException {
+        Long roleId = objectMapper.readValue(requestMessage.getData(), AuthoritiesByRoleId.class).getRoleId();
+        ResponseMessage<AuthoritiesNode> responseMessage = rolesAndAuthoritiesService.getAuthoritiesByRoleId(roleId);
+        TextMessage response = new TextMessage(objectMapper.writeValueAsBytes(responseMessage));
+        session.sendMessage(response);
     }
 
 }

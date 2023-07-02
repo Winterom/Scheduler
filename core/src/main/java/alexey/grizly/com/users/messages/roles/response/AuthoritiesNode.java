@@ -6,7 +6,7 @@ import lombok.Data;
 
 import java.util.Collection;
 import java.util.List;
-
+@Data
 public class AuthoritiesNode {
     Collection<Authority> authorities;
 
@@ -15,7 +15,7 @@ public class AuthoritiesNode {
         private Long key;
         private Boolean isCatalog;
         private Long parentId;
-        private String title;
+        private String label;
         private String description;
         private List<Authority> children;
 

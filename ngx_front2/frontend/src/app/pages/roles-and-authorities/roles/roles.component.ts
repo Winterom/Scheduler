@@ -39,7 +39,6 @@ export class RolesComponent implements OnInit{
   ngOnInit(): void {
     this.wsService.on<RolesGroup>(ERolesWebsocketEvents.ALL_ROLES).subscribe({
       next: data => {
-
          const  rawRoles = data.data.roles.filter(x=> x.label!='ROOT');
          this.walkTheTree(rawRoles);
         this.roles = rawRoles;

@@ -1,5 +1,5 @@
 CREATE TABLE refresh_tokens(
-    id BIGINT PRIMARY KEY,
+    id BIGSERIAL unique not null primary key ,
     expired TIMESTAMPTZ NOT NULL,
     token VARCHAR(250)
 )

@@ -1,5 +1,5 @@
 CREATE TABLE authorities (
-    id BIGSERIAL primary key ,
+    id BIGSERIAL unique not null primary key ,
     title VARCHAR(50) not null ,
     is_catalog BOOLEAN not null,
     catalog BIGSERIAL REFERENCES authorities,

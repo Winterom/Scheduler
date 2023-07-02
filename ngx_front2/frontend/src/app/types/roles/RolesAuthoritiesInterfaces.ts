@@ -25,9 +25,13 @@ export namespace RolesAuthoritiesInterfaces {
     code: RoleStatus|null;
   }
 
-  export interface Authority{
-    id: string;
-    title: string;
-    description: string;
+  export interface Authorities {
+    authorities: AuthorityNode[]
+  }
+
+  export interface AuthorityNode extends TreeNode{
+    isCatalog:boolean;
+    parentId:number;
+    description:string;
   }
 }

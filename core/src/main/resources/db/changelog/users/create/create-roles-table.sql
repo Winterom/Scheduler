@@ -1,5 +1,5 @@
 CREATE TABLE roles (
-    id BIGSERIAL PRIMARY KEY ,
+    id BIGSERIAL unique not null primary key  ,
     is_catalog BOOLEAN not null,
     catalog BIGSERIAL REFERENCES roles,
     title VARCHAR(100) not null ,

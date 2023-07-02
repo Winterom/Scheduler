@@ -2,6 +2,7 @@ package alexey.grizly.com.users.services.impl;
 
 import alexey.grizly.com.users.messages.profile.response.ResponseMessage;
 import alexey.grizly.com.users.messages.roles.request.AllRolesMessage;
+import alexey.grizly.com.users.messages.roles.response.AuthoritiesNode;
 import alexey.grizly.com.users.messages.roles.response.RoleNode;
 import alexey.grizly.com.users.repositories.RoleRepository;
 import alexey.grizly.com.users.services.RoleService;
@@ -32,7 +33,7 @@ public class RolesAndAuthoritiesServiceImpl implements RolesAndAuthoritiesServic
     }
 
     @Override
-    public ResponseMessage<RoleNode> getAllRoles(AllRolesMessage message) {
+    public ResponseMessage<RoleNode> getAllRoles() {
         List<RoleNode.Role> rawList = this.roleRepository.getAllRoles();
         Map<Long, RoleNode.Role> resultMap = new HashMap<>();
         rawList.forEach(x->{
@@ -56,7 +57,22 @@ public class RolesAndAuthoritiesServiceImpl implements RolesAndAuthoritiesServic
     }
 
     @Override
-    public ResponseMessage<RoleNode> getAllAuthorities(AllRolesMessage message) {
-        return null;
+    public ResponseMessage<AuthoritiesNode> getAllAuthorities() {
+        List<AuthoritiesNode.Authority> authorities = roleRepository.getAllAuthorities();
+        AuthoritiesNode authoritiesNode = new AuthoritiesNode();
+        authoritiesNode.setAuthorities(authorities);
+        return new ResponseMessage<>(ERolesAuthoritiesWSEvents.ALL_AUTHORITIES.name(),
+                authoritiesNode,
+                ResponseMessage.ResponseStatus.OK);
+    }
+
+    @Override
+    public ResponseMessage<AuthoritiesNode> getAuthoritiesByRoleId(Long roleId) {
+        List<AuthoritiesNode.Authority> authorities = roleRepository.getAuthoritiesByRoleId(roleId);
+        AuthoritiesNode authoritiesNode = new AuthoritiesNode();
+        authoritiesNode.setAuthorities(authorities);
+        return new ResponseMessage<>(ERolesAuthoritiesWSEvents.AUTHORITIES_BY_ROLE_ID.name(),
+                authoritiesNode,
+                ResponseMessage.ResponseStatus.OK);
     }
 }

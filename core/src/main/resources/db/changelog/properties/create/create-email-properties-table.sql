@@ -1,5 +1,5 @@
 CREATE TABLE email_properties(
-    id BIGSERIAL PRIMARY KEY,
+    id BIGSERIAL unique not null primary key ,
     type VARCHAR(20),
     description TEXT,
     email VARCHAR(100) not null,

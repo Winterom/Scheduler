@@ -1,5 +1,5 @@
 CREATE TABLE users (
-    id BIGSERIAL PRIMARY KEY ,
+    id BIGSERIAL unique not null primary key ,
     email VARCHAR(50) NOT NULL UNIQUE ,
     is_email_verified BOOLEAN default false,
     phone VARCHAR(50) UNIQUE ,

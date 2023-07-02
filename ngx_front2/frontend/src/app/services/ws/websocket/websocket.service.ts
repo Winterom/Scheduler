@@ -22,7 +22,7 @@ import {UserService} from "../../user.service";
   providedIn: 'root'
 })
 export class WebsocketService implements OnDestroy{
-  private isConnected:boolean =false;
+  public isConnected:boolean =false;
   public wsSubject:WebSocketSubject<any>|null=null;
   private wsMessages: Subject<IWsMessage<any>> = new Subject<IWsMessage<any>>();
   private readonly config: WebSocketSubjectConfig<IWsMessage<any>>;
