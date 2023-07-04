@@ -12,6 +12,7 @@ export namespace RolesAuthoritiesInterfaces {
     createdAt:string;
     updatedAt:string;
     modifyBy:string;
+    path: string
   }
 
   export enum RoleStatus{

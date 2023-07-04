@@ -20,6 +20,7 @@ public class RoleNode {
         private ERoleStatus status;
         private LocalDateTime createdAt;
         private LocalDateTime updatedAt;
+        private String path;
         private String modifyBy; //email редактора
         private List<Role> children;
 

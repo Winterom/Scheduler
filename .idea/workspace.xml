@@ -11,36 +11,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="750a344e-c061-4730-8fc1-d19a16e5fd0b" name="Changes" comment="feat: registration">
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/extractors/roles/AuthorityNodeRowMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/messages/roles/request/AuthoritiesByRoleId.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/roles-and-authorities/current-role/authorities-table/authorities-table.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/roles-and-authorities/current-role/authorities-table/authorities-table.component.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/roles-and-authorities/current-role/authorities-table/authorities-table.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/extractors/roles/AllRolesExtractor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/messages/roles/response/AuthoritiesNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/messages/roles/response/AuthoritiesNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/repositories/RoleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/repositories/RoleRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/extractors/auth/UserAccountWithAuthoritiesExtractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/extractors/auth/UserAccountWithAuthoritiesExtractor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/extractors/roles/AllRolesRowMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/extractors/roles/AllRolesRowMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/messages/roles/response/RoleNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/messages/roles/response/RoleNode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/repositories/impl/RoleRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/repositories/impl/RoleRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/services/RolesAndAuthoritiesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/services/RolesAndAuthoritiesService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/services/impl/RolesAndAuthoritiesServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/services/impl/RolesAndAuthoritiesServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/utils/TreeUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/utils/TreeUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/ws_handlers/ERolesAuthoritiesWSEvents.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/ws_handlers/ERolesAuthoritiesWSEvents.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/ws_handlers/RolesAndAuthoritiesWebsocketHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/ws_handlers/RolesAndAuthoritiesWebsocketHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/resources/db/changelog/hr/create/create-employees-table.sql" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/resources/db/changelog/hr/create/create-employees-table.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/resources/db/changelog/properties/create/create-email-properties-table.sql" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/resources/db/changelog/properties/create/create-email-properties-table.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/resources/db/changelog/properties/create/create-properties-table.sql" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/resources/db/changelog/properties/create/create-properties-table.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/resources/db/changelog/users/create/create-authorities-table.sql" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/resources/db/changelog/users/create/create-authorities-table.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/resources/db/changelog/users/create/create-change-psw-token-table.sql" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/resources/db/changelog/users/create/create-change-psw-token-table.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/resources/db/changelog/users/create/create-email-approved-token-table.sql" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/resources/db/changelog/users/create/create-email-approved-token-table.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/resources/db/changelog/users/create/create-refresh-token-table.sql" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/resources/db/changelog/users/create/create-refresh-token-table.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/resources/db/changelog/users/complete/complete-roles-table.sql" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/resources/db/changelog/users/complete/complete-roles-table.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/resources/db/changelog/users/create/create-roles-table.sql" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/resources/db/changelog/users/create/create-roles-table.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/resources/db/changelog/users/create/create-users-table.sql" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/resources/db/changelog/users/create/create-users-table.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/roles-and-authorities/ERolesWebsocketEvents.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/roles-and-authorities/ERolesWebsocketEvents.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/roles-and-authorities/current-role/current-role.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/roles-and-authorities/current-role/current-role.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/roles-and-authorities/current-role/current-role.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/roles-and-authorities/current-role/current-role.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/roles-and-authorities/roles-and-authorities.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/roles-and-authorities/roles-and-authorities.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/roles-and-authorities/roles/roles.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/roles-and-authorities/roles/roles.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/services/ws/websocket/websocket.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/services/ws/websocket/websocket.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ngx_front2/frontend/src/app/types/roles/RolesAuthoritiesInterfaces.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ngx_front2/frontend/src/app/types/roles/RolesAuthoritiesInterfaces.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -61,29 +41,7 @@
         </task>
         <projects_view>
           <tree_state>
-            <expand>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="core" type="f1a62948:ProjectNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="core" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="core" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="application" type="c8890929:TasksNode$1" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="core" type="f1a62948:ProjectNode" />
-                <item name="Tasks" type="e4a08cd1:TasksNode" />
-                <item name="build" type="c8890929:TasksNode$1" />
-              </path>
-            </expand>
+            <expand />
             <select />
           </tree_state>
         </projects_view>
@@ -95,9 +53,9 @@
       <list>
         <option value="JUnit5 Test Class" />
         <option value="package-info" />
-        <option value="Interface" />
         <option value="Enum" />
         <option value="TypeScript File" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -130,70 +88,72 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers&quot;: &quot;true&quot;,
-    &quot;create.test.in.the.same.root&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-19&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Volumes/Работа/Scheduler/core/src/main/resources/db/changelog&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_interpreter_path&quot;: &quot;node&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;1d2dfe7cbec4cb85764de7dce500cd05&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Volumes/Работа/Scheduler/ngx_front2/frontend/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers": "true",
+    "create.test.in.the.same.root": "true",
+    "git-widget-placeholder": "dev",
+    "ignore.virus.scanning.warn.message": "true",
+    "jdk.selected.JAVA_MODULE": "openjdk-19",
+    "last_opened_file_path": "C:/Users/winte/IdeaProjects/Scheduler/core",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_interpreter_path": "node",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "database.query.execution",
+    "spring.configuration.checksum": "1d2dfe7cbec4cb85764de7dce500cd05",
+    "ts.external.directory.path": "C:\\Users\\winte\\IdeaProjects\\Scheduler\\ngx_front2\\frontend\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;postgresql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
     ],
-    &quot;com.intellij.ide.scratch.LRUPopupBuilder$1/&quot;: [
-      &quot;PostgreSQL&quot;
+    "com.intellij.ide.scratch.LRUPopupBuilder$1/": [
+      "PostgreSQL"
     ],
-    &quot;com.intellij.ide.scratch.LRUPopupBuilder$1/SQL Dialect&quot;: [
-      &quot;PostgreSQL&quot;
+    "com.intellij.ide.scratch.LRUPopupBuilder$1/SQL Dialect": [
+      "PostgreSQL"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\winte\IdeaProjects\Scheduler\core\src\main\resources\db\changelog\users\create" />
       <recent name="$PROJECT_DIR$/core/src/main/resources/db/changelog" />
       <recent name="$PROJECT_DIR$/ngx_front2/frontend/src/app/types" />
       <recent name="$PROJECT_DIR$/ngx_front2/frontend/src/app/services" />
       <recent name="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/login/login" />
-      <recent name="$PROJECT_DIR$/ngx_front2/frontend/src/assets" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/users-list" />
-      <recent name="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages/roles-and-authorities" />
+      <recent name="C:\Users\winte\IdeaProjects\Scheduler\ngx_front2\frontend\src\app\pages\profile" />
+      <recent name="C:\Users\winte\IdeaProjects\Scheduler\ngx_front2\frontend\src\app\pages\profile\user-profile" />
       <recent name="$PROJECT_DIR$/ngx_front2/frontend/src/app/types/user" />
       <recent name="$PROJECT_DIR$/ngx_front2/frontend/src/app/types/auth" />
       <recent name="$PROJECT_DIR$/ngx_front2/frontend/src/app/pages" />
     </key>
     <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="alexey.grizly.com.users.messages.request" />
       <recent name="alexey.grizly.com.properties.services.impl" />
       <recent name="alexey.grizly.com.properties.models" />
     </key>
@@ -201,6 +161,8 @@
       <recent name="alexey.grizly.com.users.controllers" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="alexey.grizly.com.commons.helpers" />
+      <recent name="alexey.grizly.com.users.messages.roles" />
       <recent name="alexey.grizly.com.users.controllers" />
       <recent name="alexey.grizly.com.users.utils" />
     </key>
@@ -213,38 +175,22 @@
     </option>
   </component>
   <component name="RunManager" selected="Spring Boot.StartApplication">
-    <configuration name="AuthenticationControllerTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/core" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;users.authentication.AuthenticationControllerTest&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <ForceTestExec>true</ForceTestExec>
-      <method v="2" />
-    </configuration>
     <configuration name="Angular Application (ngx_front)" type="JavascriptDebugType" uri="http://localhost:4200">
       <method v="2" />
     </configuration>
     <configuration name="StartApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <option name="ALTERNATIVE_JRE_PATH" value="openjdk-19" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <module name="core.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="alexey.grizly.com.StartApplication" />
+      <extension name="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
+        </ENTRIES>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -268,18 +214,10 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Gradle.AuthenticationControllerTest" />
       <item itemvalue="JavaScript Debug.Angular Application (ngx_front)" />
       <item itemvalue="npm.Angular CLI Server (ngx_front2)" />
-      <item itemvalue="Nx.frontend:build:production" />
       <item itemvalue="Spring Boot.StartApplication" />
     </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Gradle.AuthenticationControllerTest" />
-        <item itemvalue="Nx.frontend:build:production" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -332,10 +270,16 @@
       <workItem from="1685786462089" duration="640000" />
       <workItem from="1685787381567" duration="82000" />
       <workItem from="1685787932417" duration="16192000" />
-      <workItem from="1687080310652" duration="7944000" />
-      <workItem from="1687173900833" duration="7403000" />
-      <workItem from="1687606436954" duration="11902000" />
-      <workItem from="1688207782561" duration="3668000" />
+      <workItem from="1687336495670" duration="22148000" />
+      <workItem from="1687359681473" duration="61000" />
+      <workItem from="1687426045974" duration="5035000" />
+      <workItem from="1687515789783" duration="4000" />
+      <workItem from="1687526061294" duration="491000" />
+      <workItem from="1687526565990" duration="3385000" />
+      <workItem from="1687783956079" duration="7577000" />
+      <workItem from="1687867532008" duration="1223000" />
+      <workItem from="1687932635269" duration="12823000" />
+      <workItem from="1688107596695" duration="18168000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1678620390716</created>
@@ -471,20 +415,37 @@
       <updated>1686631436751</updated>
     </task>
     <task id="LOCAL-00020" summary="feat: registration">
-      <created>1687002725179</created>
+      <created>1687336539387</created>
       <option name="number" value="00020" />
       <option name="presentableId" value="LOCAL-00020" />
       <option name="project" value="LOCAL" />
-      <updated>1687002725179</updated>
+      <updated>1687336539387</updated>
     </task>
     <task id="LOCAL-00021" summary="feat: registration">
-      <created>1687162309529</created>
+      <option name="closed" value="true" />
+      <created>1687359734675</created>
       <option name="number" value="00021" />
       <option name="presentableId" value="LOCAL-00021" />
       <option name="project" value="LOCAL" />
-      <updated>1687162309530</updated>
+      <updated>1687359734675</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="feat: registration">
+      <option name="closed" value="true" />
+      <created>1687791767162</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1687791767162</updated>
+    </task>
+    <task id="LOCAL-00023" summary="feat: registration">
+      <option name="closed" value="true" />
+      <created>1687963613586</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1687963613587</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -525,6 +486,11 @@
           <properties class="java.lang.NullPointerException" package="java.lang" />
           <option name="timeStamp" value="1" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/core/src/main/java/alexey/grizly/com/users/services/impl/UserAccountDetailsService.java</url>
+          <line>27</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

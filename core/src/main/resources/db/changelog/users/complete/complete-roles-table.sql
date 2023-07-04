@@ -1,5 +1,5 @@
-INSERT INTO roles (title, description, createdat,is_catalog,catalog,modifyby,status) VALUES
-    ('ROOT','ROOT',current_timestamp,true,1,1,'ACTIVE'),
+INSERT INTO roles (title, description, createdat,is_catalog,parent_id,modifyby,status) VALUES
+    ('ROOT','ROOT',current_timestamp,true,null,1,'ACTIVE'),
     ('Служебные','Служебные роли',current_timestamp,true,1,1,'ACTIVE'),
     ('Администраторы','Роли администраторов',current_timestamp,true,1,1,'ACTIVE'),
     ('Регистратура','Роли модуля регистратуры',current_timestamp,true,1,1,'ACTIVE'),

@@ -114,4 +114,6 @@ export class CurrentRoleComponent implements OnInit, OnDestroy{
       this.authoritiesFrmRef.close();
     }
   }
+
+  protected readonly undefined = undefined;
 }

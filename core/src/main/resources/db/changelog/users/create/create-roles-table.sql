@@ -1,7 +1,7 @@
 CREATE TABLE roles (
     id BIGSERIAL unique not null primary key  ,
     is_catalog BOOLEAN not null,
-    catalog BIGSERIAL REFERENCES roles,
+    parent_id BIGINT,
     title VARCHAR(100) not null ,
     description VARCHAR(300) not null,
     createdAt TIMESTAMPTZ not null,
