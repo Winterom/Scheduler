@@ -1,26 +1,56 @@
 package alexey.grizly.com.users.extractors.roles;
 
-import alexey.grizly.com.users.messages.roles.response.RoleNode;
+import alexey.grizly.com.users.messages.roles.response.RolesTree;
 import alexey.grizly.com.users.models.ERoleStatus;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Deque;
-import java.util.LinkedList;
+import java.util.*;
 
-public class AllRolesExtractor implements ResultSetExtractor<RoleNode.Role> {
+@Slf4j
+public class AllRolesExtractor implements ResultSetExtractor<RolesTree.RoleNode> {
     @Override
-    public RoleNode.Role extractData(ResultSet rs) throws SQLException, DataAccessException {
-        Deque<RoleNode.Role> roleDeque = new LinkedList<>();
+    public RolesTree.RoleNode extractData(ResultSet rs) throws SQLException, DataAccessException {
+        RolesTree.RoleNode startNode = null;
+        Queue<RolesTree.RoleNode> rolesLeafs = new LinkedList<>();
+        Map<Long, RolesTree.RoleNode> rolesNodes = new HashMap<>();
+        while (rs.next()){
+            RolesTree.RoleNode role = mapRow(rs);
+            if(role.getParentId()==null){
+                startNode = role;
+            }else {
+               if(role.getIsCatalog()){
+                   role.setChildren(new LinkedList<>());
+                   rolesNodes.put(role.getKey(),role);
+               }else {
+                   rolesLeafs.add(role);
+               }
+            }
+        }
+        if(startNode==null){
+            log.error("Не нашли рутовую ноду");
+            StringBuilder result = new StringBuilder();
+            rolesLeafs.forEach(x-> result.append(" ").append(x));
+            rolesNodes.forEach((x,y)-> result.append(" ").append(y));
+            log.error(result.toString());
+        }
+        /* Раскидали листья*/
+        while (!rolesLeafs.isEmpty()){
+            RolesTree.RoleNode role = rolesLeafs.poll();
+            RolesTree.RoleNode parent = rolesNodes.get(role.getParentId());
+            parent.getChild().add(role);
+        }
+        while (!rolesNodes.isEmpty()){
 
-        RoleNode.Role role = mapRow(rs);
-        return role;
+        }
+        return startNode;
     }
 
-    public RoleNode.Role mapRow(ResultSet rs) throws SQLException {
-        RoleNode.Role role = new RoleNode.Role();
+    private RolesTree.RoleNode mapRow(ResultSet rs) throws SQLException {
+        RolesTree.RoleNode role = new RolesTree.RoleNode();
         role.setKey(rs.getLong("id"));
         role.setIsCatalog(rs.getBoolean("is_catalog"));
         role.setParentId(rs.getLong("parent_id"));
@@ -33,5 +63,10 @@ public class AllRolesExtractor implements ResultSetExtractor<RoleNode.Role> {
         role.setPath(path);
         role.setModifyBy(rs.getString("email"));
         return role;
+    }
+
+    private void findChild(RolesTree.RoleNode parentNode, List<RolesTree.RoleNode> nodes){
+        parentNode.setChildren(new LinkedList<>());
+        nodes.
     }
 }

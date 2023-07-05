@@ -6,7 +6,7 @@ import alexey.grizly.com.users.messages.profile.response.ResponseMessage;
 import alexey.grizly.com.users.messages.roles.RolesRequestMessage;
 import alexey.grizly.com.users.messages.roles.request.AuthoritiesByRoleId;
 import alexey.grizly.com.users.messages.roles.response.AuthoritiesNode;
-import alexey.grizly.com.users.messages.roles.response.RoleNode;
+import alexey.grizly.com.users.messages.roles.response.RolesTree;
 import alexey.grizly.com.users.services.RolesAndAuthoritiesService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.text.StringEscapeUtils;
@@ -81,7 +81,7 @@ public class RolesAndAuthoritiesWebsocketHandler extends TextWebSocketHandler {
     }
 
     public void getAllRolesWithAuthoritiesPage(WebSocketSession session) throws IOException {
-        ResponseMessage<RoleNode> responseMessage = rolesAndAuthoritiesService.getAllRoles();
+        ResponseMessage<RolesTree> responseMessage = rolesAndAuthoritiesService.getAllRoles();
         TextMessage response = new TextMessage(objectMapper.writeValueAsBytes(responseMessage));
         session.sendMessage(response);
     }

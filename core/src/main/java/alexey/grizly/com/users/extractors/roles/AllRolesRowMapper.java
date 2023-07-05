@@ -1,16 +1,16 @@
 package alexey.grizly.com.users.extractors.roles;
 
-import alexey.grizly.com.users.messages.roles.response.RoleNode;
+import alexey.grizly.com.users.messages.roles.response.RolesTree;
 import alexey.grizly.com.users.models.ERoleStatus;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class AllRolesRowMapper implements RowMapper<RoleNode.Role> {
+public class AllRolesRowMapper implements RowMapper<RolesTree.RoleNode> {
     @Override
-    public RoleNode.Role mapRow(ResultSet rs, int rowNum) throws SQLException {
-       RoleNode.Role role = new RoleNode.Role();
+    public RolesTree.RoleNode mapRow(ResultSet rs, int rowNum) throws SQLException {
+       RolesTree.RoleNode role = new RolesTree.RoleNode();
        role.setKey(rs.getLong("id"));
        role.setIsCatalog(rs.getBoolean("is_catalog"));
        role.setParentId(rs.getLong("parent_id"));

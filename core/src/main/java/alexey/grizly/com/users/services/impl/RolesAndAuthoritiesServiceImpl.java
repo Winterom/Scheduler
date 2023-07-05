@@ -1,9 +1,8 @@
 package alexey.grizly.com.users.services.impl;
 
 import alexey.grizly.com.users.messages.profile.response.ResponseMessage;
-import alexey.grizly.com.users.messages.roles.request.AllRolesMessage;
 import alexey.grizly.com.users.messages.roles.response.AuthoritiesNode;
-import alexey.grizly.com.users.messages.roles.response.RoleNode;
+import alexey.grizly.com.users.messages.roles.response.RolesTree;
 import alexey.grizly.com.users.repositories.RoleRepository;
 import alexey.grizly.com.users.services.RoleService;
 import alexey.grizly.com.users.services.RolesAndAuthoritiesService;
@@ -33,9 +32,9 @@ public class RolesAndAuthoritiesServiceImpl implements RolesAndAuthoritiesServic
     }
 
     @Override
-    public ResponseMessage<RoleNode> getAllRoles() {
-        List<RoleNode.Role> rawList = this.roleRepository.getAllRoles();
-        Map<Long, RoleNode.Role> resultMap = new HashMap<>();
+    public ResponseMessage<RolesTree> getAllRoles() {
+        List<RolesTree.RoleNode> rawList = this.roleRepository.getAllRoles();
+        Map<Long, RolesTree.RoleNode> resultMap = new HashMap<>();
         rawList.forEach(x->{
             if (Boolean.TRUE.equals(x.getIsCatalog())){
                 resultMap.put(x.getKey(),x);
@@ -49,7 +48,7 @@ public class RolesAndAuthoritiesServiceImpl implements RolesAndAuthoritiesServic
                         .add(x);
             }
         });
-        RoleNode roles = new RoleNode();
+        RolesTree roles = new RolesTree();
         roles.setRoles(resultMap.values());
         return new ResponseMessage<>(ERolesAuthoritiesWSEvents.ALL_ROLES.name(),
                 roles,

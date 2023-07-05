@@ -8,10 +8,10 @@ import java.util.Collection;
 import java.util.List;
 
 @Data
-public class RoleNode {
-    Collection<Role> roles;
+public class RolesTree {
+    Collection<RoleNode> roles;
     @Data
-    public static class Role implements MessageTreeNode<Role>{
+    public static class RoleNode implements MessageTreeNode<RoleNode>{
         private Long key;
         private Boolean isCatalog;
         private Long parentId;
@@ -22,7 +22,7 @@ public class RoleNode {
         private LocalDateTime updatedAt;
         private String path;
         private String modifyBy; //email редактора
-        private List<Role> children;
+        private List<RoleNode> children;
 
         @Override
         public Long getParent() {
@@ -30,7 +30,7 @@ public class RoleNode {
         }
 
         @Override
-        public Collection<Role> getChild() {
+        public Collection<RoleNode> getChild() {
             return this.children;
         }
     }
