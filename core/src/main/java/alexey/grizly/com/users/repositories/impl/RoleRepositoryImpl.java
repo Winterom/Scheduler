@@ -1,6 +1,6 @@
 package alexey.grizly.com.users.repositories.impl;
 
-import alexey.grizly.com.users.extractors.roles.AllRolesRowMapper;
+import alexey.grizly.com.users.extractors.roles.AllRolesExtractor;
 import alexey.grizly.com.users.extractors.roles.AuthorityNodeRowMapper;
 import alexey.grizly.com.users.messages.roles.response.AuthoritiesNode;
 import alexey.grizly.com.users.messages.roles.response.RolesTree;
@@ -48,8 +48,8 @@ public class RoleRepositoryImpl implements RoleRepository {
     }
 
     @Override
-    public List<RolesTree.RoleNode> getAllRoles() {
-        return jdbcTemplate.getJdbcTemplate().query(ALL_ROLES,new AllRolesRowMapper());
+    public RolesTree.RoleNode getAllRolesTree() {
+        return jdbcTemplate.getJdbcTemplate().query(ALL_ROLES,new AllRolesExtractor());
     }
 
     @Override

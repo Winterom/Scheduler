@@ -19,10 +19,11 @@ public class AllRolesExtractor implements ResultSetExtractor<RolesTree.RoleNode>
         Map<Long, RolesTree.RoleNode> rolesNodes = new HashMap<>();
         while (rs.next()){
             RolesTree.RoleNode role = mapRow(rs);
-            if(role.getParentId()==null){
+            if(role.getParentId()==0){
                 startNode = role;
+                startNode.setChildren(new LinkedList<>());
             }else {
-               if(role.getIsCatalog()){
+               if(Boolean.TRUE.equals(role.getIsCatalog())){
                    role.setChildren(new LinkedList<>());
                    rolesNodes.put(role.getKey(),role);
                }else {
@@ -36,6 +37,7 @@ public class AllRolesExtractor implements ResultSetExtractor<RolesTree.RoleNode>
             rolesLeafs.forEach(x-> result.append(" ").append(x));
             rolesNodes.forEach((x,y)-> result.append(" ").append(y));
             log.error(result.toString());
+            return null;
         }
         /* Раскидали листья*/
         while (!rolesLeafs.isEmpty()){
@@ -43,8 +45,13 @@ public class AllRolesExtractor implements ResultSetExtractor<RolesTree.RoleNode>
             RolesTree.RoleNode parent = rolesNodes.get(role.getParentId());
             parent.getChild().add(role);
         }
-        while (!rolesNodes.isEmpty()){
-
+        for (Map.Entry<Long, RolesTree.RoleNode> entry : rolesNodes.entrySet()) {
+            RolesTree.RoleNode roleNode = entry.getValue();
+            if (roleNode.getParentId().equals(startNode.getKey())) {
+                startNode.getChildren().add(roleNode);
+            } else {
+                rolesNodes.get(roleNode.getParentId()).getChildren().add(roleNode);
+            }
         }
         return startNode;
     }
@@ -59,14 +66,12 @@ public class AllRolesExtractor implements ResultSetExtractor<RolesTree.RoleNode>
         role.setDescription(rs.getString("description"));
         role.setCreatedAt(rs.getTimestamp("createdat").toLocalDateTime());
         role.setUpdatedAt(rs.getTimestamp("updatedat").toLocalDateTime());
-        String path = rs.getString("path").substring(1);
-        role.setPath(path);
+        String rawPath =  rs.getString("path");
+        if(!rawPath.isEmpty()){
+            role.setPath(rawPath.substring(1));
+        }
         role.setModifyBy(rs.getString("email"));
         return role;
     }
 
-    private void findChild(RolesTree.RoleNode parentNode, List<RolesTree.RoleNode> nodes){
-        parentNode.setChildren(new LinkedList<>());
-        nodes.
-    }
 }

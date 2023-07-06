@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface RoleRepository {
     int setRole(final Long userId, final Long roleId);
-    List<RolesTree.RoleNode> getAllRoles();
+    RolesTree.RoleNode getAllRolesTree();
     List<AuthoritiesNode.Authority> getAuthoritiesByRoleId(final Long roleId);
     List<AuthoritiesNode.Authority> getAllAuthorities();
 }

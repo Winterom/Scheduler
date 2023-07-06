@@ -39,7 +39,7 @@ export class RolesComponent implements OnInit{
   ngOnInit(): void {
     this.wsService.on<RolesGroup>(ERolesWebsocketEvents.ALL_ROLES).subscribe({
       next: data => {
-         const  rawRoles = data.data.roles.filter(x=> x.label!='ROOT');
+         const  rawRoles = data.data.roles
          this.walkTheTree(rawRoles);
         this.roles = rawRoles;
       }});
@@ -49,27 +49,32 @@ export class RolesComponent implements OnInit{
   walkTheTree(nodes:Role[]){
     nodes.forEach((node)=>{
       if(node.isCatalog){
-        this.createCatalog(node);
+        this.setCatalogStyles(node);
         if(node.children&&node.children.length>0){
           let childes:Role[] = node.children as Role[];
           this.walkTheTree(childes);
         }
       }else{
-        this.createItem(node);
+        this.setLeafStyles(node);
       }
     })
   }
 
-  createCatalog(role:Role){
+  setCatalogStyles(role:Role){
     role.collapsedIcon = 'fa fa-folder';
     role.expandedIcon = 'fa fa-folder-open-o';
   }
-  createItem(role:Role){
+
+  setLeafStyles(role:Role){
     role.icon = 'fa fa-tags';
   }
 
   nodeSelect($event: any) {
     this.eventBus.emit({name:RolesEvents.ROLE_SELECT.toString(), value:$event});
+  }
+
+  nodeDrop($event: any) {
+    console.log($event);
   }
 }
 

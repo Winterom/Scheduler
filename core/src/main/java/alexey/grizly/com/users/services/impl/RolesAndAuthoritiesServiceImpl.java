@@ -33,23 +33,9 @@ public class RolesAndAuthoritiesServiceImpl implements RolesAndAuthoritiesServic
 
     @Override
     public ResponseMessage<RolesTree> getAllRoles() {
-        List<RolesTree.RoleNode> rawList = this.roleRepository.getAllRoles();
-        Map<Long, RolesTree.RoleNode> resultMap = new HashMap<>();
-        rawList.forEach(x->{
-            if (Boolean.TRUE.equals(x.getIsCatalog())){
-                resultMap.put(x.getKey(),x);
-                x.setChildren(new ArrayList<>());
-            }
-        });
-        rawList.forEach(x->{
-            if(Boolean.FALSE.equals(x.getIsCatalog())){
-                resultMap.get(x.getParentId())
-                        .getChildren()
-                        .add(x);
-            }
-        });
+        RolesTree.RoleNode rolesTree = this.roleRepository.getAllRolesTree();
         RolesTree roles = new RolesTree();
-        roles.setRoles(resultMap.values());
+        roles.setRoles(rolesTree.getChild());
         return new ResponseMessage<>(ERolesAuthoritiesWSEvents.ALL_ROLES.name(),
                 roles,
                 ResponseMessage.ResponseStatus.OK);
