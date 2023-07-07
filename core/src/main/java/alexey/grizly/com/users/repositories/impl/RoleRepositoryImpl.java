@@ -32,6 +32,8 @@ public class RoleRepositoryImpl implements RoleRepository {
     private static final String AUTHORITY_BY_ROLE = "SELECT * FROM roles_authorities as r_a LEFT JOIN authorities a " +
             "ON a.id = r_a.authority_id WHERE role_id=:roleId";
     private static final String ALL_AUTHORITIES = "SELECT * FROM authorities";
+
+    private static final String ROLE_SAVE_AFTER_DRAG_DROP = "UPDATE roles set parent_id=:newParentId where id=:roleId";
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
     @Autowired
@@ -62,5 +64,13 @@ public class RoleRepositoryImpl implements RoleRepository {
     @Override
     public List<AuthoritiesNode.Authority> getAllAuthorities() {
         return jdbcTemplate.getJdbcTemplate().query(ALL_AUTHORITIES,new AuthorityNodeRowMapper());
+    }
+
+    @Override
+    public int updateRoleAfterDragDrop(Long roleId, Long newParentId) {
+        SqlParameterSource namedParameters = new MapSqlParameterSource()
+                .addValue("newParentId", newParentId)
+                .addValue("roleId",roleId);
+        return jdbcTemplate.update(ROLE_SAVE_AFTER_DRAG_DROP,namedParameters);
     }
 }

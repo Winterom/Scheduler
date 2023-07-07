@@ -1,6 +1,7 @@
 package alexey.grizly.com.users.services.impl;
 
 import alexey.grizly.com.users.messages.profile.response.ResponseMessage;
+import alexey.grizly.com.users.messages.roles.request.DragDropRoleMessage;
 import alexey.grizly.com.users.messages.roles.response.AuthoritiesNode;
 import alexey.grizly.com.users.messages.roles.response.RolesTree;
 import alexey.grizly.com.users.repositories.RoleRepository;
@@ -59,5 +60,16 @@ public class RolesAndAuthoritiesServiceImpl implements RolesAndAuthoritiesServic
         return new ResponseMessage<>(ERolesAuthoritiesWSEvents.AUTHORITIES_BY_ROLE_ID.name(),
                 authoritiesNode,
                 ResponseMessage.ResponseStatus.OK);
+    }
+
+    @Override
+    public ResponseMessage<RolesTree> updateRoleAfterDragDrop(DragDropRoleMessage message) {
+        int resultSave = roleRepository.updateRoleAfterDragDrop(message.getRoleId(),message.getNewParentId());
+        ResponseMessage<RolesTree> responseMessage = getAllRoles();
+        if(resultSave!=1){
+           responseMessage.getPayload().setResponseStatus(ResponseMessage.ResponseStatus.ERROR);
+            responseMessage.getPayload().setErrorMessages(List.of("Не удалось обновить роль"));
+        }
+        return responseMessage;
     }
 }

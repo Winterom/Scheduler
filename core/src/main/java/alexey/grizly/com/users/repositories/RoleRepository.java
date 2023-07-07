@@ -12,4 +12,6 @@ public interface RoleRepository {
     RolesTree.RoleNode getAllRolesTree();
     List<AuthoritiesNode.Authority> getAuthoritiesByRoleId(final Long roleId);
     List<AuthoritiesNode.Authority> getAllAuthorities();
+
+    int updateRoleAfterDragDrop(Long roleId, Long newParentId);
 }

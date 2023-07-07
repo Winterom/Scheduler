@@ -8,6 +8,7 @@
         styleClass="p-button-raised p-button-text p-button-success mr-2">
       </p-button>
       <p-button
+        (onClick)="deleteRole()"
         icon="fa fa-trash"
         pTooltip="Удалить роль или каталог"
         styleClass="p-button-raised p-button-text p-button-danger mr-2">
@@ -23,14 +24,16 @@
     </div>
     <p-tree class="h-full w-full "
             selectionMode="single"
+            [style]="{'max-height':'30rem','height':'30rem','overflow':'auto'}"
             [value]="roles"
+            [(selection)]="selected"
             (onNodeSelect)="nodeSelect($event)"
             [draggableNodes]="true"
             [droppableNodes]="true"
             draggableScope="self"
             droppableScope="self"
             (onNodeDrop)="nodeDrop($event)"
-
     ></p-tree>
   </div>
+
 

@@ -5,6 +5,7 @@ import alexey.grizly.com.users.messages.RequestMessage;
 import alexey.grizly.com.users.messages.profile.response.ResponseMessage;
 import alexey.grizly.com.users.messages.roles.RolesRequestMessage;
 import alexey.grizly.com.users.messages.roles.request.AuthoritiesByRoleId;
+import alexey.grizly.com.users.messages.roles.request.DragDropRoleMessage;
 import alexey.grizly.com.users.messages.roles.response.AuthoritiesNode;
 import alexey.grizly.com.users.messages.roles.response.RolesTree;
 import alexey.grizly.com.users.services.RolesAndAuthoritiesService;
@@ -67,9 +68,10 @@ public class RolesAndAuthoritiesWebsocketHandler extends TextWebSocketHandler {
         String request=String.copyValueOf(request1.toCharArray(),1,request1.length()-2);
         RequestMessage requestMessage = objectMapper.readValue(request, RolesRequestMessage.class);
         switch (requestMessage.getEvent()){
-            case "ALL_ROLES"-> getAllRolesWithAuthoritiesPage(session);
+            case "ALL_ROLES"-> getAllRoles(session);
             case "ALL_AUTHORITIES"-> getAllAuthorities(session);
             case "AUTHORITIES_BY_ROLE_ID"-> getAuthoritiesByRoleId(session,requestMessage);
+            case "ROLE_DRAG_DROP" -> roleDragDropRole(session,requestMessage);
             default -> unknownEvent(session);
         }
     }
@@ -80,7 +82,7 @@ public class RolesAndAuthoritiesWebsocketHandler extends TextWebSocketHandler {
         session.close();
     }
 
-    public void getAllRolesWithAuthoritiesPage(WebSocketSession session) throws IOException {
+    public void getAllRoles(WebSocketSession session) throws IOException {
         ResponseMessage<RolesTree> responseMessage = rolesAndAuthoritiesService.getAllRoles();
         TextMessage response = new TextMessage(objectMapper.writeValueAsBytes(responseMessage));
         session.sendMessage(response);
@@ -94,6 +96,13 @@ public class RolesAndAuthoritiesWebsocketHandler extends TextWebSocketHandler {
     private void getAuthoritiesByRoleId(WebSocketSession session, RequestMessage requestMessage) throws IOException {
         Long roleId = objectMapper.readValue(requestMessage.getData(), AuthoritiesByRoleId.class).getRoleId();
         ResponseMessage<AuthoritiesNode> responseMessage = rolesAndAuthoritiesService.getAuthoritiesByRoleId(roleId);
+        TextMessage response = new TextMessage(objectMapper.writeValueAsBytes(responseMessage));
+        session.sendMessage(response);
+    }
+
+    private void roleDragDropRole(WebSocketSession session, RequestMessage requestMessage) throws IOException {
+        DragDropRoleMessage message= objectMapper.readValue(requestMessage.getData(), DragDropRoleMessage.class);
+        ResponseMessage<RolesTree> responseMessage = rolesAndAuthoritiesService.updateRoleAfterDragDrop(message);
         TextMessage response = new TextMessage(objectMapper.writeValueAsBytes(responseMessage));
         session.sendMessage(response);
     }

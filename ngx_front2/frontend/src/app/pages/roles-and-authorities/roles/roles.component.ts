@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {TreeNode} from "primeng/api";
+import {MessageService, TreeDragDropService, TreeNode} from "primeng/api";
 
-import {WebsocketService} from "../../../services/ws/websocket";
+import {ResponseStatus, WebsocketService} from "../../../services/ws/websocket";
 import {ERolesWebsocketEvents} from "../ERolesWebsocketEvents";
 import {RolesAuthoritiesInterfaces} from "../../../types/roles/RolesAuthoritiesInterfaces";
 import {EventBusService} from "../../../services/eventBus/event-bus.service";
@@ -11,15 +11,21 @@ import RolesGroup = RolesAuthoritiesInterfaces.RolesGroup;
 import Role = RolesAuthoritiesInterfaces.Role;
 import SelectedStatus = RolesAuthoritiesInterfaces.SelectedStatus;
 import RoleStatus = RolesAuthoritiesInterfaces.RoleStatus;
+import DragDropRole = RolesAuthoritiesInterfaces.DragDropRole;
+import {CustomMessage} from "../../../shared/messages/CustomMessages";
+import addErrorMessage = CustomMessage.addErrorMessage;
 
 
 @Component({
   selector: 'app-roles',
   templateUrl: './roles.component.html',
-  styleUrls: ['./roles.component.scss']
+  styleUrls: ['./roles.component.scss'],
+  providers: [TreeDragDropService, MessageService]
 })
 export class RolesComponent implements OnInit{
-  roles: TreeNode[]=[];
+  roles: Role[]=[];
+  expandedNodes: Map<string,TreeNode>= new Map;
+  selected:Role|null=null;
   filterForm: FormGroup;
   statusControl:FormControl;
   selStatus: SelectedStatus[] = [
@@ -30,7 +36,8 @@ export class RolesComponent implements OnInit{
   ];
 
   constructor(private wsService:WebsocketService,
-              private eventBus:EventBusService) {
+              private eventBus:EventBusService,
+              private messageService:MessageService) {
     this.statusControl = new FormControl<any>('')
     this.filterForm = new FormGroup<any>({
       statusControl: this.statusControl,
@@ -39,9 +46,14 @@ export class RolesComponent implements OnInit{
   ngOnInit(): void {
     this.wsService.on<RolesGroup>(ERolesWebsocketEvents.ALL_ROLES).subscribe({
       next: data => {
+        if(data.responseStatus===ResponseStatus.ERROR){
+          data.errorMessages.forEach(x=>{
+            addErrorMessage(this.messageService,x,null);
+          })
+        }
          const  rawRoles = data.data.roles
          this.walkTheTree(rawRoles);
-        this.roles = rawRoles;
+         this.roles = rawRoles;
       }});
 
   }
@@ -49,6 +61,9 @@ export class RolesComponent implements OnInit{
   walkTheTree(nodes:Role[]){
     nodes.forEach((node)=>{
       if(node.isCatalog){
+        if(node.key&&this.expandedNodes.has(node.key)){
+          node.expanded=true;
+        }
         this.setCatalogStyles(node);
         if(node.children&&node.children.length>0){
           let childes:Role[] = node.children as Role[];
@@ -73,8 +88,29 @@ export class RolesComponent implements OnInit{
     this.eventBus.emit({name:RolesEvents.ROLE_SELECT.toString(), value:$event});
   }
 
-  nodeDrop($event: any) {
-    console.log($event);
+  nodeDrop(event: any) {
+    const message: DragDropRole = {newParentId:event.dropNode.key,roleId:event.dragNode.key};
+    this.expandedNodes = new Map<string, TreeNode>();
+    this.completeExpandedNode(this.roles);
+    this.wsService.send(ERolesWebsocketEvents.ROLE_DRAG_DROP,message);
   }
+
+  completeExpandedNode(nodes:Role[]){
+    nodes.forEach(node=>{
+      if(node.isCatalog){
+        if(node.key&&node.expanded){
+          this.expandedNodes.set(node.key,node)
+        }
+        if(node.children&&node.children.length>0){
+          this.completeExpandedNode(node.children as Role[])
+        }
+      }
+    })
+  }
+
+  deleteRole() {
+    console.log(this.selected)
+  }
+
 }
 

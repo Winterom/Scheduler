@@ -15,6 +15,7 @@ import {DropdownModule} from "primeng/dropdown";
 import {TableModule} from "primeng/table";
 import { AuthoritiesTableComponent } from './current-role/authorities-table/authorities-table.component';
 import {TreeTableModule} from "primeng/treetable";
+import {ToastModule} from "primeng/toast";
 
 const routes: Routes = [
   {
@@ -44,7 +45,8 @@ const routes: Routes = [
         TooltipModule,
         DropdownModule,
         TableModule,
-        TreeTableModule
+        TreeTableModule,
+        ToastModule
     ]
 })
 export class RolesAndAuthoritiesModule { }

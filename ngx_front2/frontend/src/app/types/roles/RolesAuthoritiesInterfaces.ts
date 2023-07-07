@@ -35,4 +35,9 @@ export namespace RolesAuthoritiesInterfaces {
     parentId:number;
     description:string;
   }
+
+  export interface DragDropRole{
+    newParentId: string;
+    roleId: string;
+  }
 }
