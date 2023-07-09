@@ -8,28 +8,4 @@
     background-size: cover;
     padding: 5rem;
   }
-  .apps{
-    display: flex;
-    justify-content: flex-start;
-  }
-  .app {
-    padding-top: 0.5rem;
-    font-size: 1.4rem;
-    width: 7rem;
-    height: 10rem;
-    text-align: center;
-    background: #BDD9FE;
-    border: 1px solid deepskyblue;
-    border-radius: 1rem;
-    cursor: pointer;
-    margin-left: 1rem;
-    color: black;
-  }
-  .app:hover{
-    width: 8rem;
-    font-weight: bold;
-    background: #6FC6FF;
-    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-    transition: 0.2s;
-  }
 }

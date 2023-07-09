@@ -16,6 +16,8 @@ import {TableModule} from "primeng/table";
 import { AuthoritiesTableComponent } from './current-role/authorities-table/authorities-table.component';
 import {TreeTableModule} from "primeng/treetable";
 import {ToastModule} from "primeng/toast";
+import { DeleteRoleComponent } from './delete-role/delete-role.component';
+import {StepsModule} from "primeng/steps";
 
 const routes: Routes = [
   {
@@ -29,24 +31,26 @@ const routes: Routes = [
     RolesAndAuthoritiesComponent,
     RolesComponent,
     CurrentRoleComponent,
-    AuthoritiesTableComponent
+    AuthoritiesTableComponent,
+    DeleteRoleComponent
   ],
   exports:[RouterModule],
-    imports: [
-        CommonModule,
-        SharedModule,
-        RouterModule.forChild(routes),
-        TreeModule,
-        FormsModule,
-        InputTextModule,
-        ReactiveFormsModule,
-        InputTextareaModule,
-        ButtonModule,
-        TooltipModule,
-        DropdownModule,
-        TableModule,
-        TreeTableModule,
-        ToastModule
-    ]
+  imports: [
+    CommonModule,
+    SharedModule,
+    RouterModule.forChild(routes),
+    TreeModule,
+    FormsModule,
+    InputTextModule,
+    ReactiveFormsModule,
+    InputTextareaModule,
+    ButtonModule,
+    TooltipModule,
+    DropdownModule,
+    TableModule,
+    TreeTableModule,
+    ToastModule,
+    StepsModule
+  ]
 })
 export class RolesAndAuthoritiesModule { }

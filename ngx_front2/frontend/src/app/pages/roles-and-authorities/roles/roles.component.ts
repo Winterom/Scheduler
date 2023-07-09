@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MessageService, TreeDragDropService, TreeNode} from "primeng/api";
 
 import {ResponseStatus, WebsocketService} from "../../../services/ws/websocket";
@@ -6,7 +6,6 @@ import {ERolesWebsocketEvents} from "../ERolesWebsocketEvents";
 import {RolesAuthoritiesInterfaces} from "../../../types/roles/RolesAuthoritiesInterfaces";
 import {EventBusService} from "../../../services/eventBus/event-bus.service";
 import {RolesEvents} from "../RolesEvents";
-import {FormControl, FormGroup} from "@angular/forms";
 import RolesGroup = RolesAuthoritiesInterfaces.RolesGroup;
 import Role = RolesAuthoritiesInterfaces.Role;
 import SelectedStatus = RolesAuthoritiesInterfaces.SelectedStatus;
@@ -14,22 +13,22 @@ import RoleStatus = RolesAuthoritiesInterfaces.RoleStatus;
 import DragDropRole = RolesAuthoritiesInterfaces.DragDropRole;
 import {CustomMessage} from "../../../shared/messages/CustomMessages";
 import addErrorMessage = CustomMessage.addErrorMessage;
+import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
+import {DeleteRoleComponent} from "../delete-role/delete-role.component";
 
 
 @Component({
   selector: 'app-roles',
   templateUrl: './roles.component.html',
   styleUrls: ['./roles.component.scss'],
-  providers: [TreeDragDropService, MessageService]
+  providers: [TreeDragDropService, MessageService,DialogService]
 })
-export class RolesComponent implements OnInit{
+export class RolesComponent implements OnInit,OnDestroy{
   roles: Role[]=[];
   expandedNodes: Map<string,TreeNode>= new Map;
   selected:Role|null=null;
-  filterForm: FormGroup;
-  statusControl:FormControl;
+  ref: DynamicDialogRef | undefined;
   selStatus: SelectedStatus[] = [
-    {name: 'Любые', code:null},
     {name: 'Активные', code: RoleStatus.ACTIVE},
     {name: 'Удаленные', code: RoleStatus.DELETE},
     {name: 'Приостановлено', code: RoleStatus.PASSED}
@@ -37,11 +36,8 @@ export class RolesComponent implements OnInit{
 
   constructor(private wsService:WebsocketService,
               private eventBus:EventBusService,
+              private dialogService: DialogService,
               private messageService:MessageService) {
-    this.statusControl = new FormControl<any>('')
-    this.filterForm = new FormGroup<any>({
-      statusControl: this.statusControl,
-    })
   }
   ngOnInit(): void {
     this.wsService.on<RolesGroup>(ERolesWebsocketEvents.ALL_ROLES).subscribe({
@@ -109,8 +105,40 @@ export class RolesComponent implements OnInit{
   }
 
   deleteRole() {
-    console.log(this.selected)
+    console.log(this.selected);
+    if(this.selected===null){
+      addErrorMessage(this.messageService,'Необходимо выбрать роль для удаления', null)
+      return;
+    }
+    let header:string;
+    if(this.selected?.isCatalog){
+      header='Удаление каталога ролей: ';
+    }else {
+      header ='Удаление роли: ';
+    }
+    header = header+this.selected?.label;
+    this.ref = this.dialogService.open(DeleteRoleComponent, {
+      data: this.selected,
+      header: header,
+      width: '70%',
+      contentStyle: { overflow: 'auto' },
+      baseZIndex: 10000,
+      maximizable: false
+    });
   }
 
+  ngOnDestroy(): void {
+    if (this.ref) {
+      this.ref.close();
+    }
+  }
+
+  copyRole() {
+
+  }
+
+  stopRole() {
+
+  }
 }
 

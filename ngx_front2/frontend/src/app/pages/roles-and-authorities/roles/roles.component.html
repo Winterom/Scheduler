@@ -8,19 +8,28 @@
         styleClass="p-button-raised p-button-text p-button-success mr-2">
       </p-button>
       <p-button
+        (onClick)="copyRole()"
+        icon="fa fa-clone"
+        pTooltip="Копировать можно только роли"
+        styleClass="p-button-raised p-button-text mr-2">
+      </p-button>
+      <p-button
         (onClick)="deleteRole()"
         icon="fa fa-trash"
         pTooltip="Удалить роль или каталог"
         styleClass="p-button-raised p-button-text p-button-danger mr-2">
       </p-button>
-      <form [formGroup]="filterForm">
+      <p-button
+        (onClick)="stopRole()"
+        icon="fa fa-hand-paper-o"
+        pTooltip="Приостановка действия роли"
+        styleClass="p-button-raised p-button-text p-button-danger mr-1">
+      </p-button>
         <p-dropdown
           pTooltip="Фильтрация по статусу"
-          styleClass="w-14rem"
-          formControlName="statusControl"
+          styleClass="w-13rem"
           [options]="selStatus" optionLabel="name">
         </p-dropdown>
-      </form>
     </div>
     <p-tree class="h-full w-full "
             selectionMode="single"
@@ -35,5 +44,6 @@
             (onNodeDrop)="nodeDrop($event)"
     ></p-tree>
   </div>
+  <p-toast></p-toast>
 
 

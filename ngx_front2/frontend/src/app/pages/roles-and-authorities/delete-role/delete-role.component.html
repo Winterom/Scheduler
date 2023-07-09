@@ -1,0 +1,48 @@
+<p-steps
+  [model]="stepItems"
+  [readonly]="true"
+  [activeIndex]="activeIndex"
+  (activeIndexChange)="onActiveIndexChange($event)">
+</p-steps>
+<div *ngIf="activeIndex===0">
+  <p>Правила удаления:</p>
+  <ul>
+    <li>При удалении каталога удаляются так же роли и каталоги находящиеся в нем</li>
+    <li>Невозможно удалить роль, а соответственно и каталог ролей в которой находится роль, если данная роль
+      присвоена хотя бы одному пользователю. Перед удалением производится проверка выполнения данного условия</li>
+  </ul>
+</div>
+<div *ngIf="activeIndex===1">
+  <p></p>
+</div>
+<div *ngIf="activeIndex!==2" class="flex justify-content-between">
+  <p-button
+    (onClick)="backStep()"
+    label="Назад"
+    icon="fa fa-angle-left"
+    pTooltip="Шаг назад"
+    [disabled]="disabledBackBtn"
+    styleClass="p-button-raised p-button-text p-button-info ml-4">
+  </p-button>
+  <p-button
+    (onClick)="nextStep()"
+    label="Дальше"
+    icon="fa fa-angle-right"
+    pTooltip="Следующий шаг"
+    [disabled]="disabledNextBtn"
+    styleClass="p-button-raised p-button-text p-button-info mr-4">
+  </p-button>
+</div>
+<div *ngIf="activeIndex===2" class="flex justify-content-center">
+  <p-button
+    (onClick)="deleteRole()"
+    label="Удалить"
+    icon="fa fa-trash"
+    pTooltip="Удаление каталога или роли"
+    [disabled]="disabledNextBtn"
+    styleClass="p-button-raised p-button-text p-button-danger">
+  </p-button>
+</div>
+
+
+
