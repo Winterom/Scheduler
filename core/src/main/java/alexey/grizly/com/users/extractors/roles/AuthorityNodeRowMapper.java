@@ -1,16 +1,15 @@
 package alexey.grizly.com.users.extractors.roles;
 
-import alexey.grizly.com.users.messages.roles.response.AuthoritiesNode;
-
+import alexey.grizly.com.users.messages.roles.response.AuthoritiesNodeResponseMessage;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class AuthorityNodeRowMapper implements RowMapper<AuthoritiesNode.Authority> {
+public class AuthorityNodeRowMapper implements RowMapper<AuthoritiesNodeResponseMessage.Authority> {
     @Override
-    public AuthoritiesNode.Authority mapRow(ResultSet rs, int rowNum) throws SQLException {
-        AuthoritiesNode.Authority node = new AuthoritiesNode.Authority();
+    public AuthoritiesNodeResponseMessage.Authority mapRow(ResultSet rs, int rowNum) throws SQLException {
+        final AuthoritiesNodeResponseMessage.Authority node = new AuthoritiesNodeResponseMessage.Authority();
         node.setKey(rs.getLong("id"));
         node.setLabel(rs.getString("title"));
         node.setDescription(rs.getString("description"));

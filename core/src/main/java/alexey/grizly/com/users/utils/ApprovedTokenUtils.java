@@ -1,7 +1,7 @@
 package alexey.grizly.com.users.utils;
 
 import java.security.SecureRandom;
-import java.util.*;
+import java.util.Random;
 
 
 public class ApprovedTokenUtils {

@@ -6,15 +6,15 @@ import {ERolesWebsocketEvents} from "../ERolesWebsocketEvents";
 import {RolesAuthoritiesInterfaces} from "../../../types/roles/RolesAuthoritiesInterfaces";
 import {EventBusService} from "../../../services/eventBus/event-bus.service";
 import {RolesEvents} from "../RolesEvents";
+import {CustomMessage} from "../../../shared/messages/CustomMessages";
+import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
+import {DeleteRoleComponent} from "../delete-role/delete-role.component";
 import RolesGroup = RolesAuthoritiesInterfaces.RolesGroup;
 import Role = RolesAuthoritiesInterfaces.Role;
 import SelectedStatus = RolesAuthoritiesInterfaces.SelectedStatus;
 import RoleStatus = RolesAuthoritiesInterfaces.RoleStatus;
 import DragDropRole = RolesAuthoritiesInterfaces.DragDropRole;
-import {CustomMessage} from "../../../shared/messages/CustomMessages";
 import addErrorMessage = CustomMessage.addErrorMessage;
-import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
-import {DeleteRoleComponent} from "../delete-role/delete-role.component";
 
 
 @Component({

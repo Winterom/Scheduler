@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {DynamicDialogConfig, DynamicDialogRef} from "primeng/dynamicdialog";
 import {RolesAuthoritiesInterfaces} from "../../../../types/roles/RolesAuthoritiesInterfaces";
-import AuthorityNode = RolesAuthoritiesInterfaces.AuthorityNode;
 import {TreeNode} from "primeng/api";
 import {WebsocketService} from "../../../../services/ws/websocket";
 import {ERolesWebsocketEvents} from "../../ERolesWebsocketEvents";
+import AuthorityNode = RolesAuthoritiesInterfaces.AuthorityNode;
 import Authorities = RolesAuthoritiesInterfaces.Authorities;
+
 interface Column {
   field: string;
   header: string;

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MessageService} from "primeng/api";
 import {PasswordStrengthRequirement} from "../../../types/auth/PasswordStrengthRequirement";
@@ -16,8 +16,6 @@ import UserProfile = UserInterfaces.UserProfile;
 import CheckEmailOrPhoneWSResponse = UserInterfaces.CheckEmailOrPhoneWSResponse;
 import SendVerifyToken = UserInterfaces.SendVerifyToken;
 import EUserStatus = UserInterfaces.EUserStatus;
-import {interval, Observable, Subscription, takeUntil, timer} from "rxjs";
-
 
 
 @Component({

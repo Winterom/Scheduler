@@ -2,8 +2,10 @@ package alexey.grizly.com.users.services.impl;
 
 import alexey.grizly.com.users.messages.profile.response.ResponseMessage;
 import alexey.grizly.com.users.messages.roles.request.DragDropRoleMessage;
-import alexey.grizly.com.users.messages.roles.response.AuthoritiesNode;
+import alexey.grizly.com.users.messages.roles.response.AuthoritiesNodeResponseMessage;
+
 import alexey.grizly.com.users.messages.roles.response.RolesTree;
+import alexey.grizly.com.users.models.roles.CheckedRoleForDelete;
 import alexey.grizly.com.users.repositories.RoleRepository;
 import alexey.grizly.com.users.services.RoleService;
 import alexey.grizly.com.users.services.RolesAndAuthoritiesService;
@@ -11,7 +13,7 @@ import alexey.grizly.com.users.ws_handlers.ERolesAuthoritiesWSEvents;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.List;
 
 @Service
 public class RolesAndAuthoritiesServiceImpl implements RolesAndAuthoritiesService, RoleService {
@@ -34,7 +36,7 @@ public class RolesAndAuthoritiesServiceImpl implements RolesAndAuthoritiesServic
 
     @Override
     public ResponseMessage<RolesTree> getAllRoles() {
-        RolesTree.RoleNode rolesTree = this.roleRepository.getAllRolesTree();
+        RolesTree.RoleNode rolesTree = this.roleRepository.getRolesTree(1L);
         RolesTree roles = new RolesTree();
         roles.setRoles(rolesTree.getChild());
         return new ResponseMessage<>(ERolesAuthoritiesWSEvents.ALL_ROLES.name(),
@@ -43,9 +45,9 @@ public class RolesAndAuthoritiesServiceImpl implements RolesAndAuthoritiesServic
     }
 
     @Override
-    public ResponseMessage<AuthoritiesNode> getAllAuthorities() {
-        List<AuthoritiesNode.Authority> authorities = roleRepository.getAllAuthorities();
-        AuthoritiesNode authoritiesNode = new AuthoritiesNode();
+    public ResponseMessage<AuthoritiesNodeResponseMessage> getAllAuthorities() {
+        List<AuthoritiesNodeResponseMessage.Authority> authorities = roleRepository.getAllAuthorities();
+        AuthoritiesNodeResponseMessage authoritiesNode = new AuthoritiesNodeResponseMessage();
         authoritiesNode.setAuthorities(authorities);
         return new ResponseMessage<>(ERolesAuthoritiesWSEvents.ALL_AUTHORITIES.name(),
                 authoritiesNode,
@@ -53,9 +55,9 @@ public class RolesAndAuthoritiesServiceImpl implements RolesAndAuthoritiesServic
     }
 
     @Override
-    public ResponseMessage<AuthoritiesNode> getAuthoritiesByRoleId(Long roleId) {
-        List<AuthoritiesNode.Authority> authorities = roleRepository.getAuthoritiesByRoleId(roleId);
-        AuthoritiesNode authoritiesNode = new AuthoritiesNode();
+    public ResponseMessage<AuthoritiesNodeResponseMessage> getAuthoritiesByRoleId(Long roleId) {
+        List<AuthoritiesNodeResponseMessage.Authority> authorities = roleRepository.getAuthoritiesByRoleId(roleId);
+        AuthoritiesNodeResponseMessage authoritiesNode = new AuthoritiesNodeResponseMessage();
         authoritiesNode.setAuthorities(authorities);
         return new ResponseMessage<>(ERolesAuthoritiesWSEvents.AUTHORITIES_BY_ROLE_ID.name(),
                 authoritiesNode,
@@ -71,5 +73,13 @@ public class RolesAndAuthoritiesServiceImpl implements RolesAndAuthoritiesServic
             responseMessage.getPayload().setErrorMessages(List.of("Не удалось обновить роль"));
         }
         return responseMessage;
+    }
+
+    @Override
+    public ResponseMessage<CheckedRoleForDelete> checkRoleForDelete(Long roleId) {
+        CheckedRoleForDelete checkedRoleForDelete = roleRepository.getRolesWithAssignedUsers(roleId);
+        return new ResponseMessage<>(ERolesAuthoritiesWSEvents.CHECK_ROLE_FOR_DELETE.name(),
+                checkedRoleForDelete,
+                ResponseMessage.ResponseStatus.OK);
     }
 }

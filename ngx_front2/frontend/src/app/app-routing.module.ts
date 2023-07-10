@@ -8,10 +8,6 @@ import {ChangePasswordComponent} from "./pages/auth/change-password/change-passw
 import {TitleStrategyService} from "./services/title-strategy.service";
 import {isAuthentication} from "./guards/isAuthentication";
 import {ApprovedEmailComponent} from "./pages/auth/approved-email/approved-email.component";
-import {GlobalSettingsComponent} from "./pages/global-settings/global-settings.component";
-import {ProfileComponent} from "./pages/profile/profile.component";
-import {RolesAndAuthoritiesComponent} from "./pages/roles-and-authorities/roles-and-authorities.component";
-import {UsersListComponent} from "./pages/users-list/users-list.component";
 
 const routes: Routes = [
   {path:'login',component:LoginComponent},

@@ -1,7 +1,5 @@
 package alexey.grizly.com.users.messages;
 
-import alexey.grizly.com.users.ws_handlers.EProfileWSEvents;
-
 public interface RequestMessage {
     String getEvent();
 

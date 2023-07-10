@@ -4,6 +4,7 @@ public enum ERolesAuthoritiesWSEvents {
     ALL_ROLES,
     ALL_AUTHORITIES,
     AUTHORITIES_BY_ROLE_ID,
-    ROLE_DRAG_DROP
+    ROLE_DRAG_DROP,
+    CHECK_ROLE_FOR_DELETE
 
 }

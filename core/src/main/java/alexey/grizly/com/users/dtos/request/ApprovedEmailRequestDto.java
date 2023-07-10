@@ -2,7 +2,6 @@ package alexey.grizly.com.users.dtos.request;
 
 import alexey.grizly.com.users.validators.TokenLength;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 

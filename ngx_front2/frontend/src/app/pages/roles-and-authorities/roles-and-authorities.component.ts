@@ -1,8 +1,7 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {WSUserApi} from "../../services/API/WSUserApi";
 import {WebsocketService} from "../../services/ws/websocket";
 import {ERolesWebsocketEvents} from "./ERolesWebsocketEvents";
-import {MessageService, TreeDragDropService} from "primeng/api";
 
 @Component({
   selector: 'app-roles-and-authorities',

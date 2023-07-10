@@ -1,11 +1,9 @@
 package users.email;
 
 import alexey.grizly.com.StartApplication;
-
 import alexey.grizly.com.users.dtos.request.ApprovedEmailRequestDto;
 import alexey.grizly.com.users.services.impl.UserEmailServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;

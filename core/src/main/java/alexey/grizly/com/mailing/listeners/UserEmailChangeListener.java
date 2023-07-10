@@ -1,16 +1,15 @@
 package alexey.grizly.com.mailing.listeners;
 
-import alexey.grizly.com.users.events.UserEmailApprovedTokenEvent;
 import alexey.grizly.com.mailing.services.EmailSenders;
 import alexey.grizly.com.properties.models.EEmailType;
 import alexey.grizly.com.properties.properties.GlobalProperties;
+import alexey.grizly.com.users.events.UserEmailApprovedTokenEvent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 @Service

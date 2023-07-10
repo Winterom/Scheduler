@@ -11,7 +11,7 @@ import java.util.List;
 public class RolesTree {
     Collection<RoleNode> roles;
     @Data
-    public static class RoleNode implements MessageTreeNode<RoleNode>{
+    public static class RoleNode{
         private Long key;
         private Boolean isCatalog;
         private Long parentId;
@@ -24,12 +24,6 @@ public class RolesTree {
         private String modifyBy; //email редактора
         private List<RoleNode> children;
 
-        @Override
-        public Long getParent() {
-            return this.parentId;
-        }
-
-        @Override
         public Collection<RoleNode> getChild() {
             return this.children;
         }

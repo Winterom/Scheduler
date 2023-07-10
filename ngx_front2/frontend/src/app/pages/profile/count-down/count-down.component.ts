@@ -2,8 +2,6 @@ import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angula
 import {interval, Observable, Subscription, takeUntil, timer} from "rxjs";
 
 
-
-
 @Component({
   selector: 'app-count-down',
   templateUrl: './count-down.component.html',

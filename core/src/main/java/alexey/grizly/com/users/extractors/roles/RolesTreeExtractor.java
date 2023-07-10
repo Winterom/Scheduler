@@ -8,15 +8,18 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Queue;
 
 @Slf4j
-public class AllRolesExtractor implements ResultSetExtractor<RolesTree.RoleNode> {
+public class RolesTreeExtractor implements ResultSetExtractor<RolesTree.RoleNode> {
     @Override
     public RolesTree.RoleNode extractData(ResultSet rs) throws SQLException, DataAccessException {
         RolesTree.RoleNode startNode = null;
-        Queue<RolesTree.RoleNode> rolesLeafs = new LinkedList<>();
-        Map<Long, RolesTree.RoleNode> rolesNodes = new HashMap<>();
+        final Queue<RolesTree.RoleNode> rolesLeafs = new LinkedList<>();
+        final Map<Long, RolesTree.RoleNode> rolesNodes = new HashMap<>();
         while (rs.next()){
             RolesTree.RoleNode role = mapRow(rs);
             if(role.getParentId()==0){
@@ -57,7 +60,7 @@ public class AllRolesExtractor implements ResultSetExtractor<RolesTree.RoleNode>
     }
 
     private RolesTree.RoleNode mapRow(ResultSet rs) throws SQLException {
-        RolesTree.RoleNode role = new RolesTree.RoleNode();
+        final RolesTree.RoleNode role = new RolesTree.RoleNode();
         role.setKey(rs.getLong("id"));
         role.setIsCatalog(rs.getBoolean("is_catalog"));
         role.setParentId(rs.getLong("parent_id"));

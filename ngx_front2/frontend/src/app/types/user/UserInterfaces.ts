@@ -1,5 +1,4 @@
 import {Data} from "@angular/router";
-import {ChronosUtils} from "../../shared/ChronosUtils";
 
 
 export namespace UserInterfaces {

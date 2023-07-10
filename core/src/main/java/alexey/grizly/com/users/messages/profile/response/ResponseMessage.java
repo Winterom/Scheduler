@@ -1,6 +1,5 @@
 package alexey.grizly.com.users.messages.profile.response;
 
-import alexey.grizly.com.users.ws_handlers.EProfileWSEvents;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.builder.ToStringBuilder;
