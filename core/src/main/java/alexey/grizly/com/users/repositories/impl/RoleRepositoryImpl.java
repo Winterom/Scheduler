@@ -15,7 +15,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@SuppressWarnings("FieldCanBeLocal")
 @Repository
 public class RoleRepositoryImpl implements RoleRepository {
     private static final String SET_ROLE = "INSERT INTO users_roles (role_id,user_id) VALUES (:roleId,:userId)";
@@ -41,7 +40,7 @@ public class RoleRepositoryImpl implements RoleRepository {
             "cast(temp_roles.path||'\\' || t2.title as VARCHAR(100)) FROM roles as t2 " +
             "join temp_roles on (t2.parent_id = temp_roles.id) " +
             ") " +
-            "SELECT r.id, r.is_catalog, r.parent_id, r.title, r.status,  r.path, u.email as email, u.id as user_id " +
+            "SELECT r.id, r.is_catalog, r.parent_id, r.title, r.status,  r.path, u.email as email, u.id as user_id, u.e_status as u_status " +
             "FROM temp_roles as r left join users_roles as ur on r.id = ur.role_id left join users u on u.id = ur.user_id";
     private static final String AUTHORITY_BY_ROLE = "SELECT * FROM roles_authorities as r_a LEFT JOIN authorities a " +
             "ON a.id = r_a.authority_id WHERE role_id=:roleId";

@@ -120,7 +120,7 @@ export class RolesComponent implements OnInit,OnDestroy{
     this.ref = this.dialogService.open(DeleteRoleComponent, {
       data: this.selected,
       header: header,
-      width: '70%',
+      width: '45rem',
       contentStyle: { overflow: 'auto' },
       baseZIndex: 10000,
       maximizable: false

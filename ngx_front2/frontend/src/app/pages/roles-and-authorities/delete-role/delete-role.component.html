@@ -1,10 +1,5 @@
-<p-steps
-  [model]="stepItems"
-  [readonly]="true"
-  [activeIndex]="activeIndex"
-  (activeIndexChange)="onActiveIndexChange($event)">
-</p-steps>
-<div *ngIf="activeIndex===0">
+
+<div>
   <p>Правила удаления:</p>
   <ul>
     <li>При удалении каталога удаляются так же роли и каталоги находящиеся в нем</li>
@@ -12,37 +7,52 @@
       присвоена хотя бы одному пользователю. Перед удалением производится проверка выполнения данного условия</li>
   </ul>
 </div>
-<div *ngIf="activeIndex===1">
-  <p></p>
+<div>
+  <p>При проверке было проверено</p>
+  <ul>
+    <li>Каталогов: {{checkedRole?.catalogCount}}</li>
+    <li>Ролей: {{checkedRole?.roleCount}}</li>
+  </ul>
+  <p *ngIf="!isDeletePossible">Удаление невозможно пока данные роли присутствуют у пользователей: </p>
+  <p *ngIf="isDeletePossible&&deleteRole?.isCatalog">Данный каталог можно удалить </p>
+  <p *ngIf="isDeletePossible&&!deleteRole?.isCatalog">Данную роль можно удалить </p>
+  <p-tabView *ngIf="!isDeletePossible" [(activeIndex)]="activeIndex" [scrollable]="true" class="mb-4">
+    <p-tabPanel *ngFor="let tab of roles" [header]="getHeader(tab.label)">
+      <p-table
+        [value]="tab.users"
+        [paginator]="true"
+        [rows]="5"
+        styleClass="p-datatable-sm"
+        currentPageReportTemplate="Показано с {first} по {last} из {totalRecords} пользователей"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th style="width:25%">ID</th>
+            <th style="width:50%">Email</th>
+            <th style="width:25%">Статус</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-role>
+          <tr>
+            <td>{{role.key }}</td>
+            <td>{{role.email }}</td>
+            <td><p-tag [value]="getStatus(role.status)" [severity]="getSeverity(role.status)"></p-tag></td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </p-tabPanel>
+  </p-tabView>
+  <div class="flex justify-content-center mt-4">
+    <p-button
+      [disabled]="!isDeletePossible"
+      (click)="deleteRoleReq()"
+      label="Удаление роли"
+      pTooltip="Удалить роль или каталог"
+      styleClass="p-button-raised p-button-text p-button-danger mt-4">
+    </p-button>
+  </div>
 </div>
-<div *ngIf="activeIndex!==2" class="flex justify-content-between">
-  <p-button
-    (onClick)="backStep()"
-    label="Назад"
-    icon="fa fa-angle-left"
-    pTooltip="Шаг назад"
-    [disabled]="disabledBackBtn"
-    styleClass="p-button-raised p-button-text p-button-info ml-4">
-  </p-button>
-  <p-button
-    (onClick)="nextStep()"
-    label="Дальше"
-    icon="fa fa-angle-right"
-    pTooltip="Следующий шаг"
-    [disabled]="disabledNextBtn"
-    styleClass="p-button-raised p-button-text p-button-info mr-4">
-  </p-button>
-</div>
-<div *ngIf="activeIndex===2" class="flex justify-content-center">
-  <p-button
-    (onClick)="deleteRole()"
-    label="Удалить"
-    icon="fa fa-trash"
-    pTooltip="Удаление каталога или роли"
-    [disabled]="disabledNextBtn"
-    styleClass="p-button-raised p-button-text p-button-danger">
-  </p-button>
-</div>
+
 
 
 

@@ -1,6 +1,7 @@
 package alexey.grizly.com.users.models.roles;
 
 import alexey.grizly.com.users.models.ERoleStatus;
+import alexey.grizly.com.users.models.EUserStatus;
 import lombok.Data;
 
 import java.util.Collection;
@@ -28,5 +29,6 @@ public class CheckedRoleForDelete {
    public static class User{
       private Long key;
       private String email;
+      private EUserStatus status;
    }
 }

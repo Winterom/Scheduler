@@ -1,6 +1,9 @@
 import {TreeNode} from "primeng/api";
+import {UserInterfaces} from "../user/UserInterfaces";
 
 export namespace RolesAuthoritiesInterfaces {
+  import EUserStatus = UserInterfaces.EUserStatus;
+
   export interface RolesGroup{
     roles:Role[];
   }
@@ -39,5 +42,28 @@ export namespace RolesAuthoritiesInterfaces {
   export interface DragDropRole{
     newParentId: string;
     roleId: string;
+  }
+
+  export interface CheckedRoleForDelete{
+    catalogCount: string;
+    roleCount:string;
+    roleAssignedUsers:CheckedRole[];
+
+  }
+
+  export interface CheckedRole{
+    key:string;
+    label:string
+    isCatalog:boolean;
+    parentId:number;
+    status:RoleStatus;
+    path: string;
+    users:UserForCheckedRole[];
+  }
+
+  export interface UserForCheckedRole{
+    key:string;
+    email:string;
+    status:EUserStatus;
   }
 }

@@ -1,6 +1,7 @@
 package alexey.grizly.com.users.extractors.roles;
 
 import alexey.grizly.com.users.models.ERoleStatus;
+import alexey.grizly.com.users.models.EUserStatus;
 import alexey.grizly.com.users.models.roles.CheckedRoleForDelete;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -26,6 +27,7 @@ public class CheckedRoleExtractor implements ResultSetExtractor<CheckedRoleForDe
            }
            if(role.getIsCatalog()){
                this.countCatalogs = this.countCatalogs+1;
+               continue;
            }else {
                this.countRoles = this.countRoles+1;
            }
@@ -36,6 +38,7 @@ public class CheckedRoleExtractor implements ResultSetExtractor<CheckedRoleForDe
            CheckedRoleForDelete.User user = new CheckedRoleForDelete.User();
            user.setKey(userId);
            user.setEmail(rs.getString("email"));
+           user.setStatus(EUserStatus.valueOf(rs.getString("u_status")));
            role.getUsers().add(user);
        }
        this.checkedRole.setRoleCount(this.countRoles);

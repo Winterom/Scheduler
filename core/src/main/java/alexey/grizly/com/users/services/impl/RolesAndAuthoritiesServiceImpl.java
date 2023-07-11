@@ -13,6 +13,8 @@ import alexey.grizly.com.users.ws_handlers.ERolesAuthoritiesWSEvents;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -78,8 +80,10 @@ public class RolesAndAuthoritiesServiceImpl implements RolesAndAuthoritiesServic
     @Override
     public ResponseMessage<CheckedRoleForDelete> checkRoleForDelete(Long roleId) {
         CheckedRoleForDelete checkedRoleForDelete = roleRepository.getRolesWithAssignedUsers(roleId);
+        checkedRoleForDelete.getRoleAssignedUsers().removeIf(CheckedRoleForDelete.CheckedRole::getIsCatalog);
         return new ResponseMessage<>(ERolesAuthoritiesWSEvents.CHECK_ROLE_FOR_DELETE.name(),
                 checkedRoleForDelete,
                 ResponseMessage.ResponseStatus.OK);
     }
+
 }
